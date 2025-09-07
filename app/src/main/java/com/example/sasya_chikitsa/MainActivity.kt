@@ -292,25 +292,34 @@ class MainActivity : ComponentActivity() {
     
     // Helper method to create a user message view with optional image (aligned right, WhatsApp-style)
     private fun createUserMessageView(message: ConversationMessage): View {
-        // Calculate width for WhatsApp-like chat bubble (75% max width, but can be smaller for short messages)
+        // Calculate width for WhatsApp-like chat bubble with proper margins
         val displayMetrics = resources.displayMetrics
         val screenWidth = displayMetrics.widthPixels
         val maxCardWidth = (screenWidth * 0.75).toInt()
         val minCardWidth = (screenWidth * 0.3).toInt()
-        val rightMargin = 16
-        val leftMargin = (screenWidth * 0.2).toInt() // More space on left to push right
+        val rightMargin = (screenWidth * 0.05).toInt() // 5% right margin for proper spacing
+        val leftMargin = (screenWidth * 0.2).toInt() // 20% left margin to push right
         
         val messageCard = androidx.cardview.widget.CardView(this).apply {
             layoutParams = LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.WRAP_CONTENT, // Let it size based on content
                 LinearLayout.LayoutParams.WRAP_CONTENT
             ).apply {
-                setMargins(leftMargin, 8, rightMargin, 8) // Reduced vertical margins for tighter spacing
+                setMargins(leftMargin, 8, rightMargin, 8) // Proper margins for spacing
                 gravity = android.view.Gravity.END // Align to right
                 
-                // Set max width constraint
+                // Constrain card width to prevent overflow
                 width = LinearLayout.LayoutParams.WRAP_CONTENT
+                // Calculate max available width: screen - left margin - right margin
+                val maxAvailableWidth = screenWidth - leftMargin - rightMargin
+                if (maxAvailableWidth < maxCardWidth) {
+                    width = maxAvailableWidth
+                }
             }
+            
+            // Set maximum width on the card itself to prevent overflow
+            maxWidth = minOf(maxCardWidth, screenWidth - leftMargin - rightMargin)
+            
             radius = 18f // WhatsApp-like rounded corners
             cardElevation = 2f // Subtle shadow like WhatsApp
             setCardBackgroundColor(ContextCompat.getColor(this@MainActivity, R.color.user_message_bg))
@@ -356,8 +365,15 @@ class MainActivity : ComponentActivity() {
                 setLineSpacing(4f, 1.1f) // WhatsApp-like line spacing
                 typeface = android.graphics.Typeface.DEFAULT
                 
-                // Make text wrap nicely
-                maxWidth = maxCardWidth - 64 // Account for padding and margins
+                // Make text wrap nicely - calculate available space properly
+                val cardPadding = 32 // 16px left + 16px right padding from messageLayout
+                val maxAvailableCardWidth = minOf(maxCardWidth, screenWidth - leftMargin - rightMargin)
+                val availableTextWidth = maxAvailableCardWidth - cardPadding
+                maxWidth = availableTextWidth
+                
+                // Enable text wrapping
+                isSingleLine = false
+                maxLines = 10 // Allow multiple lines but with reasonable limit
             }
             messageLayout.addView(textView)
         }
@@ -365,7 +381,8 @@ class MainActivity : ComponentActivity() {
         // Add image if present (WhatsApp-style image sizing)
         if (message.imageUri != null) {
             val imageView = ImageView(this).apply {
-                val imageSize = minOf(maxCardWidth - 32, 280) // Max 280dp like WhatsApp, account for padding
+                val maxAvailableCardWidth = minOf(maxCardWidth, screenWidth - leftMargin - rightMargin)
+                val imageSize = minOf(maxAvailableCardWidth - 32, 280) // Max 280dp like WhatsApp, account for padding
                 layoutParams = LinearLayout.LayoutParams(
                     imageSize,
                     imageSize
