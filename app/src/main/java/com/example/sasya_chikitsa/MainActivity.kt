@@ -292,33 +292,28 @@ class MainActivity : ComponentActivity() {
     
     // Helper method to create a user message view with optional image (aligned right, WhatsApp-style)
     private fun createUserMessageView(message: ConversationMessage): View {
-        // Calculate width for WhatsApp-like chat bubble with proper margins
+        // Simplified approach: Use percentage-based margins with match_parent and proper constraints
         val displayMetrics = resources.displayMetrics
         val screenWidth = displayMetrics.widthPixels
-        val maxCardWidth = (screenWidth * 0.75).toInt()
-        val minCardWidth = (screenWidth * 0.3).toInt()
-        val rightMargin = (screenWidth * 0.05).toInt() // 5% right margin for proper spacing
-        val leftMargin = (screenWidth * 0.2).toInt() // 20% left margin to push right
+        
+        // Convert dp to pixels for consistent sizing
+        val dpToPx = displayMetrics.density
+        val rightMarginDp = 16 // 16dp right margin
+        val leftMarginPercent = 0.25f // 25% left margin to push message right
+        
+        val rightMargin = (rightMarginDp * dpToPx).toInt()
+        val leftMargin = (screenWidth * leftMarginPercent).toInt()
         
         val messageCard = androidx.cardview.widget.CardView(this).apply {
             layoutParams = LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.WRAP_CONTENT, // Let it size based on content
+                LinearLayout.LayoutParams.MATCH_PARENT, // Use full available width
                 LinearLayout.LayoutParams.WRAP_CONTENT
             ).apply {
-                setMargins(leftMargin, 8, rightMargin, 8) // Proper margins for spacing
-                gravity = android.view.Gravity.END // Align to right
+                setMargins(leftMargin, 8, rightMargin, 8) // Asymmetric margins for right alignment
                 
-                // Constrain card width to prevent overflow
-                width = LinearLayout.LayoutParams.WRAP_CONTENT
-                // Calculate max available width: screen - left margin - right margin
-                val maxAvailableWidth = screenWidth - leftMargin - rightMargin
-                if (maxAvailableWidth < maxCardWidth) {
-                    width = maxAvailableWidth
-                }
+                // The content will determine the actual width within these margins
+                gravity = android.view.Gravity.END // This helps with right alignment
             }
-            
-            // Set maximum width on the card itself to prevent overflow
-            maxWidth = minOf(maxCardWidth, screenWidth - leftMargin - rightMargin)
             
             radius = 18f // WhatsApp-like rounded corners
             cardElevation = 2f // Subtle shadow like WhatsApp
@@ -331,14 +326,10 @@ class MainActivity : ComponentActivity() {
             layoutParams = LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.WRAP_CONTENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT
-            ).apply {
-                // Set width constraints based on content type
-                if (message.imageUri != null) {
-                    // Messages with images get more consistent width
-                    width = maxCardWidth - 32 // Account for padding
-                }
-                // Text-only messages use WRAP_CONTENT naturally
-            }
+            )
+            
+            // Let content determine the width naturally without manual constraints
+            gravity = android.view.Gravity.END // Align content to the right
         }
         
         // Add header with icon and "Human" label
@@ -365,15 +356,21 @@ class MainActivity : ComponentActivity() {
                 setLineSpacing(4f, 1.1f) // WhatsApp-like line spacing
                 typeface = android.graphics.Typeface.DEFAULT
                 
-                // Make text wrap nicely - calculate available space properly
-                val cardPadding = 32 // 16px left + 16px right padding from messageLayout
-                val maxAvailableCardWidth = minOf(maxCardWidth, screenWidth - leftMargin - rightMargin)
-                val availableTextWidth = maxAvailableCardWidth - cardPadding
-                maxWidth = availableTextWidth
+                // Let the text wrap naturally with a maximum width constraint
+                layoutParams = LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.WRAP_CONTENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT
+                )
                 
-                // Enable text wrapping
+                // Set a sensible maximum width to prevent text from getting too wide
+                // This ensures the bubble doesn't become too wide while preventing cutoff
+                val maxTextWidthDp = 250 // Reasonable max width in dp
+                val maxTextWidth = (maxTextWidthDp * dpToPx).toInt()
+                maxWidth = maxTextWidth
+                
+                // Enable text wrapping without manual width constraints
                 isSingleLine = false
-                maxLines = 10 // Allow multiple lines but with reasonable limit
+                maxLines = 15 // Allow reasonable multiline text
             }
             messageLayout.addView(textView)
         }
@@ -381,13 +378,19 @@ class MainActivity : ComponentActivity() {
         // Add image if present (WhatsApp-style image sizing)
         if (message.imageUri != null) {
             val imageView = ImageView(this).apply {
-                val maxAvailableCardWidth = minOf(maxCardWidth, screenWidth - leftMargin - rightMargin)
-                val imageSize = minOf(maxAvailableCardWidth - 32, 280) // Max 280dp like WhatsApp, account for padding
+                // Calculate available space: total available width minus padding
+                val cardPadding = 32 // 16px left + 16px right padding from messageLayout
+                val availableSpace = screenWidth - leftMargin - rightMargin - cardPadding
+                val maxImageSizeDp = 280
+                val maxImageSize = (maxImageSizeDp * dpToPx).toInt() // 280dp converted to pixels
+                val imageSize = minOf(availableSpace, maxImageSize)
+                
                 layoutParams = LinearLayout.LayoutParams(
                     imageSize,
                     imageSize
                 ).apply {
                     setMargins(0, if (message.text.isNotEmpty()) 8 else 0, 0, 0) // Space from text if both exist
+                    gravity = android.view.Gravity.CENTER_HORIZONTAL // Center the image
                 }
                 scaleType = ImageView.ScaleType.CENTER_CROP
                 setImageURI(message.imageUri)
