@@ -30,6 +30,7 @@
     <color name="sage_bg">#F1F8E9</color>
     
     <!-- Text Colors -->
+    <color name="text_black">#000000</color>            <!-- Pure black for regular text -->
     <color name="earth_text_primary">#2E2E2E</color>
     <color name="earth_text_secondary">#5D4037</color>
     <color name="earth_text_accent">#1B5E20</color>
@@ -42,6 +43,10 @@
     <color name="user_message_bg">#E8F5E8</color>      <!-- Soft green for user -->
     <color name="assistant_message_bg">#FFFFFF</color>  <!-- Clean white for assistant -->
     <color name="user_text">#1B5E20</color>            <!-- Dark forest green -->
-    <color name="assistant_text">#2E2E2E</color>        <!-- Dark gray for better readability -->
-    <color name="action_item_color">#2E7D32</color>     <!-- Forest green for clickable items -->
+    <color name="assistant_text">#000000</color>        <!-- Pure black for better readability -->
+    
+    <!-- Action Item Colors -->
+    <color name="action_item_color">#1976D2</color>     <!-- Blue hyperlink color for clickable items -->
+    <color name="hyperlink_blue">#1976D2</color>        <!-- Standard hyperlink blue -->
+    <color name="hyperlink_blue_dark">#1565C0</color>   <!-- Darker blue for pressed state -->
 </resources>

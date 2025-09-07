@@ -48,7 +48,7 @@
                     android:text="🌿 Sasya Chikitsa"
                     android:textStyle="bold"
                     android:textSize="18sp"
-                    android:textColor="#2D3748"
+                    android:textColor="@color/text_black"
                     android:layout_marginBottom="4dp"/>
 
                 <!-- App Subtitle -->
@@ -58,7 +58,7 @@
                     android:layout_height="wrap_content"
                     android:text="AI-powered plant diagnosis"
                     android:textSize="14sp"
-                    android:textColor="#4A5568"
+                    android:textColor="@color/text_black"
                     android:layout_marginBottom="4dp"/>
 
                 <!-- App Description -->
@@ -68,7 +68,7 @@
                     android:layout_height="wrap_content"
                     android:text="Upload a photo of your plant for instant health analysis"
                     android:textSize="12sp"
-                    android:textColor="#718096"
+                    android:textColor="@color/text_black"
                     android:layout_marginBottom="4dp"/>
 
                 <!-- Server Status -->
@@ -138,7 +138,7 @@
                     android:padding="16dp"
                     android:textSize="16sp"
                     android:lineSpacingExtra="6dp"
-                    android:textColor="#2D3748"
+                    android:textColor="@color/text_black"
                     android:background="@drawable/chat_background"
                     android:layout_marginBottom="16dp" />
                     
@@ -190,7 +190,7 @@
                     android:text="📷 Image attached"
                     android:textSize="14sp"
                     android:textStyle="bold"
-                    android:textColor="#2D3748"
+                    android:textColor="@color/text_black"
                     android:layout_marginBottom="2dp"/>
 
                 <TextView
@@ -198,7 +198,7 @@
                     android:layout_height="wrap_content"
                     android:text="Ready to analyze"
                     android:textSize="12sp"
-                    android:textColor="#718096"/>
+                    android:textColor="@color/text_black"/>
             </LinearLayout>
 
             <ImageButton
@@ -250,7 +250,7 @@
                 android:maxLines="4"
                 android:inputType="textMultiLine|textCapSentences"
                 android:textSize="16sp"
-                android:textColor="#2D3748"
+                android:textColor="@color/text_black"
                 android:textColorHint="#A0AEC0"
                 android:minHeight="50dp"/>
 
