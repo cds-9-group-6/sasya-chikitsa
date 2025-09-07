@@ -1181,80 +1181,156 @@ class AgentCore:
         return result
 
     def _generate_fallback_action_items(self, main_answer: str, session_id: str = None, is_classification_result: bool = False) -> str:
-        """Generate appropriate action items based on the main answer content."""
-        action_items = []
+        """Generate top 2 most relevant action items based on the main answer content and previous context."""
+        
+        # Get previous context for intelligent prioritization
+        previous_context = self._get_previous_response_context(session_id) if session_id else ""
+        
+        # Create a scoring system for action items
+        action_scores = {}
         
         # Convert to lowercase for keyword matching
         content_lower = main_answer.lower()
         
-        # If this is a classification result and we don't have complete metadata, prioritize collection
+        # HIGH PRIORITY: Metadata collection for classification results with diseases
         if is_classification_result and session_id:
             missing_fields = self.get_missing_metadata(session_id)
             if len(missing_fields) > 0:
-                # Check if there's a disease detected
                 disease = self.extract_disease_from_classification(main_answer)
                 if disease:
-                    # Disease detected but missing metadata - prioritize collection
+                    # Disease detected - metadata collection is CRITICAL (score: 100+)
                     if 'location' in missing_fields:
-                        action_items.append("Tell me your location (district/state)")
+                        action_scores["Tell me your location (district/state)"] = 120
                     if 'season' in missing_fields:
-                        action_items.append("Tell me the current season")
+                        action_scores["Tell me the current season"] = 110
                     if 'plant' in missing_fields:
-                        action_items.append("Tell me what plant/crop this is")
+                        action_scores["Tell me what plant/crop this is"] = 115
                     
+                    # Prescription actions get high priority but need metadata first
                     if len(missing_fields) == 1:
-                        action_items.append("Get plant-specific prescription")
+                        action_scores["Get plant-specific prescription"] = 105
                     else:
-                        action_items.append("Get specific prescription for my area")
+                        action_scores["Get specific prescription for my area"] = 100
                 else:
-                    # Healthy plant or no clear disease - still collect for future
+                    # Healthy plant - lower priority for metadata (score: 40-60)
                     if 'plant' in missing_fields:
-                        action_items.append("Tell me what plant this is")
+                        action_scores["Tell me what plant this is"] = 50
                     if 'location' in missing_fields:
-                        action_items.append("Tell me your location for better advice")
+                        action_scores["Tell me your location for better advice"] = 45
                     if 'season' in missing_fields:
-                        action_items.append("Tell me the current season")
+                        action_scores["Tell me the current season"] = 40
         
-        # Based on content, suggest relevant action items
-        if any(keyword in content_lower for keyword in ['watering', 'water', 'irrigation']):
-            action_items.append("Give me watering schedule")
-        
-        if any(keyword in content_lower for keyword in ['fertiliz', 'nutrien', 'feed']):
-            action_items.append("Show fertilization procedure")
-        
-        if any(keyword in content_lower for keyword in ['disease', 'infection', 'fungal', 'bacterial', 'pest']):
+        # CONTENT-BASED SCORING: Analyze main answer for relevant topics
+        disease_keywords = ['disease', 'infection', 'fungal', 'bacterial', 'pest', 'blight', 'rot', 'virus']
+        if any(keyword in content_lower for keyword in disease_keywords):
             if session_id and self.has_complete_metadata(session_id):
                 metadata = self.get_session_metadata(session_id)
                 plant_name = metadata.get('plant', 'plant')
-                action_items.append(f"Get specific prescription for {plant_name}")
-            elif session_id and len(self.get_missing_metadata(session_id)) == 1:
-                action_items.append("Get plant-specific prescription")
+                action_scores[f"Get specific prescription for {plant_name}"] = 90
             else:
-                action_items.append("Send me prescription for this disease")
-            action_items.append("Show treatment steps")
+                action_scores["Send me prescription for this disease"] = 85
+            action_scores["Show treatment steps"] = 80
+            
+            # If previous context suggests prevention interest, boost prevention
+            if 'prevent' in previous_context.lower() or 'avoid' in previous_context.lower():
+                action_scores["Explain prevention methods"] = 88
         
-        if any(keyword in content_lower for keyword in ['care', 'maintain', 'schedule']):
-            action_items.append("Create plant care schedule")
+        # Watering-related content
+        if any(keyword in content_lower for keyword in ['watering', 'water', 'irrigation', 'dry', 'overwater']):
+            action_scores["Give me watering schedule"] = 75
+            # Boost if user asked about watering before
+            if 'water' in previous_context.lower():
+                action_scores["Give me watering schedule"] = 85
         
-        if any(keyword in content_lower for keyword in ['prevent', 'avoid']):
-            action_items.append("Explain prevention methods")
+        # Fertilization/nutrition content  
+        if any(keyword in content_lower for keyword in ['fertiliz', 'nutrien', 'feed', 'nitrogen', 'phosphorus']):
+            action_scores["Show fertilization procedure"] = 70
+            # Boost if nutrition was discussed before
+            if any(word in previous_context.lower() for word in ['fertiliz', 'nutrien', 'feed']):
+                action_scores["Show fertilization procedure"] = 80
         
-        if any(keyword in content_lower for keyword in ['soil', 'potting', 'repot']):
-            action_items.append("Get soil recommendations")
+        # Care and maintenance
+        if any(keyword in content_lower for keyword in ['care', 'maintain', 'schedule', 'routine']):
+            action_scores["Create plant care schedule"] = 65
         
-        if any(keyword in content_lower for keyword in ['information', 'need', 'tell me', 'describe']):
-            action_items.append("Provide more details")
-            action_items.append("Ask specific question")
+        # Prevention-focused content
+        if any(keyword in content_lower for keyword in ['prevent', 'avoid', 'stop', 'protect']):
+            action_scores["Explain prevention methods"] = 70
         
-        # Always include these general options if no specific matches
-        if not action_items:
-            action_items = ["Ask follow-up question", "Get more plant care tips", "Upload new plant image"]
-        else:
-            # Add general backup options
-            action_items.append("Ask follow-up question")
-            action_items.append("Upload new plant image")
+        # Soil-related content
+        if any(keyword in content_lower for keyword in ['soil', 'potting', 'repot', 'drainage', 'ph']):
+            action_scores["Get soil recommendations"] = 60
         
-        return " | ".join(action_items)
+        # Information requests
+        if any(keyword in content_lower for keyword in ['information', 'need', 'tell me', 'describe', 'explain']):
+            action_scores["Provide more details"] = 55
+        
+        # CONTEXTUAL BOOSTING: Increase scores based on previous conversation
+        if previous_context:
+            prev_lower = previous_context.lower()
+            
+            # If user previously asked about treatments, boost prescription
+            if any(word in prev_lower for word in ['treatment', 'cure', 'medicine', 'spray']):
+                for action in action_scores:
+                    if 'prescription' in action or 'treatment' in action:
+                        action_scores[action] += 15
+            
+            # If user showed interest in detailed care, boost care-related actions
+            if any(word in prev_lower for word in ['schedule', 'routine', 'care', 'maintain']):
+                for action in action_scores:
+                    if 'schedule' in action or 'care' in action:
+                        action_scores[action] += 10
+        
+        # FALLBACK ACTIONS: Add general actions with lower scores
+        general_actions = {
+            "Ask follow-up question": 30,
+            "Get more plant care tips": 25, 
+            "Upload new plant image": 20
+        }
+        
+        # Only add general actions if we don't have enough high-scoring specific ones
+        high_score_count = len([score for score in action_scores.values() if score >= 50])
+        if high_score_count < 2:
+            action_scores.update(general_actions)
+        
+        # SELECT TOP 2 ACTIONS: Sort by score and take the highest weighted
+        if not action_scores:
+            # Emergency fallback
+            return "Ask follow-up question | Upload new plant image"
+        
+        # Sort actions by score (highest first) and take top 2
+        sorted_actions = sorted(action_scores.items(), key=lambda x: x[1], reverse=True)
+        top_actions = [action for action, score in sorted_actions[:2]]
+        
+        # Ensure we always have exactly 2 actions
+        if len(top_actions) < 2:
+            # Add a general action as backup
+            for general_action in ["Ask follow-up question", "Upload new plant image"]:
+                if general_action not in top_actions:
+                    top_actions.append(general_action)
+                    break
+        
+        return " | ".join(top_actions[:2])
+    
+    def _get_previous_response_context(self, session_id: str) -> str:
+        """Get the last 2 AI responses for context-aware action prioritization."""
+        if not session_id:
+            return ""
+        
+        history = self.get_session_history(session_id)
+        messages = getattr(history, 'messages', [])
+        
+        # Get the last 2 AI responses for context
+        ai_responses = []
+        for msg in reversed(messages):
+            if getattr(msg, "type", None) == "ai":
+                content = getattr(msg, "content", "")
+                ai_responses.append(content)
+                if len(ai_responses) >= 2:
+                    break
+        
+        # Return combined context (most recent first)
+        return " ".join(ai_responses)
     
     def force_structure_response(self, response_text: str, session_id: str = None, is_classification_result: bool = False) -> str:
         """Force any response into the required MAIN_ANSWER/ACTION_ITEMS structure."""
@@ -1323,7 +1399,7 @@ class AgentCore:
                 f"IMPORTANT: You have complete information - plant: {plant_name}, location: {location}, season: {season}. "
                 f"A specific prescription has been generated from the knowledge base: {rag_prescription}\n"
                 "Include this prescription information in your response.\n\n"
-            )
+        )
         
         # Add user text prompt handling if provided
         if user_text and user_text.strip():
