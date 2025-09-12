@@ -1,0 +1,8 @@
+BlockName,Category,Year,Month,Day,Crop,DistrictName,QueryType,Season,Sector,StateName,QueryText,KccAns,latitude,longitude
+TIRTOL,Vegetables,2015,12,16,Potato,JAGATSINGHAPUR,"Plant Protection",nan,HORTICULTURE,ODISHA,"Red Spider Mites infestation in Potato","Recommended to spray Dicofol 185 EC 4ml per litre of water to control Red Spider Mites infestation in Potato",20.1801,86.3415
+SATYAMANGALAM,Vegetables,2015,8,8,Potato,ERODE,"Plant Protection",KHARIF,HORTICULTURE,TAMILNADU,"Red spider mite in potato","Recommended for spray dicofol 2 ml  litre of water",11.4905,77.3505
+JAMANKIRA,Vegetables,2016,1,17,Potato,SAMBALPUR,"Plant Protection",nan,HORTICULTURE,ODISHA,"Red Spider Mites infestation in Potato","Recommended to spray Dicofol 185 EC 4ml per litre of water to control Red Spider Mites infestation in Potato",21.5571,84.1529
+LAKHANPUR,Vegetables,2017,1,23,Potato,JHARSUGUDA,"Bio-Pesticides and Bio-Fertilizers",nan,HORTICULTURE,ODISHA,"RED SPIDER MITES IN POTATO","SPRAY OMITE 2 ML PER 1 LITRE WATER TO CONTROL RED SPIDER MITES IN POTATO",21.8019,83.9714
+KNUAGAN,Vegetables,2017,12,3,Potato,KANDHAMAL,"Plant Protection",nan,HORTICULTURE,ODISHA,"red spider mite in potato","spray dicofol 2 ml in 1 litre water",20.1307,84.079
+TEHATTA-I,Vegetables,2017,12,27,Potato,NADIA,"Plant Protection",RABI,HORTICULTURE,"WEST BENGAL","ASKING ABOUT THE CONTROL OF RED SPIDER MITES IN POTATO","RECOMMENDED FOR SPRAY  FENPYROXIMATE 5 SC  15 MLLIT OF WATER",23.4847,88.5567
+DABHARA,Vegetables,2020,12,7,Potato,JANJGIR-CHAMPA,"Plant Protection",nan,HORTICULTURE,CHHATTISGARH,"Farmer wants information regarding control of Red Spider Mite attack in Potato crop","                         400        150  200                ",21.9864,82.5537

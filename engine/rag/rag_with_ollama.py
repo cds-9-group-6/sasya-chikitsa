@@ -81,9 +81,11 @@ class ollama_rag:
     def __init__(self, 
                  llm_name: str, 
                  temperature: float = 0.1, 
-                 embedding_model: str = "intfloat/multilingual-e5-large-instruct",
+                #  embedding_model: str = "intfloat/multilingual-e5-large-instruct",
+                 embedding_model: str = "multi-qa-MiniLM-L6-cos-v1",
                  collections_to_init: Optional[List[str]] = None,
-                 persist_directory: str = "./chroma_capstone_db_new"):
+                #  persist_directory: str = "./chroma_capstone_db_new"
+                 persist_directory: str = "./chroma_capstone_db_new_small"):
         """
         Initialize RAG system with pre-loaded embeddings and retrievers for multiple plant collections.
         

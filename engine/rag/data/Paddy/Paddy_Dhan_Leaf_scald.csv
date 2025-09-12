@@ -1,0 +1,567 @@
+BlockName,Category,Year,Month,Day,Crop,DistrictName,QueryType,Season,Sector,StateName,QueryText,KccAns,latitude,longitude
+BALIAPAL,Cereals,2015,2,27,"Paddy Dhan",BALASORE,"Plant Protection",nan,AGRICULTURE,ODISHA,"leaf scald in paddy","recommended to spray copperoxychloride 0r mancozeb   2 gm per litre water",21.5006,86.9199
+SORO,Cereals,2015,9,17,"Paddy Dhan",BALASORE,"Plant Protection",nan,AGRICULTURE,ODISHA,"LEAF SCALD IN PADDY","RECOMMENDED TO APPLY MANCOZEB 4GM OR COPPER OXYCHLORIDE 3GM IN 1 LITRE WATER TO CONTROL LEAF SCALD IN PADDY",21.5006,86.9199
+SORO,Cereals,2015,9,17,"Paddy Dhan",BALASORE,"Plant Protection",nan,AGRICULTURE,ODISHA,"LEAF SCALD IN PADDY","RECOMMENDED TO APPLY CARBEDENZIM 3GM IN 1 LITRE WATER TO CONTROL LEAF SCALD AND APPLY QUINALPHOS 25EC 2ML IN 1 LITRE WATER TO CONTROL  INSECTES IN PADDY",21.5006,86.9199
+SORO,Cereals,2015,9,18,"Paddy Dhan",BALASORE,"Plant Protection",nan,AGRICULTURE,ODISHA,"leaf scald in rice","recommended to spray with blitox 50 2gmltr of water",21.5006,86.9199
+BAHANAGA,Cereals,2015,9,25,"Paddy Dhan",BALASORE,"Plant Protection",KHARIF,AGRICULTURE,ODISHA,"Leaf Scald","SPRAY COC 2 GLITRE OF WATER",21.5006,86.9199
+REMUNA,Cereals,2015,9,26,"Paddy Dhan",BALASORE,"Plant Protection",nan,AGRICULTURE,ODISHA,"leaf scald in rice","apply mancozeb 2gm in 1 litre water",21.5006,86.9199
+NILGIRI,Cereals,2015,9,28,"Paddy Dhan",BALASORE,"Plant Protection",KHARIF,AGRICULTURE,ODISHA,"LEAF SCALD IN PADDY","RECOMMENDED TO SPRAY VALIDAMYCIN  2ML1 LIT OF WATER FOR LEAF SCALD IN PADDY",21.5006,86.9199
+BALESHWAR,Cereals,2015,9,29,"Paddy Dhan",BALASORE,"Plant Protection",nan,AGRICULTURE,ODISHA,"leaf scald in paddy","recommended to spray validamycin  2 ml1 lit of water for leaf scald in paddy",21.5006,86.9199
+REMUNA,Cereals,2015,10,1,"Paddy Dhan",BALASORE,"Plant Protection",nan,AGRICULTURE,ODISHA,"leaf scald in paddy","apply mancozeb 2gm in 1 litre water",21.5006,86.9199
+OUPADA,Cereals,2015,10,6,"Paddy Dhan",BALASORE,"Plant Protection",nan,AGRICULTURE,ODISHA,"leaf scald in paddy","apply mancozeb 2gm per 1 litre water",21.5006,86.9199
+SIMULIA,Cereals,2015,10,8,"Paddy Dhan",BALASORE,"Plant Protection",nan,AGRICULTURE,ODISHA,"LEAF SCALD IN PADDY","APPLY COPPER OXYCHLORIDE  3GMLITRE WATER SPRAY",21.5006,86.9199
+KHAIRA,Cereals,2015,10,16,"Paddy Dhan",BALASORE,"Plant Protection",RABI,AGRICULTURE,ODISHA,"leaf scald in paddy","recommended to spray propiconazole  2ml1 lit of water for leaf scald in paddy",21.5006,86.9199
+SAINTALA,Cereals,2015,9,24,"Paddy Dhan",BALANGIR,"Plant Protection",nan,AGRICULTURE,ODISHA,"leaf scald in rice","apply mancozeb 2gm in 1 litre water",20.6095,83.1673
+LOISINGA,Cereals,2015,9,24,"Paddy Dhan",BALANGIR,"Plant Protection",KHARIF,AGRICULTURE,ODISHA,"LEAF SCALD IN PADDY","RECOMENDED TO SPRAY HEXACONAZOLE  2ML1 LIT OF WATER FOR LEAF SCALD IN PADDY",20.6095,83.1673
+SAINTALA,Cereals,2015,9,26,"Paddy Dhan",BALANGIR,"Plant Protection",KHARIF,AGRICULTURE,ODISHA,"LEAF SCALD IN PADDY","RECOMMENDED TO SPRAY VALIDAMYCIN  2ML1 LIT OF WATER FOR LEAF SCALD IN PADDY",20.6095,83.1673
+AGALPUR,Cereals,2015,9,28,"Paddy Dhan",BALANGIR,"Plant Protection",KHARIF,AGRICULTURE,ODISHA,"LEAF SCALD IN PADDY","RECOMMENDED TO SPRAY HEXACONAZOLE OR VALIDAMYCIN  2 ML1 LIT OF WATER FOR LEAF SCALD IN PADDY",20.6095,83.1673
+PUINTALA,Cereals,2015,9,28,"Paddy Dhan",BALANGIR,"Plant Protection",KHARIF,AGRICULTURE,ODISHA,"LEAF SCALD IN PADDY","RECOMMENDED TO SPRAY VALIDAMYCIN OR HEXACONAZOLE  2ML1 LIT OF WATER FOR LEAF SCALD IN PADDY",20.6095,83.1673
+MURIBAHAL,Cereals,2015,9,29,"Paddy Dhan",BALANGIR,"Plant Protection",KHARIF,AGRICULTURE,ODISHA,"leaf scald in paddy","recommended to spray hexaconazole  2ml1 lit of water for leaf scald in paddy",20.6095,83.1673
+DEOGAON,Cereals,2015,9,30,"Paddy Dhan",BALANGIR,"Plant Protection",nan,AGRICULTURE,ODISHA,"leaf scald in paddy","apply mancozeb 2gm in 1 litre water",20.6095,83.1673
+DEOGAON,Cereals,2015,10,1,"Paddy Dhan",BALANGIR,"Plant Protection",nan,AGRICULTURE,ODISHA,"leaf scald in paddy","apply mancozeb 2gm in 1 litre water",20.6095,83.1673
+PATNAGARH,Cereals,2015,10,6,"Paddy Dhan",BALANGIR,"Plant Protection",nan,AGRICULTURE,ODISHA,"LEAF SCALD IN PADDY","RECOMMENDED TO SPRAY HEXACONAZOLE OR VALIDAMYCIN  2ML1 LIT OF WATER FOR LEAF SCALD IN PADDY",20.6095,83.1673
+LOISINGA,Cereals,2015,10,14,"Paddy Dhan",BALANGIR,"Plant Protection",KHARIF,AGRICULTURE,ODISHA,"leaf scald in paddy","recommended to spray hexadecanol or validamycin  2ml1 lit of water for leaf scald in paddy",20.6095,83.1673
+CHIKITI,Cereals,2015,8,23,"Paddy Dhan",GANJAM,"Plant Protection",KHARIF,AGRICULTURE,ODISHA,"leaf scald in paddy","Apply carbendazim  2gm1lit water for leaf scald in paddy",19.609,84.7081
+SANAKHEMUNDI,Cereals,2015,9,23,"Paddy Dhan",GANJAM,"Plant Protection",nan,AGRICULTURE,ODISHA,"LEAF SCALD IN PADDY","RECOMENDED DOSE OF BENOFIT 1GM1LIT WATER SPRAY",19.609,84.7081
+DIGAPAHANDI,Cereals,2015,9,23,"Paddy Dhan",GANJAM,"Plant Protection",nan,AGRICULTURE,ODISHA,"leaf scald in rice","apply validamycin 2gm in 1 litre water",19.609,84.7081
+BUGUDA,Cereals,2015,9,30,"Paddy Dhan",GANJAM,"Plant Protection",KHARIF,AGRICULTURE,ODISHA,"LEAF SCALD IN PADDY","RECOMMENDED TO SPRAY HEXACONAZOLE OR VALIDAMYCIN  2ML1 LIT OF WATER FOR LEAF SCALD IN PADDY",19.609,84.7081
+SHERAGADA,Cereals,2015,10,5,"Paddy Dhan",GANJAM,"Plant Protection",nan,AGRICULTURE,ODISHA,"leaf scald in paddy","apply mancozeb 2gm per 1 litre water",19.609,84.7081
+GOLAMUNDA,Cereals,2015,8,23,"Paddy Dhan",KALAHANDI,"Plant Protection",KHARIF,AGRICULTURE,ODISHA,"LEAF SCALD IN PADDY","APPLY carbendazim  2GM1LIT WATER",19.8266,83.0409
+"MADANPUR    RAMPUR",Cereals,2015,9,24,"Paddy Dhan",KALAHANDI,"Plant Protection",nan,AGRICULTURE,ODISHA,"leaf scald in rice","apply mancozeb 2gm in 1 litre water",19.8266,83.0409
+GOLAMUNDA,Cereals,2015,9,25,"Paddy Dhan",KALAHANDI,"Plant Protection",nan,AGRICULTURE,ODISHA,"leaf scald in rice","apply mancozeb 2gm in 1 litre water",19.8266,83.0409
+BHAWANIPATNA,Cereals,2015,9,26,"Paddy Dhan",KALAHANDI,"Plant Protection",nan,AGRICULTURE,ODISHA,"leaf scald in rice","apply mancozeb 2gm in 1 litre water",19.8266,83.0409
+JUNAGARH,Cereals,2015,9,26,"Paddy Dhan",KALAHANDI,"Plant Protection",nan,AGRICULTURE,ODISHA,"leaf scald in rice","apply mancozeb 2gm in 1 litre water",19.8266,83.0409
+KALAMPUR,Cereals,2015,9,28,"Paddy Dhan",KALAHANDI,"Plant Protection",nan,AGRICULTURE,ODISHA,"LEAF SCALD IN PADDY","RECOMMENDED TO SPRAY HEXACONAZOLE OR VALIDAMYCIN  2ML1 LIT OF WATER FOR LEAF SCALD IN PADDY",19.8266,83.0409
+"MADANPUR    RAMPUR",Cereals,2015,9,28,"Paddy Dhan",KALAHANDI,"Plant Protection",KHARIF,AGRICULTURE,ODISHA,"LEAF SCALD IN PADDY","RECOMMENDED TO SPRAY HEXACONAZOLE  2ML1 LIT OF WATER FOR LEAF SCALD IN PADDY",19.8266,83.0409
+GOLAMUNDA,Cereals,2015,10,1,"Paddy Dhan",KALAHANDI,"Plant Protection",nan,AGRICULTURE,ODISHA,"leaf scald in paddy","apply mancozeb 2gm in 1 litre water",19.8266,83.0409
+KESINGA,Cereals,2015,10,1,"Paddy Dhan",KALAHANDI,"Plant Protection",KHARIF,AGRICULTURE,ODISHA,"LEAF SCALD IN PADDY","RECOMMENDED TO SPRAY VALIDAMYCIN OR HEXACONAZOLE  2ML1LIT OF WATER FOR LEAF SCALD IN PADDY",19.8266,83.0409
+KARLAMUNDA,Cereals,2015,10,4,"Paddy Dhan",KALAHANDI,"Plant Protection",KHARIF,AGRICULTURE,ODISHA,"LEAF SCALD IN PADDY","RECOMMENDED TO SPRAY VALIDAMYCIN OR HEXACONAZOLE  2ML1 LIT OF WATER FOR LEAF SCALD IN PADDY",19.8266,83.0409
+KARLAMUNDA,Cereals,2015,10,14,"Paddy Dhan",KALAHANDI,"Plant Protection",KHARIF,AGRICULTURE,ODISHA,"LEAF SCALD IN PADDY","RECOMMENDED TO SPRAY HEXACONAZOLE OR VALIDAMYCIN  1ML1 LIT OF WATER FOR LEAF SCALD IN PADDY",19.8266,83.0409
+KESINGA,Cereals,2015,10,29,"Paddy Dhan",KALAHANDI,"Plant Protection",nan,AGRICULTURE,ODISHA,"LEAF SCALD IN PADDY","RECOMMENDED TO SPRAY VALIDAMYCIN  1ML1 LIT OF WATER FOR LEAF SCALD IN PADDY",19.8266,83.0409
+GHASIPURA,Cereals,2015,9,24,"Paddy Dhan",KEONJHAR,"Plant Protection",nan,AGRICULTURE,ODISHA,"leaf scald in rice","apply mancozeb 2gm in 1 litre water",21.5,85.5
+GHASIPURA,Cereals,2015,10,4,"Paddy Dhan",KEONJHAR,"Plant Protection",nan,AGRICULTURE,ODISHA,"LEAF SCALD IN PADDY","RECOMMENDED TO SPRAY HEXACONAZOLE  2ML1 LIT OF WATER FOR LEAF SCALD IN PADDY",21.5,85.5
+GOPABANDHUNAGAR,Cereals,2015,9,27,"Paddy Dhan",MAYURBHANJ,"Plant Protection",nan,AGRICULTURE,ODISHA,"leaf scald in rice","apply mancozeb 2gm in 1 litre water",21.9156,86.3962
+SADAR,Cereals,2015,9,24,"Paddy Dhan",PURI,"Plant Protection",nan,AGRICULTURE,ODISHA,"leaf scald in rice","apply mancozeb 2gm in 1 litre water",19.8076,85.8253
+NIMAPADA,Cereals,2015,9,25,"Paddy Dhan",PURI,"Plant Protection",nan,AGRICULTURE,ODISHA,"leaf scald in rice","apply mancozeb 2gm in 1 litre water",19.8076,85.8253
+KRUSHNAPRASAD,Cereals,2015,9,25,"Paddy Dhan",PURI,"Plant Protection",nan,AGRICULTURE,ODISHA,"LEAF SCALD IN PADDY","RECOMMENDED TO SPRAY VALIDAMYCIN  2ML1 LIT OF WATER FOR LEAF SCALD IN PADDY",19.8076,85.8253
+SATYABADI,Cereals,2015,9,26,"Paddy Dhan",PURI,"Plant Protection",nan,AGRICULTURE,ODISHA,"LEAF SCALD IN PADDY","RECOMMENDED TO SPRAY VALIDAMYCIN  2ML1 LIT OF WATER FOR LEAF SCALD IN PADDY",19.8076,85.8253
+DELANGA,Cereals,2015,10,1,"Paddy Dhan",PURI,"Plant Protection",KHARIF,AGRICULTURE,ODISHA,"LEAF SCALD IN PADDY","RECOMMENDED TO SPRAY HEXACONAZOLE OR VALIDAMYCIN  2ML1 LIT OF WATER FOR LEAF SCALD IN PADDY",19.8076,85.8253
+PIPILI,Cereals,2015,10,2,"Paddy Dhan",PURI,"Plant Protection",KHARIF,AGRICULTURE,ODISHA,"LEAF SCALD IN PADDY","RECOMMENDED TO SPRAY HEXACONAZOLE OR VALIDAMYCIN  2ML1 LIT OF WATER FOR LEAF SCALD IN PADDY",19.8076,85.8253
+NIMAPADA,Cereals,2015,10,5,"Paddy Dhan",PURI,"Plant Protection",KHARIF,AGRICULTURE,ODISHA,"LEAF SCALD IN PADDY","RECOMMENDED TO SPRAY HEXACONAZOLE OR VALIDAMYCIN  2ML1 LIT OF WATER FOR LEAF SCALD IN PADDY",19.8076,85.8253
+NIMAPADA,Cereals,2015,10,15,"Paddy Dhan",PURI,"Plant Protection",nan,AGRICULTURE,ODISHA,"LEAF SCALD IN PADDY","RECOMMENDED TO SPRAY VALIDAMYCIN  2ML1 LIT OF WATER FOR LEAF SCALD IN PADDY",19.8076,85.8253
+NAKTIDEUL,Cereals,2015,9,29,"Paddy Dhan",SAMBALPUR,"Plant Protection",nan,AGRICULTURE,ODISHA,"LEAF SCALD IN PADDY","RECOMMENDED TO SPRAY VALDAMYCIN  2ML1 LIT OF WATER FOR LEAF SCALD IN PADDY",21.5571,84.1529
+DHANKAUDA,Cereals,2015,10,8,"Paddy Dhan",SAMBALPUR,"Plant Protection",nan,AGRICULTURE,ODISHA,"LEAF SCALD IN PADDY","RECOMMENDED TO SPRAY HEXACONAZOLE OR VALIDAMYCIN  2ML1 LIT OF WATER FOR LEAF SCALD IN PADDY",21.5571,84.1529
+TIHIDI,Cereals,2015,9,5,"Paddy Dhan",BHADRAK,"Plant Protection",nan,AGRICULTURE,ODISHA,"leaf scald disease in rice","apply mancozeb 2gm in 1litre water",20.9854,86.5934
+TIHIDI,Cereals,2015,9,29,"Paddy Dhan",BHADRAK,"Plant Protection",KHARIF,AGRICULTURE,ODISHA,"LEAF SCALD IN PADDY","RECOMMENDED TO SPRAY VALIDAMYCIN OR HEXACONAZOLE OR VALIDAMYCIN 2 2ML1 LIT OF WATER FOR LEAF SCALD IN PADDY",20.9854,86.5934
+TIHIDI,Cereals,2015,10,5,"Paddy Dhan",BHADRAK,"Plant Protection",nan,AGRICULTURE,ODISHA,"leaf scald in paddy","apply mancozeb 2gm in 1 litre water",20.9854,86.5934
+BHANDARIPOKHARI,Cereals,2015,10,7,"Paddy Dhan",BHADRAK,"Plant Protection",nan,AGRICULTURE,ODISHA,"leaf scald in paddy","apply mancozeb 2gm per 1 litre water",20.9854,86.5934
+BONTH,Cereals,2015,10,16,"Paddy Dhan",BHADRAK,"Plant Protection",KHARIF,AGRICULTURE,ODISHA,"leaf scald in paddy","recommended to spray validamycin  2 ml1 lit of water for leaf scald in paddy",20.9854,86.5934
+DUNGURIPALI,Cereals,2015,9,17,"Paddy Dhan",SONEPUR,"Plant Protection",nan,AGRICULTURE,ODISHA,"LEAF SCALD IN PADDY","RECOMMENDED TO APPLY VALIDAMYCIN 3L 2ML IN 1 LITRE WATER TO CONTROL LEAF SCALD IN PADDY",20.8454,83.9091
+DUNGURIPALI,Cereals,2015,9,19,"Paddy Dhan",SONEPUR,"Plant Protection",nan,AGRICULTURE,ODISHA,"LEAF SCALD IN PADDY","RECOMMENDED TO VALIDAMYCIN 3L 2ML IN 1 LITRE WATER TO CONTROL LEAF SCALD IN PADDY",20.8454,83.9091
+DUNGURIPALI,Cereals,2015,9,28,"Paddy Dhan",SONEPUR,"Plant Protection",nan,AGRICULTURE,ODISHA,"LEAF SCALD IN PADDY","APPLY MANCOZEB 2GM IN 1 LITRE WATER",20.8454,83.9091
+TARBHA,Cereals,2015,10,1,"Paddy Dhan",SONEPUR,"Plant Protection",nan,AGRICULTURE,ODISHA,"Leaf Scald in rice","recommended to spray with blitox 50 2gmltr of water",20.8454,83.9091
+TARBHA,Cereals,2015,10,3,"Paddy Dhan",SONEPUR,"Plant Protection",nan,AGRICULTURE,ODISHA,"leaf scald in paddy","apply mancozeb 2gm in 1 litre water",20.8454,83.9091
+DUNGURIPALI,Cereals,2015,10,7,"Paddy Dhan",SONEPUR,"Plant Protection",KHARIF,AGRICULTURE,ODISHA,"LEAF SCALD IN PADDY","RECOMMENDED TO SPRAY HEXACONAZOLE  2ML1 LIT OF WATER FOR LEAF SCALD IN PADDY",20.8454,83.9091
+DUNGURIPALI,Cereals,2015,10,8,"Paddy Dhan",SONEPUR,"Plant Protection",nan,AGRICULTURE,ODISHA,"leaf scald in paddy","apply mancozeb 2gm per 1 litre water",20.8454,83.9091
+TARBHA,Cereals,2015,10,15,"Paddy Dhan",SONEPUR,"Plant Protection",nan,AGRICULTURE,ODISHA,"LEAF SCALD IN PADDY","RECOMMENDED TO SPRAY HEXACONAZOLE  1ML1 LIT OF WATER FOR LEAF SCALD IN PADDY",20.8454,83.9091
+NAUGAON,Cereals,2015,8,25,"Paddy Dhan",JAGATSINGHAPUR,"Plant Protection",KHARIF,AGRICULTURE,ODISHA,"LEAF SCALD IN PADDY","RECOMMENDED TO SPRAY SAAF  2G1 LIT OF WATER FOR LEAF SCALD IN PADDY",20.1801,86.3415
+JAGATSINGHPUR,Cereals,2015,9,24,"Paddy Dhan",JAGATSINGHAPUR,"Plant Protection",KHARIF,AGRICULTURE,ODISHA,"LEAF SCALD IN PADDY","RECOMMENDED TO SPRAY VALIDAMYCIN  2ML1 LIT OF WATER FOR LEAF SCALD IN PADDY",20.1801,86.3415
+TIRTOL,Cereals,2015,10,15,"Paddy Dhan",JAGATSINGHAPUR,"Plant Protection",KHARIF,AGRICULTURE,ODISHA,"LEAF SCALD IN PADDY","RECOMMENDED TO SPRAY HEXACONAZOLE  2ML1 LIT OF WATER FOR LEAF SCALD IN PADDY",20.1801,86.3415
+NAUGAON,Cereals,2015,10,15,"Paddy Dhan",JAGATSINGHAPUR,"Plant Protection",KHARIF,AGRICULTURE,ODISHA,"LEAF SCALD IN PADDY","RECOMMENDED TO SPRAY VALIDAMYCIN  1ML1 LIT OF WATER FOR LEAF SCALD IN PADDY",20.1801,86.3415
+KOREI,Cereals,2015,8,18,"Paddy Dhan",JAJAPUR,"Plant Protection",nan,AGRICULTURE,ODISHA,"LEAF SCALD IN PADDY","APPLY COPPER OXYCHLORIDE  3GMLITRE WATER SPRAY",20.8278,86.3798
+SUKINDA,Cereals,2015,9,28,"Paddy Dhan",JAJAPUR,"Plant Protection",KHARIF,AGRICULTURE,ODISHA,"LEAF SCALD IN PADDY","RECOMMENDED TO SPRAY HEXACONAZOLE OR VALIDAMYCIN  2ML1 LIT OF WATER FOR LEAF SCALD IN PADDY",20.8278,86.3798
+BADCHANA,Cereals,2015,10,7,"Paddy Dhan",JAJAPUR,"Plant Protection",nan,AGRICULTURE,ODISHA,"LEAF SCALD IN PADDY","RECOMMENDED TO SPRAY HEXACONAZOLE OR PROPICONAZOLE  2ML1 LIT OF WATER FOR LEAF SCALD IN PADDY",20.8278,86.3798
+GARADAPUR,Cereals,2015,9,18,"Paddy Dhan",KENDRAPARA,"Plant Protection",nan,AGRICULTURE,ODISHA,"LEAF SCALD IN PADDY","RECOMMENDED TO APPLY SAFF 2GM IN 1 LITRE WATER TO CONTROL LEAF SCALD IN PADDY",20.5475,86.5296
+MAHAKALAPADA,Cereals,2015,9,24,"Paddy Dhan",KENDRAPARA,"Plant Protection",nan,AGRICULTURE,ODISHA,"leaf scald in rice","apply mancozeb 2gm in 1 litre water",20.5475,86.5296
+GARADAPUR,Cereals,2015,9,26,"Paddy Dhan",KENDRAPARA,"Plant Protection",nan,AGRICULTURE,ODISHA,"leaf scald in rice","apply mancozeb 2gm in 1 litre water",20.5475,86.5296
+MAHAKALAPADA,Cereals,2015,10,8,"Paddy Dhan",KENDRAPARA,"Plant Protection",KHARIF,AGRICULTURE,ODISHA,"LEAF SCALD IN PADDY","RECOMMENDED TO SPRAY COPPER OXY CHLORIDE 2 G1 LIT OF WATER OR VALIDAMYCIN  2ML1 LIT OF WATER FOR LEAF SCALD IN PADDY",20.5475,86.5296
+CHHENDIPADA,Cereals,2015,10,8,"Paddy Dhan",ANUGUL,"Plant Protection",KHARIF,AGRICULTURE,ODISHA,"LEAF SCALD IN PADDY","RECOMMENDED TO SPRAY HEXACONAZOLE  2ML1 LIT WATER OR VALIDAMYCIN  2ML1 LIT OF WATER FOR LEAF SCALD IN PADDY",20.8411,85.0804
+ANUGUL,Cereals,2015,10,19,"Paddy Dhan",ANUGUL,"Plant Protection",nan,AGRICULTURE,ODISHA,"leaf scald in paddy","recommended to spray propiconazole  1ml1 lit of water for leaf scald in paddy",20.8411,85.0804
+KHARIAR,Cereals,2015,9,19,"Paddy Dhan",NAWAPARA,"Plant Protection",KHARIF,AGRICULTURE,ODISHA,"LEAF SCALD IN PADDY","RECOMMENDED TO SPRAY SAAF 2 G  PLANTOMYCIN 1 G IN 1 LIT OF WATER FOR LEAF SCALD IN PADDY",21.1447,82.9432
+NUAPADA,Cereals,2015,9,24,"Paddy Dhan",NAWAPARA,"Plant Protection",nan,AGRICULTURE,ODISHA,"leaf scald in rice","apply mancozeb 2gm in 1 litre water",21.1447,82.9432
+KANTAMAL,Cereals,2015,10,4,"Paddy Dhan",BAUDH,"Plant Protection",nan,AGRICULTURE,ODISHA,"leaf scald in paddy","apply mancozeb 2gm in 1 litre water",20.8416,84.3213
+KANTAMAL,Cereals,2015,10,16,"Paddy Dhan",BAUDH,"Plant Protection",KHARIF,AGRICULTURE,ODISHA,"LEAF SCALD IN PADDY","RECOMMENDED TO SPRAY HEXACONAZOLE OR VALIDAMYCIN  2ML1 LIT OF WATER FOR LEAF SCALD IN PADDY",20.8416,84.3213
+BALIPATNA,Cereals,2015,9,27,"Paddy Dhan",KHORDHA,"Plant Protection",nan,AGRICULTURE,ODISHA,"leaf scald in rice","apply mancozeb 2gm in 1 litre water",20.0538,85.5023
+BALIPATNA,Cereals,2015,10,6,"Paddy Dhan",KHORDHA,"Plant Protection",nan,AGRICULTURE,ODISHA,"leaf scald in paddy","spray mancozeb 2gm per 1 litre water",20.0538,85.5023
+BARPALI,Cereals,2015,9,24,"Paddy Dhan",BARGARH,"Plant Protection",nan,AGRICULTURE,ODISHA,"leaf scald in rice","apply mancozeb 2gm in 1 litre water",21.232,83.5653
+BARGARH,Cereals,2015,9,25,"Paddy Dhan",BARGARH,"Plant Protection",KHARIF,AGRICULTURE,ODISHA,"LEAF SCALD IN PADDY","RECOMMENDED TO SPRAY VALIDAMYCIN  2ML1 LIT OF WATER FOR LEAF SCALD IN PADDY",21.232,83.5653
+AMBABHONA,Cereals,2015,9,28,"Paddy Dhan",BARGARH,"Plant Protection",nan,AGRICULTURE,ODISHA,"LEAF SCALD IN PADDY","RECOMMENDED TO SPRAY HEXACONAZOLE  2ML1 LIT OF WATER FOR LEAF SCALD IN PADDY",21.232,83.5653
+BHEDEN,Cereals,2015,9,29,"Paddy Dhan",BARGARH,"Plant Protection",nan,AGRICULTURE,ODISHA,"LEAF SCALD IN PADDY","RECOMMENDED TO SPRAY VALIDAMYCIN OR HEXACONAZOLE  2ML1 LIT OF WATER FOR LEAF SCALD IN PADDY",21.232,83.5653
+BARGARH,Cereals,2015,9,30,"Paddy Dhan",BARGARH,"Plant Protection",nan,AGRICULTURE,ODISHA,"LEAF SCALD IN PADDY","RECOMMENDED TO SPRAY HEXACONAZOLE OR VALIDAMYCIN  2ML1 LIT OF WATER FOR LEAF SCALD IN PADDY",21.232,83.5653
+BHATLI,Cereals,2015,10,2,"Paddy Dhan",BARGARH,"Plant Protection",nan,AGRICULTURE,ODISHA,"Leaf Scald","spray copper oxychloride  3 Gof water",21.232,83.5653
+BHATLI,Cereals,2015,10,16,"Paddy Dhan",BARGARH,"Plant Protection",nan,AGRICULTURE,ODISHA,"LEAF SCALD IN PADDY","RECOMMENDED TO SPRAY VALIDAMYCIN OR HEXACONAZOLE  2ML1 LIT OF WATER FOR LEAF SCALD IN PADDY",21.232,83.5653
+PADAMPUR,Cereals,2015,10,26,"Paddy Dhan",BARGARH,"Plant Protection",KHARIF,AGRICULTURE,ODISHA,"leaf scald in paddy","recommended to spray validamycin  1ml1 lit of water for leaf scald in paddy",21.232,83.5653
+LAKHANPUR,Cereals,2015,9,28,"Paddy Dhan",JHARSUGUDA,"Plant Protection",KHARIF,AGRICULTURE,ODISHA,"LEAF SCALD IN PADDY","RECOMMENDED TO SPRAY HEXACONAZOLE OR VALIDAMYCIN  2ML1 LIT OF WATER FOR LEAF SCALD IN PADDY",21.8019,83.9714
+ARAKKONAM,Cereals,2015,10,14,"Paddy Dhan",VELLORE,"Nutrient Management",KHARIF,AGRICULTURE,TAMILNADU,"Leaf Scald in paddy","Recommended for spray benomyl 50 wp 2gm  lit",12.9022,79.0611
+AYODHIYAPATTINAM,Cereals,2015,11,14,"Paddy Dhan",SALEM,"Plant Protection",RABI,AGRICULTURE,TAMILNADU,"Leaf Scald in paddy","Recommended for spray carbendazim 2gm  lit",11.647,78.2107
+ERODE,Cereals,2015,12,19,"Paddy Dhan",ERODE,"Plant Protection",RABI,AGRICULTURE,TAMILNADU,"Leaf Scald in paddy","Recommended for spray carbendazim 2gm  lit",11.4905,77.3505
+LALGUDI,Cereals,2015,5,7,"Paddy Dhan",TIRUCHIRAPPALLI,"Plant Protection",JAYAD,AGRICULTURE,TAMILNADU,"Leaf Scald in paddy","Recommended for spray  Chlorothalonil  2 g  lit of water",10.8071,78.6881
+THOTTIAM,Cereals,2015,11,2,"Paddy Dhan",TIRUCHIRAPPALLI,"Plant Protection",RABI,AGRICULTURE,TAMILNADU,"Leaf Scald in paddy","Recommended for Leaf Scald in paddy spray mancozeb 2g  litre of water",10.8071,78.6881
+MANIKANDAM,Cereals,2015,11,30,"Paddy Dhan",TIRUCHIRAPPALLI,"Plant Protection",RABI,AGRICULTURE,TAMILNADU,"paddy Leaf Scald control","recommended for spray benomyl 2 g lit of water",10.8071,78.6881
+MANIKANDAM,Cereals,2015,12,19,"Paddy Dhan",TIRUCHIRAPPALLI,"Plant Protection",RABI,AGRICULTURE,TAMILNADU,"paddy Leaf Scald management","recommended for spray copper oxy chloride  2 g  lit of water",10.8071,78.6881
+PULLAMBADI,Cereals,2015,12,23,"Paddy Dhan",TIRUCHIRAPPALLI,"Plant Protection",RABI,AGRICULTURE,TAMILNADU,"Paddy  Leaf Scald management","recommended for spray copper oxychloride 2 g  lit of water",10.8071,78.6881
+BUDALUR,Cereals,2015,11,11,"Paddy Dhan",THANJAVUR,"Plant Protection",RABI,AGRICULTURE,TAMILNADU,"Leaf Scald in paddy","Recommended for spray benomyl 50 wp 2gm  lit",10.659,79.2014
+AMMAPETTAI,Cereals,2015,11,12,"Paddy Dhan",THANJAVUR,"Plant Protection",RABI,AGRICULTURE,TAMILNADU,"Leaf Scald in paddy","Recommended for spray Leaf Scald in paddy Mancozeb 2g  lit of water",10.659,79.2014
+KUMBAKONAM,Cereals,2015,11,12,"Paddy Dhan",THANJAVUR,"Plant Protection",RABI,AGRICULTURE,TAMILNADU,"Leaf Scald in paddy","Recommended for spray carbendazim 2gm  lit",10.659,79.2014
+KUMBAKONAM,Cereals,2015,11,12,"Paddy Dhan",THANJAVUR,"Plant Protection",RABI,AGRICULTURE,TAMILNADU,"Leaf Scald in paddy","Recommended for spray carbendazim 2gm  lit",10.659,79.2014
+TIRUVIDAIMARUDUR,Cereals,2015,11,12,"Paddy Dhan",THANJAVUR,"Plant Protection",RABI,AGRICULTURE,TAMILNADU,"Leaf Scald in paddy","Recommended for spray carbendazim 2gm  lit",10.659,79.2014
+KUMBAKONAM,Cereals,2015,11,16,"Paddy Dhan",THANJAVUR,"Plant Protection",RABI,AGRICULTURE,TAMILNADU,"Leaf Scald in paddy","Recommended for spray carbendazim 2gm  lit",10.659,79.2014
+KUMBAKONAM,Cereals,2015,11,17,"Paddy Dhan",THANJAVUR,"Plant Protection",RABI,AGRICULTURE,TAMILNADU,"Leaf Scald in paddy","Recommended for spray carbendazim 2gm  lit",10.659,79.2014
+TIRUVIDAIMARUDUR,Cereals,2015,11,21,"Paddy Dhan",THANJAVUR,"Plant Protection",RABI,AGRICULTURE,TAMILNADU,"Leaf Scald in paddy","Recommended for spray carbendazim 2gm  lit",10.659,79.2014
+THIRUVAIYARU,Cereals,2015,12,9,"Paddy Dhan",THANJAVUR,"Plant Protection",RABI,AGRICULTURE,TAMILNADU,"Leaf Scald in paddy","Recommended for Leaf Scald in paddy spray copper oxy chloride 25g  litre of water",10.659,79.2014
+KUMBAKONAM,Cereals,2015,12,20,"Paddy Dhan",THANJAVUR,"Plant Protection",RABI,AGRICULTURE,TAMILNADU,"Leaf Scald in paddy","Recommended for spray carbendazim 2gm  lit",10.659,79.2014
+PAPANASAM,Cereals,2015,12,27,"Paddy Dhan",THANJAVUR,"Plant Protection",RABI,AGRICULTURE,TAMILNADU,"Leaf Scald in paddy","Recommended for Leaf Scald in paddy  spray Mancozeb 2g  litre of water",10.659,79.2014
+KUMBAKONAM,Cereals,2015,12,31,"Paddy Dhan",THANJAVUR,"Plant Protection",RABI,AGRICULTURE,TAMILNADU,"Leaf Scald in paddy","Recommended for spray benomyl 50 wp 2gm  lit",10.659,79.2014
+ALANGANALLUR,Cereals,2015,5,14,"Paddy Dhan",MADURAI,"Plant Protection",JAYAD,AGRICULTURE,TAMILNADU,"Leaf Scald in paddy","Recommended for spray mancozeb 2 glit of water",9.92612,78.1141
+KALAKADU,Cereals,2015,10,21,"Paddy Dhan",TIRUNELVELI,"Plant Protection",RABI,AGRICULTURE,TAMILNADU,"Leaf Scald in paddy","Recommended for spray carbendazim 2gm  lit",8.72031,77.7075
+RADHAPURAM,Cereals,2015,12,10,"Paddy Dhan",TIRUNELVELI,"Plant Protection",RABI,AGRICULTURE,TAMILNADU,"Leaf scald in Paddy","recommended for spray neem oil 3 ml liter",8.72031,77.7075
+MANUR,Cereals,2015,12,29,"Paddy Dhan",TIRUNELVELI,"Plant Protection",RABI,AGRICULTURE,TAMILNADU,"Leaf Scald in paddy","Recommended for spray carbendazim 2gm  lit",8.72031,77.7075
+GUDALUR,Cereals,2015,1,23,"Paddy Dhan","THE NILGIRIS","Plant Protection",RABI,AGRICULTURE,TAMILNADU,"Leaf Scald in paddy","recommended for carbendazim 2 giram litre",11.4,76.7
+RKPET,Cereals,2015,3,3,"Paddy Dhan",THIRUVALLUR,"Plant Protection",RABI,AGRICULTURE,TAMILNADU,"leaf scald in paddy","recommended for spraying copper oxy chloride 25 gram litre of water",13.2538,80.0563
+GUMMIDIPUNDI,Cereals,2015,11,16,"Paddy Dhan",THIRUVALLUR,"Plant Protection",RABI,AGRICULTURE,TAMILNADU,"Leaf Scald in paddy","Recommended for spray benomyl 50 wp 2gm  lit",13.2538,80.0563
+SRIVILLIPUTTUR,Cereals,2015,12,21,"Paddy Dhan",VIRUDHUNAGAR,"Plant Protection",RABI,AGRICULTURE,TAMILNADU,"Leaf Scald in paddy","Recommended for spray carbendazim 2gm  lit",9.49263,77.8632
+VADAMADURAI,Cereals,2015,12,25,"Paddy Dhan",DINDIGUL,"Plant Protection",RABI,AGRICULTURE,TAMILNADU,"Leaf Scald in paddy","Recommended for spray Mancozeb  2gm  lit",10.4257,77.8157
+KODAVASAL,Cereals,2015,6,10,"Paddy Dhan",THIRUVARUR,"Plant Protection",JAYAD,AGRICULTURE,TAMILNADU,"Leaf Scald in paddy","recommended for spray benomyl 2 gram litre of water",10.6879,79.4979
+NANNILAM,Cereals,2015,11,13,"Paddy Dhan",THIRUVARUR,"Plant Protection",RABI,AGRICULTURE,TAMILNADU,"Leaf Scald in paddy","Recommended for spray carbendazim 2gm  lit",10.6879,79.4979
+MUTHUPETTAI,Cereals,2015,11,16,"Paddy Dhan",THIRUVARUR,"Plant Protection",RABI,AGRICULTURE,TAMILNADU,"Leaf Scald in paddy","Recommended for spray benomyl 50 wp 2gm  lit",10.6879,79.4979
+MUTHUPETTAI,Cereals,2015,12,15,"Paddy Dhan",THIRUVARUR,"Plant Protection",RABI,AGRICULTURE,TAMILNADU,"Leaf Scald in paddy","Recommended for spray carbendazim 2gm  lit",10.6879,79.4979
+NAGAPPATTINAM,Cereals,2015,9,1,"Paddy Dhan",NAGAPATTINAM,"Plant Protection",KHARIF,AGRICULTURE,TAMILNADU,"Leaf Scald in paddy","Recommended for spray benomyl 50 wp 2gm  lit",10.6026,79.7619
+NAGAPPATTINAM,Cereals,2015,10,9,"Paddy Dhan",NAGAPATTINAM,"Plant Protection",RABI,AGRICULTURE,TAMILNADU,"Paddy Leaf Scald management","recommended for spray copper oxy chloride 2 g  lit of water",10.6026,79.7619
+KUTTALAM,Cereals,2015,10,20,"Paddy Dhan",NAGAPATTINAM,"Plant Protection",RABI,AGRICULTURE,TAMILNADU,"Leaf Scald in paddy","Recommended for spray carbendazim 2gm  lit",10.6026,79.7619
+VEDARANYAM,Cereals,2015,11,20,"Paddy Dhan",NAGAPATTINAM,"Plant Protection",RABI,AGRICULTURE,TAMILNADU,"Leaf Scald in paddy","Recommended for spray carbendazim 2gm  lit",10.6026,79.7619
+DEVAKOTTAI,Cereals,2015,12,18,"Paddy Dhan",SIVAGANGA,"Plant Protection",RABI,AGRICULTURE,TAMILNADU,"Leaf Scald in paddy","Recommended for spray carbendazim 2gm  lit",9.84869,78.487
+VEMBAKKAM,Cereals,2015,10,13,"Paddy Dhan",TIRUVANNAMALAI,"Plant Protection",KHARIF,AGRICULTURE,TAMILNADU,"Leaf Scald in paddy","Recommended for spray benomyl 50 wp 2gm  lit",12.4289,78.9992
+KEELPENNATHUR,Cereals,2015,11,13,"Paddy Dhan",TIRUVANNAMALAI,"Plant Protection",RABI,AGRICULTURE,TAMILNADU,"leaf scald and leaf blight in paddy","recommended for application of Bavistin  2g per litre of water",12.4289,78.9992
+THOOTHUKKUDI,Cereals,2015,12,15,"Paddy Dhan",THOOTHUKUDI,"Plant Protection",RABI,AGRICULTURE,TAMILNADU,"Leaf Scald in paddy","Recommended for Leaf Scald in paddy spray mancozeb 2g  litre of water",8.8457,77.9938
+KHAIR,Cereals,2015,8,9,"Paddy Dhan",ALIGARH,"Plant Protection",KHARIF,AGRICULTURE,"UTTAR PRADESH","Leaf Scald ","copper oxychloride  025 ka ghol banakar spray kare",27.8761,78.1358
+"KAURI RAM",Cereals,2015,9,28,"Paddy Dhan",GORAKHPUR,"Plant Protection",KHARIF,AGRICULTURE,"UTTAR PRADESH","Dhan Me Leaf Scald","HEXACONAZOLE 1 GRAM LITER PANI ME GHOLKAR CHIDKAV KAREN",26.6678,83.3642
+SHIVPUR,Cereals,2015,9,28,"Paddy Dhan",BAHRAICH,"Plant Protection",KHARIF,AGRICULTURE,"UTTAR PRADESH","leaf scald problem in paddy crop","NPK 19:19:19  1 kiloekd copper oxychloride 50 25 gramliter panistreptocyclin 2 gram10 liter pani ka spray kare",27.7344,81.4765
+SAHABGANJ,Cereals,2015,10,10,"Paddy Dhan",CHANDAULI,"Plant Protection",KHARIF,AGRICULTURE,"UTTAR PRADESH","leaf scald problem in paddy","copper oxychloride 50 25 gramliter panistreptocyclin 2 gram10 liter panimancozeb-2 gramliter pani ka spray kare",25.1257,83.2495
+BHOGRAI,Cereals,2016,2,23,"Paddy Dhan",BALASORE,"Plant Protection",nan,AGRICULTURE,ODISHA,"Leaf scald in rice","Spray copper oxy chloride and Mancozeb alternatively",21.5006,86.9199
+JALESWAR,Cereals,2016,3,15,"Paddy Dhan",BALASORE,"Cultural Practices",nan,AGRICULTURE,ODISHA,"LEAF SCALD IN PADDY","RECOMMENDED TO SPRAY HEXACONAZOLE 2 ML1 LIT WATER FOR LEAF SCALD IN PADDY",21.5006,86.9199
+BHOGRAI,Cereals,2016,3,18,"Paddy Dhan",BALASORE,"Cultural Practices",nan,AGRICULTURE,ODISHA,"leaf scald in paddy","recommended to spray tricyclazole  2ml1 lit water for leaf scald in paddy",21.5006,86.9199
+SAINTALA,Cereals,2016,3,17,"Paddy Dhan",BALANGIR,"Plant Protection",nan,AGRICULTURE,ODISHA,"Leaf Scald in paddy","Recommended to spray copper oxychloride 2glit water to control Leaf Scald in paddy",20.6095,83.1673
+KARLAMUNDA,Cereals,2016,3,30,"Paddy Dhan",KALAHANDI,"Cultural Practices",nan,AGRICULTURE,ODISHA,"leaf scald in paddy","recommended to spray hexaconazole  2ml1 lit water for leaf scald in paddy",19.8266,83.0409
+JAMANKIRA,Cereals,2016,1,28,"Paddy Dhan",SAMBALPUR,"Plant Protection",nan,AGRICULTURE,ODISHA,"LEAF SCALD IN PADDY","RECOMMENDED TO SPRAY VALIDAMYCIN OR HEXACONAZOLE  2 ML1 LIT WATER FOR LEAF SCALD IN PADDY",21.5571,84.1529
+DHANKAUDA,Cereals,2016,3,20,"Paddy Dhan",SAMBALPUR,"Cultural Practices",nan,AGRICULTURE,ODISHA,"LEAF SCALD IN PADDY","RECOMMENDED TO SPRAY HEXACONAZOLE  2 ML1 LIT WATER FOR LEAF SCALD IN PADDY",21.5571,84.1529
+MANESWAR,Cereals,2016,3,24,"Paddy Dhan",SAMBALPUR,"Cultural Practices",nan,AGRICULTURE,ODISHA,"LEAF SCALD IN PADDY","RECOMMENDED TO SPRAY HEXACONAZOLE  2ML1 LIT WATER FOR LEAF SCALD IN PADDY",21.5571,84.1529
+DUNGURIPALI,Cereals,2016,1,28,"Paddy Dhan",SONEPUR,"Plant Protection",nan,AGRICULTURE,ODISHA,"leaf scald in paddy","recommended to spray hexaconazole  2ml1 lit water for leaf scald in paddy",20.8454,83.9091
+ATHMALLIK,Cereals,2016,3,20,"Paddy Dhan",ANUGUL,"Cultural Practices",nan,AGRICULTURE,ODISHA,"LEAF SCALD IN PADDY","RECOMMENDED TO SPRAY HEXACONAZOLE  2ML1 LIT WATERF FOR LEAF SCALD IN PADDY",20.8411,85.0804
+BARPALI,Cereals,2016,1,27,"Paddy Dhan",BARGARH,"Plant Protection",RABI,AGRICULTURE,ODISHA,"LEAF SCALD IN PADDY","RECOMMENDED TO SPRAY HEXACONAZOLE  1ML1 LIT WATER FOR LEAF SCALD IN PADDY",21.232,83.5653
+BHEDEN,Cereals,2016,1,27,"Paddy Dhan",BARGARH,"Plant Protection",nan,AGRICULTURE,ODISHA,"LEAF SCALD IN PADDY","RECOMMENDED TO SPRAY HEXACONZOLE  1ML1 LIT LEAF SCALD IN PADDY",21.232,83.5653
+BARPALI,Cereals,2016,3,3,"Paddy Dhan",BARGARH,"Plant Protection",JAYAD,AGRICULTURE,ODISHA,"leaf scald in paddy","recommended to spray copper oxy chloride 2 g 1 lit water or ridomil gold  2g1 lit water for leaf scald in paddy",21.232,83.5653
+JHARBANDH,Cereals,2016,3,8,"Paddy Dhan",BARGARH,"Cultural Practices",nan,AGRICULTURE,ODISHA,"LEAF SCALD IN PADDY","RECOMMENDED TO SPRAY COPPER OXY CHLORIDE  2G1 LIT WATER FOR LEAF SCALD IN PADDY",21.232,83.5653
+BARGARH,Cereals,2016,3,15,"Paddy Dhan",BARGARH,"Cultural Practices",nan,AGRICULTURE,ODISHA,"leaf scald in paddy","recommended to spray hexaconazole  2ml1 lit water for leaf scald in paddy",21.232,83.5653
+UTTIRAMERUR,Cereals,2016,6,19,"Paddy Dhan",KANCHEEPURAM,"Plant Protection",JAYAD,AGRICULTURE,TAMILNADU,"Leaf Scald disease management for Paddy","Recommended for spray mancozeb- 2 g  sticking agent- 05ml 1 litre of water",12.8796,79.7043
+UTTIRAMERUR,Cereals,2016,8,24,"Paddy Dhan",KANCHEEPURAM,"Plant Protection",KHARIF,AGRICULTURE,TAMILNADU,"asking about Leaf Scald in paddy","Recommended for spray mancozeb 2gm  lit",12.8796,79.7043
+WALAJAPET,Cereals,2016,7,27,"Paddy Dhan",VELLORE,"Plant Protection",KHARIF,AGRICULTURE,TAMILNADU,"asking about Leaf Scald in paddy","Recommended for spray carbendazim 2gm  lit",12.9022,79.0611
+ARCOT,Cereals,2016,8,23,"Paddy Dhan",VELLORE,"Plant Protection",KHARIF,AGRICULTURE,TAMILNADU,"asking about Leaf Scald in paddy","Recommended for spray benomyl 50 wp 2gm  lit",12.9022,79.0611
+SHOLINGHUR,Cereals,2016,9,28,"Paddy Dhan",VELLORE,"Plant Protection",KHARIF,AGRICULTURE,TAMILNADU,"asking about Leaf Scald in paddy","Recommended for spray carbendazim 2gm  litre of water",12.9022,79.0611
+GANGAVALLI,Cereals,2016,12,5,"Paddy Dhan",SALEM,"Plant Protection",RABI,AGRICULTURE,TAMILNADU,"Leaf Scald in paddy","Recommended for spray carbendazim 2gm  lit",11.647,78.2107
+ANDIYUR,Cereals,2016,10,26,"Paddy Dhan",ERODE,"Cultural Practices",KHARIF,AGRICULTURE,TAMILNADU,"Leaf Scald in paddy","Recommended for spray Carbendazim  2gm  litre of water",11.4905,77.3505
+MUSIRI,Cereals,2016,11,21,"Paddy Dhan",TIRUCHIRAPPALLI,"Plant Protection",RABI,AGRICULTURE,TAMILNADU,"Leaf Scald in paddy","Recommended for spray carbendazim 2gm  lit",10.8071,78.6881
+MANACHANELLUR,Cereals,2016,11,28,"Paddy Dhan",TIRUCHIRAPPALLI,"Plant Protection",RABI,AGRICULTURE,TAMILNADU,"Leaf Scald in paddy","Recommended for Spray Carbendazim 2gm  lit",10.8071,78.6881
+MANACHANELLUR,Cereals,2016,12,11,"Paddy Dhan",TIRUCHIRAPPALLI,"Plant Protection",RABI,AGRICULTURE,TAMILNADU,"Leaf Scald in paddy","Recommended for spray carbendazim 2gm  lit",10.8071,78.6881
+VIRALIMALAI,Cereals,2016,11,23,"Paddy Dhan",PUDUKKOTTAI,"Plant Protection",RABI,AGRICULTURE,TAMILNADU,"Leaf Scald in paddy","Recommended for spray carbendazim 2gm lit",10.2903,78.8174
+TIRUVIDAIMARUDUR,Cereals,2016,1,6,"Paddy Dhan",THANJAVUR,"Plant Protection",RABI,AGRICULTURE,TAMILNADU,"Leaf Scald in paddy","Recommended for spray carbendazim 2gm  lit",10.659,79.2014
+TIRUVIDAIMARUDUR,Cereals,2016,11,20,"Paddy Dhan",THANJAVUR,"Plant Protection",RABI,AGRICULTURE,TAMILNADU,"Leaf Scald in paddy","Recommended for spray benomyl 50 wp 2gm  lit",10.659,79.2014
+KUMBAKONAM,Cereals,2016,11,24,"Paddy Dhan",THANJAVUR,"Plant Protection",RABI,AGRICULTURE,TAMILNADU,"Leaf Scald in paddy","Recommended for spray carbendazim 2gm  lit",10.659,79.2014
+KUMBAKONAM,Cereals,2016,12,3,"Paddy Dhan",THANJAVUR,"Plant Protection",RABI,AGRICULTURE,TAMILNADU,"Leaf Scald in paddy","Recommended for spray carbendazim 2gm  lit",10.659,79.2014
+PATTUKKOTTAI,Cereals,2016,12,11,"Paddy Dhan",THANJAVUR,"Plant Protection",RABI,AGRICULTURE,TAMILNADU,"Leaf Scald in paddy","Recommended for spray carbendazim 2gm  litre of water",10.659,79.2014
+PAPANASAM,Cereals,2016,12,31,"Paddy Dhan",THANJAVUR,"Plant Protection",RABI,AGRICULTURE,TAMILNADU,"Leaf Scald in paddy","Recommended for spray Carbendazim 2gm  litre of water",10.659,79.2014
+RADHAPURAM,Cereals,2016,1,2,"Paddy Dhan",TIRUNELVELI,"Plant Protection",RABI,AGRICULTURE,TAMILNADU,"Leaf Scald in paddy","Recommended for spray benomyl 50 wp 2gm  lit",8.72031,77.7075
+NANGUNERI,Cereals,2016,5,19,"Paddy Dhan",TIRUNELVELI,"Plant Protection",JAYAD,AGRICULTURE,TAMILNADU,"asking about Leaf Scald in paddy","Recommended for spray carbendazim 2gm  lit",8.72031,77.7075
+NANGUNERI,Cereals,2016,6,14,"Paddy Dhan",TIRUNELVELI,"Plant Protection",KHARIF,AGRICULTURE,TAMILNADU,"asking about Leaf Scald in paddy","Recommended for spray carbendazim 2gm  lit",8.72031,77.7075
+KADAYAM,Cereals,2016,12,24,"Paddy Dhan",TIRUNELVELI,"Plant Protection",RABI,AGRICULTURE,TAMILNADU,"Leaf Scald in paddy","Recommended for spray carbendazim 2gm  lit",8.72031,77.7075
+SHOLAVARAM,Cereals,2016,8,16,"Paddy Dhan",THIRUVALLUR,"Plant Protection",KHARIF,AGRICULTURE,TAMILNADU,"assign about paddy Leaf Scald","recommended for spray neem oil - 3 ml  teepol - 1 ml lit of water",13.2538,80.0563
+RAJAPALAIYAM,Cereals,2016,4,1,"Paddy Dhan",VIRUDHUNAGAR,"Plant Protection",RABI,AGRICULTURE,TAMILNADU,"Leaf Scald in paddy","Recommended for spray carbendazim 2gm  lit",9.49263,77.8632
+PERAMBALUR,Cereals,2016,12,24,"Paddy Dhan",PERAMBALUR,"Plant Protection",RABI,AGRICULTURE,TAMILNADU,"Leaf Scald in paddy","Recommended for spray carbendazim 2gm  lit",11.2903,78.93
+KOTTUR,Cereals,2016,6,22,"Paddy Dhan",THIRUVARUR,"Plant Protection",KHARIF,AGRICULTURE,TAMILNADU,"asking about Leaf Scald in paddy","Recommended for spray carbendazim 2gm  lit",10.6879,79.4979
+KODAVASAL,Cereals,2016,7,13,"Paddy Dhan",THIRUVARUR,"Plant Protection",KHARIF,AGRICULTURE,TAMILNADU,"Leaf Scald in paddy","Recommended for spray carbendazim 2gm  lit",10.6879,79.4979
+MANNARGUDI,Cereals,2016,7,21,"Paddy Dhan",THIRUVARUR,"Plant Protection",KHARIF,AGRICULTURE,TAMILNADU,"Asking about Leaf Scald in paddy","Recommended for spray Carbendazim 2 g  litre of water",10.6879,79.4979
+"SEMBANAR KOIL",Cereals,2016,6,18,"Paddy Dhan",NAGAPATTINAM,"Plant Protection",JAYAD,AGRICULTURE,TAMILNADU,"Asking about Leaf Scald in paddy","recommended for Spray Mancozeb 2 g litre of water",10.6026,79.7619
+"SEMBANAR KOIL",Cereals,2016,12,11,"Paddy Dhan",NAGAPATTINAM,"Plant Protection",RABI,AGRICULTURE,TAMILNADU,"Leaf Scald in paddy","Recommended for spray carbendazim 2gm  lit",10.6026,79.7619
+SIVAGANGA,Cereals,2016,6,20,"Paddy Dhan",SIVAGANGA,"Plant Protection",KHARIF,AGRICULTURE,TAMILNADU,"asking about Leaf Scald in paddy","Recommended for spray carbendazim 2gm  lit",9.84869,78.487
+TIRUVANNAMALAI,Cereals,2016,1,28,"Paddy Dhan",TIRUVANNAMALAI,"Plant Protection",RABI,AGRICULTURE,TAMILNADU,"Leaf Scald in paddy","Recommended for spray benomyl 50 wp 2gm  lit",12.4289,78.9992
+CHENGAM,Cereals,2016,4,7,"Paddy Dhan",TIRUVANNAMALAI,"Plant Protection",JAYAD,AGRICULTURE,TAMILNADU,"Leaf Scald in paddy","Recommended for spray benomyl 50 wp 2gm  lit",12.4289,78.9992
+CHETPUT,Cereals,2016,9,3,"Paddy Dhan",TIRUVANNAMALAI,"Plant Protection",KHARIF,AGRICULTURE,TAMILNADU,"Leaf Scald  in paddy","recommended for the spray  :  carbendazim 2gm lit of water",12.4289,78.9992
+CHEYYAR,Cereals,2016,9,17,"Paddy Dhan",TIRUVANNAMALAI,"Plant Protection",KHARIF,AGRICULTURE,TAMILNADU,"Leaf Scald in paddy","Recommended for spray carbendazim 2gm  lit",12.4289,78.9992
+FARAH,Cereals,2016,9,26,"Paddy Dhan",MATHURA,"Plant Protection",KHARIF,AGRICULTURE,"UTTAR PRADESH","Leaf Scald control in paddy ","copper oxy cloride 25 gramlitre yaa 1 kilogramacre ki dar se ghol banakar spray kare",27.4956,77.6856
+KORAON,Cereals,2016,10,8,"Paddy Dhan",ALLAHABAD,"Plant Protection",KHARIF,AGRICULTURE,"UTTAR PRADESH","leaf Scald Disease control in paddy crops ","Mancozeb 75 WP 600-800 g acre 200 liter paani me ghol kar spray kare",25.4381,81.8338
+PALHANA,Cereals,2016,10,5,"Paddy Dhan",AZAMGARH,"Plant Protection",KHARIF,AGRICULTURE,"UTTAR PRADESH","Leaf Scald control in paddy ","Mancozeb 75 WP 800 gram acre ki dar se spray kare",26.0236,83.0293
+CHAHNIYA,Cereals,2016,9,9,"Paddy Dhan",CHANDAULI,"Plant Protection",KHARIF,AGRICULTURE,"UTTAR PRADESH","Leaf Scald in paddy","Spray Mancozeb 75 20gramliter",25.1257,83.2495
+NICHLAUL,Cereals,2016,7,31,"Paddy Dhan",MAHARAHGANJ,"Fertilizer Use and Availability",KHARIF,AGRICULTURE,"UTTAR PRADESH","Leaf Scald in paddy","Spray carbendazim  1 gm  liter ater",27.1303,80.8597
+LAKSHMIPUR,Cereals,2016,8,31,"Paddy Dhan",MAHARAHGANJ,"Plant Protection",KHARIF,AGRICULTURE,"UTTAR PRADESH","Leaf Scald problem in paddy ","Mancozeb 75 WP 200 gram dawa urea ke sath pryog ke aur Carbofuran 3 GR  8 kg  acre ke hisab se pryog kre ",27.1303,80.8597
+"RAM NAGAR",Cereals,2016,10,18,"Paddy Dhan","AMBEDKAR NAGAR","Plant Protection",KHARIF,AGRICULTURE,"UTTAR PRADESH","Leaf Scald control in paddy crop    ","Mancozeb 75 WP 500-600 gramacre 200 liter paani me ghol kar spray kare",26.4046,82.6065
+DONGARGHAR,Cereals,2016,8,31,"Paddy Dhan","RAJ NANDGAON","Plant Protection",nan,AGRICULTURE,CHHATTISGARH,"Farmer needs information regarding How to control of leaf scald in paddy crop","Recommended for to control of fungal attack use copper oxy chloride 50 WP Blue copper or Dhanucop or Copper Oxychloride 50 WG blueget 727 sumil chemicals 40 gram and streptocyclin 2 gram at 15 liter of water",21.6637,81.8406
+KOILEBEDA,Cereals,2016,9,4,"Paddy Dhan","UTTAR BASTAR KANKER","Plant Protection",KHARIF,AGRICULTURE,CHHATTISGARH,"Farmer needs information regarding control measures of leaf scald in Paddy","Recommended for to control of fungal attack in paddy crop use validamycin 3 L 25ml at 15 liter of water or Spray benomyl 50  WP  2 gmliter",20.1287,80.9845
+PALI,Cereals,2016,9,1,"Paddy Dhan",KORBA,"Fertilizer Use and Availability",KHARIF,AGRICULTURE,CHHATTISGARH,"Farmer needs information regarding control measures of leaf scald in Paddy ","Recommended for to control of leaf scald  in paddy crop use validamycin 3 L 25ml at 15 liter of water",22.5198,82.635
+RAIGARH,Cereals,2016,3,15,"Paddy Dhan",RAIGARH,"Plant Protection",JAYAD,AGRICULTURE,CHHATTISGARH,"Farmer wants to know information about How to control of Leaf Scald in paddy crop","Foliar application of captafol mancozeb and copper oxychloride also reduces the incidence and severity of the fungal disease",22.2362,83.353
+PATTAMUNDAI,Cereals,2017,9,13,"Paddy Dhan",KENDRAPARA,"Bio-Pesticides and Bio-Fertilizers",nan,AGRICULTURE,ODISHA,"leaf scald in paddy","spray 30gram copper oxychloride  15gram streptocycline in 15ltr water",20.5475,86.5296
+PHUL,Cereals,2017,9,23,"Paddy Dhan",BHATINDA,"Plant Protection",KHARIF,AGRICULTURE,PUNJAB,"information regarding the control of leaf scald in paddy ","SPRAY BLITOX COPPER OXYCHLORIDE  500GM IN 200 LITERS OF WATER  ACRE ",30.2068,74.9464
+RAMPURA,Cereals,2017,10,3,"Paddy Dhan",BHATINDA,"Plant Protection",KHARIF,AGRICULTURE,PUNJAB,"INFORMATION REGARDING THE CONTROL OF LEAF SCALD IN PADDY ","SPRAY BLITOX  500GM MIX IN 200 LITERS OF WATER  ACRE ",30.2068,74.9464
+FARIDKOT,Cereals,2017,9,24,"Paddy Dhan",FARIDKOT,"Plant Protection",KHARIF,AGRICULTURE,PUNJAB,"information regarding the control of leaf scald in paddy ","spray blitox copper oxychloride  500gm in 200 liters of water  acre ",30.6014,74.795
+"TARN TARAN-12",Cereals,2017,9,23,"Paddy Dhan","TARN TARAN","Plant Protection",KHARIF,AGRICULTURE,PUNJAB,"INFORMATION REGARDING THE CONTROL OF LEAF SCALD IN PADDY ","SPRAY BLITOX  500GM MIX IN 200 LITERS OF WATER  ACRE ",31.3212,74.8417
+"TARN TARAN-12",Cereals,2017,10,8,"Paddy Dhan","TARN TARAN","Plant Protection",KHARIF,AGRICULTURE,PUNJAB,"INFORMATION REGARDING THE CONTROL OF LEAF SCALD IN PADDY ","SPRAY BLITOX  500GM MIX IN 200 LITERS OF WATER  ACRE ",31.3212,74.8417
+ACHARAPAKKAM,Cereals,2017,2,15,"Paddy Dhan",KANCHEEPURAM,"Plant Protection",RABI,AGRICULTURE,TAMILNADU,"Asking about Leaf Scald in paddy","Recommended for spray carbendazim 2gm  lit",12.8796,79.7043
+HARUR,Cereals,2017,12,7,"Paddy Dhan",DHARMAPURI,"Plant Protection",RABI,AGRICULTURE,TAMILNADU,"Asking about Leaf Scald management in paddy","recommended for spray Copper oxy chloride 25 glit of water",12.1456,78.1132
+HOLAGARH,Cereals,2017,8,8,"Paddy Dhan",ALLAHABAD,"Plant Protection",KHARIF,AGRICULTURE,"UTTAR PRADESH","Leaf Scald DISEASE PROBLEM IN PADDY CROP","dhaan me mancozeb or copper oxychloride 2gramliter pani me milaker spray kre",25.4381,81.8338
+SHANKARGARH,Cereals,2017,9,2,"Paddy Dhan",ALLAHABAD,"Plant Protection",KHARIF,AGRICULTURE,"UTTAR PRADESH","LEAF SCALD PROBLEM IN PADDY CROP","Dear former use to  Copper Oxychloride 50 WP  25gliter water splash in the field",25.4381,81.8338
+JAKHANIA,Cereals,2017,8,26,"Paddy Dhan",GHAZIPUR,"Plant Protection",nan,AGRICULTURE,"UTTAR PRADESH","Leaf Scald disease control","copper oxychloride 25 gramliter water",25.6035,83.5076
+BANSI,Cereals,2017,9,7,"Paddy Dhan","SIDDHARTH NAGAR","Plant Protection",nan,AGRICULTURE,"UTTAR PRADESH","Leaf Scald disease problem in paddy crop ","thiophanate-methyl 70 WP 400 gram  Acre 200 litre pani ke sath spray kare",27.2753,83.0676
+TANDA,Cereals,2017,10,8,"Paddy Dhan","AMBEDKAR NAGAR","Cultural Practices",nan,AGRICULTURE,"UTTAR PRADESH","Attack leaf scald in Paddy crop","Carbendazim 4627 SC  100 ml acre ki dar se spray kare",26.4046,82.6065
+FARIDABAD,Cereals,2018,10,6,"Paddy Dhan",FARIDABAD,nan,0,AGRICULTURE,HARYANA,"TELL ME CONTROL LEAF SCALD IN DHAN CROP","SPRAY OF MENCOZEB 2 GM PER LITER WATER",28.4031,77.3106
+DEOGAON,Cereals,2018,7,23,"Paddy Dhan",BALANGIR,"Plant Protection",nan,AGRICULTURE,ODISHA,"LEAF SCALD IN PADDY","LEAF SCALD IN PADDY - SPRAY CARBENDAZIM 2 GRAM PER 1 LITRE OF WATER",20.6095,83.1673
+NIMAPADA,Cereals,2018,4,16,"Paddy Dhan",PURI,"Plant Protection",nan,AGRICULTURE,ODISHA,"Leaf scald in paddy","Recommended to spray Mancozeb 75 WP 3gm per litre of water to control Leaf scald in paddy",19.8076,85.8253
+NUAPADA,Cereals,2018,4,5,"Paddy Dhan",NAWAPARA,"Plant Protection",nan,AGRICULTURE,ODISHA,"LEAF SCALD IN PADDY","LEAF SCALD IN PADDY-SPRAY MANCOZEB 75WP 3GM IN 1 LITRE WATER",21.1447,82.9432
+BHEDEN,Cereals,2018,4,6,"Paddy Dhan",BARGARH,"Plant Protection",nan,AGRICULTURE,ODISHA,"LEAF SCALD IN PADDY","LEAF SCALD IN PADDY-SPRAY MANCOZEB 75WP 3GM IN 1 LITRE WATER",21.232,83.5653
+CHITHAMUR,Cereals,2018,2,9,"Paddy Dhan",KANCHEEPURAM,"Plant Protection",RABI,AGRICULTURE,TAMILNADU,"asking about Leaf Scald in paddy","Recommended for spray carbendazim 2gm  lit",12.8796,79.7043
+MADURANTAKAM,Cereals,2018,6,9,"Paddy Dhan",KANCHEEPURAM,"Plant Protection",JAYAD,AGRICULTURE,TAMILNADU,"asking about Leaf Scald in paddy","Recommended for spray copper oxychloride 2gm  lit of water",12.8796,79.7043
+WALAJAPET,Cereals,2018,6,26,"Paddy Dhan",VELLORE,"Plant Protection",JAYAD,AGRICULTURE,TAMILNADU,"Asking about Leaf Scald in paddy","Recommended for spray carbendazim 2gm  lit",12.9022,79.0611
+SANKARI,Cereals,2018,11,25,"Paddy Dhan",SALEM,nan,0,AGRICULTURE,TAMILNADU,"Asking about Leaf Scald in paddy","Recommended for Spray Carbendazim 2gm  lit",11.647,78.2107
+SATYAMANGALAM,Cereals,2018,12,15,"Paddy Dhan",ERODE,"Plant Protection",0,AGRICULTURE,TAMILNADU,"Asking about Leaf Scald in paddy","Recommended for Spray Carbendazim 2gm  lit",11.4905,77.3505
+UPPILIAPURAM,Cereals,2018,5,19,"Paddy Dhan",TIRUCHIRAPPALLI,"Plant Protection",RABI,AGRICULTURE,TAMILNADU,"asking about Leaf Scald in paddy","Recommended for spray carbendazim 2gm  lit",10.8071,78.6881
+AMMAPETTAI,Cereals,2018,11,23,"Paddy Dhan",THANJAVUR,nan,0,AGRICULTURE,TAMILNADU,"Asking about Leaf Scald in paddy","Recommended for spray carbendazim 2gm  lit",10.659,79.2014
+TIRUMANGALAM,Cereals,2018,11,24,"Paddy Dhan",MADURAI,nan,0,AGRICULTURE,TAMILNADU,"Asking about Leaf Scald in paddy","Recommended for Spray Carbendazim 2gm  lit",9.92612,78.1141
+KODAVASAL,Cereals,2018,5,27,"Paddy Dhan",THIRUVARUR,"Plant Protection",JAYAD,AGRICULTURE,TAMILNADU,"Asking about Leaf Scald in paddy","Recommended for spray carbendazim 2 gram  liter of water",10.6879,79.4979
+NANNILAM,Cereals,2018,8,3,"Paddy Dhan",THIRUVARUR,"Plant Protection",KHARIF,AGRICULTURE,TAMILNADU,"Asking about Leaf Scald in paddy","Recommended for spray carbendazim 2gm  litre of water",10.6879,79.4979
+KODAVASAL,Cereals,2018,11,26,"Paddy Dhan",THIRUVARUR,nan,0,AGRICULTURE,TAMILNADU,"Asking about Leaf Scald in paddy","Recommended for Spray Carbendazim 2gm  lit",10.6879,79.4979
+THALANAYAR,Cereals,2018,8,2,"Paddy Dhan",NAGAPATTINAM,"Plant Protection",KHARIF,AGRICULTURE,TAMILNADU,"Asking about Leaf Scald in paddy","Recommended for spray carbendazim 2gm  litre of water",10.6026,79.7619
+KILVELUR,Cereals,2018,12,5,"Paddy Dhan",NAGAPATTINAM,"Nutrient Management",0,AGRICULTURE,TAMILNADU,"Asked about Leaf Scald management  in paddy","Recommended for spray carbendazim 2gm  litter of water",10.6026,79.7619
+SIRKAZHI,Cereals,2018,12,13,"Paddy Dhan",NAGAPATTINAM,"Plant Protection",0,AGRICULTURE,TAMILNADU,"Asking about Leaf Scald in paddy","Recommended for Spray Carbendazim 2gm  lit",10.6026,79.7619
+KALASAPAKKAM,Cereals,2018,2,4,"Paddy Dhan",TIRUVANNAMALAI,"Nutrient Management",RABI,AGRICULTURE,TAMILNADU,"Asked about Leaf Scald in paddy","Recommended for spray carbendazim 2gm  litter of water",12.4289,78.9992
+MAT,Cereals,2018,9,25,"Paddy Dhan",MATHURA,nan,0,AGRICULTURE,"UTTAR PRADESH","LEAF SCALDING CONTROL IN PADDY ","copper oxychloride 50 wp 2 Gram liter water  streptocycline 1 gram10 liter water ",27.4956,77.6856
+"QADAR CHOWK",Cereals,2018,8,12,"Paddy Dhan",BADAUN,"Plant Protection",KHARIF,AGRICULTURE,"UTTAR PRADESH","leaf scalding problem in paddy","kisan bhai aap dhaan me Copper Oxychloride 50 WP  500 gram prati acre 200 litre pani me milakar spray kare",28.0649,79.0438
+ISLAMNAGAR,Cereals,2018,9,7,"Paddy Dhan",BADAUN,"Plant Protection",KHARIF,AGRICULTURE,"UTTAR PRADESH","Leaf Scald disease control in Paddy crop ","kisan bhai aap copper oxychloride 50  WP 400 gram dva prati acre 200 litre pani me milaakr spray kare",28.0649,79.0438
+BISALPUR,Cereals,2018,8,11,"Paddy Dhan",PILIBHIT,"Plant Protection",KHARIF,AGRICULTURE,"UTTAR PRADESH","Leaf Scald control in paddy","mancozeb or copper oxychloride also reduces the incidence and severity of the fungal disease",28.4947,80.1076
+BHITARGAON,Cereals,2018,9,25,"Paddy Dhan","KANPUR CITY",nan,0,AGRICULTURE,"UTTAR PRADESH","LEAF SCALDING CONTROL IN PADDY ","copper oxychloride 50 wp 2 Gram liter water  streptocycline 1 gram10 liter water ",26.4551,80.3512
+SHIVRAJPUR,Cereals,2018,10,14,"Paddy Dhan","KANPUR CITY",nan,0,AGRICULTURE,"UTTAR PRADESH","leaf scalding control in paddy ","Propiconazole 25  ec 15 mlliter water",26.4551,80.3512
+DAKORE,Cereals,2018,9,27,"Paddy Dhan",JALAUN,nan,0,AGRICULTURE,"UTTAR PRADESH","LEAF SCALDING CONTROL IN PADDY CROP","Dear farmer use to  Copper Oxychloride 50 WP  25gliter water splash in the field",26.1049,79.3919
+SARILA,Cereals,2018,7,19,"Paddy Dhan",HAMIRPUR,"Plant Protection",KHARIF,AGRICULTURE,"UTTAR PRADESH","Leaf Scald control in paddy","copper oxychloride 2 gramliter water   Streptomycin 1 gram 10 liter water ",25.75,80
+NARAINPUR,Cereals,2018,10,6,"Paddy Dhan",MIRZAPUR,nan,0,AGRICULTURE,"UTTAR PRADESH","leaf scalding control in paddy ","Dear farmer use to  Propiconazole 25 EC 1mlliter water splash in the field",24.9317,82.628
+MOHAMMADABAD,Cereals,2018,9,13,"Paddy Dhan",GHAZIPUR,nan,0,AGRICULTURE,"UTTAR PRADESH","Leaf Scald Control  in paddy ","mancozeb  WP15  GRAMLITER   W ATER ",25.6035,83.5076
+NAGRA,Cereals,2018,10,4,"Paddy Dhan",BALLIA,nan,0,AGRICULTURE,"UTTAR PRADESH","Leaf Scald disease control in Paddy crop ","kisan bhai aap Copper Oxychloride 50 WP 400 gram dvaacre 200 litre pani me milakar spray kare",25.875,84.121
+REOTI,Cereals,2018,10,4,"Paddy Dhan",BALLIA,nan,0,AGRICULTURE,"UTTAR PRADESH","LEAF SCALDING CONTROL IN PADDY ","copper oxychloride  50  WP 2 GRAMLITER WATER",25.875,84.121
+MANIAR,Cereals,2018,10,5,"Paddy Dhan",BALLIA,nan,0,AGRICULTURE,"UTTAR PRADESH","Leaf Scald control in paddy ","copper oxychloride 50  wp 2 gramliter water  streptocycline 1 gram10 liter water",25.875,84.121
+PAWAI,Cereals,2018,9,25,"Paddy Dhan",AZAMGARH,nan,0,AGRICULTURE,"UTTAR PRADESH","leaf scalding control in paddy ","copper oxychloride 50  WP 32 GRAMLITER WATER  streptocycline  1 gram10 liter water ",26.0236,83.0293
+GOSAIGANJ,Cereals,2018,9,21,"Paddy Dhan",LUCKNOW,nan,0,AGRICULTURE,"UTTAR PRADESH","fungal diseaseleaf scald control in  paddy","copper oxychloride 50  wp 2 gramliter water",26.8381,80.9346
+BICHHIYA,Cereals,2018,10,6,"Paddy Dhan",UNNAO,nan,0,AGRICULTURE,"UTTAR PRADESH","leaf scalding control in paddy ","Dear farmer use to  Propiconazole 25 EC 1mlliter water splash in the field",26.5673,80.6198
+BANKEYGANJ,Cereals,2018,8,2,"Paddy Dhan",KHERI,"Plant Protection",KHARIF,AGRICULTURE,"UTTAR PRADESH","Leaf Scald disease control in Paddy crop ","kisan bhai aap copper oxychloride 50  WP 400 gram dva prati acre 200 litre pani me milaakr spray kare",28.1167,80.7167
+BELSAR,Cereals,2018,8,16,"Paddy Dhan",GONDA,"Plant Protection",KHARIF,AGRICULTURE,"UTTAR PRADESH","fungal disease leaf scalding control in rice ","mancozeb 75 b wp 2 gramliter water",27.1104,81.9239
+BELSAR,Cereals,2018,8,16,"Paddy Dhan",GONDA,"Plant Protection",KHARIF,AGRICULTURE,"UTTAR PRADESH","fungal disease leaf scalding control in rice ","mancozeb 75 b wp 2 gramliter water",27.1104,81.9239
+JHANJHARI,Cereals,2018,9,16,"Paddy Dhan",GONDA,nan,0,AGRICULTURE,"UTTAR PRADESH","Leaf Scald in paddy crop","Kisan bhai ap dhaan ki fasal me Copper Oxychloride 50 WP  25 gramlitr panee ki dar se ghol banakar chhidkaw kare",27.1104,81.9239
+RAMNAGAR,Cereals,2018,10,3,"Paddy Dhan",BARABANKI,nan,0,AGRICULTURE,"UTTAR PRADESH","leaf scald in paddy crops","kisan bhai  copper oxychloride  500 gram straptocyclin 6 gramacre ki dar se prayog kre",26.9421,81.3856
+CHAKIYA,Cereals,2018,9,11,"Paddy Dhan",CHANDAULI,nan,0,AGRICULTURE,"UTTAR PRADESH","Leaf Scald Control in paddy ","copper oxychloride50    wp 2gram liter water",25.1257,83.2495
+SAHABGANJ,Cereals,2018,10,5,"Paddy Dhan",CHANDAULI,nan,0,AGRICULTURE,"UTTAR PRADESH","leaf scalding control in paddy ","copper oxychloride 2 gram liter water streptocycline 1 gram10 liter water",25.1257,83.2495
+"JALAL PUR",Cereals,2018,9,28,"Paddy Dhan","AMBEDKAR NAGAR",nan,0,AGRICULTURE,"UTTAR PRADESH","leaf scalding control in paddy","copper oxychloride 50  wp 2 gram liter water  streptocycline 1 gram10 liter water ",26.4046,82.6065
+MAITHA,Cereals,2018,10,6,"Paddy Dhan","KANPUR DEHAT",nan,0,AGRICULTURE,"UTTAR PRADESH","leaf scalding control in paddy ","propiconazole 25 ec 2 MLliter water ",26.4586,79.8548
+DELHI,Cereals,2018,9,25,"Paddy Dhan","New Delhi Connaught Place","Plant Protection",KHARIF,AGRICULTURE,DELHI,"TELL ME CONTROL LEAF SCALD IN DHAN CROP","SPRAY MANCOZEB 2GM PER LITTER WATER",28.6426,77.2211
+EKANGARSARAI,Cereals,2019,8,31,"Paddy Dhan",NALANDA,"Plant Protection",nan,AGRICULTURE,BIHAR,"Leaf Scald in Paddy",nan,25.1365,85.4437
+BAHADURGARH,Cereals,2019,10,14,"Paddy Dhan",JHAJJAR,"Plant Protection",nan,AGRICULTURE,HARYANA,"TELL ME CONTROL LEAF SCALD IN DHAN CROP ",nan,28.5964,76.6505
+LAKHANDUR,Cereals,2019,9,17,"Paddy Dhan",BHANDARA,"Plant Protection",nan,AGRICULTURE,MAHARASHTRA,"FARMER ASKED ABOUT LEAF SCALD ATTACK ON PADDY BLOCK LAKHANAPURBHANDARA ",nan,21.1226,79.7945
+BASTA,Cereals,2019,4,4,"Paddy Dhan",BALASORE,"Plant Protection",nan,AGRICULTURE,ODISHA,"Leaf Scald  in Paddy",nan,21.5006,86.9199
+BASTA,Cereals,2019,4,4,"Paddy Dhan",BALASORE,"Plant Protection",nan,AGRICULTURE,ODISHA," Leaf Scald  in Paddy",nan,21.5006,86.9199
+"MADANPUR    RAMPUR",Cereals,2019,8,19,"Paddy Dhan",KALAHANDI,"Plant Protection",nan,AGRICULTURE,ODISHA,"Leaf scald disease in Paddy  ",nan,19.8266,83.0409
+GOPABANDHUNAGAR,Cereals,2019,9,3,"Paddy Dhan",MAYURBHANJ,"Plant Protection",nan,AGRICULTURE,ODISHA,"Leaf scald in Paddy",nan,21.9156,86.3962
+MADURANTAKAM,Cereals,2019,1,4,"Paddy Dhan",KANCHEEPURAM,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about Leaf scald management in paddy ","Recommended for spray copper oxy chloride 25 g in one litre of water ",12.8796,79.7043
+MELBHUVANAGIRI,Cereals,2019,1,29,"Paddy Dhan",CUDDALORE,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about Leaf Scald in paddy","Recommended for spray carbendazim 2gm  lit",11.5202,79.3396
+KATTUMANNARKOIL,Cereals,2019,12,18,"Paddy Dhan",CUDDALORE,"Nutrient Management",nan,AGRICULTURE,TAMILNADU,"Asking about Leaf Scald in paddy",nan,11.5202,79.3396
+ARCOT,Cereals,2019,2,14,"Paddy Dhan",VELLORE,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about leaf scald in paddy ","Recommended for spray  copper oxychloride 25 gmlit",12.9022,79.0611
+TIRUPPATTUR,Cereals,2019,10,15,"Paddy Dhan",VELLORE,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about leaf scald in paddy",nan,12.9022,79.0611
+TIRUPPATTUR,Cereals,2019,10,18,"Paddy Dhan",VELLORE,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about leaf scald in paddy",nan,12.9022,79.0611
+KARIMANGALAM,Cereals,2019,6,14,"Paddy Dhan",DHARMAPURI,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about leaf scald management in paddy ",nan,12.1456,78.1132
+MORAPPUR,Cereals,2019,12,10,"Paddy Dhan",DHARMAPURI,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about leaf scald in paddy ",nan,12.1456,78.1132
+MORAPPUR,Cereals,2019,12,10,"Paddy Dhan",DHARMAPURI,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about leaf scald in paddy ",nan,12.1456,78.1132
+MORAPPUR,Cereals,2019,12,10,"Paddy Dhan",DHARMAPURI,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about leaf scald in paddy ",nan,12.1456,78.1132
+MORAPPUR,Cereals,2019,12,10,"Paddy Dhan",DHARMAPURI,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about leaf scald in paddy ",nan,12.1456,78.1132
+MORAPPUR,Cereals,2019,12,10,"Paddy Dhan",DHARMAPURI,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about leaf scald in paddy ",nan,12.1456,78.1132
+GOPICHETTIPALAIYAM,Cereals,2019,10,18,"Paddy Dhan",ERODE,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about Leaf Scald in paddy",nan,11.4905,77.3505
+SATYAMANGALAM,Cereals,2019,12,13,"Paddy Dhan",ERODE,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about leaf scald in paddy ",nan,11.4905,77.3505
+LALGUDI,Cereals,2019,8,4,"Paddy Dhan",TIRUCHIRAPPALLI,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about Leaf Scald management in paddy",nan,10.8071,78.6881
+PERAVURANI,Cereals,2019,1,6,"Paddy Dhan",THANJAVUR,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about Leaf Scald in paddy","Recommended for spray mancozeb 2gm lit",10.659,79.2014
+POONDI,Cereals,2019,12,16,"Paddy Dhan",THIRUVALLUR,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about leaf scald in paddy",nan,13.2538,80.0563
+RAJAPALAIYAM,Cereals,2019,12,13,"Paddy Dhan",VIRUDHUNAGAR,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about Leaf Scald management in paddy",nan,9.49263,77.8632
+NANNILAM,Cereals,2019,6,16,"Paddy Dhan",THIRUVARUR,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about Leaf Scald in paddy",nan,10.6879,79.4979
+KOTTUR,Cereals,2019,6,17,"Paddy Dhan",THIRUVARUR,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about Leaf Scald in paddy",nan,10.6879,79.4979
+NIDAMANGALAM,Cereals,2019,12,14,"Paddy Dhan",THIRUVARUR,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about Leaf Scald in paddy",nan,10.6879,79.4979
+MANNARGUDI,Cereals,2019,12,14,"Paddy Dhan",THIRUVARUR,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about leaf scald in paddy",nan,10.6879,79.4979
+KALRAYANHILLS,Cereals,2019,10,22,"Paddy Dhan",VILLUPPURAM,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about Leaf Scald management in paddy",nan,10.9094,78.3665
+ULUNDURPET,Cereals,2019,12,10,"Paddy Dhan",VILLUPPURAM,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about Leaf Scald in paddy",nan,10.9094,78.3665
+"KADAMALAIKUNDRU MYLADUMPARAI",Cereals,2019,1,19,"Paddy Dhan",THENI,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about Leaf Scald in paddy","Recommended for Spray SAAF 2gm  lit",9.86926,77.4223
+CHENGAM,Cereals,2019,1,6,"Paddy Dhan",TIRUVANNAMALAI,"Fertilizer Use and Availability",nan,AGRICULTURE,TAMILNADU,"Asking about Leaf Scald in paddy","Recommended for Spray mancozeb 2gm  lit",12.4289,78.9992
+CHEYYAR,Cereals,2019,10,14,"Paddy Dhan",TIRUVANNAMALAI,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about Leaf Scald management in paddy",nan,12.4289,78.9992
+VEMBAKKAM,Cereals,2019,10,18,"Paddy Dhan",TIRUVANNAMALAI,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about Leaf Scald in paddy",nan,12.4289,78.9992
+ARIYALUR,Cereals,2019,12,15,"Paddy Dhan",ARIYALUR,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about Leaf Scald in paddy",nan,11.1531,79.2586
+UTTANGARAI,Cereals,2019,12,2,"Paddy Dhan",KRISHNAGIRI,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about leaf scald in paddy ",nan,12.5152,78.0094
+UTTANGARAI,Cereals,2019,12,11,"Paddy Dhan",KRISHNAGIRI,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about leaf scald in paddy",nan,12.5152,78.0094
+SARSAWAN,Cereals,2019,7,31,"Paddy Dhan",SAHARANPUR,"Plant Protection",nan,AGRICULTURE,"UTTAR PRADESH","Leaf Scald Disease in Paddy Crop ",nan,29.9857,77.5041
+PURANPUR,Cereals,2019,9,13,"Paddy Dhan",PILIBHIT,"Plant Protection",nan,AGRICULTURE,"UTTAR PRADESH","Leaf Scald disease control in Paddy crop ",nan,28.4947,80.1076
+BASREHAR,Cereals,2019,9,30,"Paddy Dhan",ETAWAH,"Plant Protection",nan,AGRICULTURE,"UTTAR PRADESH","Leaf Scald disease control in Paddy crop ",nan,26.7156,79.0917
+LALGANJ,Cereals,2019,10,8,"Paddy Dhan",MIRZAPUR,"Plant Protection",nan,AGRICULTURE,"UTTAR PRADESH","Leaf Scald control in Paddy crops information ",nan,24.9317,82.628
+BARASATHI,Cereals,2019,8,13,"Paddy Dhan",JAUNPUR,"Plant Protection",nan,AGRICULTURE,"UTTAR PRADESH","Leaf Scald disease control in Paddy crop ",nan,25.7967,82.4889
+NAGRA,Cereals,2019,9,30,"Paddy Dhan",BALLIA,"Plant Protection",nan,AGRICULTURE,"UTTAR PRADESH","Leaf Scald disease control in Paddy crop ",nan,25.875,84.121
+GAUR,Cereals,2019,9,23,"Paddy Dhan",BASTI,"Plant Protection",nan,AGRICULTURE,"UTTAR PRADESH","Leaf Scald in paddy crop ",nan,26.8387,82.5351
+MIRZAPUR,Cereals,2019,9,12,"Paddy Dhan",AZAMGARH,Weather,nan,AGRICULTURE,"UTTAR PRADESH","Leaf Scald problem in Paddy crop",nan,26.0236,83.0293
+KHAIRABAD,Cereals,2019,10,1,"Paddy Dhan",SITAPUR,"Plant Protection",nan,AGRICULTURE,"UTTAR PRADESH","Control for Leaf Scald in paddy Crop",nan,27.5027,80.8335
+LAMBHUA,Cereals,2019,10,10,"Paddy Dhan",SULTANPUR,"Plant Protection",nan,AGRICULTURE,"UTTAR PRADESH","Leaf Scald in paddy crop ",nan,26.2605,82.2381
+LAKSHMIPUR,Cereals,2019,8,31,"Paddy Dhan",MAHARAHGANJ,"Plant Protection",nan,AGRICULTURE,"UTTAR PRADESH","Leaf Scald in paddy crop ",nan,27.1303,80.8597
+SIMBHAWALI,Cereals,2019,9,17,"Paddy Dhan","HAPUR PANCHSHEEL NAGAR","Plant Protection",nan,AGRICULTURE,"UTTAR PRADESH","Leaf Scald disease control in Paddy crop ",nan,27.1303,80.8597
+Singhpur,Cereals,2019,8,17,"Paddy Dhan","AMETHI  Shahu Ji Maharaj","Plant Protection",nan,AGRICULTURE,"UTTAR PRADESH","Leaf Scald problem in paddy crop",nan,27.1303,80.8597
+Bhadurpur,Cereals,2019,9,22,"Paddy Dhan","AMETHI  Shahu Ji Maharaj","Plant Protection",nan,AGRICULTURE,"UTTAR PRADESH","Leaf scald control in Paddy crops information ",nan,27.1303,80.8597
+MAHASAMUND,Cereals,2019,9,21,"Paddy Dhan",MAHASAMUND,"Plant Protection",nan,AGRICULTURE,CHHATTISGARH,"Farmer want information ab0ut control of Leaf Scald in Paddy ",nan,21.1923,82.489
+BELHA,Cereals,2019,9,13,"Paddy Dhan",BILASPUR,"Plant Protection",nan,AGRICULTURE,CHHATTISGARH,"Farmer wants to know about control of Leaf Scald disease in Paddy crop",nan,22.1638,82.1366
+CHAINPUR,Cereals,2020,9,3,"Paddy Dhan",KAIMUR,"Plant Protection",nan,AGRICULTURE,BIHAR,"sheath blight leaf scald and rice blast diseases of paddy  ","  5 EC 2 ML          Validamycin 3 L 60 gmai 2000 gmml 750 lit water  Spray Streptocycline 2g 15-liter water with DICHLORVOS 7630 ml",24.9755,83.5768
+GAIRATGANJ,Cereals,2020,8,25,"Paddy Dhan",RAISEN,"Plant Protection",nan,AGRICULTURE,"MADHYA PRADESH","Farmer need information regarding control measures of Leaf Scald in paddy crop","                 25-30    2    15                                 ",23.2676,78.1727
+PUINTALA,Cereals,2020,1,17,"Paddy Dhan",BALANGIR,"Plant Protection",nan,AGRICULTURE,ODISHA,"leaf scald in paddy","Recommended to apply Ferterra chlorantraniliprole 04 GR  4kg per acre of land in paddy field as preventive measure to pests",20.6095,83.1673
+MADURANTAKAM,Cereals,2020,2,25,"Paddy Dhan",KANCHEEPURAM,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about Leaf Scald in paddy"," :      :   2       ",12.8796,79.7043
+KAMMAPURAM,Cereals,2020,12,14,"Paddy Dhan",CUDDALORE,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about leaf scald in paddy"," :       :   2   1      ",11.5202,79.3396
+NALLUR,Cereals,2020,12,17,"Paddy Dhan",CUDDALORE,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about Leaf Scald in paddy"," :      :  2        ",11.5202,79.3396
+WALAJAPET,Cereals,2020,1,7,"Paddy Dhan",VELLORE,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about Leaf Scald control management in Paddy "," :       :    5   1     ",12.9022,79.0611
+WALAJAPET,Cereals,2020,3,3,"Paddy Dhan",VELLORE,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about leaf folder and leaf scald management in paddy",":           :      2     2         ",12.9022,79.0611
+PANAMARATHUPATTI,Cereals,2020,1,1,"Paddy Dhan",SALEM,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about Leaf Scald mangement in paddy"," :      :   2       ",11.647,78.2107
+IDAPPADI,Cereals,2020,12,14,"Paddy Dhan",SALEM,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about Leaf Scald in paddy"," :      :    2        ",11.647,78.2107
+HARUR,Cereals,2020,1,13,"Paddy Dhan",DHARMAPURI,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about Leaf Scald in paddy"," :      :     2        ",12.1456,78.1132
+LALGUDI,Cereals,2020,8,12,"Paddy Dhan",TIRUCHIRAPPALLI,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about Leaf Scald management in paddy"," :      :  1       ",10.8071,78.6881
+ARIMALAM,Cereals,2020,11,6,"Paddy Dhan",PUDUKKOTTAI,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about leaf folder and leaf scald management in paddy "," :            :    2    2       ",10.2903,78.8174
+KUMBAKONAM,Cereals,2020,11,28,"Paddy Dhan",THANJAVUR,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about leaf scald management in paddy",":       : :       10 ml    ",10.659,79.2014
+ORATTANADU,Cereals,2020,11,29,"Paddy Dhan",THANJAVUR,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about leaf scald management in paddy",":      : :      2     ",10.659,79.2014
+THIRUVAIYARU,Cereals,2020,12,9,"Paddy Dhan",THANJAVUR,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about leaf scald management in paddy"," :      :   1       ",10.659,79.2014
+THIRUVONAM,Cereals,2020,12,22,"Paddy Dhan",THANJAVUR,"Nutrient Management",nan,AGRICULTURE,TAMILNADU,"Asked about paddy leaf scald  blight management"," :     :   10       ",10.659,79.2014
+THANJAVUR,Cereals,2020,12,31,"Paddy Dhan",THANJAVUR,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about Leaf Scald management in paddy",":       : SAAF    2   1      ",10.659,79.2014
+KURUVIKULAM,Cereals,2020,12,11,"Paddy Dhan",TIRUNELVELI,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about Leaf Scald management in paddy"," :      :   2       ",8.72031,77.7075
+"0   ",Cereals,2020,12,1,"Paddy Dhan","KANNIYA KUMARI","Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about leaf scald in paddy "," :      :     5    ",10.9094,78.3665
+KULITTALAI,Cereals,2020,12,15,"Paddy Dhan",KARUR,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about Leaf Scald management in paddy",":      :   10      ",10.8218,78.3829
+PERAMBALUR,Cereals,2020,1,30,"Paddy Dhan",PERAMBALUR,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about leaf scald in paddy"," :       : SAAF    2   1      ",11.2903,78.93
+VEPPANTHATTAI,Cereals,2020,11,30,"Paddy Dhan",PERAMBALUR,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about Leaf Scald in paddy "," :      :    2        ",11.2903,78.93
+KODAVASAL,Cereals,2020,7,19,"Paddy Dhan",THIRUVARUR,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about Leaf Scald management in paddy"," :      :   2       ",10.6879,79.4979
+MUTHUPETTAI,Cereals,2020,9,21,"Paddy Dhan",THIRUVARUR,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about Leaf scald management in paddy",":      :   5       ",10.6879,79.4979
+GINGEE,Cereals,2020,3,8,"Paddy Dhan",VILLUPPURAM,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about Leaf scald management in paddy"," :      :   2        ",10.9094,78.3665
+MUGAIYUR,Cereals,2020,12,15,"Paddy Dhan",VILLUPPURAM,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about leaf scald in paddy"," :      :   2        ",10.9094,78.3665
+NAGAPPATTINAM,Cereals,2020,1,11,"Paddy Dhan",NAGAPATTINAM,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about leaf scald in paddy"," :      :     2     ",10.6026,79.7619
+POLUR,Cereals,2020,11,8,"Paddy Dhan",TIRUVANNAMALAI,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about Leaf Scald management in paddy"," :      :   2       ",12.4289,78.9992
+OTTAPIDARAM,Cereals,2020,1,13,"Paddy Dhan",THOOTHUKUDI,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about leaf scald management in paddy"," :     :   2       ",8.8457,77.9938
+BHAGALPUR,Cereals,2020,7,16,"Paddy Dhan",DEORIA,"Plant Protection",nan,AGRICULTURE,"UTTAR PRADESH","Information about control of Leaf Scald disease in paddy crop ","      Carbendazim 12 Mancozeb 63 WP  400     200        ",26.424,83.7639
+"SIKANDARPUR SARAUSI",Cereals,2020,8,14,"Paddy Dhan",UNNAO,"Water Management",nan,AGRICULTURE,"UTTAR PRADESH","Information about control of Leaf Scald in paddy crop ","       Copper Oxychloride 50 WP  400     200        ",26.5673,80.6198
+SATAON,Cereals,2020,8,16,"Paddy Dhan",RAEBARELI,"Plant Protection",nan,AGRICULTURE,"UTTAR PRADESH","Information about leaf scald disease control in paddy crop ","      Copper Oxychloride 50 WP 500     200        ",26.2087,81.2186
+BASKHARI,Cereals,2020,8,14,"Paddy Dhan","AMBEDKAR NAGAR","Plant Protection",nan,AGRICULTURE,"UTTAR PRADESH","Information about Leaf Scald disease control in paddy crop ","      Copper Oxychloride 50 WP  400     200        ",26.4046,82.6065
+ABHANPUR,Cereals,2020,8,14,"Paddy Dhan",RAIPUR,"Plant Protection",nan,AGRICULTURE,CHHATTISGARH,"Farmer wants to know about control of Leaf scald  disease in Paddy","                    250                                        ",21.2381,81.6337
+BASNA,Cereals,2020,8,13,"Paddy Dhan",MAHASAMUND,"Plant Protection",nan,AGRICULTURE,CHHATTISGARH,"Farmer wants to know about control of Cercospora leaf scald Disease in Paddy ","                                          15             40    15      1    10     ",21.1923,82.489
+SARAIPALI,Cereals,2020,8,14,"Paddy Dhan",MAHASAMUND,"Plant Protection",nan,AGRICULTURE,CHHATTISGARH,"Farmer wants to know about control of leaf scald Disease in Paddy ","                                            15             40    15      1    10     ",21.1923,82.489
+Thirunallar,Cereals,2020,11,28,"Paddy Dhan",KARAIKAL,"Plant Protection",nan,AGRICULTURE,PUDUCHERRY,"Asking about leaf scald management in paddy",":   :   2      ",10.9157,79.8376
+TIRTOL,Cereals,2021,10,26,"Paddy Dhan",JAGATSINGHAPUR,"Plant Protection",nan,AGRICULTURE,ODISHA," Leaf scald in paddy ","Recommended to spray Mancozeb 75wp 3gm in 1 litre water or copper oxychloride 50wp 3gm in 1 litre water Leaf scald in paddy ",20.1801,86.3415
+KATTUMANNARKOIL,Cereals,2021,11,19,"Paddy Dhan",CUDDALORE,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about leaf scald in paddy"," :      :  2    I    ",11.5202,79.3396
+KAMMAPURAM,Cereals,2021,11,21,"Paddy Dhan",CUDDALORE,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about Leaf Scald in paddy"," :      :   2       ",11.5202,79.3396
+KOMARATCHI,Cereals,2021,12,1,"Paddy Dhan",CUDDALORE,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about Paddy Leaf Scald management ",":      :   - 10        ",11.5202,79.3396
+KATTUMANNARKOIL,Cereals,2021,12,3,"Paddy Dhan",CUDDALORE,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about leaf scald in paddy"," :      :  2    I    ",11.5202,79.3396
+KATTUMANNARKOIL,Cereals,2021,12,4,"Paddy Dhan",CUDDALORE,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about Leaf Scald management in paddy"," :      :   2       ",11.5202,79.3396
+KOMARATCHI,Cereals,2021,12,6,"Paddy Dhan",CUDDALORE,"Nutrient Management",nan,AGRICULTURE,TAMILNADU,"Asking about Leaf Scald management  in paddy"," :      :   2       ",11.5202,79.3396
+KOMARATCHI,Cereals,2021,12,21,"Paddy Dhan",CUDDALORE,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about Leaf Scald management in paddy"," :      :   2       ",11.5202,79.3396
+WALAJAPET,Cereals,2021,1,22,"Paddy Dhan",VELLORE,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about Leaf Scald management in paddy"," :      :   2     10       ",12.9022,79.0611
+KAVERIPAKKAM,Cereals,2021,12,5,"Paddy Dhan",VELLORE,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about Leaf Scald management  in paddy"," :      :   2       ",12.9022,79.0611
+VALAPADY,Cereals,2021,11,25,"Paddy Dhan",SALEM,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about leaf scald in paddy "," :      :         ",11.647,78.2107
+IDAPPADI,Cereals,2021,12,18,"Paddy Dhan",SALEM,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about Leaf Scald management in paddy"," :      :   2       ",11.647,78.2107
+VALAPADY,Cereals,2021,12,20,"Paddy Dhan",SALEM,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about leaf scald in paddy"," :      :  2    I    ",11.647,78.2107
+OMALUR,Cereals,2021,12,20,"Paddy Dhan",SALEM,"Agriculture Mechanization",nan,AGRICULTURE,TAMILNADU,"Asking about Leaf Scald management in paddy"," :      :   2       ",11.647,78.2107
+DHARMAPURI,Cereals,2021,9,25,"Paddy Dhan",DHARMAPURI,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about leaf scald in paddy"," :     :     2    ",12.1456,78.1132
+PAPPIREDDIPATTY,Cereals,2021,12,1,"Paddy Dhan",DHARMAPURI,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about leaf scald in paddy"," :      :     5    ",12.1456,78.1132
+DHARMAPURI,Cereals,2021,12,20,"Paddy Dhan",DHARMAPURI,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about brown spot and leaf scald in paddy ",":      :         ",12.1456,78.1132
+ANDIYUR,Cereals,2021,12,22,"Paddy Dhan",ERODE,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about Leaf Scald management  in paddy"," :      :   2       ",11.4905,77.3505
+MUSIRI,Cereals,2021,12,6,"Paddy Dhan",TIRUCHIRAPPALLI,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about Paddy leaf scald management"," :      :   - 5     ",10.8071,78.6881
+LALGUDI,Cereals,2021,12,8,"Paddy Dhan",TIRUCHIRAPPALLI,Varieties,nan,AGRICULTURE,TAMILNADU,"Asking about Leaf Scald management in paddy"," :      :   2       ",10.8071,78.6881
+LALGUDI,Cereals,2021,12,19,"Paddy Dhan",TIRUCHIRAPPALLI,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about Leaf Scald management in Paddy "," :       :   2   1      ",10.8071,78.6881
+VAIYAMPATTI,Cereals,2021,12,21,"Paddy Dhan",TIRUCHIRAPPALLI,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about Leaf Scald management in paddy"," :      :   2       ",10.8071,78.6881
+TURAIYUR,Cereals,2021,12,28,"Paddy Dhan",TIRUCHIRAPPALLI,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about Leaf Scald management in paddy"," :      :   5 ml       ",10.8071,78.6881
+PULLAMBADI,Cereals,2021,12,28,"Paddy Dhan",TIRUCHIRAPPALLI,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about leaf scald in paddy"," :      :  2    I    ",10.8071,78.6881
+TIRUMAYAM,Cereals,2021,4,19,"Paddy Dhan",PUDUKKOTTAI,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asked about Leaf Scald management in paddy"," :      :   2       ",10.2903,78.8174
+ANNAVASAL,Cereals,2021,11,19,"Paddy Dhan",PUDUKKOTTAI,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about Leaf Scald management in paddy"," :      :   2       ",10.2903,78.8174
+ARANTANGI,Cereals,2021,11,19,"Paddy Dhan",PUDUKKOTTAI,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about leaf scald in paddy"," :      :  5     I    ",10.2903,78.8174
+GANDARAVAKOTTAI,Cereals,2021,11,19,"Paddy Dhan",PUDUKKOTTAI,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about leaf scald in paddy"," :      :  2    I    ",10.2903,78.8174
+TIRUMAYAM,Cereals,2021,12,13,"Paddy Dhan",PUDUKKOTTAI,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about Leaf Scald management in paddy"," :      :   2       ",10.2903,78.8174
+ARANTANGI,Cereals,2021,12,23,"Paddy Dhan",PUDUKKOTTAI,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about brown spot and leaf scald in paddy bio",":        :     5    ",10.2903,78.8174
+ARANTANGI,Cereals,2021,12,23,"Paddy Dhan",PUDUKKOTTAI,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about brown spot and leaf scald in paddy ",":       :       25    ",10.2903,78.8174
+PERAVURANI,Cereals,2021,1,26,"Paddy Dhan",THANJAVUR,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about Leaf Scald management in paddy",":       :   2       ",10.659,79.2014
+PATTUKKOTTAI,Cereals,2021,4,12,"Paddy Dhan",THANJAVUR,"Plant Protection",nan,AGRICULTURE,TAMILNADU," Asking about Leaf Scald management in paddy",":       :  5        ",10.659,79.2014
+TIRUVIDAIMARUDUR,Cereals,2021,4,19,"Paddy Dhan",THANJAVUR,"Nutrient Management",nan,AGRICULTURE,TAMILNADU,"Asking about Leaf Scald management in paddy",":       :  5      ",10.659,79.2014
+PERAVURANI,Cereals,2021,9,8,"Paddy Dhan",THANJAVUR,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about Leaf Scald management in paddy"," :      :   2       ",10.659,79.2014
+ORATTANADU,Cereals,2021,11,15,"Paddy Dhan",THANJAVUR,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about Gall midge  and leaf scald management in paddy",":          :     1 5     2       ",10.659,79.2014
+THIRUVAIYARU,Cereals,2021,11,25,"Paddy Dhan",THANJAVUR,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about Leaf Scald management in paddy"," :      :   2       ",10.659,79.2014
+THANJAVUR,Cereals,2021,12,14,"Paddy Dhan",THANJAVUR,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about leaf scald in paddy"," :      :  2    I    ",10.659,79.2014
+PAPANASAM,Cereals,2021,12,22,"Paddy Dhan",THANJAVUR,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about Leaf Scald management  in paddy"," :      :   2       ",10.659,79.2014
+CHELLAMPATTI,Cereals,2021,4,9,"Paddy Dhan",MADURAI,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about Leaf Scald management in paddy"," :      :   1       ",9.92612,78.1141
+VADIPATTI,Cereals,2021,12,6,"Paddy Dhan",MADURAI,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about Paddy leaf scald management ",":      :   - 5     ",9.92612,78.1141
+SEDAPATTI,Cereals,2021,12,23,"Paddy Dhan",MADURAI,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about leaf scald and blast in paddy ","        :    2     ",9.92612,78.1141
+PARAMAKKUDI,Cereals,2021,12,26,"Paddy Dhan",RAMANATHAPURAM,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about Leaf Scald management in paddy"," :      :   2       ",9.52056,78.5185
+VASUDEVANALLUR,Cereals,2021,5,4,"Paddy Dhan",TIRUNELVELI,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about leaf scald management in paddy"," :      :   1       ",8.72031,77.7075
+VASUDEVANALLUR,Cereals,2021,5,4,"Paddy Dhan",TIRUNELVELI,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about leaf scald management in paddy organic"," :      :        5 ml     ",8.72031,77.7075
+RADHAPURAM,Cereals,2021,12,19,"Paddy Dhan",TIRUNELVELI,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asked about Paddy leaf scald management ",":    :    5       ",8.72031,77.7075
+PAPPAKUDI,Cereals,2021,12,28,"Paddy Dhan",TIRUNELVELI,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about Leaf Scald management in paddy"," :      :   2       ",8.72031,77.7075
+PALLIPATTU,Cereals,2021,4,4,"Paddy Dhan",THIRUVALLUR,"Nutrient Management",nan,AGRICULTURE,TAMILNADU,"Asking about Leaf Scald management in paddy"," :      :   2       ",13.2538,80.0563
+VILLIVAKKAM,Cereals,2021,11,5,"Paddy Dhan",THIRUVALLUR,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about leaf scald in paddy"," :      :   2    I    ",13.2538,80.0563
+MINJUR,Cereals,2021,11,21,"Paddy Dhan",THIRUVALLUR,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about leaf scald in paddy"," :      :  2    I    ",13.2538,80.0563
+THOGAIMALAI,Cereals,2021,10,9,"Paddy Dhan",KARUR,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about Leaf Scald management in paddy"," :      :   2       ",10.8218,78.3829
+THANTHONI,Cereals,2021,11,24,"Paddy Dhan",KARUR,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about Leaf Scald management  in paddy"," :      :  10        ",10.8218,78.3829
+KRISHNARAYAPURAM,Cereals,2021,11,25,"Paddy Dhan",KARUR,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about Leaf Scald management in paddy"," :      :   2       ",10.8218,78.3829
+KADAVUR,Cereals,2021,12,23,"Paddy Dhan",KARUR,"Fertilizer Use and Availability",nan,AGRICULTURE,TAMILNADU,"Asking about Paddy leaf scald management ",":      :  - 2      ",10.8218,78.3829
+KADAVUR,Cereals,2021,12,26,"Paddy Dhan",KARUR,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about Leaf Scald management in paddy"," :      :   2       ",10.8218,78.3829
+PERAMBALUR,Cereals,2021,12,1,"Paddy Dhan",PERAMBALUR,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about Leaf Scald management in paddy"," :      :   2       ",11.2903,78.93
+PERAMBALUR,Cereals,2021,12,20,"Paddy Dhan",PERAMBALUR,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about Paddy leaf scald management  for organic method ",":       :   - 10       ",11.2903,78.93
+VEPPANTHATTAI,Cereals,2021,12,25,"Paddy Dhan",PERAMBALUR,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about Paddy leaf scald management ",":      :  - 2     ",11.2903,78.93
+PALANI,Cereals,2021,12,27,"Paddy Dhan",DINDIGUL,"Nutrient Management",nan,AGRICULTURE,TAMILNADU,"Asking about Leaf Scald management in paddy"," :      :   2       ",10.4257,77.8157
+PALANI,Cereals,2021,12,31,"Paddy Dhan",DINDIGUL,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about Leaf Scald management in paddy"," :      :   2       ",10.4257,77.8157
+MANNARGUDI,Cereals,2021,3,16,"Paddy Dhan",THIRUVARUR,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about leaf scald management in Paddy  ",":     :   5      ",10.6879,79.4979
+VALANGAIMAN,Cereals,2021,12,6,"Paddy Dhan",THIRUVARUR,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about Leaf Scald management in paddy"," :      :   2       ",10.6879,79.4979
+NIDAMANGALAM,Cereals,2021,12,16,"Paddy Dhan",THIRUVARUR,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about Leaf Scald management in paddy"," :      :   2       ",10.6879,79.4979
+VALANGAIMAN,Cereals,2021,12,23,"Paddy Dhan",THIRUVARUR,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about leaf scald in paddy"," :      :  2    I    ",10.6879,79.4979
+VALANGAIMAN,Cereals,2021,12,26,"Paddy Dhan",THIRUVARUR,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about Leaf Scald management in paddy"," :      :   2       ",10.6879,79.4979
+TIRUTTURAIPPUNDI,Cereals,2021,12,26,"Paddy Dhan",THIRUVARUR,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about Leaf Scald management in paddy"," :      :   2       ",10.6879,79.4979
+VALANGAIMAN,Cereals,2021,12,28,"Paddy Dhan",THIRUVARUR,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about Leaf Scald management  in paddy"," :      :   2       ",10.6879,79.4979
+VALLAM,Cereals,2021,3,17,"Paddy Dhan",VILLUPPURAM,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about Leaf Scald management in paddy"," :      :   2       ",10.9094,78.3665
+GINGEE,Cereals,2021,4,12,"Paddy Dhan",VILLUPPURAM,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about Paddy leaf scald disease management",":      :  - 2     ",10.9094,78.3665
+KOLIYANUR,Cereals,2021,10,9,"Paddy Dhan",VILLUPPURAM,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about leaf scald in paddy"," :      :  2    I    ",10.9094,78.3665
+MARAKKANAM,Cereals,2021,10,28,"Paddy Dhan",VILLUPPURAM,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about leaf scald management in paddy ","Query: Asking about leaf scald management in paddy  Ans: Recommended for spray pseudomonas 5 ml lit of water",10.9094,78.3665
+GINGEE,Cereals,2021,11,5,"Paddy Dhan",VILLUPPURAM,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about Leaf Scald management in paddy"," :      :   2       ",10.9094,78.3665
+KOLIYANUR,Cereals,2021,11,24,"Paddy Dhan",VILLUPPURAM,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about Leaf Scald management  in paddy"," :      :   2       ",10.9094,78.3665
+CHINNASALEM,Cereals,2021,12,15,"Paddy Dhan",VILLUPPURAM,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about Leaf Scald management in paddy"," :      :   2       ",10.9094,78.3665
+TIRUKKOYILUR,Cereals,2021,12,16,"Paddy Dhan",VILLUPPURAM,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asked about Paddy leaf scald management ",":     :    2         ",10.9094,78.3665
+THIRUMARUGAL,Cereals,2021,11,20,"Paddy Dhan",NAGAPATTINAM,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about Leaf Scald management in paddy"," :      :   2       ",10.6026,79.7619
+KUTTALAM,Cereals,2021,11,24,"Paddy Dhan",NAGAPATTINAM,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about Leaf Scald management in paddy"," :      :   2       ",10.6026,79.7619
+KUTTALAM,Cereals,2021,12,8,"Paddy Dhan",NAGAPATTINAM,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about Leaf Scald management in paddy"," :      :   2       ",10.6026,79.7619
+"SEMBANAR KOIL",Cereals,2021,12,12,"Paddy Dhan",NAGAPATTINAM,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about Leaf Scald management  in paddy"," :      :   2       ",10.6026,79.7619
+VEDARANYAM,Cereals,2021,12,15,"Paddy Dhan",NAGAPATTINAM,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about Leaf Scald management in paddy"," :      :   2       ",10.6026,79.7619
+CHENGAM,Cereals,2021,1,16,"Paddy Dhan",TIRUVANNAMALAI,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about Paddy leaf scald management ",":      :  - 2      ",12.4289,78.9992
+ARANI,Cereals,2021,9,16,"Paddy Dhan",TIRUVANNAMALAI,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about leaf scald in paddy",":      :        ",12.4289,78.9992
+POLUR,Cereals,2021,10,6,"Paddy Dhan",TIRUVANNAMALAI,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about Leaf Scald  management in paddy"," :      :   2       ",12.4289,78.9992
+KALASAPAKKAM,Cereals,2021,10,26,"Paddy Dhan",TIRUVANNAMALAI,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about leaf scald in paddy"," :      :  2    I    ",12.4289,78.9992
+THOOTHUKKUDI,Cereals,2021,2,1,"Paddy Dhan",THOOTHUKUDI,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about leaf Scald management in paddy"," :      :   2       ",8.8457,77.9938
+KARUNGULAM,Cereals,2021,12,28,"Paddy Dhan",THOOTHUKUDI,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about Leaf Scald management in paddy"," :      :  5ml       ",8.8457,77.9938
+THOOTHUKKUDI,Cereals,2021,12,31,"Paddy Dhan",THOOTHUKUDI,"Nutrient Management",nan,AGRICULTURE,TAMILNADU,"Asking about Leaf Scald management in paddy"," :      :   2       ",8.8457,77.9938
+THIRUMANUR,Cereals,2021,12,23,"Paddy Dhan",ARIYALUR,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about leaf scald in paddy"," :      :  2    I    ",11.1531,79.2586
+MATHUR,Cereals,2021,4,23,"Paddy Dhan",KRISHNAGIRI,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about Leaf Scald management in paddy"," :      :   2       ",12.5152,78.0094
+Vellakoil,Cereals,2021,12,17,"Paddy Dhan",TIRUPUR,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about Leaf Scald management  in paddy"," :      :   2       ",11.1672,77.3473
+"0   ",Cereals,2021,12,20,"Paddy Dhan",KALLAKURICHI,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about Leaf Scald management in paddy"," :      :   2       ",11.7947,79.0388
+"0   ",Cereals,2021,12,25,"Paddy Dhan",KALLAKURICHI,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about Leaf Scald management in paddy"," :      :   2       ",11.7947,79.0388
+"0   ",Cereals,2021,12,25,"Paddy Dhan",KALLAKURICHI,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about Paddy leaf scald management ",":       :  - 2     ",11.7947,79.0388
+"0   ",Cereals,2021,12,25,"Paddy Dhan",KALLAKURICHI,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about Paddy leaf scald  leaf folder management ",":           :  - 2      - 2         ",11.7947,79.0388
+"0   ",Cereals,2021,12,12,"Paddy Dhan",MAYILADUTHURAI,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about leaf scald in paddy","-- :      :  2    I    ",11.1019,79.6503
+UTTIRAMERUR,Cereals,2022,1,25,"Paddy Dhan",KANCHEEPURAM,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about leaf scald in paddy"," :      :  2    I    ",12.8796,79.7043
+KANCHIPURAM,Cereals,2022,1,28,"Paddy Dhan",KANCHEEPURAM,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about leaf scald in paddy"," :      :  2    I    ",12.8796,79.7043
+ANAICUT,Cereals,2022,1,14,"Paddy Dhan",VELLORE,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about Leaf Scald management in paddy"," :      :   1       ",12.9022,79.0611
+HARUR,Cereals,2022,1,14,"Paddy Dhan",DHARMAPURI,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about Leaf folder   leaf scald management ",":         :  - 2    - 2      ",12.1456,78.1132
+PALAKKODU,Cereals,2022,1,25,"Paddy Dhan",DHARMAPURI,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about Leaf Scald management in paddy"," :      :   2       ",12.1456,78.1132
+MORAPPUR,Cereals,2022,1,25,"Paddy Dhan",DHARMAPURI,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about Leaf Scald management in paddy"," :      :   2       ",12.1456,78.1132
+PERUNDURAI,Cereals,2022,1,11,"Paddy Dhan",ERODE,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about Leaf Scald management in paddy"," :      :   2       ",11.4905,77.3505
+THIRUVERAMBUR,Cereals,2022,1,22,"Paddy Dhan",TIRUCHIRAPPALLI,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about leaf scald management in paddy"," :      :   2       ",10.8071,78.6881
+PATTUKKOTTAI,Cereals,2022,1,13,"Paddy Dhan",THANJAVUR,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about Leaf Scald management  in paddy"," :      :   2       ",10.659,79.2014
+KOTTAMPATTI,Cereals,2022,1,2,"Paddy Dhan",MADURAI,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about Leaf Scald management in paddy"," :      :   2       ",9.92612,78.1141
+KADAIYANALLUR,Cereals,2022,1,17,"Paddy Dhan",TIRUNELVELI,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about Leaf Scald management  in paddy"," :      :   2       ",8.72031,77.7075
+RADHAPURAM,Cereals,2022,1,26,"Paddy Dhan",TIRUNELVELI,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about Leaf Scald management  in paddy"," :      :   2       ",8.72031,77.7075
+KODAVASAL,Cereals,2022,1,20,"Paddy Dhan",THIRUVARUR,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about Leaf Scald management in paddy"," :      :   2       ",10.6879,79.4979
+TIRUKKOYILUR,Cereals,2022,1,22,"Paddy Dhan",VILLUPPURAM,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about leaf scald in paddy"," :      :  2    I    ",10.9094,78.3665
+VIKRAVANDI,Cereals,2022,1,23,"Paddy Dhan",VILLUPPURAM,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about leaf scald in paddy"," :      :  2    I    ",10.9094,78.3665
+THURINJAPURAM,Cereals,2022,1,22,"Paddy Dhan",TIRUVANNAMALAI,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asked about leaf scald management in Paddy nursery ",":     :   5       ",12.4289,78.9992
+ARANI,Cereals,2022,1,29,"Paddy Dhan",TIRUVANNAMALAI,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about Paddy leaf scald management "," :      :  - 2     ",12.4289,78.9992
+BARGUR,Cereals,2022,1,16,"Paddy Dhan",KRISHNAGIRI,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about Leaf Scald management in paddy"," :      :   2       ",12.5152,78.0094
+BARGUR,Cereals,2022,1,17,"Paddy Dhan",KRISHNAGIRI,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about Leaf Scald management in paddy"," :      :   2       ",12.5152,78.0094
+"0   ",Cereals,2022,1,17,"Paddy Dhan",RANIPET,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about leaf folder and leaf scald in paddy"," :       :      2     2    ",12.9186,79.4082
+"0   ",Cereals,2022,1,21,"Paddy Dhan",RANIPET,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about leaf scald management in paddy"," :      :   2       ",12.9186,79.4082
+MADURANTAKAM,Cereals,2022,2,9,"Paddy Dhan",KANCHEEPURAM,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about Leaf Scald management in Paddy "," :      :  1    1      ",12.8796,79.7043
+MADURANTAKAM,Cereals,2022,2,9,"Paddy Dhan",KANCHEEPURAM,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about leaf scald in paddy"," :      :  2    I    ",12.8796,79.7043
+TIRUKKALUKUNRAM,Cereals,2022,2,18,"Paddy Dhan",KANCHEEPURAM,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about brown spot and leaf scald in paddy ",":          :        ",12.8796,79.7043
+VRIDDHACHALAM,Cereals,2022,2,25,"Paddy Dhan",CUDDALORE,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about leaf scald in paddy"," :      :  2    I    ",11.5202,79.3396
+VRIDDHACHALAM,Cereals,2022,2,25,"Paddy Dhan",CUDDALORE,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about leaf scald in paddy","query : Asking about leaf scald in paddy answer : Recommended for spray carbendazim 2 gmlit",11.5202,79.3396
+VRIDDHACHALAM,Cereals,2022,2,25,"Paddy Dhan",CUDDALORE,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about leaf scald in paddy bio"," :      :  5    I    ",11.5202,79.3396
+TIRUPPATTUR,Cereals,2022,2,1,"Paddy Dhan",VELLORE,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about leaf scald in paddy"," :      :  2    I    ",12.9022,79.0611
+VELLORE,Cereals,2022,2,13,"Paddy Dhan",VELLORE,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about leaf scald in paddy"," :      :     10    ",12.9022,79.0611
+GUDIYATTAM,Cereals,2022,2,15,"Paddy Dhan",VELLORE,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about leaf scald in paddy"," :      :  2    I    ",12.9022,79.0611
+TIRUPPATTUR,Cereals,2022,2,20,"Paddy Dhan",VELLORE,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about Leaf Scald management in paddy"," :      :   2       ",12.9022,79.0611
+PALAKKODU,Cereals,2022,2,22,"Paddy Dhan",DHARMAPURI,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about leaf scald in paddy"," :      :  2    I    ",12.1456,78.1132
+SANKARANKOVIL,Cereals,2022,2,7,"Paddy Dhan",TIRUNELVELI,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about Leaf Scald management  in paddy"," :      :   2       ",8.72031,77.7075
+KALAKADU,Cereals,2022,2,7,"Paddy Dhan",TIRUNELVELI,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about Leaf Scald management  in paddy"," :      :   2       ",8.72031,77.7075
+MARAKKANAM,Cereals,2022,2,15,"Paddy Dhan",VILLUPPURAM,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about leaf scald in paddy"," :      :  2    I    ",10.9094,78.3665
+MELMALAYANUR,Cereals,2022,2,26,"Paddy Dhan",VILLUPPURAM,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about Leaf Scald management in paddy"," :      :   2       ",10.9094,78.3665
+BODINAYAKKANUR,Cereals,2022,2,5,"Paddy Dhan",THENI,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about leaf scald in paddy"," :      :  2    I    ",9.86926,77.4223
+THALANAYAR,Cereals,2022,2,27,"Paddy Dhan",NAGAPATTINAM,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about leaf scald  blast management in paddy"," :        :      ",10.6026,79.7619
+ARANI,Cereals,2022,2,2,"Paddy Dhan",TIRUVANNAMALAI,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asked about Paddy leaf scald management ",":    :   5        ",12.4289,78.9992
+CHENGAM,Cereals,2022,2,10,"Paddy Dhan",TIRUVANNAMALAI,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about leaf scald in paddy","-- :      :  2    I    ",12.4289,78.9992
+CHENGAM,Cereals,2022,2,12,"Paddy Dhan",TIRUVANNAMALAI,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about leaf scald in paddy"," :      :  2    I    ",12.4289,78.9992
+CHENGAM,Cereals,2022,2,20,"Paddy Dhan",TIRUVANNAMALAI,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about Leaf Scald management in paddy"," :      :   2       ",12.4289,78.9992
+Nedungadu,Cereals,2022,2,5,"Paddy Dhan",KARAIKAL,"Plant Protection",nan,AGRICULTURE,PUDUCHERRY,"Asking about brown spot and leaf scald in paddy"," :        :     2     ",10.9157,79.8376
+GUDIYATTAM,Cereals,2022,3,9,"Paddy Dhan",VELLORE,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about Leaf Scald management in paddy",":      :      2     ",12.9022,79.0611
+ARANI,Cereals,2022,3,7,"Paddy Dhan",TIRUVANNAMALAI,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about Leaf Scald management in Paddy "," :       :   2    1      ",12.4289,78.9992
+CHENGAM,Cereals,2022,3,13,"Paddy Dhan",TIRUVANNAMALAI,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about leaf scald in paddy"," :      :  2    I    ",12.4289,78.9992
+THANDRAMPET,Cereals,2022,3,30,"Paddy Dhan",TIRUVANNAMALAI,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about leaf scald in paddy"," :      :  2    I    ",12.4289,78.9992
+KANCHIPURAM,Cereals,2022,4,22,"Paddy Dhan",KANCHEEPURAM,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about leaf scald and leaf spot in paddy"," :      :   2    I    ",12.8796,79.7043
+CUDDALORE,Cereals,2022,4,29,"Paddy Dhan",CUDDALORE,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about Paddy stem borer  leaf scald management ",":         : - 2    - 2      ",11.5202,79.3396
+TALAVASAL,Cereals,2022,4,4,"Paddy Dhan",SALEM,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about Paddy leaf folder  leaf scald management ",":        :   - 2    - 2      ",11.647,78.2107
+NIDAMANGALAM,Cereals,2022,4,23,"Paddy Dhan",THIRUVARUR,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about brown spot and leaf scald in paddy"," :      :     2     ",10.6879,79.4979
+PERAVURANI,Cereals,2022,5,17,"Paddy Dhan",THANJAVUR,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about leaf scald in paddy"," :      :  2    I    ",10.659,79.2014
+THIRUVAIYARU,Cereals,2022,5,27,"Paddy Dhan",THANJAVUR,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about Leaf Scald management in paddy"," :      :   2       ",10.659,79.2014
+RAJAPALAIYAM,Cereals,2022,5,11,"Paddy Dhan",VIRUDHUNAGAR,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about Leaf Scald management in paddy"," :      :   2       ",9.49263,77.8632
+SRIVILLIPUTTUR,Cereals,2022,5,19,"Paddy Dhan",VIRUDHUNAGAR,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about Paddy leaf scald management "," :      :   - 2       ",9.49263,77.8632
+KOLIYANUR,Cereals,2022,5,23,"Paddy Dhan",VILLUPPURAM,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about Paddy leaf scald management "," :      :  - 2      ",10.9094,78.3665
+"0   ",Cereals,2022,5,12,"Paddy Dhan",KALLAKURICHI,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about Paddy leaf scald management "," :      :  - 2      ",11.7947,79.0388
+THANJAVUR,Cereals,2022,6,11,"Paddy Dhan",THANJAVUR,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about Leaf Scald management in paddy"," :      :   2       ",10.659,79.2014
+VALLAM,Cereals,2022,7,22,"Paddy Dhan",VILLUPPURAM,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about Leaf Scald management in paddy"," :      :   2       ",10.9094,78.3665
+"0   ",Cereals,2022,7,2,"Paddy Dhan",RANIPET,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about leaf scald management in paddy"," :      :      2     ",12.9186,79.4082
+KATTUMANNARKOIL,Cereals,2022,8,3,"Paddy Dhan",CUDDALORE,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about Leaf Scald management in paddy"," :      :   2       ",11.5202,79.3396
+KADAYAM,Cereals,2022,8,27,"Paddy Dhan",TIRUNELVELI,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asked about Paddy leaf scald management ",":      :  - 2      ",8.72031,77.7075
+MUTHUPETTAI,Cereals,2022,8,28,"Paddy Dhan",THIRUVARUR,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about Paddy leaf scald management ",":      :  - 2     ",10.6879,79.4979
+ELLAPURAM,Cereals,2022,10,25,"Paddy Dhan",THIRUVALLUR,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asked about Paddy leaf folder  leaf scald management ",":          :  20  EC - 2    - 2       ",13.2538,80.0563
+NANNILAM,Cereals,2022,10,15,"Paddy Dhan",THIRUVARUR,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asked about Paddy gall midge  leaf scald management",":        :  - 2    - 2     ",10.6879,79.4979
+GINGEE,Cereals,2022,10,14,"Paddy Dhan",VILLUPPURAM,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asked about leaf scald management in paddy "," :      :     2     ",10.9094,78.3665
+PUDUPALAYAM,Cereals,2022,10,16,"Paddy Dhan",TIRUVANNAMALAI,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asked about leaf scald management in paddy"," :      : 5    I    ",12.4289,78.9992
+CHENGAM,Cereals,2022,10,18,"Paddy Dhan",TIRUVANNAMALAI,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asked about leaf folder and leaf scald management in paddy "," :          :  2      2     I    ",12.4289,78.9992
+"0   ",Cereals,2022,10,23,"Paddy Dhan",RANIPET,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about Leaf Scald management in paddy"," :      :       10     ",12.9186,79.4082
+VRIDDHACHALAM,Cereals,2022,11,19,"Paddy Dhan",CUDDALORE,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about Leaf Scald management in paddy"," :      :   2       ",11.5202,79.3396
+KATTUMANNARKOIL,Cereals,2022,11,22,"Paddy Dhan",CUDDALORE,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about Leaf Scald management in paddy"," :      :   2       ",11.5202,79.3396
+KOMARATCHI,Cereals,2022,11,24,"Paddy Dhan",CUDDALORE,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asked about leaf scald management in paddy ",":      :        ",11.5202,79.3396
+SANKARI,Cereals,2022,11,25,"Paddy Dhan",SALEM,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asked about Paddy leaf scald disease management",":      :   - 2     ",11.647,78.2107
+PAPPIREDDIPATTY,Cereals,2022,11,21,"Paddy Dhan",DHARMAPURI,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asked about Paddy leaf scald disease management",":      :  - 2     ",12.1456,78.1132
+LALGUDI,Cereals,2022,11,7,"Paddy Dhan",TIRUCHIRAPPALLI,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asked about Leaf Scald management in paddy"," :      :   2       ",10.8071,78.6881
+THIRUVONAM,Cereals,2022,11,23,"Paddy Dhan",THANJAVUR,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asked about Paddy leaf scald disease management",":      :  - 2     ",10.659,79.2014
+PAPANASAM,Cereals,2022,11,28,"Paddy Dhan",THANJAVUR,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asked about Paddy leaf scald disease management",":      :  - 2      ",10.659,79.2014
+PAPANASAM,Cereals,2022,11,28,"Paddy Dhan",THANJAVUR,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asked about Paddy leaf scald disease management",":      :  - 2      ",10.659,79.2014
+KULITTALAI,Cereals,2022,11,22,"Paddy Dhan",KARUR,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asked about Paddy leaf scald disease management",":      :  - 2      ",10.8218,78.3829
+NATTAM,Cereals,2022,11,23,"Paddy Dhan",DINDIGUL,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Askied about leaf scald in paddy"," :      :  2    I    ",10.4257,77.8157
+BODINAYAKKANUR,Cereals,2022,11,22,"Paddy Dhan",THENI,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about Leaf Scald management in paddy"," :      :   2       ",9.86926,77.4223
+KILVELUR,Cereals,2022,11,24,"Paddy Dhan",NAGAPATTINAM,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about Leaf Scald management in paddy","-- :      :   2       ",10.6026,79.7619
+KALASAPAKKAM,Cereals,2022,11,8,"Paddy Dhan",TIRUVANNAMALAI,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asked about leaf scald management in paddy"," :      :  2    I    ",12.4289,78.9992
+"0   ",Cereals,2022,11,23,"Paddy Dhan",TIRUPATTUR,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asked about Leaf Scald management in paddy"," :      :      5 ml   ",12.4984,78.5618
+"0   ",Cereals,2022,11,21,"Paddy Dhan",CHENGALPATTU,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asked about Paddy leaf scald disease management",":      :  - 2     ",12.6841,79.9836
+BUDALUR,Cereals,2022,12,13,"Paddy Dhan",THANJAVUR,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about leaf scald in paddy"," :      :  2    I    ",10.659,79.2014
+KADAIYANALLUR,Cereals,2022,12,7,"Paddy Dhan",TIRUNELVELI,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about leaf scald in paddy",":       :    5    ",8.72031,77.7075
+WATRAP,Cereals,2022,12,22,"Paddy Dhan",VIRUDHUNAGAR,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asked about Paddy leaf scald management ",":      :  - 2     ",9.49263,77.8632
+VEPPUR,Cereals,2022,12,23,"Paddy Dhan",PERAMBALUR,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asked about Paddy leaf scald management ",":      :  - 2     ",11.2903,78.93
+MUGAIYUR,Cereals,2022,12,21,"Paddy Dhan",VILLUPPURAM,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asked about Paddy leaf scald management ",":      :  - 2     ",10.9094,78.3665
+VEDARANYAM,Cereals,2022,12,7,"Paddy Dhan",NAGAPATTINAM,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asked about Paddy leaf scald disease management",":      :  - 2      ",10.6026,79.7619
+CHIRALA,Cereals,2023,1,3,"Paddy Dhan",PRAKASAM,"Plant Protection",nan,AGRICULTURE,"ANDHRA PRADESH","FARMER ASKED QUERY  ABOUT LEAF SCALD MANAGEMENT IN PADDY","RECOMMENDED TO SPRAY  CARBENDAZIM MANCOZEB  SAAF 400GM  200 LIT OF WATER ACRE     400   200        ",15.6643,79.4733
+GUDUR,Cereals,2023,1,16,"Paddy Dhan",NELLORE,"Plant Protection",nan,AGRICULTURE,"ANDHRA PRADESH","FARMER ASKED QUERY ON Leaf Scald DISEASE CONTROL IN PADDY","RECOMMENDED TO SPRAY  CARBENDAZIM MANCOZEB  SAAF 400GM  200 LIT OF WATER ACRE     400   200        ",14.4494,79.9874
+VELLORE,Cereals,2023,1,29,"Paddy Dhan",VELLORE,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asked about Paddy leaf scald management ",":     :    - 10      ",12.9022,79.0611
+PERNAMALLUR,Cereals,2023,1,20,"Paddy Dhan",TIRUVANNAMALAI,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asked about leaf scald management in paddy"," :      :   2    I    ",12.4289,78.9992
+CHEYYAR,Cereals,2023,1,29,"Paddy Dhan",TIRUVANNAMALAI,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asked about Paddy leaf folder  leaf scald management ",":          :  20  EC - 2    - 2       ",12.4289,78.9992
+SATTANKULAM,Cereals,2023,1,18,"Paddy Dhan",THOOTHUKUDI,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about Leaf Scald management  in paddy"," :      :   2       ",8.8457,77.9938
+SENDURAI,Cereals,2023,1,11,"Paddy Dhan",ARIYALUR,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about Leaf Scald management in paddy"," :      :   2       ",11.1531,79.2586
+KANCHIPURAM,Cereals,2023,2,5,"Paddy Dhan",KANCHEEPURAM,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about Leaf Scald management in paddy"," :      :   2       ",12.8796,79.7043
+NALLAMPALLI,Cereals,2023,2,11,"Paddy Dhan",DHARMAPURI,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asked about Leaf Scald management in paddy"," :      :   2       ",12.1456,78.1132
+RADHAPURAM,Cereals,2023,2,7,"Paddy Dhan",TIRUNELVELI,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about Leaf Scald management  in paddy"," :      :   2       ",8.72031,77.7075
+CHENGAM,Cereals,2023,2,24,"Paddy Dhan",TIRUVANNAMALAI,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about Leaf Scald management in paddy"," :      :   2       ",12.4289,78.9992
+"0   ",Cereals,2023,2,21,"Paddy Dhan",CHENGALPATTU,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about Leaf Scald management  in paddy"," :      :   2       ",12.6841,79.9836
+MANACHANELLUR,Cereals,2023,5,20,"Paddy Dhan",TIRUCHIRAPPALLI,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asked about Leaf Scald management in paddy"," :      :   2       ",10.8071,78.6881
+TURAIYUR,Cereals,2023,5,28,"Paddy Dhan",TIRUCHIRAPPALLI,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asked bout Paddy leaf scald management ",":      :  - 2      ",10.8071,78.6881
+THIRUVAIYARU,Cereals,2023,6,13,"Paddy Dhan",THANJAVUR,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asked about Paddy stem borer  leaf scald management ",":         :  - 15    -2      ",10.659,79.2014
+"0   ",Cereals,2023,6,26,"Paddy Dhan",KALLAKURICHI,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asked about Paddy leaf scald management ",":     :    - 10      ",11.7947,79.0388
+"0   ",Cereals,2023,6,24,"Paddy Dhan",MAYILADUTHURAI,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asked about Paddy leaf scald disease management",":      :  - 2      ",11.1019,79.6503
+ANAICUT,Cereals,2023,7,12,"Paddy Dhan",VELLORE,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about Paddy Leaf folder sucking pest  Leaf scald  management "," :            :  - 2    - 2     ",12.9022,79.0611
+"0   ",Cereals,2023,7,31,"Paddy Dhan",CHENGALPATTU,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asked about Leaf Scald management  in paddy"," :      :   2       ",12.6841,79.9836
+NIDAMANGALAM,Cereals,2023,8,17,"Paddy Dhan",THIRUVARUR,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about Leaf Scald management  in paddy"," :      :   2       ",10.6879,79.4979
+THALANAYAR,Cereals,2023,8,13,"Paddy Dhan",NAGAPATTINAM,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asked about Paddy leaf scald management "," :      :  - 2      ",10.6026,79.7619
+TIRUMANGALAM,Cereals,2023,12,7,"Paddy Dhan",MADURAI,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asked about leaf scald management in paddy"," :      :  2   1    ",9.92612,78.1141
+KILVELUR,Cereals,2023,12,19,"Paddy Dhan",NAGAPATTINAM,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asking about leaf scald management in paddy",":      : :      2     ",10.6026,79.7619
+CUDDALORE,Cereals,2024,5,30,"Paddy Dhan",CUDDALORE,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asked about Leaf Scald management in paddy"," :      :   2       ",11.5202,79.3396
+RANAGHAT-II,Cereals,2024,10,14,"Paddy Dhan",NADIA,"Plant Protection",nan,AGRICULTURE,"WEST BENGAL","ASKING ABOUT CONTROL OF LEAF SCALD IN PADDY"," SPRAY TRICYCLAZOLE 75 WP  15 GM  2 LIT OF WATER  ",23.4847,88.5567
+GOSABA,Cereals,2024,10,18,"Paddy Dhan","SOUTH 24 PARGANAS","Plant Protection",nan,AGRICULTURE,"WEST BENGAL","ASKING ABOUT CONTROL OF LEAF SCALD  IN PADDY ","SPRAY Azoxystrobin 167  Tricyclazole 333 SC   1 ML  LITER OF WATER ",22.1777,88.5308
+"KAK DWIP",Cereals,2024,10,20,"Paddy Dhan","SOUTH 24 PARGANAS","Plant Protection",nan,AGRICULTURE,"WEST BENGAL","ASKING ABOUT CONTROL OF RICE LEAF SCALD IN PADDY"," Azoxystrobin 20  Thifluzamide 15 wv SC               AZOXYSTROBIN 167  TRICYCLAZOLE 333 SC           ",22.1777,88.5308
+GARBETA-II,Cereals,2024,10,5,"Paddy Dhan","WEST MEDINIPUR","Plant Protection",nan,AGRICULTURE,"WEST BENGAL","ASKING ABOUT CONTROL OF LEAF SCALD DISEASE IN PADDY","SPRAY AZOXYSTROBIN 11   TEBUCONAZOLE 183  SC  15 ML  LITER OF WATER  ",22.2789,87.9223
+CHANCHAL-II,Cereals,2024,12,5,"Paddy Dhan",MALDAH,"Plant Protection",nan,AGRICULTURE,"WEST BENGAL","ASKING ABOUT CONTROL OF LEAF SCALD IN PADDY","  AZOXYSTROBIN 23 SC                :               -                                  ",25.0977,88.1262
+NANNILAM,Cereals,2024,12,16,"Paddy Dhan",THIRUVARUR,"Plant Protection",nan,AGRICULTURE,TAMILNADU,"Asked about Paddy leaf scald management ",":      :  - 2      ",10.6879,79.4979
+CHENGAM,Cereals,2025,2,18,"Paddy Dhan",TIRUVANNAMALAI,"Plant Protection",,AGRICULTURE,TAMILNADU,"Asked about Paddy leaf scald and beetles management ",":       :   2            ",12.4289,78.9992

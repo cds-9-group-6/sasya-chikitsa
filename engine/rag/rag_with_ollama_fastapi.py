@@ -68,11 +68,13 @@ PROMPT = PromptTemplate(
 chain_type_kwargs = {"prompt": PROMPT}
 
 print("Loading ChromaDB and setting up retriever...")
-embedding = HuggingFaceEmbeddings(model_name="intfloat/multilingual-e5-large-instruct",
+embedding = HuggingFaceEmbeddings( #model_name="intfloat/multilingual-e5-large-instruct",
+                                  model_name = "multi-qa-MiniLM-L6-cos-v1",
                                 #   model_kwargs={"device": "mps"}
                                   )
 chroma_db = Chroma(
-    persist_directory="./chroma_capstone_db_new",
+    # persist_directory="./chroma_capstone_db_new",
+    persist_directory= "./chroma_capstone_db_new_small"
     embedding_function=embedding,
     collection_name="Tomato"  # Specify which collection to load
 )
