@@ -109,7 +109,7 @@ retriever = chroma_db.as_retriever(
     search_type="similarity_score_threshold",
     search_kwargs={
         "k": 5,
-        "score_threshold": 0.65,
+        "score_threshold": 0.7,
         # "fetch_k": 3,
         # "filter": {
         #     "state": "TAMILNADU",  # Adjust field name based on your metadata
@@ -118,6 +118,7 @@ retriever = chroma_db.as_retriever(
     },
 )
 
+logging.info(f"retriever: {retriever}")
 
 class ChromaDBPerformanceMonitor:
     """
@@ -232,7 +233,7 @@ class ChromaDBPerformanceMonitor:
         query_id = len(self.query_history) + 1
 
         if log_query:
-            self.logger.info(f"Executing query {query_id}: {question[:50]}...")
+            self.logger.info(f"Executing query {query_id}: {question}")
 
         start_time = time.perf_counter()
 
@@ -616,9 +617,15 @@ def main():
     #     "Crop yield improvement strategies",
     #     "Fungal infection prevention in agricultural crops",
     # ]
+    # questions = [
+    #     "Treatment prescription for esca in tomato crop in karnataka region during summer season. Include chemical treatments, organic options, prevention methods, dosage, and timing. StateName:KARNATAKA"
+    # ]
+
     questions = [
-        "Treatment prescription for esca in tomato crop in karnataka region during summer season. Include chemical treatments, organic options, prevention methods, dosage, and timing. StateName:KARNATAKA"
+        "Treatment prescription for esca in tomato crop in tamil nadu region during summer season. Include chemical treatments, organic options, prevention methods, dosage, and timing."
     ]
+    # logging.info(f"questions: {questions}")
+
     # Execute queries with monitoring
     for i, question in enumerate(questions):
         metadata = {
@@ -630,8 +637,8 @@ def main():
         docs, record = monitor.timed_query(retriever, question, metadata=metadata)
 
         # Print stats every 3 queries
-        if (i + 1) % 3 == 0:
-            monitor.print_stats()
+        # if (i + 1) % 3 == 0:
+        #     monitor.print_stats()
 
     # Final statistics
     monitor.print_stats()
