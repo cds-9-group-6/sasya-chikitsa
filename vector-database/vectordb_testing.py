@@ -10,7 +10,7 @@ from datetime import datetime
 from pathlib import Path
 from typing import Dict, Any, Optional, List
 import json
-import logging  
+import logging
 import torch
 from dotenv import load_dotenv
 from langchain_huggingface import HuggingFaceEmbeddings
@@ -61,7 +61,6 @@ else:
     logging.warning(
         f"⚠️ Local model not found at {LOCAL_MODEL_PATH}. Downloading from Hub: {HUB_MODEL_ID}"
     )
-    
 
     # Install huggingface_hub if needed
     try:
@@ -102,8 +101,21 @@ chroma_db = Chroma(
 )
 
 
+# retriever = chroma_db.as_retriever(
+#     search_type="mmr", search_kwargs={"k": 3, "fetch_k": 6}
+# )
+
 retriever = chroma_db.as_retriever(
-    search_type="mmr", search_kwargs={"k": 3, "fetch_k": 6}
+    search_type="similarity_score_threshold",
+    search_kwargs={
+        "k": 5,
+        "score_threshold": 0.65,
+        # "fetch_k": 3,
+        # "filter": {
+        #     "state": "TAMILNADU",  # Adjust field name based on your metadata
+        #     # "disease": "esca"  # Add if you have disease metadata
+        # },
+    },
 )
 
 
@@ -228,6 +240,7 @@ class ChromaDBPerformanceMonitor:
             docs = retriever.invoke(question)
             success = True
             error_msg = None
+            logging.info(f"docs: {docs}")
         except Exception as e:
             docs = []
             success = False
@@ -574,7 +587,6 @@ def setup_mlflow_dashboard():
             mlflow.log_param("python_version", platform.python_version())
             mlflow.log_param("cpu_count", psutil.cpu_count())
             mlflow.log_param("memory_gb", psutil.virtual_memory().total / (1024**3))
-            
 
     return log_custom_metrics
 
@@ -596,15 +608,17 @@ def main():
     )
 
     # Sample questions for testing
+    # questions = [
+    #     "Apple tree disease management techniques",
+    #     "Rice paddy bacterial blight symptoms",
+    #     "Coconut palm red weevil control methods",
+    #     "Organic pesticide application for fruit trees",
+    #     "Crop yield improvement strategies",
+    #     "Fungal infection prevention in agricultural crops",
+    # ]
     questions = [
-        "Apple tree disease management techniques",
-        "Rice paddy bacterial blight symptoms",
-        "Coconut palm red weevil control methods",
-        "Organic pesticide application for fruit trees",
-        "Crop yield improvement strategies",
-        "Fungal infection prevention in agricultural crops",
+        "Treatment prescription for esca in tomato crop in karnataka region during summer season. Include chemical treatments, organic options, prevention methods, dosage, and timing. StateName:KARNATAKA"
     ]
-
     # Execute queries with monitoring
     for i, question in enumerate(questions):
         metadata = {
