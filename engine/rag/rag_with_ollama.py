@@ -1,12 +1,10 @@
 # import pandas as pd
+import chromadb
 from langchain_chroma import Chroma
 from langchain_core.prompts import PromptTemplate
 from langchain.chains import RetrievalQA
 from langchain_community.embeddings import HuggingFaceEmbeddings
 from langchain_community.chat_models import ChatOllama
-from fastapi import FastAPI
-from pydantic import BaseModel
-# import uvicorn
 import os
 import logging
 from typing import Dict, List, Optional
@@ -18,7 +16,7 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 
-class ollama_rag:
+class OllamaRag:
     """
     Enhanced RAG system with pre-initialized ChromaDB collections for multiple plant types.
     
@@ -151,6 +149,8 @@ class ollama_rag:
 
     def _initialize_all_collections(self):
         """Pre-initialize ChromaDB and retrievers for all specified collections."""
+        chroma_client = chromadb.HttpClient(host="localhost", port=8000)
+
         successful_collections = []
         
         for collection_name in self.collections_to_init:
@@ -161,7 +161,8 @@ class ollama_rag:
                 chroma_db = Chroma(
                     persist_directory=self.persist_directory,
                     embedding_function=self.embedding,
-                    collection_name=collection_name
+                    collection_name=collection_name,
+                    client=chroma_client
                 )
                 
                 # Create retriever for this collection

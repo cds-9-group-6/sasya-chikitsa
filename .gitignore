@@ -247,4 +247,4 @@ multi-qa-MiniLM-L6-cos-v1-local
 chromadb_summary*
 query_history*
 temp_question.txt
-mlruns
+mlrunsapp-ux/

@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Earthly Plant Disease Detection App Theme -->
-    <style name="Theme.Sasya_Chikitsa" parent="android:Theme.Material.Light.NoActionBar">
+    <style name="Theme.Sasya_Chikitsa" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Primary earth colors -->
-        <item name="android:colorPrimary">@color/forest_green</item>
-        <item name="android:colorPrimaryDark">@color/forest_green_dark</item>
-        <item name="android:colorAccent">@color/warm_amber</item>
+        <item name="colorPrimary">@color/forest_green</item>
+        <item name="colorPrimaryDark">@color/forest_green_dark</item>
+        <item name="colorAccent">@color/warm_amber</item>
         
         <!-- Background colors -->
-        <item name="android:windowBackground">@drawable/gradient_background</item>
-        <item name="android:colorBackground">@color/clean_white</item>
+        <item name="android:windowBackground">@color/clean_white</item>
+        <item name="colorSurface">@color/clean_white</item>
         
         <!-- Text colors -->
-        <item name="android:textColorPrimary">@color/earth_text_primary</item>
-        <item name="android:textColorSecondary">@color/earth_text_secondary</item>
+        <item name="colorOnSurface">@color/earth_text_primary</item>
+        <item name="colorOnBackground">@color/earth_text_primary</item>
         
         <!-- Status bar -->
         <item name="android:statusBarColor">@color/forest_green_dark</item>

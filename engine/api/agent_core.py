@@ -18,7 +18,7 @@ from langchain_core.runnables.history import RunnableWithMessageHistory
 from langchain_community.chat_message_histories import ChatMessageHistory
 
 from ml.cnn_attn_classifier_improved import CNNWithAttentionClassifier
-from rag.rag_with_ollama import ollama_rag
+from rag.rag_with_ollama import OllamaRag
 
 try:
     from langchain_openai import ChatOpenAI  # type: ignore
@@ -77,7 +77,7 @@ class AgentCore:
         self._image_emitters: Dict[str, Callable[[str], None]] = {}
         self.llm = create_llm() # Initialize LLM here
         # Initialize RAG system (this might need to be cached later for performance)
-        rag_system = ollama_rag(llm_name="llama-3.1-8b")
+        rag_system = OllamaRag(llm_name="llama-3.1-8b")
         logger.debug(f"AgentCore initialized with agent_with_history: {self.agent_with_history}")
 
     def get_image_store_status(self):
@@ -303,7 +303,7 @@ class AgentCore:
             # Import RAG system
 
             # Initialize RAG system (this might need to be cached later for performance)
-            rag_system = ollama_rag(llm_name="llama-3.1-8b")
+            rag_system = OllamaRag(llm_name="llama-3.1-8b")
             
             # Determine collection name based on plant type
             collection_name = self._get_rag_collection_name(plant)

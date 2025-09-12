@@ -20,7 +20,7 @@ object ServerConfig {
     const val DEFAULT_LOCALHOST_URL = "http://localhost:8001/"
     const val DEFAULT_LOCAL_IP_URL = "http://192.168.1.100:8001/"
     const val DEFAULT_STAGING_URL = "https://your-staging-server.com/api/"
-    const val DEFAULT_PRODUCTION_URL = "http://engine-sasya-chikitsa.apps.cluster-mx6z7.mx6z7.sandbox5315.opentlc.com/"
+    const val DEFAULT_PRODUCTION_URL = "http://engine-sasya-chikitsa.apps.cluster-6twrd.6twrd.sandbox1818.opentlc.com/"
     
     private fun getPreferences(context: Context): SharedPreferences {
         return context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)

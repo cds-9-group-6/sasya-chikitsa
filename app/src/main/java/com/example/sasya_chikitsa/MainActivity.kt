@@ -94,16 +94,16 @@ class MainActivity : ComponentActivity() {
     private var currentAttentionOverlayData: String? = null
 
     private val TAG = "MainActivity" // For logging
-
+    
     // Modern Activity Result API for image selection
     private val imagePickerLauncher =
         registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
-            if (uri != null) {
-                try {
-                    showSelectedImage(uri)
+        if (uri != null) {
+            try {
+                showSelectedImage(uri)
 //                Toast.makeText(this, "Image selected.", Toast.LENGTH_SHORT).show()
-                } catch (e: Exception) {
-                    Log.e(TAG, "Error handling selected image", e)
+            } catch (e: Exception) {
+                Log.e(TAG, "Error handling selected image", e)
                     Toast.makeText(this, "Error processing image: ${e.message}", Toast.LENGTH_LONG)
                         .show()
                 }
@@ -210,102 +210,102 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         try {
-            setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_main)
 
-            // Initialize RetrofitClient with context for configurable server URL
-            RetrofitClient.initialize(this)
-            Log.d(TAG, "Server URL configured: ${ServerConfig.getServerUrl(this)}")
+        // Initialize RetrofitClient with context for configurable server URL
+        RetrofitClient.initialize(this)
+        Log.d(TAG, "Server URL configured: ${ServerConfig.getServerUrl(this)}")
 
-            imagePreview = findViewById(R.id.imagePreview)
-            uploadBtn = findViewById(R.id.uploadBtn)
-            sendBtn = findViewById(R.id.sendBtn)
-            messageInput = findViewById(R.id.messageInput)
-            removeImageBtn = findViewById(R.id.removeImageBtn)
-            uploadSection = findViewById(R.id.uploadSection)
-            imageFileName = findViewById(R.id.imageFileName)
-            serverStatus = findViewById(R.id.serverStatus)
-            settingsBtn = findViewById(R.id.settingsBtn)
-            responseTextView = findViewById(R.id.responseTextView)
-            conversationScrollView = findViewById(R.id.conversationScrollView)
+        imagePreview = findViewById(R.id.imagePreview)
+        uploadBtn = findViewById(R.id.uploadBtn)
+        sendBtn = findViewById(R.id.sendBtn)
+        messageInput = findViewById(R.id.messageInput)
+        removeImageBtn = findViewById(R.id.removeImageBtn)
+        uploadSection = findViewById(R.id.uploadSection)
+        imageFileName = findViewById(R.id.imageFileName)
+        serverStatus = findViewById(R.id.serverStatus)
+        settingsBtn = findViewById(R.id.settingsBtn)
+        responseTextView = findViewById(R.id.responseTextView)
+        conversationScrollView = findViewById(R.id.conversationScrollView)
             conversationContainer = findViewById(R.id.conversationContainer)
-
-            // Update server status display
-            updateServerStatusDisplay()
-
-            // Initialize conversation history if empty
-            if (conversationHistory.length == 0) {
+        
+        // Update server status display
+        updateServerStatusDisplay()
+        
+        // Initialize conversation history if empty
+        if (conversationHistory.length == 0) {
                 val welcomeMessage =
                     "MAIN_ANSWER: Welcome to Sasya Chikitsa! I'm your AI plant health assistant. I can help diagnose plant diseases, provide care recommendations, and guide you through treatment procedures. Each app session starts fresh with a new conversation. Upload a photo or ask me about plant care to get started.\n\nACTION_ITEMS: Send Image | Give me watering schedule | Show fertilization procedure | Explain prevention methods"
-                addAssistantMessage(welcomeMessage)
-
-                // Add some test content to demonstrate action items
+            addAssistantMessage(welcomeMessage)
+            
+            // Add some test content to demonstrate action items
                 val exampleMessage =
                     "MAIN_ANSWER: Here are some common plant problems I can help with:\n• Leaf spots and discoloration\n• Wilting and drooping\n• Pest infestations\n• Nutrient deficiencies\n• Growth issues\n\nACTION_ITEMS: Identify plant disease from photo | Create plant care schedule | Get soil testing recommendations | Show organic treatment options"
-                addAssistantMessage(exampleMessage)
-            }
+            addAssistantMessage(exampleMessage)
+        }
 
-            // Settings Button
-            settingsBtn.setOnClickListener {
+        // Settings Button
+        settingsBtn.setOnClickListener {
                 showSettingsDialog()
-            }
+        }
 
-            // Upload Button
-            uploadBtn.setOnClickListener {
-                imagePickerLauncher.launch("image/*")
-            }
+        // Upload Button
+        uploadBtn.setOnClickListener {
+            imagePickerLauncher.launch("image/*")
+        }
 
-            // Remove Image Button
-            removeImageBtn.setOnClickListener {
-                clearSelectedImage()
-            }
+        // Remove Image Button
+        removeImageBtn.setOnClickListener {
+            clearSelectedImage()
+        }
 
-            // Send Button
-            sendBtn.setOnClickListener {
-                try {
-                    val message = messageInput.text.toString().trim()
-                    val currentImageUri = selectedImageUri // Use the stored URI
-                    if (message.isEmpty() && currentImageUri == null) {
+        // Send Button
+        sendBtn.setOnClickListener {
+            try {
+            val message = messageInput.text.toString().trim()
+            val currentImageUri = selectedImageUri // Use the stored URI
+            if (message.isEmpty() && currentImageUri == null) {
                         Toast.makeText(
                             this,
                             "Please enter a message or upload an image.",
                             Toast.LENGTH_SHORT
                         ).show()
-                        return@setOnClickListener
-                    }
-                    // Convert image to Base64 if an image is selected
-                    var imageBase64: String? = null
-                    if (currentImageUri != null) {
-                        try {
-                            imageBase64 = uriToBase64(currentImageUri)
-                        } catch (e: IOException) {
-                            Log.e(TAG, "Error converting image to Base64", e)
+                return@setOnClickListener
+            }
+            // Convert image to Base64 if an image is selected
+            var imageBase64: String? = null
+            if (currentImageUri != null) {
+                try {
+                    imageBase64 = uriToBase64(currentImageUri)
+                } catch (e: IOException) {
+                    Log.e(TAG, "Error converting image to Base64", e)
                             Toast.makeText(this, "Error processing image.", Toast.LENGTH_SHORT)
                                 .show()
-                            return@setOnClickListener
-                        }
-                    }
+                    return@setOnClickListener
+                }
+            }
 
                     // Add user message to conversation history with image
-                    if (message.isNotEmpty()) {
+            if (message.isNotEmpty()) {
                         addUserMessageWithImage(message, currentImageUri)
 //                Toast.makeText(this, "Message sent: $message", Toast.LENGTH_SHORT).show()
-                    } else if (currentImageUri != null) {
+            } else if (currentImageUri != null) {
                         addUserMessageWithImage("Image", currentImageUri)
 //                Toast.makeText(this, "Image sent", Toast.LENGTH_SHORT).show()
-                    }
+            }
 
-                    // Clear the input field
-                    messageInput.text.clear()
+            // Clear the input field
+            messageInput.text.clear()
 
-                    // Fetch the stream
-                    fetchChatStreamFromServer(message, imageBase64, sessionId)
-
+            // Fetch the stream
+            fetchChatStreamFromServer(message, imageBase64, sessionId)
+            
                     // Clear the upload preview but keep image in conversation history
-                    if (currentImageUri != null) {
-                        clearSelectedImage(showToast = false)
-                    }
-                } catch (e: Exception) {
-                    Log.e(TAG, "Error in send button logic", e)
+                if (currentImageUri != null) {
+                    clearSelectedImage(showToast = false)
+                }
+            } catch (e: Exception) {
+                Log.e(TAG, "Error in send button logic", e)
                     Toast.makeText(this, "Error sending message: ${e.message}", Toast.LENGTH_LONG)
                         .show()
                 }
@@ -328,10 +328,10 @@ class MainActivity : ComponentActivity() {
     // Helper method to show selected image
     private fun showSelectedImage(imageUri: Uri) {
         selectedImageUri = imageUri
-        imagePreview.setImageURI(imageUri)
+            imagePreview.setImageURI(imageUri)
         imageFileName.text = "📷 Image attached"
         uploadSection.visibility = android.view.View.VISIBLE
-
+        
         Log.d(TAG, "Image selected and upload section shown")
     }
 
@@ -340,7 +340,7 @@ class MainActivity : ComponentActivity() {
         selectedImageUri = null
         imagePreview.setImageURI(null)
         uploadSection.visibility = android.view.View.GONE
-
+        
         if (showToast) {
             Toast.makeText(this, "Image removed", Toast.LENGTH_SHORT).show()
         }
@@ -351,11 +351,11 @@ class MainActivity : ComponentActivity() {
     private fun addUserMessage(message: String, hasImage: Boolean = false) {
         val imageIndicator = if (hasImage) " 📷" else ""
         val userMsg = "👤 $message$imageIndicator\n\n"
-
+        
         Log.d(TAG, "Adding user message to history. Current length: ${conversationHistory.length}")
         conversationHistory.append(userMsg)
         Log.d(TAG, "After adding user message. New length: ${conversationHistory.length}")
-
+        
         updateConversationDisplay()
     }
 
@@ -385,7 +385,7 @@ class MainActivity : ComponentActivity() {
     private fun addAssistantMessage(message: String) {
         // Check if this is a structured response
         val structuredResponse = parseStructuredResponse(message)
-
+        
         if (structuredResponse != null) {
             // Handle structured response with separate main answer and action items
             addStructuredAssistantMessage(
@@ -400,7 +400,7 @@ class MainActivity : ComponentActivity() {
 
     // Enhanced helper method to add assistant message to new conversation structure
     private fun addAssistantMessageToConversation(message: String) {
-        val formattedMessage = formatMessageWithCollapsibleJson(message)
+            val formattedMessage = formatMessageWithCollapsibleJson(message)
 
         // Add to new conversation messages list
         val conversationMsg = ConversationMessage(
@@ -413,10 +413,10 @@ class MainActivity : ComponentActivity() {
 
         // Also add to legacy text-based history for compatibility
         val assistantMsg = "🤖 $formattedMessage\n\n"
-        conversationHistory.append(assistantMsg)
-
+            conversationHistory.append(assistantMsg)
+            
         Log.d(TAG, "Added assistant message. Total messages: ${conversationMessages.size}")
-        updateConversationDisplay()
+            updateConversationDisplay()
 
         // Save conversations after adding assistant message
         saveConversations()
@@ -924,7 +924,7 @@ class MainActivity : ComponentActivity() {
     // Helper method to parse structured response format
     private fun parseStructuredResponse(message: String): StructuredResponse? {
         Log.d(TAG, "Parsing response for structure: $message")
-
+        
         try {
             // Look for MAIN_ANSWER section
             val mainAnswerRegex = Regex(
@@ -932,20 +932,20 @@ class MainActivity : ComponentActivity() {
                 setOf(RegexOption.DOT_MATCHES_ALL, RegexOption.IGNORE_CASE)
             )
             val mainAnswerMatch = mainAnswerRegex.find(message)
-
+            
             // Look for ACTION_ITEMS section
             val actionItemsRegex = Regex(
                 "ACTION_ITEMS:\\s*(.*?)$",
                 setOf(RegexOption.DOT_MATCHES_ALL, RegexOption.IGNORE_CASE)
             )
             val actionItemsMatch = actionItemsRegex.find(message)
-
+            
             if (mainAnswerMatch != null && actionItemsMatch != null) {
                 val mainAnswer = mainAnswerMatch.groupValues[1].trim()
                 val actionItemsText = actionItemsMatch.groupValues[1].trim()
                 val actionItemsList =
                     actionItemsText.split("|").map { it.trim() }.filter { it.isNotEmpty() }
-
+                
                 Log.d(
                     TAG,
                     "Structured response found - Main: '${mainAnswer.take(50)}...', Actions: $actionItemsList"
@@ -955,7 +955,7 @@ class MainActivity : ComponentActivity() {
         } catch (e: Exception) {
             Log.e(TAG, "Error parsing structured response", e)
         }
-
+        
         Log.d(TAG, "No structured format found in response")
         return null
     }
@@ -965,7 +965,7 @@ class MainActivity : ComponentActivity() {
         // Format main answer
         val formattedMainAnswer = formatMessageWithCollapsibleJson(mainAnswer)
         var assistantMsg = "🤖 $formattedMainAnswer"
-
+        
         // Add action items as clickable elements if they exist
         if (actionItems.isNotEmpty()) {
             assistantMsg += "\n\n📋 Quick Actions:"
@@ -973,18 +973,18 @@ class MainActivity : ComponentActivity() {
                 assistantMsg += "\n• $actionItem"
             }
         }
-
+        
         assistantMsg += "\n\n"
-
+        
         Log.d(
             TAG,
             "Adding structured assistant message to history. Current length: ${conversationHistory.length}"
         )
-
+        
         // Create a SpannableString for the new message and apply action item spans immediately
         val spannableMessage = SpannableString(assistantMsg)
         applyActionItemSpansToText(spannableMessage, actionItems)
-
+        
         // Add to new conversation messages list (convert SpannableString to String)
         val conversationMsg = ConversationMessage(
             text = spannableMessage.toString(),
@@ -1000,7 +1000,7 @@ class MainActivity : ComponentActivity() {
             TAG,
             "After adding structured assistant message. New length: ${conversationHistory.length}"
         )
-
+        
         updateConversationDisplay()
 
         // Save conversations after adding structured assistant message
@@ -1016,18 +1016,18 @@ class MainActivity : ComponentActivity() {
         actionItems: List<String>
     ) {
         if (actionItems.isEmpty()) return
-
+        
         val text = spannableText.toString()
         val quickActionsIndex = text.indexOf("📋 Quick Actions:")
-
+        
         if (quickActionsIndex != -1) {
             actionItems.forEach { actionItem ->
                 val bulletItemText = "• $actionItem"
                 val itemIndex = text.indexOf(bulletItemText, quickActionsIndex)
-
+                
                 if (itemIndex != -1) {
                     val itemEndIndex = itemIndex + bulletItemText.length
-
+                    
                     // Create clickable span for this specific action item
                     val clickableSpan = object : ClickableSpan() {
                         override fun onClick(view: View) {
@@ -1042,7 +1042,7 @@ class MainActivity : ComponentActivity() {
                             ).show()
                         }
                     }
-
+                    
                     // Apply styling spans
                     spannableText.setSpan(
                         clickableSpan,
@@ -1082,9 +1082,9 @@ class MainActivity : ComponentActivity() {
         val jsonRegex = Regex("\\{[^{}]*(?:\\{[^{}]*\\}[^{}]*)*\\}", RegexOption.DOT_MATCHES_ALL)
         val arrayRegex =
             Regex("\\[[^\\[\\]]*(?:\\[[^\\[\\]]*\\][^\\[\\]]*)*\\]", RegexOption.DOT_MATCHES_ALL)
-
+        
         var formattedMessage = message
-
+        
         // Find and replace JSON objects
         jsonRegex.findAll(message).forEach { match ->
             val jsonString = match.value
@@ -1093,7 +1093,7 @@ class MainActivity : ComponentActivity() {
                 formattedMessage = formattedMessage.replace(jsonString, collapsibleJson)
             }
         }
-
+        
         // Find and replace JSON arrays
         arrayRegex.findAll(formattedMessage).forEach { match ->
             val jsonString = match.value
@@ -1102,7 +1102,7 @@ class MainActivity : ComponentActivity() {
                 formattedMessage = formattedMessage.replace(jsonString, collapsibleJson)
             }
         }
-
+        
         return formattedMessage
     }
 
@@ -1136,10 +1136,10 @@ class MainActivity : ComponentActivity() {
     // Helper method to handle JSON collapsibles (action items are now handled immediately when added)
     private fun makeJsonCollapsiblesClickable() {
         val text = responseTextView.text.toString()
-
+        
         val spannableString = SpannableString(text)
         var foundInteractiveElements = false
-
+        
         // Handle collapsible JSON blocks
         val collapsedJsonRegex =
             Regex("▼ ([^\\n]+) \\(tap to expand\\)\\n\\[COLLAPSED_JSON:([^\\]]+)\\]")
@@ -1148,7 +1148,7 @@ class MainActivity : ComponentActivity() {
             val fullMatch = match.value
             val label = match.groupValues[1]
             val jsonContent = match.groupValues[2]
-
+            
             val clickableSpan = object : ClickableSpan() {
                 override fun onClick(view: View) {
                     // Replace collapsed section with expanded JSON
@@ -1162,32 +1162,32 @@ class MainActivity : ComponentActivity() {
                     } catch (e: JSONException) {
                         jsonContent
                     }
-
+                    
                     val expandedText = "▲ $label (tap to collapse)\n```json\n$prettyJson\n```"
                     val updatedText = currentText.replace(fullMatch, expandedText)
-
+                    
                     // Update both conversation history and display
                     conversationHistory.clear()
                     conversationHistory.append(updatedText)
                     responseTextView.text = updatedText
-
+                    
                     // Re-apply clickable spans for collapse functionality
                     makeExpandedJsonCollapsible()
-
+                    
                     Toast.makeText(this@MainActivity, "JSON expanded", Toast.LENGTH_SHORT).show()
                 }
             }
-
+            
             val labelStart = text.indexOf("▼ $label")
             val labelEnd = labelStart + "▼ $label (tap to expand)".length
-
+            
             spannableString.setSpan(
-                clickableSpan,
-                labelStart,
-                labelEnd,
+                clickableSpan, 
+                labelStart, 
+                labelEnd, 
                 Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
             )
-
+            
             // Make the label blue and underlined to indicate it's clickable
             spannableString.setSpan(
                 ForegroundColorSpan(ContextCompat.getColor(this, android.R.color.holo_blue_dark)),
@@ -1195,14 +1195,14 @@ class MainActivity : ComponentActivity() {
                 labelEnd,
                 Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
             )
-
+            
             spannableString.setSpan(
                 UnderlineSpan(),
                 labelStart,
                 labelEnd,
                 Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
             )
-
+            
             spannableString.setSpan(
                 StyleSpan(Typeface.BOLD),
                 labelStart,
@@ -1210,7 +1210,7 @@ class MainActivity : ComponentActivity() {
                 Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
             )
         }
-
+        
         if (foundInteractiveElements) {
             responseTextView.text = spannableString
             responseTextView.movementMethod = LinkMovementMethod.getInstance()
@@ -1222,12 +1222,12 @@ class MainActivity : ComponentActivity() {
         val text = responseTextView.text.toString()
         val expandedJsonRegex =
             Regex("▲ ([^\\n]+) \\(tap to collapse\\)\\n```json\\n([\\s\\S]*?)\\n```")
-
+        
         expandedJsonRegex.findAll(text).forEach { match ->
             val fullMatch = match.value
             val label = match.groupValues[1]
             val jsonContent = match.groupValues[2]
-
+            
             val spannableString = SpannableString(text)
             val clickableSpan = object : ClickableSpan() {
                 override fun onClick(view: View) {
@@ -1240,29 +1240,29 @@ class MainActivity : ComponentActivity() {
                         ).trim()
                     }]"
                     val updatedText = currentText.replace(fullMatch, collapsedText)
-
+                    
                     // Update both conversation history and display
                     conversationHistory.clear()
                     conversationHistory.append(updatedText)
                     responseTextView.text = updatedText
-
+                    
                     // Re-apply clickable spans for JSON
                     makeJsonCollapsiblesClickable()
-
+                    
                     Toast.makeText(this@MainActivity, "JSON collapsed", Toast.LENGTH_SHORT).show()
                 }
             }
-
+            
             val labelStart = text.indexOf("▲ $label")
             val labelEnd = labelStart + "▲ $label (tap to collapse)".length
-
+            
             spannableString.setSpan(
-                clickableSpan,
-                labelStart,
-                labelEnd,
+                clickableSpan, 
+                labelStart, 
+                labelEnd, 
                 Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
             )
-
+            
             // Make the label blue and underlined to indicate it's clickable
             spannableString.setSpan(
                 ForegroundColorSpan(ContextCompat.getColor(this, android.R.color.holo_blue_dark)),
@@ -1270,76 +1270,36 @@ class MainActivity : ComponentActivity() {
                 labelEnd,
                 Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
             )
-
+            
             spannableString.setSpan(
                 UnderlineSpan(),
                 labelStart,
                 labelEnd,
                 Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
             )
-
+            
             spannableString.setSpan(
                 StyleSpan(Typeface.BOLD),
                 labelStart,
                 labelEnd,
                 Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
             )
-
+            
             responseTextView.text = spannableString
             responseTextView.movementMethod = LinkMovementMethod.getInstance()
         }
     }
 
     /**
-     * Robust scrolling method to ensure user sees the complete response
-     * Uses multiple approaches and timing to guarantee scroll to bottom
+     * Smooth scrolling method to show new content
+     * Only scrolls when actual content is added, not during thinking/waiting phases
      */
     private fun scrollToResponseEnd() {
         runOnUiThread {
-            // Method 1: Immediate scroll attempt
+            // Simple, clean scroll approach - only when content is actually present
             conversationScrollView.post {
-                conversationScrollView.fullScroll(ScrollView.FOCUS_DOWN)
+                conversationScrollView.smoothScrollTo(0, conversationScrollView.getChildAt(0).height)
             }
-
-            // Method 2: Wait for layout and scroll to actual bottom
-            conversationScrollView.viewTreeObserver.addOnGlobalLayoutListener(object :
-                ViewTreeObserver.OnGlobalLayoutListener {
-                override fun onGlobalLayout() {
-                    conversationScrollView.viewTreeObserver.removeOnGlobalLayoutListener(this)
-
-                    // Calculate the actual bottom position
-                    val scrollViewHeight = conversationScrollView.height
-                    val contentHeight = conversationContainer.height + responseTextView.height
-                    val targetScrollY =
-                        maxOf(0, contentHeight - scrollViewHeight + 100) // +100px padding
-
-                    // Smooth scroll to the calculated position
-                    conversationScrollView.smoothScrollTo(0, targetScrollY)
-
-                    // Backup: Force full scroll after smooth scroll
-                    conversationScrollView.postDelayed({
-                        conversationScrollView.fullScroll(ScrollView.FOCUS_DOWN)
-                    }, 300)
-                }
-            })
-
-            // Method 3: Aggressive backup scrolling with multiple delays
-            conversationScrollView.postDelayed({
-                conversationScrollView.fullScroll(ScrollView.FOCUS_DOWN)
-            }, 150)
-
-            conversationScrollView.postDelayed({
-                conversationScrollView.fullScroll(ScrollView.FOCUS_DOWN)
-            }, 500)
-
-            // Method 4: Final fallback scroll
-            conversationScrollView.postDelayed({
-                val scrollViewHeight = conversationScrollView.height
-                val contentHeight = conversationScrollView.getChildAt(0).height
-                conversationScrollView.smoothScrollTo(0, contentHeight - scrollViewHeight + 50)
-            }, 800)
-
-            // Comprehensive scroll to response end initiated (removed noisy logging)
         }
     }
 
@@ -1361,22 +1321,27 @@ class MainActivity : ComponentActivity() {
                     createAssistantMessageView(message)
                 }
                 conversationContainer.addView(messageView)
+                
+                // If this is the last user message and we're thinking, add thinking indicator
+                if (message.isUser && message == conversationMessages.lastOrNull() && isThinking) {
+                    addThinkingIndicatorToContainer()
+                }
             }
 
             // Only update legacy TextView if NOT currently streaming to avoid wiping streaming content
             if (!isCurrentlyStreaming) {
-                responseTextView.text = conversationHistory
-                responseTextView.movementMethod = LinkMovementMethod.getInstance()
+            responseTextView.text = conversationHistory
+            responseTextView.movementMethod = LinkMovementMethod.getInstance()
                 Log.d(TAG, "Updated legacy TextView (not streaming)")
             } else {
                 Log.d(TAG, "Skipping TextView update - streaming in progress")
             }
-
+            
             Log.d(TAG, "Display updated. Message views: ${conversationMessages.size}")
-
+            
             // Force layout update
             responseTextView.requestLayout()
-
+            
             // Enhanced scroll to bottom - ensure user sees complete response
             scrollToResponseEnd()
         }
@@ -1385,6 +1350,7 @@ class MainActivity : ComponentActivity() {
     // Variables for animated thinking indicator
     private var thinkingAnimation: Runnable? = null
     private var isThinking = false
+    private var thinkingIndicatorView: View? = null
 
     // Helper method to show animated thinking indicator with animated dots
     private fun showAnimatedThinkingIndicator() {
@@ -1393,15 +1359,59 @@ class MainActivity : ComponentActivity() {
 
             // Mark that we're thinking
             isThinking = true
-
-            // Add initial thinking message
-            responseTextView.append("🤖 Sasya Chikitsa AI Agent Thinking")
+            
+            // Add thinking indicator to conversation container after the latest user message
+            addThinkingIndicatorToContainer()
 
             // Start dot animation
             startThinkingDotAnimation()
 
-            // Scroll to show indicator
-            scrollToResponseEnd()
+            // DO NOT scroll during thinking - keep current scroll position stable
+            // Scrolling will happen once actual response content is received
+        }
+    }
+
+    private fun addThinkingIndicatorToContainer() {
+        // Remove existing thinking indicator if any
+        removeThinkingIndicatorFromContainer()
+        
+        // Create thinking indicator view
+        thinkingIndicatorView = createThinkingIndicatorView()
+        conversationContainer.addView(thinkingIndicatorView)
+        
+        Log.d(TAG, "✅ Thinking indicator added to conversation container")
+    }
+
+    private fun createThinkingIndicatorView(): View {
+        val cardView = androidx.cardview.widget.CardView(this).apply {
+            layoutParams = LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.WRAP_CONTENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT
+            ).apply {
+                setMargins(16, 8, 64, 8) // Left align like assistant messages
+            }
+            radius = 20f
+            cardElevation = 4f
+            setCardBackgroundColor(getColor(R.color.assistant_message_bg))
+        }
+
+        val textView = TextView(this).apply {
+            text = "🤖 Sasya Chikitsa AI Agent Thinking"
+            textSize = 16f
+            setTextColor(getColor(R.color.assistant_text))
+            setPadding(24, 16, 24, 16)
+            id = View.generateViewId() // For animation updates
+        }
+
+        cardView.addView(textView)
+        return cardView
+    }
+
+    private fun removeThinkingIndicatorFromContainer() {
+        thinkingIndicatorView?.let { view ->
+            conversationContainer.removeView(view)
+            thinkingIndicatorView = null
+            Log.d(TAG, "✅ Thinking indicator removed from conversation container")
         }
     }
 
@@ -1420,27 +1430,34 @@ class MainActivity : ComponentActivity() {
                 }
 
                 runOnUiThread {
+                    // Create animated dots (1-4 dots cycling) - define outside loop scope
+                    val dots = ".".repeat((dotCount % 4) + 1)
+                    
                     val currentText = responseTextView.text.toString()
                     val lines = currentText.split("\n").toMutableList()
 
                     // Find and update the thinking line
                     for (i in lines.indices.reversed()) {
                         if (lines[i].contains("Sasya Chikitsa AI Agent Thinking")) {
-                            // Create animated dots (1-4 dots cycling)
-                            val dots = ".".repeat((dotCount % 4) + 1)
                             lines[i] = "🤖 Sasya Chikitsa AI Agent Thinking$dots"
                             break
                         }
                     }
 
-                    // Update the display
-                    responseTextView.text = lines.joinToString("\n")
-                    scrollToResponseEnd()
+                    // Update the thinking indicator view text with dots
+                    thinkingIndicatorView?.let { view ->
+                        val textView = (view as? androidx.cardview.widget.CardView)?.getChildAt(0) as? TextView
+                        textView?.text = "🤖 Sasya Chikitsa AI Agent Thinking$dots"
+                    }
+                    
+                    // NO scrolling during thinking animation - keep position stable
 
                     dotCount++
 
                     // Continue animation every 500ms
-                    responseTextView.postDelayed(this, 500)
+                    if (::responseTextView.isInitialized) {
+                        responseTextView.postDelayed(this, 500)
+                    }
                 }
             }
         }
@@ -1456,17 +1473,16 @@ class MainActivity : ComponentActivity() {
             isThinking = false
 
             // Cancel any pending animation
-            thinkingAnimation?.let { responseTextView.removeCallbacks(it) }
-
-            // Remove thinking indicator from display
-            val currentText = responseTextView.text.toString()
-            val lines = currentText.split("\n").toMutableList()
-            lines.removeAll { line ->
-                line.contains("Sasya Chikitsa AI Agent Thinking")
+            thinkingAnimation?.let { 
+                if (::responseTextView.isInitialized) {
+                    responseTextView.removeCallbacks(it)
+                }
             }
 
-            responseTextView.text = lines.joinToString("\n")
-            Log.d(TAG, "✅ Thinking indicator removed")
+            // Remove thinking indicator from conversation container
+            removeThinkingIndicatorFromContainer()
+            
+            Log.d(TAG, "✅ Thinking indicator stopped and removed from container")
         }
     }
 
@@ -1492,8 +1508,7 @@ class MainActivity : ComponentActivity() {
             // Start animated progress dots
             startProgressAnimation()
 
-            // Enhanced scroll to show indicator
-            scrollToResponseEnd()
+            // DO NOT scroll during progress animation - keep position stable
         }
     }
 
@@ -1539,7 +1554,7 @@ class MainActivity : ComponentActivity() {
                     lines.add(progressText)
 
                     responseTextView.text = lines.joinToString("\n") + "\n"
-                    scrollToResponseEnd()
+                    // NO scrolling during progress animation - keep position stable
 
                     dotCount++
                     if (dotCount % 4 == 0) {
@@ -1595,10 +1610,10 @@ class MainActivity : ComponentActivity() {
     // Variables for streaming response handling
     private val streamingChunks = mutableListOf<String>()
     private var isCurrentlyStreaming = false
-
+    
     // Generate unique session ID for this app instance
-    private val sessionId: String = UUID.randomUUID().toString().also {
-        Log.i(TAG, "🆔 New session created: $it")
+    private val sessionId: String = UUID.randomUUID().toString().also { 
+        Log.i(TAG, "🆔 New session created: $it") 
     }
 
     /**
@@ -1663,35 +1678,35 @@ class MainActivity : ComponentActivity() {
 
                 // 📊 ENHANCED LOGGING - Track streaming chunks with precise timing
                 Log.i(TAG, "🔥 STREAMING CHUNK RECEIVED FOR DISPLAY:")
-                Log.i(TAG, "   📦 Chunk content: '$chunk'")
-                Log.i(TAG, "   📊 Chunk length: ${chunk.length} characters")
+            Log.i(TAG, "   📦 Chunk content: '$chunk'")
+            Log.i(TAG, "   📊 Chunk length: ${chunk.length} characters")
                 Log.i(TAG, "   ⏰ Display timestamp: $currentTime")
-                Log.i(TAG, "   🔄 Currently streaming: $isCurrentlyStreaming")
-                Log.i(TAG, "   📈 Total chunks so far: ${streamingChunks.size}")
+            Log.i(TAG, "   🔄 Currently streaming: $isCurrentlyStreaming")
+            Log.i(TAG, "   📈 Total chunks so far: ${streamingChunks.size}")
                 Log.i(TAG, "   🎯 About to display this chunk individually")
-
-                if (!isCurrentlyStreaming) {
+            
+            if (!isCurrentlyStreaming) {
                     // Starting new streaming - clear any thinking/typing indicators
-                    Log.i(TAG, "🚀 STARTING NEW STREAMING SESSION")
+                Log.i(TAG, "🚀 STARTING NEW STREAMING SESSION")
                     try {
-                        stopThinkingIndicator() // Stop animated thinking dots
+                        stopThinkingIndicator() // Stop animated thinking dots and remove from container
                         removeTypingIndicator() // Remove any other typing indicators
-                        streamingChunks.clear()
+                streamingChunks.clear()
                         currentAttentionOverlayData = null // Clear previous attention data
-                        isCurrentlyStreaming = true
-
-                        // Add assistant header for the streaming response
-                        responseTextView.append("🤖 Plant Analysis Progress:\n")
-                        Log.i(TAG, "   ✅ Added assistant header with progress indicator")
+                isCurrentlyStreaming = true
+                
+                // Add assistant header for the streaming response
+                responseTextView.append("🤖 Plant Analysis Progress:\n")
+                Log.i(TAG, "   ✅ Added assistant header with progress indicator")
                     } catch (e: Exception) {
                         Log.e(TAG, "❌ Error initializing streaming session: ${e.message}", e)
                         return@runOnUiThread
                     }
-                }
-
-                // Add the chunk to the display and track it
-                streamingChunks.add(chunk)
-
+            }
+            
+            // Add the chunk to the display and track it
+            streamingChunks.add(chunk)
+            
                 // 🎯 ATTENTION OVERLAY IMAGE DETECTION
                 if (chunk.startsWith("ATTENTION_OVERLAY_BASE64:")) {
                     Log.i(TAG, "🎯 ATTENTION OVERLAY CHUNK DETECTED!")
@@ -1715,45 +1730,45 @@ class MainActivity : ComponentActivity() {
                     return@runOnUiThread
 
                 } else if (isPipeSeperatedActionItems(chunk)) {
-                    // 🔍 PIPE-SEPARATED ACTION ITEMS DETECTION
-                    Log.i(TAG, "🎯 DETECTED PIPE-SEPARATED ACTION ITEMS:")
-                    Log.i(TAG, "   📋 Raw action items: '$chunk'")
-
-                    // Parse and display action items with special formatting
-                    val actionItems = chunk.split("|").map { it.trim() }.filter { it.isNotEmpty() }
-                    Log.i(TAG, "   📊 Parsed ${actionItems.size} action items")
-
-                    // Add section header for action items
-                    responseTextView.append("\n📋 Recommended Actions:\n")
-
-                    // Display each action item with special formatting
-                    actionItems.forEachIndexed { index, actionItem ->
-                        val actionBullet = "  ✓ $actionItem"
-                        responseTextView.append("$actionBullet\n")
-                        Log.i(TAG, "   ✓ Action ${index + 1}: '$actionItem'")
-                    }
-
-                    Log.i(TAG, "   🎨 Formatted as highlighted action items list")
-
-                } else {
-                    // 🎯 REGULAR BULLET POINT FORMATTING - Each chunk as a bullet point
-                    val bulletPointChunk = "  • $chunk"
-                    responseTextView.append("$bulletPointChunk\n")
-                    Log.i(TAG, "   💡 Formatted as regular bullet point: '$bulletPointChunk'")
+            // 🔍 PIPE-SEPARATED ACTION ITEMS DETECTION
+                Log.i(TAG, "🎯 DETECTED PIPE-SEPARATED ACTION ITEMS:")
+                Log.i(TAG, "   📋 Raw action items: '$chunk'")
+                
+                // Parse and display action items with special formatting
+                val actionItems = chunk.split("|").map { it.trim() }.filter { it.isNotEmpty() }
+                Log.i(TAG, "   📊 Parsed ${actionItems.size} action items")
+                
+                // Add section header for action items
+                responseTextView.append("\n📋 Recommended Actions:\n")
+                
+                // Display each action item with special formatting
+                actionItems.forEachIndexed { index, actionItem ->
+                    val actionBullet = "  ✓ $actionItem"
+                    responseTextView.append("$actionBullet\n")
+                    Log.i(TAG, "   ✓ Action ${index + 1}: '$actionItem'")
                 }
-
+                
+                Log.i(TAG, "   🎨 Formatted as highlighted action items list")
+                
+            } else {
+                // 🎯 REGULAR BULLET POINT FORMATTING - Each chunk as a bullet point
+                val bulletPointChunk = "  • $chunk"
+                responseTextView.append("$bulletPointChunk\n")
+                Log.i(TAG, "   💡 Formatted as regular bullet point: '$bulletPointChunk'")
+            }
+            
                 Log.i(TAG, "   📱 CHUNK DISPLAYED ON SCREEN")
                 Log.i(TAG, "   ⏰ Screen display time: ${System.currentTimeMillis()}")
                 Log.i(TAG, "   ✅ Individual chunk streaming successful")
-
+            
                 // Auto-scroll to show new content with robust scrolling
                 scrollToResponseEnd()
                 Log.d(TAG, "   📜 Auto-scrolled to show new content")
-
-                Log.i(TAG, "✅ STREAMING CHUNK PROCESSED SUCCESSFULLY")
-                Log.i(TAG, "   📊 Updated total chunks: ${streamingChunks.size}")
+            
+            Log.i(TAG, "✅ STREAMING CHUNK PROCESSED SUCCESSFULLY")
+            Log.i(TAG, "   📊 Updated total chunks: ${streamingChunks.size}")
                 Log.i(TAG, "   🎯 Display format: Bullet point list / Attention image")
-                Log.i(TAG, "   " + "=".repeat(50))
+            Log.i(TAG, "   " + "=".repeat(50))
             } catch (e: Exception) {
                 Log.e(TAG, "❌ Critical error in addStreamingChunk: ${e.message}", e)
                 try {
@@ -1817,12 +1832,12 @@ class MainActivity : ComponentActivity() {
             Log.i(TAG, "🏁 FINALIZING STREAMING RESPONSE:")
             Log.i(TAG, "   🔄 Currently streaming: $isCurrentlyStreaming")
             Log.i(TAG, "   📦 Chunks collected: ${streamingChunks.size}")
-
+            
             if (isCurrentlyStreaming && streamingChunks.isNotEmpty()) {
                 Log.i(TAG, "✅ PRESERVING REAL-TIME STREAMED DISPLAY:")
                 Log.i(TAG, "   📊 Total chunks streamed individually: ${streamingChunks.size}")
                 Log.i(TAG, "   🔄 Chunks were displayed in real-time, now preserving for history")
-
+                
                 // Log chunks for debugging (they were already displayed individually)
                 streamingChunks.forEachIndexed { index, chunk ->
                     Log.i(TAG, "   📦 Chunk ${index + 1} (already displayed): '$chunk'")
@@ -1845,13 +1860,13 @@ class MainActivity : ComponentActivity() {
 
                 // Check if the streamed content represents a structured response
                 val structuredResponse = parseStructuredResponse(streamedContent)
-
+                
                 if (structuredResponse != null) {
                     // Handle structured response - format with action items
                     val formattedMainAnswer =
                         formatMessageWithCollapsibleJson(structuredResponse.mainAnswer)
                     var assistantMsg = "🤖 $formattedMainAnswer"
-
+                    
                     if (structuredResponse.actionItems.isNotEmpty()) {
                         assistantMsg += "\n\n📋 Quick Actions:"
                         structuredResponse.actionItems.forEach { actionItem ->
@@ -1859,7 +1874,7 @@ class MainActivity : ComponentActivity() {
                         }
                     }
                     assistantMsg += "\n\n"
-
+                    
                     // Add to new conversation messages list
                     val conversationMsg = ConversationMessage(
                         text = assistantMsg.removePrefix("🤖 "), // Remove emoji for clean display
@@ -1894,7 +1909,7 @@ class MainActivity : ComponentActivity() {
                 Log.i(TAG, "   🔄 Used actual streamed display instead of combining chunks")
                 Log.i(TAG, "   💾 Conversation history updated with streamed content")
                 Log.i(TAG, "   📊 New conversation history length: ${conversationHistory.length}")
-
+                
                 // Clean up streaming state
                 val totalChunks = streamingChunks.size
                 streamingChunks.clear()
@@ -1934,7 +1949,7 @@ class MainActivity : ComponentActivity() {
 
                 // Ensure user can see the complete response with robust scrolling
                 scrollToResponseEnd()
-
+                
                 Log.i(TAG, "🧹 STREAMING STATE CLEANUP COMPLETE:")
                 Log.i(TAG, "   ✅ Processed ${totalChunks} chunks total")
                 Log.i(TAG, "   🔄 Streaming state reset")
@@ -1986,21 +2001,21 @@ class MainActivity : ComponentActivity() {
     private fun isPipeSeperatedActionItems(chunk: String): Boolean {
         // 🔍 DETECTION LOGIC for pipe-separated action items
         Log.d(TAG, "🔍 Analyzing chunk for action items: '$chunk'")
-
+        
         // Check if chunk contains pipes and looks like action items
         val containsPipes = chunk.contains("|")
         val hasMultipleParts = chunk.split("|").size > 1
         val partsLookLikeActions = chunk.split("|").all { part ->
             val trimmedPart = part.trim()
-            trimmedPart.isNotEmpty() &&
-                    (trimmedPart.length > 10) && // Action items are usually descriptive
-                    (trimmedPart.contains(" ")) && // Should contain spaces (multiple words)
-                    !trimmedPart.startsWith("http") && // Not URLs
-                    !trimmedPart.contains("...")  // Not typical progress messages
+            trimmedPart.isNotEmpty() && 
+            (trimmedPart.length > 10) && // Action items are usually descriptive
+            (trimmedPart.contains(" ")) && // Should contain spaces (multiple words)
+            !trimmedPart.startsWith("http") && // Not URLs
+            !trimmedPart.contains("...")  // Not typical progress messages
         }
-
+        
         val isActionItems = containsPipes && hasMultipleParts && partsLookLikeActions
-
+        
         Log.d(TAG, "   📊 Analysis results:")
         Log.d(TAG, "      🔗 Contains pipes: $containsPipes")
         Log.d(TAG, "      📄 Multiple parts: $hasMultipleParts")
@@ -2009,7 +2024,7 @@ class MainActivity : ComponentActivity() {
             TAG,
             "      🎯 Final decision: ${if (isActionItems) "ACTION ITEMS" else "REGULAR CHUNK"}"
         )
-
+        
         return isActionItems
     }
 
@@ -2061,24 +2076,25 @@ class MainActivity : ComponentActivity() {
                         val reader = BufferedReader(InputStreamReader(inputStream, Charsets.UTF_8))
                         var line: String?
                         val fullResponse = StringBuilder()
-                        removeTypingIndicator() // Remove typing indicator before streaming
+                        // Do NOT remove typing indicator here - thinking should continue until first chunk
+                        Log.d(TAG, "🤔 Keeping thinking indicator active until first response chunk")
 
                         try {
                             Log.i(TAG, "🌊 STARTING STREAM PROCESSING LOOP")
                             Log.i(TAG, "   📖 Reading lines from server stream...")
-
+                            
                             var lineCount = 0
 
                             // FIXED: Remove dangerous context switching inside loop
                             while (reader.readLine().also { line = it } != null) {
                                 val currentLine = line ?: ""
                                 lineCount++
-
+                                
                                 try {
-                                    // 📊 COMPREHENSIVE LINE LOGGING
-                                    Log.i(TAG, "📥 STREAM LINE #$lineCount RECEIVED:")
-                                    Log.i(TAG, "   🔗 Raw content: '$currentLine'")
-                                    Log.i(TAG, "   📏 Length: ${currentLine.length}")
+                                // 📊 COMPREHENSIVE LINE LOGGING
+                                Log.i(TAG, "📥 STREAM LINE #$lineCount RECEIVED:")
+                                Log.i(TAG, "   🔗 Raw content: '$currentLine'")
+                                Log.i(TAG, "   📏 Length: ${currentLine.length}")
                                     Log.i(
                                         TAG,
                                         "   🔍 Is SSE format: ${currentLine.startsWith("data: ")}"
@@ -2088,35 +2104,35 @@ class MainActivity : ComponentActivity() {
                                         "   ⏰ Processing timestamp: ${System.currentTimeMillis()}"
                                     )
 
-                                    if (currentLine.startsWith("data: ")) {
-                                        val actualData = currentLine.substringAfter("data: ").trim()
-
-                                        // 📊 ENHANCED SERVER-SENT EVENT LOGGING
-                                        Log.i(TAG, "📡 SSE DATA RECEIVED:")
-                                        Log.i(TAG, "   🔗 Raw line: '$currentLine'")
-                                        Log.i(TAG, "   📦 Extracted data: '$actualData'")
-                                        Log.i(TAG, "   📏 Data length: ${actualData.length}")
-
-                                        if (actualData == "[DONE]") {
-                                            Log.i(TAG, "🏁 STREAM COMPLETION SIGNAL RECEIVED")
-                                            Log.i(TAG, "   ✅ Stream finished by [DONE] signal")
-                                            break
-                                        }
-                                        if (actualData.isNotEmpty()) {
-                                            fullResponse.append(actualData).append("\n")
-
-                                            Log.i(TAG, "🚀 PROCESSING CHUNK FOR DISPLAY:")
-                                            Log.i(TAG, "   📤 About to send to addStreamingChunk()")
+                                if (currentLine.startsWith("data: ")) {
+                                    val actualData = currentLine.substringAfter("data: ").trim()
+                                    
+                                    // 📊 ENHANCED SERVER-SENT EVENT LOGGING
+                                    Log.i(TAG, "📡 SSE DATA RECEIVED:")
+                                    Log.i(TAG, "   🔗 Raw line: '$currentLine'")
+                                    Log.i(TAG, "   📦 Extracted data: '$actualData'")
+                                    Log.i(TAG, "   📏 Data length: ${actualData.length}")
+                                    
+                                    if (actualData == "[DONE]") {
+                                        Log.i(TAG, "🏁 STREAM COMPLETION SIGNAL RECEIVED")
+                                        Log.i(TAG, "   ✅ Stream finished by [DONE] signal")
+                                        break
+                                    }
+                                    if (actualData.isNotEmpty()) {
+                                        fullResponse.append(actualData).append("\n")
+                                        
+                                        Log.i(TAG, "🚀 PROCESSING CHUNK FOR DISPLAY:")
+                                        Log.i(TAG, "   📤 About to send to addStreamingChunk()")
                                             Log.i(
                                                 TAG,
                                                 "   🎯 Chunk will be formatted as bullet point"
                                             )
-
+                                        
                                             // FIXED: Safer UI thread dispatch
                                             try {
-                                                withContext(Dispatchers.Main) {
-                                                    addStreamingChunk(actualData)
-                                                }
+                                        withContext(Dispatchers.Main) {
+                                            addStreamingChunk(actualData)
+                                        }
                                                 Log.i(TAG, "✅ CHUNK DISPLAYED SUCCESSFULLY")
                                             } catch (e: Exception) {
                                                 Log.e(
@@ -2125,28 +2141,28 @@ class MainActivity : ComponentActivity() {
                                                     e
                                                 )
                                             }
-                                        } else {
+                                    } else {
                                             Log.w(
                                                 TAG,
                                                 "⚠️  Empty actualData received, skipping display"
                                             )
-                                        }
-                                    } else if (currentLine.isNotEmpty()) {
-                                        // Handle plain text chunks if not using SSE "data:" prefix
-                                        Log.i(TAG, "📄 PLAIN TEXT CHUNK RECEIVED:")
-                                        Log.i(TAG, "   🔗 Raw line: '$currentLine'")
-                                        Log.i(TAG, "   📏 Line length: ${currentLine.length}")
-
-                                        fullResponse.append(currentLine).append("\n")
-
-                                        Log.i(TAG, "🚀 PROCESSING PLAIN TEXT CHUNK:")
-                                        Log.i(TAG, "   📤 About to send to addStreamingChunk()")
-
+                                    }
+                                } else if (currentLine.isNotEmpty()) {
+                                    // Handle plain text chunks if not using SSE "data:" prefix
+                                    Log.i(TAG, "📄 PLAIN TEXT CHUNK RECEIVED:")
+                                    Log.i(TAG, "   🔗 Raw line: '$currentLine'")
+                                    Log.i(TAG, "   📏 Line length: ${currentLine.length}")
+                                    
+                                    fullResponse.append(currentLine).append("\n")
+                                    
+                                    Log.i(TAG, "🚀 PROCESSING PLAIN TEXT CHUNK:")
+                                    Log.i(TAG, "   📤 About to send to addStreamingChunk()")
+                                    
                                         // FIXED: Safer UI thread dispatch
                                         try {
-                                            withContext(Dispatchers.Main) {
-                                                addStreamingChunk(currentLine)
-                                            }
+                                    withContext(Dispatchers.Main) {
+                                        addStreamingChunk(currentLine)
+                                    }
                                             Log.i(TAG, "✅ PLAIN TEXT CHUNK DISPLAYED SUCCESSFULLY")
                                         } catch (e: Exception) {
                                             Log.e(
@@ -2165,28 +2181,28 @@ class MainActivity : ComponentActivity() {
                                     // Continue processing other lines
                                 }
                             }
-
+                            
                             // Handle end of stream - finalize streaming response
                             Log.i(TAG, "🏁 STREAM PROCESSING COMPLETED")
                             Log.i(TAG, "   📊 Total lines processed: $lineCount")
                             Log.i(TAG, "   ✅ Stream finished naturally")
                             Log.i(TAG, "   🔄 About to finalize streaming response...")
-
+                            
                             // FIXED: Proper UI thread dispatch for finalization
                             try {
                                 withContext(Dispatchers.Main) {
-                                    finalizeStreamingResponse()
-                                }
-                                Log.i(TAG, "✅ STREAM FINALIZATION COMPLETE")
+                                finalizeStreamingResponse()
+                            }
+                            Log.i(TAG, "✅ STREAM FINALIZATION COMPLETE")
                             } catch (e: Exception) {
                                 Log.e(TAG, "❌ Error finalizing stream: ${e.message}", e)
                             }
                         } catch (e: IOException) {
                             Log.e(TAG, "Error reading stream", e)
                             try {
-                                withContext(Dispatchers.Main) {
-                                    finalizeStreamingResponse()
-                                    addAssistantMessage("⚠️ Error reading stream: ${e.message}")
+                            withContext(Dispatchers.Main) {
+                                finalizeStreamingResponse()
+                                addAssistantMessage("⚠️ Error reading stream: ${e.message}")
                                 }
                             } catch (ex: Exception) {
                                 Log.e(TAG, "❌ Error handling IOException: ${ex.message}", ex)
@@ -2195,7 +2211,7 @@ class MainActivity : ComponentActivity() {
                             try {
                                 reader.close()
                                 inputStream.close()
-                                responseBody.close()
+                            responseBody.close()
                                 Log.d(TAG, "✅ Stream resources closed successfully")
                             } catch (ex: Exception) {
                                 Log.e(TAG, "❌ Error closing stream resources: ${ex.message}", ex)
@@ -2204,9 +2220,9 @@ class MainActivity : ComponentActivity() {
                     } else {
                         Log.e(TAG, "Error: Empty response body")
                         try {
-                            withContext(Dispatchers.Main) {
-                                finalizeStreamingResponse()
-                                addAssistantMessage("⚠️ Error: Empty response body")
+                        withContext(Dispatchers.Main) {
+                            finalizeStreamingResponse()
+                            addAssistantMessage("⚠️ Error: Empty response body")
                             }
                         } catch (ex: Exception) {
                             Log.e(TAG, "❌ Error handling empty response: ${ex.message}", ex)
@@ -2216,9 +2232,9 @@ class MainActivity : ComponentActivity() {
                     val errorBody = response.errorBody()?.string() ?: "Unknown error"
                     Log.e(TAG, "Error: ${response.code()} - $errorBody")
                     try {
-                        withContext(Dispatchers.Main) {
-                            finalizeStreamingResponse()
-                            addAssistantMessage("⚠️ Error: ${response.code()} - $errorBody")
+                    withContext(Dispatchers.Main) {
+                        finalizeStreamingResponse()
+                        addAssistantMessage("⚠️ Error: ${response.code()} - $errorBody")
                         }
                     } catch (ex: Exception) {
                         Log.e(TAG, "❌ Error handling HTTP error: ${ex.message}", ex)
@@ -2227,9 +2243,9 @@ class MainActivity : ComponentActivity() {
             } catch (e: Exception) {
                 Log.e(TAG, "Exception in fetchChatStreamFromServer", e)
                 try {
-                    withContext(Dispatchers.Main) {
-                        finalizeStreamingResponse()
-                        addAssistantMessage("⚠️ Exception: ${e.message}")
+                withContext(Dispatchers.Main) {
+                    finalizeStreamingResponse()
+                    addAssistantMessage("⚠️ Exception: ${e.message}")
                     }
                 } catch (ex: Exception) {
                     Log.e(TAG, "❌ Error handling general exception: ${ex.message}", ex)
@@ -2415,11 +2431,11 @@ class MainActivity : ComponentActivity() {
                 .show()
         }
     }
-
+    
     private fun updateServerStatusDisplay() {
         val currentUrl = ServerConfig.getServerUrl(this)
         val defaultUrls = ServerConfig.getDefaultUrls()
-
+        
         // Find friendly name for current URL
         val friendlyName = defaultUrls.find { it.second == currentUrl }?.first ?: "Custom"
         val shortUrl = when {
@@ -2430,32 +2446,59 @@ class MainActivity : ComponentActivity() {
             currentUrl.contains("production") || currentUrl.contains("prod") -> "Production"
             else -> currentUrl.replace("http://", "").replace("https://", "").take(20)
         }
-
+        
         serverStatus.text = "📡 Server: $shortUrl"
         Log.d(TAG, "Server status updated: $friendlyName - $currentUrl")
     }
 
     private fun showSettingsDialog() {
-        val builder = AlertDialog.Builder(this)
-        builder.setTitle("⚙️ Settings")
+        try {
+            val builder = AlertDialog.Builder(this)
+            builder.setTitle("⚙️ Settings")
 
+            val options = arrayOf(
+                "🌱 Agricultural Profile",
+                "🌐 Configure Server URL", 
+                "🗑️ Clear Conversation History",
+                "❌ Cancel"
+            )
+
+            // Use setSingleChoiceItems instead of setItems to avoid resource issues
+            builder.setSingleChoiceItems(options, -1) { dialog, which ->
+                dialog.dismiss() // Dismiss first to avoid conflicts
+                when (which) {
+                    0 -> showAgriculturalProfileDialog()
+                    1 -> showServerUrlDialog()
+                    2 -> showClearConversationsDialog()
+                    3 -> { } // Cancel - already dismissed
+                }
+            }
+
+            val dialog = builder.create()
+            dialog.show()
+        } catch (e: Exception) {
+            Log.e(TAG, "Error showing settings dialog: ${e.message}", e)
+            // Fallback to simple menu
+            showSimpleSettingsMenu()
+        }
+    }
+
+    private fun showSimpleSettingsMenu() {
+        // Simple fallback menu without AlertDialog
         val options = arrayOf(
             "🌱 Agricultural Profile",
             "🌐 Configure Server URL",
-            "🗑️ Clear Conversation History",
-            "❌ Cancel"
+            "🗑️ Clear Conversation History"
         )
-
-        builder.setItems(options) { dialog, which ->
-            when (which) {
-                0 -> showAgriculturalProfileDialog() // Show agricultural profile configuration
-                1 -> showServerUrlDialog() // Show server URL configuration
-                2 -> showClearConversationsDialog() // Show clear conversations confirmation
-                3 -> dialog.dismiss() // Cancel
-            }
-        }
-
-        builder.show()
+        
+        // Create a simple selection using Toast and buttons
+        android.widget.Toast.makeText(this, 
+            "Settings Menu:\n1. Agricultural Profile\n2. Server URL\n3. Clear History", 
+            android.widget.Toast.LENGTH_LONG).show()
+            
+        // You can add individual buttons or use a different approach here
+        // For now, just show agricultural profile as default
+        showAgriculturalProfileDialog()
     }
 
     private fun showClearConversationsDialog() {
@@ -2473,25 +2516,25 @@ class MainActivity : ComponentActivity() {
 
         builder.show()
     }
-
+    
     private fun showServerUrlDialog() {
         val defaultUrls = ServerConfig.getDefaultUrls()
         val currentUrl = ServerConfig.getServerUrl(this)
-
+        
         val builder = AlertDialog.Builder(this)
         builder.setTitle("Configure Server URL")
-
+        
         // Create a custom layout with spinner and input field
         val layout = layoutInflater.inflate(R.layout.dialog_server_url, null)
         val spinner = layout.findViewById<Spinner>(R.id.urlSpinner)
         val customUrlInput = layout.findViewById<EditText>(R.id.customUrlInput)
-
+        
         // Setup spinner with default URLs
         val urlLabels = defaultUrls.map { it.first }
         val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, urlLabels)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spinner.adapter = adapter
-
+        
         // Pre-select current URL if it matches a default
         val currentIndex = defaultUrls.indexOfFirst { it.second == currentUrl }
         if (currentIndex != -1) {
@@ -2501,7 +2544,7 @@ class MainActivity : ComponentActivity() {
             spinner.setSelection(defaultUrls.size - 1)
             customUrlInput.setText(currentUrl)
         }
-
+        
         // Show/hide custom input based on selection
         spinner.setOnItemSelectedListener(object :
             android.widget.AdapterView.OnItemSelectedListener {
@@ -2517,7 +2560,7 @@ class MainActivity : ComponentActivity() {
 
             override fun onNothingSelected(parent: android.widget.AdapterView<*>?) {}
         })
-
+        
         builder.setView(layout)
         builder.setPositiveButton("Save") { _, _ ->
             val selectedIndex = spinner.selectedItemPosition
@@ -2533,7 +2576,7 @@ class MainActivity : ComponentActivity() {
             } else {
                 defaultUrls[selectedIndex].second
             }
-
+            
             if (newUrl.isNotEmpty() && ServerConfig.isValidUrl(newUrl)) {
                 ServerConfig.setServerUrl(this, newUrl)
                 RetrofitClient.refreshInstance() // Force recreate with new URL
@@ -2549,7 +2592,7 @@ class MainActivity : ComponentActivity() {
             }
         }
         builder.setNegativeButton("Cancel", null)
-
+        
         val dialog = builder.create()
         dialog.show()
     }
