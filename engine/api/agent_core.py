@@ -18,7 +18,7 @@ from langchain_core.runnables.history import RunnableWithMessageHistory
 from langchain_community.chat_message_histories import ChatMessageHistory
 
 from ml.cnn_attn_classifier_improved import CNNWithAttentionClassifier
-
+from rag.rag_with_ollama import ollama_rag
 
 try:
     from langchain_openai import ChatOpenAI  # type: ignore
@@ -76,6 +76,8 @@ class AgentCore:
         self._emit_ctx: ContextVar[Optional[Callable[[str], None]]] = ContextVar("emit_ctx", default=None)
         self._image_emitters: Dict[str, Callable[[str], None]] = {}
         self.llm = create_llm() # Initialize LLM here
+        # Initialize RAG system (this might need to be cached later for performance)
+        rag_system = ollama_rag(llm_name="llama-3.1-8b")
         logger.debug(f"AgentCore initialized with agent_with_history: {self.agent_with_history}")
 
     def get_image_store_status(self):
@@ -299,8 +301,7 @@ class AgentCore:
                 return None
                 
             # Import RAG system
-            from RAG.rag_with_ollama import ollama_rag
-            
+
             # Initialize RAG system (this might need to be cached later for performance)
             rag_system = ollama_rag(llm_name="llama-3.1-8b")
             
@@ -975,6 +976,7 @@ class AgentCore:
             # Do actual CNN prediction directly without progress streaming
             logger.info("🧠 Running CNN prediction...")
             prediction_chunks = []
+            emitter = self._emit_ctx.get()  # Get the current emitter for streaming
             for chunk in self.model.predict_leaf_classification(image_b64, user_input):
                 chunk_str = str(chunk).rstrip("\n")
                 
@@ -983,8 +985,20 @@ class AgentCore:
                     logger.info("🎯 Attention visualization chunk detected in streaming classification")
                     # Keep user-friendly message in prediction chunks
                     prediction_chunks.append("Attention visualization generated - showing AI focus areas")
+                    # Stream the actual base64 data to client
+                    if emitter:
+                        try:
+                            emitter(chunk_str)
+                        except Exception:
+                            pass
                 else:
                     prediction_chunks.append(chunk_str)
+                    # Also emit regular chunks for streaming
+                    if emitter:
+                        try:
+                            emitter(chunk_str)
+                        except Exception:
+                            pass
             
             # Return final result immediately
             if prediction_chunks:

@@ -507,7 +507,7 @@ class ClassificationComponent(BaseComponent):
         
         # Add confidence-based guidance
         if confidence_level == 'high':
-            response += f"\n✅ I'm confident in this diagnosis. Ready to proceed with treatment recommendations?"
+            response += f"\n✅ I'm confident in this diagnosis. Proceeding with treatment recommendations"
         elif confidence_level == 'medium':
             response += f"\n⚠️ This is a probable diagnosis. Does it match what you're observing? I can provide treatment options or reclassify if needed."
         else:

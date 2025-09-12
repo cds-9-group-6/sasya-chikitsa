@@ -327,12 +327,86 @@ class AgentAPI:
             return StreamingResponse(streamer(), media_type=media_type, headers=extra_headers)
 
 
-agent_core_instance = AgentCore()
-api_server = AgentAPI(agent_core_instance)
-app = api_server.app
+# Bulletproof singleton pattern to prevent ANY double initialization
+import os
+import threading
+from typing import Optional
+
+# Thread-safe singleton with process-level protection
+_lock = threading.Lock()
+_agent_core_instance: Optional['AgentCore'] = None
+_api_server: Optional['AgentAPI'] = None
+_app = None
+_initialization_started = False
+
+# Process-level protection using environment variable
+AGENT_CORE_INITIALIZED = "SASYA_AGENT_CORE_INITIALIZED"
+
+def _get_agent_core():
+    """Thread-safe singleton AgentCore with process-level protection"""
+    global _agent_core_instance, _initialization_started
+    
+    # Fast path - already initialized
+    if _agent_core_instance is not None:
+        return _agent_core_instance
+    
+    with _lock:
+        # Double-check pattern
+        if _agent_core_instance is not None:
+            return _agent_core_instance
+            
+        # Check if another process already initialized
+        if os.environ.get(AGENT_CORE_INITIALIZED) == "true":
+            logger.warning("🔄 AgentCore already initialized in another process - creating new instance for this process")
+        
+        # Prevent recursive/double initialization
+        if _initialization_started:
+            logger.error("❌ Recursive AgentCore initialization detected - preventing double creation")
+            raise RuntimeError("AgentCore initialization already in progress")
+            
+        _initialization_started = True
+        
+        try:
+            logger.info("🚀 Creating AgentCore instance (thread-safe singleton)")
+            _agent_core_instance = AgentCore()
+            
+            # Mark as initialized globally
+            os.environ[AGENT_CORE_INITIALIZED] = "true"
+            
+            logger.info("✅ AgentCore instance created successfully (singleton pattern)")
+            return _agent_core_instance
+            
+        except Exception as e:
+            _initialization_started = False  # Reset on error
+            logger.error(f"❌ AgentCore initialization failed: {e}")
+            raise
+        finally:
+            _initialization_started = False
+
+def _get_api_server():
+    """Get or create the single AgentAPI server"""
+    global _api_server
+    if _api_server is None:
+        logger.info("🔧 Creating AgentAPI server (singleton)")
+        _api_server = AgentAPI(_get_agent_core())
+        logger.info("✅ AgentAPI server created successfully")
+    return _api_server
+
+def _get_app():
+    """Get or create the FastAPI app"""
+    global _app
+    if _app is None:
+        logger.info("📱 Creating FastAPI app (singleton)")
+        _app = _get_api_server().app
+        logger.info("✅ FastAPI app created successfully")
+    return _app
+
+def __getattr__(name):
+    """Module-level lazy attribute access"""
+    if name == "app":
+        return _get_app()
+    raise AttributeError(f"module '{__name__}' has no attribute '{name}'")
 
 if __name__ == "__main__":
-    # agent_core_instance = AgentCore()
-    # api_server = AgentAPI(agent_core_instance)
-    # uvicorn.run(api_server.app, host="127.0.0.1", port=8080)
-    uvicorn.run("agent_api:app", host="0.0.0.0", port=8080, reload=True)
+    # Use the same global instance - don't create new ones
+    uvicorn.run("agent_api:app", host="0.0.0.0", port=8080, reload=False)  # Disable reload to prevent multiple initializations
