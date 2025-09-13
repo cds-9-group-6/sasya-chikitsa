@@ -427,24 +427,21 @@ class MainActivity : ComponentActivity() {
 
     // Helper method to create a user message view with optional image (aligned right, WhatsApp-style)
     private fun createUserMessageView(message: ConversationMessage): View {
-        // Calculate width for WhatsApp-like chat bubble (75% max width, but can be smaller for short messages)
+        // Calculate width for proper zigzag chat layout (50% max width for better layout balance)
         val displayMetrics = resources.displayMetrics
         val screenWidth = displayMetrics.widthPixels
-        val maxCardWidth = (screenWidth * 0.75).toInt()
+        val maxCardWidth = (screenWidth * 0.5).toInt() // Reduced to 50% for zigzag layout
         val minCardWidth = (screenWidth * 0.3).toInt()
         val rightMargin = 16
-        val leftMargin = (screenWidth * 0.2).toInt() // More space on left to push right
+        val leftMargin = (screenWidth * 0.4).toInt() // More space on left to push right and balance layout
 
         val messageCard = androidx.cardview.widget.CardView(this).apply {
             layoutParams = LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.WRAP_CONTENT, // Let it size based on content
+                maxCardWidth, // Set explicit max width instead of WRAP_CONTENT
                 LinearLayout.LayoutParams.WRAP_CONTENT
             ).apply {
                 setMargins(leftMargin, 12, rightMargin, 12) // More spacing between messages
                 gravity = android.view.Gravity.END // Align to right
-
-                // Set max width constraint
-                width = LinearLayout.LayoutParams.WRAP_CONTENT
             }
             radius = 16f // Rounded corners
             cardElevation = 8f // Strong shadow for clear separation
@@ -460,16 +457,9 @@ class MainActivity : ComponentActivity() {
             orientation = LinearLayout.VERTICAL
             setPadding(0, 0, 0, 16) // No side padding for header, bottom padding for content
             layoutParams = LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.WRAP_CONTENT,
+                LinearLayout.LayoutParams.MATCH_PARENT, // Use full card width for proper text wrapping
                 LinearLayout.LayoutParams.WRAP_CONTENT
-            ).apply {
-                // Set width constraints based on content type
-                if (message.imageUri != null) {
-                    // Messages with images get more consistent width
-                    width = maxCardWidth - 32 // Account for padding
-                }
-                // Text-only messages use WRAP_CONTENT naturally
-            }
+            )
         }
 
         // Add header with icon and "Human" label with colored background
@@ -494,37 +484,16 @@ class MainActivity : ComponentActivity() {
         headerLayout.addView(headerText)
         messageLayout.addView(headerLayout)
 
-        // Add message text if not empty
-        if (message.text.isNotEmpty()) {
-            val textView = TextView(this).apply {
-                text = message.text // Clean text without emoji (header has it)
-                textSize = 16f // Standard message text size
-                setTextColor(ContextCompat.getColor(this@MainActivity, R.color.user_text))
-                setLineSpacing(4f, 1.1f) // WhatsApp-like line spacing
-                typeface = android.graphics.Typeface.DEFAULT
-                setPadding(16, 8, 16, 8) // Padding for text content
-
-                // Make text wrap nicely
-                maxWidth = maxCardWidth - 64 // Account for padding and margins
-            }
-            messageLayout.addView(textView)
-        }
-
-        // Add image if present (WhatsApp-style image sizing)
+        // Add image if present (WhatsApp-style image sizing) - Show image first
         if (message.imageUri != null) {
             val imageView = ImageView(this).apply {
                 val imageSize =
-                    minOf(maxCardWidth - 32, 280) // Max 280dp like WhatsApp, account for padding
+                    minOf(maxCardWidth - 32, 240) // Reduced max size for narrower cards, account for padding
                 layoutParams = LinearLayout.LayoutParams(
                     imageSize,
                     imageSize
                 ).apply {
-                    setMargins(
-                        16,
-                        if (message.text.isNotEmpty()) 8 else 8,
-                        16,
-                        0
-                    ) // Margin to match text padding
+                    setMargins(16, 8, 16, if (message.text.isNotEmpty()) 8 else 8) // Bottom margin only if text follows
                 }
                 scaleType = ImageView.ScaleType.CENTER_CROP
                 setImageURI(message.imageUri)
@@ -537,22 +506,46 @@ class MainActivity : ComponentActivity() {
             messageLayout.addView(imageView)
         }
 
+        // Add message text if not empty - Show text below image
+        if (message.text.isNotEmpty()) {
+            val textView = TextView(this).apply {
+                text = message.text // Clean text without emoji (header has it)
+                textSize = 16f // Standard message text size
+                setTextColor(ContextCompat.getColor(this@MainActivity, R.color.user_text))
+                setLineSpacing(4f, 1.1f) // WhatsApp-like line spacing
+                typeface = android.graphics.Typeface.DEFAULT
+                setPadding(16, if (message.imageUri != null) 8 else 8, 16, 8) // Top padding reduced if image above
+
+                // Enable proper text wrapping
+                layoutParams = LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT, // Use full available width
+                    LinearLayout.LayoutParams.WRAP_CONTENT
+                )
+                
+                // Additional text wrapping settings
+                setSingleLine(false) // Allow multi-line
+                maxLines = Int.MAX_VALUE // No line limit
+                ellipsize = null // No ellipsize to prevent truncation
+            }
+            messageLayout.addView(textView)
+        }
+
         messageCard.addView(messageLayout)
         return messageCard
     }
 
     // Helper method to create an assistant message view (aligned left, WhatsApp-style)
     private fun createAssistantMessageView(message: ConversationMessage): View {
-        // Calculate width for WhatsApp-like chat bubble (85% max width for longer AI responses)
+        // Calculate width for proper zigzag chat layout (60% max width to balance with user messages)
         val displayMetrics = resources.displayMetrics
         val screenWidth = displayMetrics.widthPixels
-        val maxCardWidth = (screenWidth * 0.85).toInt()
+        val maxCardWidth = (screenWidth * 0.6).toInt() // Reduced for zigzag balance
         val leftMargin = 16
-        val rightMargin = (screenWidth * 0.1).toInt() // Less space on right to push left
+        val rightMargin = (screenWidth * 0.3).toInt() // More space on right to maintain zigzag layout
 
         val messageCard = androidx.cardview.widget.CardView(this).apply {
             layoutParams = LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.WRAP_CONTENT,
+                maxCardWidth, // Set explicit max width for proper wrapping
                 LinearLayout.LayoutParams.WRAP_CONTENT
             ).apply {
                 setMargins(leftMargin, 12, rightMargin, 12) // More spacing between messages
@@ -572,7 +565,7 @@ class MainActivity : ComponentActivity() {
             orientation = LinearLayout.VERTICAL
             setPadding(0, 0, 0, 16) // No side padding for header, bottom padding for content
             layoutParams = LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.WRAP_CONTENT,
+                LinearLayout.LayoutParams.MATCH_PARENT, // Use full card width
                 LinearLayout.LayoutParams.WRAP_CONTENT
             )
         }
@@ -630,8 +623,16 @@ class MainActivity : ComponentActivity() {
                     movementMethod = LinkMovementMethod.getInstance()
                     setPadding(16, 8, 16, 8) // Padding for text content
 
-                    // Constrain max width for better readability
-                    maxWidth = maxCardWidth - 64
+                    // Enable proper text wrapping
+                    layoutParams = LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.MATCH_PARENT, // Use full available width
+                        LinearLayout.LayoutParams.WRAP_CONTENT
+                    )
+                    
+                    // Additional text wrapping settings
+                    setSingleLine(false) // Allow multi-line
+                    maxLines = Int.MAX_VALUE // No line limit
+                    ellipsize = null // No ellipsize to prevent truncation
                 }
                 messageLayout.addView(textView)
             }
@@ -1383,28 +1384,21 @@ class MainActivity : ComponentActivity() {
     }
 
     private fun createThinkingIndicatorView(): View {
-        val cardView = androidx.cardview.widget.CardView(this).apply {
+        return TextView(this).apply {
+            text = "🤖 Sasya Chikitsa AI Agent Thinking"
+            textSize = 14f
+            setTextColor(getColor(R.color.assistant_text))
+            setPadding(16, 8, 16, 8)
             layoutParams = LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.WRAP_CONTENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT
             ).apply {
-                setMargins(16, 8, 64, 8) // Left align like assistant messages
+                setMargins(16, 4, 16, 4) // Simple margins
             }
-            radius = 20f
-            cardElevation = 4f
-            setCardBackgroundColor(getColor(R.color.assistant_message_bg))
-        }
-
-        val textView = TextView(this).apply {
-            text = "🤖 Sasya Chikitsa AI Agent Thinking"
-            textSize = 16f
-            setTextColor(getColor(R.color.assistant_text))
-            setPadding(24, 16, 24, 16)
+            alpha = 0.7f // Slightly transparent to make it more subtle
+            setTypeface(typeface, android.graphics.Typeface.ITALIC) // Make text italic
             id = View.generateViewId() // For animation updates
         }
-
-        cardView.addView(textView)
-        return cardView
     }
 
     private fun removeThinkingIndicatorFromContainer() {
@@ -1446,7 +1440,7 @@ class MainActivity : ComponentActivity() {
 
                     // Update the thinking indicator view text with dots
                     thinkingIndicatorView?.let { view ->
-                        val textView = (view as? androidx.cardview.widget.CardView)?.getChildAt(0) as? TextView
+                        val textView = view as? TextView
                         textView?.text = "🤖 Sasya Chikitsa AI Agent Thinking$dots"
                     }
                     

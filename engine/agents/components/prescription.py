@@ -146,6 +146,8 @@ class PrescriptionComponent(BaseComponent):
         
         # Add specific treatment request
         rag_query += ". Include chemical treatments, organic options, prevention methods, dosage, and timing."
+        rag_query += "Summarize the treatment in simple terms and no more than 30 words for a farmer to understand."
+        rag_query += "Send only this summary of the treatment as a response and not the entire detail."
         
         logger.debug(f"📝 RAG query: {rag_query}")
         
