@@ -12,7 +12,6 @@ import os
 import logging
 from typing import Dict, List, Optional
 
-from RAG.Embeddings_creation import retrieval
 
 # Configure logging
 logging.basicConfig(
