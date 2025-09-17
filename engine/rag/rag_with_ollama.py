@@ -334,34 +334,51 @@ class OllamaRag:
             if metadata_filter:
                 logger.info(f"🎯 Using metadata filters: {metadata_filter}")
             
-            # Execute query using RetrievalQA chain
+            # Execute query using RetrievalQA chain with metadata filtering support
             if metadata_filter:
-                # For metadata filtering, we need to use the chroma_db directly first, then RetrievalQA
-                logger.info("🎯 Using metadata-filtered retrieval")
-                docs = chroma_db.similarity_search(
-                    query_request, 
-                    k=6,
-                    filter=metadata_filter
+                logger.info("🎯 Using metadata-filtered RetrievalQA")
+                
+                # Create a temporary retriever with metadata filter for this query
+                filtered_retriever = chroma_db.as_retriever(
+                    search_type="mmr",
+                    search_kwargs={
+                        "k": 6, 
+                        "fetch_k": 12,
+                        "filter": metadata_filter
+                    }
                 )
                 
-                if not docs:
-                    logger.warning("⚠️  No documents found with metadata filters, trying RetrievalQA without filters...")
+                # Create a temporary RetrievalQA with the filtered retriever
+                filtered_retrieval_qa = RetrievalQA.from_chain_type(
+                    llm=self.llm,
+                    chain_type="stuff", 
+                    retriever=filtered_retriever,
+                    input_key="query",
+                    return_source_documents=True,
+                    chain_type_kwargs=self.chain_type_kwargs,
+                )
+                
+                # Execute the query with metadata filtering
+                result = filtered_retrieval_qa.invoke({"query": query_request})
+                answer = result["result"]
+                
+                # Check if we got meaningful results
+                if not result.get("source_documents"):
+                    logger.warning("⚠️  No documents found with metadata filters, trying without filters...")
                     # Fallback to standard RetrievalQA chain
                     result = retrieval_qa.invoke({"query": query_request})
                     answer = result["result"]
                 else:
-                    # Build context from filtered documents and use LLM directly
-                    context = "\n\n".join([doc.page_content for doc in docs])
-                    formatted_prompt = self.PROMPT.format(context=context, question=query_request)
-                    answer = self.llm.invoke(formatted_prompt).content
+                    logger.info(f"✅ Found {len(result['source_documents'])} documents with metadata filter")
+                    
             else:
                 # Use RetrievalQA chain for standard queries
                 logger.info("🔍 Using RetrievalQA chain for similarity search")
                 result = retrieval_qa.invoke({"query": query_request})
                 answer = result["result"]
             
-            if metadata_filter and 'docs' in locals():
-                logger.info(f"✅ Query completed successfully using collection: {collection_name} with {len(docs)} filtered documents")
+            if metadata_filter and 'result' in locals() and result.get("source_documents"):
+                logger.info(f"✅ Query completed successfully using collection: {collection_name} with {len(result['source_documents'])} filtered documents")
             else:
                 logger.info(f"✅ Query completed successfully using collection: {collection_name} via RetrievalQA chain")
             
@@ -387,13 +404,72 @@ class OllamaRag:
         """Get list of successfully initialized collections."""
         return list(self.chroma_databases.keys())
     
+    def test_metadata_filtering(self, query_request: str, 
+                               plant_type: Optional[str] = None,
+                               season: Optional[str] = None,
+                               location: Optional[str] = None,
+                               disease: Optional[str] = None) -> Dict[str, any]:
+        """
+        Test metadata filtering by returning filtered documents and metadata filter used.
+        Useful for debugging and verifying filter functionality.
+        
+        Args:
+            query_request: The query to search for
+            plant_type: Optional explicit plant type
+            season: Optional season filter
+            location: Optional location filter
+            disease: Optional disease name filter
+            
+        Returns:
+            Dictionary containing filtered documents, metadata filter, and collection info
+        """
+        try:
+            # Determine collection
+            if plant_type and plant_type in self.chroma_databases:
+                collection_name = plant_type
+            else:
+                collection_name = self._detect_plant_type(query_request)
+            
+            if collection_name not in self.chroma_databases:
+                collection_name = self.default_collection
+                
+            chroma_db = self.chroma_databases[collection_name]
+            
+            # Build metadata filter
+            metadata_filter = self._build_metadata_filter(season, location, disease)
+            
+            # Test with and without filtering for comparison
+            docs_unfiltered = chroma_db.similarity_search(query_request, k=6)
+            
+            docs_filtered = []
+            if metadata_filter:
+                docs_filtered = chroma_db.similarity_search(
+                    query_request, 
+                    k=6, 
+                    filter=metadata_filter
+                )
+            
+            return {
+                "collection_used": collection_name,
+                "metadata_filter": metadata_filter,
+                "docs_unfiltered_count": len(docs_unfiltered),
+                "docs_filtered_count": len(docs_filtered) if metadata_filter else 0,
+                "docs_unfiltered": [{"content": doc.page_content[:200], "metadata": doc.metadata} for doc in docs_unfiltered],
+                "docs_filtered": [{"content": doc.page_content[:200], "metadata": doc.metadata} for doc in docs_filtered] if metadata_filter else [],
+                "query": query_request
+            }
+            
+        except Exception as e:
+            logger.error(f"❌ Error during metadata filter testing: {e}")
+            raise RuntimeError(f"Metadata filter test failed: {e}")
+    
     def query_with_sources(self, query_request: str, 
                           plant_type: Optional[str] = None,
                           season: Optional[str] = None,
                           location: Optional[str] = None,
                           disease: Optional[str] = None) -> Dict[str, any]:
         """
-        Run a query and return both answer and source documents.
+        Run a query and return both answer and source documents with metadata filtering support.
         
         Args:
             query_request: The query to search for
@@ -417,11 +493,42 @@ class OllamaRag:
                 logger.warning(f"⚠️  Collection {collection_name} not available, falling back to {self.default_collection}")
                 collection_name = self.default_collection
             
+            chroma_db = self.chroma_databases[collection_name]
             retrieval_qa = self.retrievers[collection_name]
+            
+            # Build metadata filter
+            metadata_filter = self._build_metadata_filter(season, location, disease)
+            
             logger.debug(f"🔍 Querying collection: {collection_name} with source documents")
             
-            # Use RetrievalQA chain which returns source documents
-            result = retrieval_qa.invoke({"query": query_request})
+            # Use RetrievalQA chain with metadata filtering if applicable
+            if metadata_filter:
+                logger.info("🎯 Using metadata-filtered RetrievalQA for sources")
+                
+                # Create filtered retriever
+                filtered_retriever = chroma_db.as_retriever(
+                    search_type="mmr",
+                    search_kwargs={
+                        "k": 6,
+                        "fetch_k": 12,
+                        "filter": metadata_filter
+                    }
+                )
+                
+                # Create temporary filtered RetrievalQA
+                filtered_retrieval_qa = RetrievalQA.from_chain_type(
+                    llm=self.llm,
+                    chain_type="stuff",
+                    retriever=filtered_retriever,
+                    input_key="query",
+                    return_source_documents=True,
+                    chain_type_kwargs=self.chain_type_kwargs,
+                )
+                
+                result = filtered_retrieval_qa.invoke({"query": query_request})
+            else:
+                # Use standard RetrievalQA chain
+                result = retrieval_qa.invoke({"query": query_request})
             
             logger.info(f"✅ Query with sources completed successfully using collection: {collection_name}")
             return result
