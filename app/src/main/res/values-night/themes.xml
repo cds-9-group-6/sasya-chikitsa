@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Earthly Plant Disease Detection App Dark Theme -->
+    <style name="Theme.Sasya_Chikitsa" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Primary earth colors for dark mode -->
+        <item name="colorPrimary">@color/sage_green_light</item>
+        <item name="colorPrimaryDark">@color/forest_green</item>
+        <item name="colorAccent">@color/warm_amber</item>
+        
+        <!-- Dark background colors -->
+        <item name="android:windowBackground">@color/rich_brown</item>
+        <item name="colorSurface">@color/bark_brown</item>
+        
+        <!-- Text colors for dark theme -->
+        <item name="colorOnSurface">@color/soft_white</item>
+        <item name="colorOnBackground">@color/soft_white</item>
+        
+        <!-- Status bar for dark theme -->
+        <item name="android:statusBarColor">@color/rich_brown</item>
+        <item name="android:windowLightStatusBar">false</item>
+    </style>
+</resources>
