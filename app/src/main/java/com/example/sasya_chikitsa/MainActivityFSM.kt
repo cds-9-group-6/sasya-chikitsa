@@ -802,7 +802,6 @@ class MainActivityFSM : ComponentActivity(), FSMStreamHandler.StreamCallback {
                         R.raw.apple_alternaria_early_blight_multi_leaves_1 to "Apple Alternaria Early Blight - Multi Leaves 1.jpg",
                         R.raw.apple_alternaria_early_blight_multi_leaves_2 to "Apple Alternaria Early Blight - Multi Leaves 2.jpg",
                         R.raw.apple_healthy_multi_leaves_1 to "Apple Healthy - Multi Leaves Sample.jpg",
-                        R.raw.apple_healthy to "Apple Healthy - Single Leaf Sample.jpg",
                         R.raw.apple_tomato_mosaic_virus_1 to "Apple Tomato Mosaic Virus - Sample 1.jpg",
                         R.raw.apple_tomato_mosaic_virus_multi_leaves to "Apple Tomato Mosaic Virus - Multi Leaves.jpg",
                         R.raw.apple_leaf_root_rot to "Apple Leaf Root Rot Disease.jpg",
@@ -814,7 +813,6 @@ class MainActivityFSM : ComponentActivity(), FSMStreamHandler.StreamCallback {
                         R.raw.potato_healthy_multi_leaves_1 to "Potato Healthy - Multi Leaves Sample.jpg",
                         
                         // Tomato varieties
-                        R.raw.tomato_dry to "Tomato Dry Condition Sample.jpg",
                         R.raw.tomato_mosaic_virus to "Tomato Mosaic Virus Disease.jpg",
                         R.raw.tomato_fruit_borer to "Tomato Fruit Borer Damage.jpg",
                         R.raw.tomato_spider_mites_multiple_leaves to "Tomato Spider Mites - Multiple Leaves.jpg",
