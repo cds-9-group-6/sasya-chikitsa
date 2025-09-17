@@ -1,0 +1,70 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: chromadb
+  namespace: your-namespace  # Replace with your actual namespace
+  labels:
+    app: chromadb
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: chromadb
+  template:
+    metadata:
+      labels:
+        app: chromadb
+    spec:
+      containers:
+      - name: chromadb
+        image: chromadb/chroma:latest
+        ports:
+        - containerPort: 8000
+          name: http
+        env:
+        - name: CHROMA_SERVER_HOST
+          valueFrom:
+            configMapKeyRef:
+              name: chromadb-config
+              key: CHROMA_SERVER_HOST
+        - name: CHROMA_SERVER_HTTP_PORT
+          valueFrom:
+            configMapKeyRef:
+              name: chromadb-config
+              key: CHROMA_SERVER_HTTP_PORT
+        - name: PERSIST_DIRECTORY
+          valueFrom:
+            configMapKeyRef:
+              name: chromadb-config
+              key: PERSIST_DIRECTORY
+        - name: CHROMA_SERVER_CORS_ALLOW_ORIGINS
+          valueFrom:
+            configMapKeyRef:
+              name: chromadb-config
+              key: CHROMA_SERVER_CORS_ALLOW_ORIGINS
+        volumeMounts:
+        - name: chromadb-data
+          mountPath: /chroma/chroma
+        livenessProbe:
+          httpGet:
+            path: /api/v1/heartbeat
+            port: 8000
+          initialDelaySeconds: 30
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /api/v1/heartbeat
+            port: 8000
+          initialDelaySeconds: 5
+          periodSeconds: 5
+        resources:
+          requests:
+            cpu: 500m
+            memory: 1Gi
+          limits:
+            cpu: 2
+            memory: 4Gi
+      volumes:
+      - name: chromadb-data
+        persistentVolumeClaim:
+          claimName: chromadb-data-pvc

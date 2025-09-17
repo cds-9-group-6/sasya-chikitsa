@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mlflow-config
+  namespace: sasya-chikitsa
+  labels:
+    app: mlflow-server
+    app.kubernetes.io/component: mlflow-server
+    app.kubernetes.io/instance: mlflow-server
+    app.kubernetes.io/name: mlflow-server
+    app.kubernetes.io/part-of: mlflow-platform
+data:
+  # MLFLOW_HOST: "0.0.0.0"
+  # MLFLOW_PORT: "5001"
+  MLFLOW_BACKEND_STORE_URI: "file:///mlruns"
+  MLFLOW_EXPOSE_PROMETHEUS: "file:///prometheus"
+  # MLFLOW_DEFAULT_ARTIFACT_ROOT: "file:///data/artifacts"
+  MLFLOW_ARTIFACTS_DESTINATION: "file:///mlartifacts"
+  # MLFLOW_SERVE_ARTIFACTS: "true"
+  # MLFLOW_WORKERS: "4"
+  # MLFLOW_GUNICORN_OPTS: "--timeout 120 --keep-alive 2 --max-requests 1000"
+  # Database Configuration (Optional - for production use)
+  # MLFLOW_BACKEND_STORE_URI: "postgresql://mlflow:password@postgres:5432/mlflow"
+  # S3 Configuration (Optional - for cloud storage)
+  # AWS_S3_ENDPOINT_URL: "https://s3.amazonaws.com"
+  # MLFLOW_S3_ENDPOINT_URL: "https://s3.amazonaws.com"

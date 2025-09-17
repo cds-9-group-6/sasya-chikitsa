@@ -1,0 +1,27 @@
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: mlflow-server
+  namespace: sasya-chikitsa
+  labels:
+    app: mlflow-server
+    app.kubernetes.io/component: mlflow-server
+    app.kubernetes.io/instance: mlflow-server
+    app.kubernetes.io/name: mlflow-server
+    app.kubernetes.io/part-of: mlflow-platform
+    app.openshift.io/runtime-version: v1
+  annotations:
+    haproxy.router.openshift.io/timeout: 10m
+    # haproxy.router.openshift.io/rate-limit-connections: "true"
+    # haproxy.router.openshift.io/rate-limit-connections.rate-http: "100"
+spec:
+  port:
+    targetPort: 5001-tcp
+  # tls:
+  #   insecureEdgeTerminationPolicy: Redirect
+  #   termination: edge
+  to:
+    kind: Service
+    name: mlflow-server
+    weight: 100
+  wildcardPolicy: None

@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: chromadb-with-data-amd64
+    app.kubernetes.io/component: chromadb-with-data-amd64
+    app.kubernetes.io/instance: chromadb-with-data-amd64
+    app.kubernetes.io/name: chromadb-with-data-amd64
+    app.kubernetes.io/part-of: engine
+    app.openshift.io/runtime-version: v1
+  name: chromadb-with-data-amd64
+  namespace: sasya-chikitsa
+spec:
+  internalTrafficPolicy: Cluster
+  ports:
+  - name: 8000-tcp
+    port: 8000
+    protocol: TCP
+    targetPort: 8000
+  selector:
+    app: chromadb-with-data-amd64
+  sessionAffinity: None
+  type: ClusterIP

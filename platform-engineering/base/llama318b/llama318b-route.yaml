@@ -1,0 +1,22 @@
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  annotations:
+    haproxy.router.openshift.io/timeout: 300s
+    # haproxy.router.openshift.io/server-timeout: 300s
+  labels:
+    app: llama318b
+  name: llama318b
+  namespace: sasya-chikitsa
+spec:
+  # host: engine-sasya-chikitsa.apps.cluster-mx6z7.mx6z7.sandbox5315.opentlc.com
+  port:
+    targetPort: 11434-tcp
+  # tls:
+  #   insecureEdgeTerminationPolicy: Redirect
+  #   termination: edge
+  to:
+    kind: Service
+    name: llama318b
+    weight: 100
+  wildcardPolicy: None

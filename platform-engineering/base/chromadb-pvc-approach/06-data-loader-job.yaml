@@ -1,0 +1,49 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: chromadb-data-loader
+  namespace: your-namespace  # Replace with your actual namespace
+spec:
+  template:
+    spec:
+      containers:
+      - name: data-loader
+        image: registry.redhat.io/ubi8/ubi:latest
+        command:
+        - /bin/bash
+        - -c
+        - |
+          echo "Starting data copy..."
+          
+          # Check if PVC already has data
+          if [ -f "/chroma/chroma/chroma.sqlite3" ]; then
+            echo "Data already exists in PVC, skipping copy..."
+            exit 0
+          fi
+          
+          # Install required tools
+          microdnf install -y wget unzip
+          
+          # Download your data (you'll need to host it somewhere accessible)
+          # Option 1: If you have the data in a public repository or storage
+          # wget -O /tmp/chromadb-data.zip "YOUR_DATA_URL"
+          
+          # Option 2: If using a ConfigMap with the data (for smaller datasets)
+          # cp -r /data-source/* /chroma/chroma/
+          
+          # For now, create placeholder structure - you'll need to replace this
+          echo "Please upload your chroma_capstone_db_new data to the PVC"
+          echo "You can use 'oc rsync' command to copy data to the running pod"
+          
+          # Create directory structure
+          mkdir -p /chroma/chroma
+          
+          echo "Data loading placeholder completed. Use 'oc rsync' to copy actual data."
+        volumeMounts:
+        - name: chromadb-data
+          mountPath: /chroma/chroma
+      restartPolicy: OnFailure
+      volumes:
+      - name: chromadb-data
+        persistentVolumeClaim:
+          claimName: chromadb-data-pvc

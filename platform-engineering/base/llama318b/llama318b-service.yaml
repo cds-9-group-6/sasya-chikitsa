@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: llama318b
+  name: llama318b
+  namespace: sasya-chikitsa
+spec:
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+  - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+  - name: 11434-tcp
+    port: 11434
+    protocol: TCP
+    targetPort: 11434
+  selector:
+    app: llama318b
+  # Supports "ClientIP" and "None". Used to maintain session affinity. Enable client IP based session affinity. Must be ClientIP or None. Defaults to None. More info: https://kubernetes.io/docs/concepts/services-networking/service/#virtual-ips-and-service-proxies
+  # Possible enum values:
+  # - `"ClientIP"` is the Client IP based.
+  # - `"None"` - no session affinity.  
+  sessionAffinity: None
+  type: ClusterIP

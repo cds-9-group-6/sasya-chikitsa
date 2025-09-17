@@ -1,0 +1,37 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    openshift.io/generated-by: OpenShiftWebConsole
+  creationTimestamp: "2025-09-06T09:31:44Z"
+  labels:
+    app: rag-with-ollama-fastapi-amd64
+    app.kubernetes.io/component: rag-with-ollama-fastapi-amd64
+    app.kubernetes.io/instance: rag-with-ollama-fastapi-amd64
+    app.kubernetes.io/name: rag-with-ollama-fastapi-amd64
+    app.kubernetes.io/part-of: rag-with-ollama-fastapi-amd64-app
+    app.openshift.io/runtime-version: v1
+  name: rag-with-ollama-fastapi-amd64
+  namespace: sasya-chikitsa
+  resourceVersion: "4367495"
+  uid: bc89e177-c697-4410-b1e7-06bdedb9ddb2
+spec:
+  clusterIP: 172.30.131.204
+  clusterIPs:
+  - 172.30.131.204
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+  - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+  - name: 5050-tcp
+    port: 5050
+    protocol: TCP
+    targetPort: 5050
+  selector:
+    app: rag-with-ollama-fastapi-amd64
+    deployment: rag-with-ollama-fastapi-amd64
+  sessionAffinity: None
+  type: ClusterIP
+status:
+  loadBalancer: {}

@@ -1,0 +1,63 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: engine
+  namespace: sasya-chikitsa
+  labels:
+    app: engine
+    app.kubernetes.io/component: engine
+    app.kubernetes.io/instance: engine
+    app.kubernetes.io/name: engine
+    app.kubernetes.io/part-of: engine
+    app.openshift.io/runtime: python
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: engine
+  template:
+    metadata:
+      labels:
+        app: engine
+        app.kubernetes.io/component: engine
+        app.kubernetes.io/name: engine
+        deployment: engine
+    spec:
+      containers:
+        - name: engine
+          image: 'quay.io/rajivranjan/engine:v4'
+          securityContext:
+            runAsUser: 0
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+          env:
+            - name: OLLAMA_HOST
+              value: 'http://llama318b.sasya-chikitsa.svc.cluster.local:11434'
+            - name: HUB_MODEL_ID
+              value: 'sentence-transformers/multi-qa-MiniLM-L6-cos-v1'
+            - name: OLLAMA_MODEL
+              value: 'llama3.1:8b'
+          resources: {}
+            # requests:
+            #     memory: "16Gi"
+            #     cpu: "4"
+            # limits:
+            #     memory: "20Gi"
+            #     cpu: "6"
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          imagePullPolicy: Always
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+      dnsPolicy: ClusterFirst
+      securityContext:
+        runAsUser: 0
+      schedulerName: default-scheduler
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 25%
+      maxSurge: 25%
+  revisionHistoryLimit: 10
+  progressDeadlineSeconds: 600

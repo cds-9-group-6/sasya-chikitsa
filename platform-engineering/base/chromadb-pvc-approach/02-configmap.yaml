@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: chromadb-config
+  namespace: your-namespace  # Replace with your actual namespace
+data:
+  # ChromaDB configuration
+  CHROMA_SERVER_HOST: "0.0.0.0"
+  CHROMA_SERVER_HTTP_PORT: "8000"
+  PERSIST_DIRECTORY: "/chroma/chroma"
+  CHROMA_SERVER_CORS_ALLOW_ORIGINS: '["*"]'

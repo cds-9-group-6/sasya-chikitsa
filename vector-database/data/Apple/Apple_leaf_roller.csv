@@ -1,0 +1,8 @@
+BlockName,Category,Year,Month,Day,Crop,DistrictName,QueryType,Season,Sector,StateName,QueryText,KccAns,latitude,longitude
+THEOG,0,2011,4,24,Apple,SHIMLA,76,KHARIF,HORTICULTURE,"HIMACHAL PRADESH","How to control leaf roller on apple",nan,31.1042,77.171
+KALPA,Fruits,2012,5,28,Apple,KINNAUR,75,JAYAD,HORTICULTURE,"HIMACHAL PRADESH","How to control leaf roller in apple","Spray melathiobn 200ml 200 liter of water",31.593,78.3281
+ANNI,Fruits,2012,6,8,Apple,KULLU,75,JAYAD,HORTICULTURE,"HIMACHAL PRADESH","How to control leaf roller in apple","Spray melathion  200ml 200 liter of water",31.9579,77.1089
+NARKANDA,Fruits,2012,5,13,Apple,SHIMLA,75,JAYAD,HORTICULTURE,"HIMACHAL PRADESH","How to control leaf roller in apple plant","Spray carbaryl  200gm 200 liter of water",31.1042,77.171
+KESHOD,Fruits,2023,7,25,Apple,JUNAGADH,"Plant Protection",nan,HORTICULTURE,GUJARAT,"Farmer asked Leaf Roller in crop  APPLE ","       EC     ",21.522,70.4582
+HANSI-I,Fruits,2023,8,15,Apple,HISSAR,"Plant Protection",nan,HORTICULTURE,HARYANA,"information regarding leaf roller in Apple","      20 EC 2 ML   1          ",29.8573,76.4545
+KULGAM,Fruits,2024,7,3,Apple,KULGAM,"Plant Protection",nan,HORTICULTURE,"JAMMU AND KASHMIR","Regarding the attack of leaf roller in apple orchards","The farmer was advised to spray - Chlorpyriphos 20 EC 100 ml in 100 litre of water",33.6447,75.0188

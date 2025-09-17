@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: engine
+    app.kubernetes.io/component: engine
+    app.kubernetes.io/instance: engine
+    app.kubernetes.io/name: engine
+    app.kubernetes.io/part-of: engine
+    app.openshift.io/runtime-version: v1
+  name: engine
+  namespace: sasya-chikitsa
+spec:
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+  - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+  - name: 8080-tcp
+    port: 8080
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    app: engine
+  sessionAffinity: None
+  type: ClusterIP

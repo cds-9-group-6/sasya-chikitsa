@@ -1,0 +1,23 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: sasya-chikitsa-argo-apps-llama318b
+  namespace: openshift-gitops
+spec:
+  destination:
+    namespace: sasya-chikitsa
+    server: 'https://kubernetes.default.svc'
+  project: default
+  source:
+    directory:
+      jsonnet: {}
+      recurse: true
+    path: platform-engineering/base/llama318b/
+    repoURL: 'https://github.com/cds-9-group-6/sasya-chikitsa.git'
+    targetRevision: HEAD
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true

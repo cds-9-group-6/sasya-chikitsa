@@ -1,0 +1,21 @@
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  labels:
+    app: chromadb-with-data-amd64
+    app.kubernetes.io/component: chromadb-with-data-amd64
+    app.kubernetes.io/instance: chromadb-with-data-amd64
+    app.kubernetes.io/name: chromadb-with-data-amd64
+    app.kubernetes.io/part-of: engine
+    app.openshift.io/runtime-version: v1
+  name: chromadb-with-data-amd64
+  namespace: sasya-chikitsa
+spec:
+  host: chromadb-with-data-amd64-sasya-chikitsa.apps.cluster-mx6z7.mx6z7.sandbox5315.opentlc.com
+  port:
+    targetPort: 8000-tcp
+  to:
+    kind: Service
+    name: chromadb-with-data-amd64
+    weight: 100
+  wildcardPolicy: None

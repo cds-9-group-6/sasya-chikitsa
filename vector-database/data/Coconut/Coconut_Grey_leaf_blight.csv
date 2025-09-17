@@ -1,0 +1,6 @@
+BlockName,Category,Year,Month,Day,Crop,DistrictName,QueryType,Season,Sector,StateName,QueryText,KccAns,latitude,longitude
+"0   ",0,2009,11,7,Coconut,KASARGOD,75,nan,HORTICULTURE,KERALA,"Control of Grey leaf blight in Coconut","Spraying of Bordeaux Mixture 1",12.4915,74.9878
+"0   ","Plantation Crops",2013,1,29,Coconut,ARARIA,75,KHARIF,HORTICULTURE,BIHAR,"GREY LEAF BLIGHT IN COCONUT","Spray the crown with 025 per cent copper oxychloride or 1 per cent Bordeaux mixture before the onset of rains",26.2651,87.3699
+PERIYANAYAKKANPALAYAM,"Plantation Crops",2013,7,17,Coconut,COIMBATORE,"Plant Protection",JAYAD,HORTICULTURE,TAMILNADU,"grey leaf blight","Application of extra 15kg of Potash Pseudomonas fluorescence 200gCowdung 5kg tree Removed burning of affected leaves",11.0018,76.9628
+DINDIGUL,"Plantation Crops",2013,8,4,Coconut,DINDIGUL,"Plant Protection",JAYAD,HORTICULTURE,TAMILNADU,"grey leaf blight","Application of extra 15kg of Potash Pseudomonas fluorescence 200gCowdung 5kg tree Removed burning of affected leaves",10.4257,77.8157
+GARADAPUR,"Plantation Crops",2023,1,21,Coconut,KENDRAPARA,"Plant Protection",nan,HORTICULTURE,ODISHA,"Grey leaf blight in Coconut","Recommended to spray Copper Oxychloride  600 g per 200 litre of water per 1 acre of land",20.5475,86.5296

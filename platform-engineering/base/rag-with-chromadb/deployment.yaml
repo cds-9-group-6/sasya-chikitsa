@@ -1,0 +1,85 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    alpha.image.policy.openshift.io/resolve-names: '*'
+    app.openshift.io/route-disabled: "false"
+    deployment.kubernetes.io/revision: "2"
+    image.openshift.io/triggers: '[{"from":{"kind":"ImageStreamTag","name":"rag-with-ollama-fastapi-amd64:v1","namespace":"sasya-chikitsa"},"fieldPath":"spec.template.spec.containers[?(@.name==\"rag-with-ollama-fastapi-amd64\")].image","paused":false}]'
+    openshift.io/generated-by: OpenShiftWebConsole
+  creationTimestamp: "2025-09-06T09:31:43Z"
+  generation: 2
+  labels:
+    app: rag-with-ollama-fastapi-amd64
+    app.kubernetes.io/component: rag-with-ollama-fastapi-amd64
+    app.kubernetes.io/instance: rag-with-ollama-fastapi-amd64
+    app.kubernetes.io/name: rag-with-ollama-fastapi-amd64
+    app.kubernetes.io/part-of: rag-with-ollama-fastapi-amd64-app
+    app.openshift.io/runtime: python
+    app.openshift.io/runtime-namespace: sasya-chikitsa
+  name: rag-with-ollama-fastapi-amd64
+  namespace: sasya-chikitsa
+  resourceVersion: "4982768"
+  uid: af840338-c189-4d61-b4ef-3264965c8a4a
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: rag-with-ollama-fastapi-amd64
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      annotations:
+        openshift.io/generated-by: OpenShiftWebConsole
+      creationTimestamp: null
+      labels:
+        app: rag-with-ollama-fastapi-amd64
+        deployment: rag-with-ollama-fastapi-amd64
+    spec:
+      containers:
+      - env:
+        - name: OLLAMA_HOST
+          value: http://llama318b.sasya-chikitsa.svc.cluster.local:11434
+        image: image-registry.openshift-image-registry.svc:5000/sasya-chikitsa/rag-with-ollama-fastapi-amd64@sha256:2ac5a39c6d91989096a1c10e32b1e9c96b6364e1907cade46200e742b8508a4e
+        imagePullPolicy: IfNotPresent
+        name: rag-with-ollama-fastapi-amd64
+        ports:
+        - containerPort: 5050
+          protocol: TCP
+        resources: {}
+        securityContext:
+          runAsUser: 0
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext:
+        runAsUser: 0
+      terminationGracePeriodSeconds: 30
+status:
+  availableReplicas: 1
+  conditions:
+  - lastTransitionTime: "2025-09-06T09:31:43Z"
+    lastUpdateTime: "2025-09-06T09:37:53Z"
+    message: ReplicaSet "rag-with-ollama-fastapi-amd64-54b6f958dd" has successfully
+      progressed.
+    reason: NewReplicaSetAvailable
+    status: "True"
+    type: Progressing
+  - lastTransitionTime: "2025-09-09T03:55:44Z"
+    lastUpdateTime: "2025-09-09T03:55:44Z"
+    message: Deployment has minimum availability.
+    reason: MinimumReplicasAvailable
+    status: "True"
+    type: Available
+  observedGeneration: 2
+  readyReplicas: 1
+  replicas: 1
+  updatedReplicas: 1

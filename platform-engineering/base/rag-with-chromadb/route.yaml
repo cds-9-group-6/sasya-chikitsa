@@ -1,0 +1,37 @@
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  annotations:
+    openshift.io/generated-by: OpenShiftWebConsole
+    openshift.io/host.generated: "true"
+  creationTimestamp: "2025-09-06T09:31:44Z"
+  labels:
+    app: rag-with-ollama-fastapi-amd64
+    app.kubernetes.io/component: rag-with-ollama-fastapi-amd64
+    app.kubernetes.io/instance: rag-with-ollama-fastapi-amd64
+    app.kubernetes.io/name: rag-with-ollama-fastapi-amd64
+    app.kubernetes.io/part-of: rag-with-ollama-fastapi-amd64-app
+    app.openshift.io/runtime-version: v1
+  name: rag-with-ollama-fastapi-amd64
+  namespace: sasya-chikitsa
+  resourceVersion: "4367491"
+  uid: 95c58bda-576a-4c05-aa6f-713fd8148703
+spec:
+  host: rag-with-ollama-fastapi-amd64-sasya-chikitsa.apps.cluster-mx6z7.mx6z7.sandbox5315.opentlc.com
+  port:
+    targetPort: 5050-tcp
+  to:
+    kind: Service
+    name: rag-with-ollama-fastapi-amd64
+    weight: 100
+  wildcardPolicy: None
+status:
+  ingress:
+  - conditions:
+    - lastTransitionTime: "2025-09-06T09:31:44Z"
+      status: "True"
+      type: Admitted
+    host: rag-with-ollama-fastapi-amd64-sasya-chikitsa.apps.cluster-mx6z7.mx6z7.sandbox5315.opentlc.com
+    routerCanonicalHostname: router-default.apps.cluster-mx6z7.mx6z7.sandbox5315.opentlc.com
+    routerName: default
+    wildcardPolicy: None

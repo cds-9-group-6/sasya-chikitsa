@@ -1,0 +1,36 @@
+# Use the official ChromaDB image as base (more reliable than building from Python)
+FROM chromadb/chroma:latest
+
+# Set working directory
+# WORKDIR /chroma
+
+# Copy your ChromaDB data into the container
+# The data should be copied to ChromaDB's default data directory
+# COPY ./chroma_capstone_db_new /data
+# COPY config.yaml /
+
+COPY ./chroma_capstone_db_new /data
+
+# Set ownership and permissions for the data directory
+# USER root
+# RUN chown -R chroma:chroma /chroma/chroma && \
+#     chmod -R 755 /chroma/chroma
+
+# # Switch back to chroma user
+# USER chroma
+
+# Expose the default ChromaDB port
+# EXPOSE 8000
+
+# Set environment variables for ChromaDB
+# ENV CHROMA_SERVER_HOST=0.0.0.0
+# ENV CHROMA_SERVER_HTTP_PORT=8000
+# ENV PERSIST_DIRECTORY=/chroma/data
+# ENV CHROMA_SERVER_CORS_ALLOW_ORIGINS='["*"]'
+
+# Health check
+# HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
+#     CMD curl -f http://localhost:8000/api/v1/heartbeat || exit 1
+
+# Use the default ChromaDB command
+# CMD ["uvicorn", "chromadb.app:app", "--host", "0.0.0.0", "--port", "8000"]

@@ -1,0 +1,80 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: llama318b
+  namespace: sasya-chikitsa
+  labels:
+    app: llama318b
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: llama318b
+  template:
+    metadata:
+      labels:
+        app: llama318b
+    spec:
+      containers:
+        - resources:
+            limits:
+              cpu: '10'
+              memory: 10Gi
+            requests:
+              cpu: '5'
+              memory: 8Gi
+          readinessProbe:
+            httpGet:
+              path: /api/tags
+              port: 11434
+              scheme: HTTP
+            initialDelaySeconds: 30
+            periodSeconds: 60
+          terminationMessagePath: /dev/termination-log
+          name: ollama318b
+          livenessProbe:
+            httpGet:
+              path: /api/tags
+              port: 11434
+              scheme: HTTP
+            initialDelaySeconds: 60
+            periodSeconds: 60
+          securityContext:
+            runAsUser: 0
+            # runAsUser: 1000
+            # runAsGroup: 1000
+            # fsGroup: 1000
+          ports:
+            - containerPort: 11434
+              protocol: TCP
+          imagePullPolicy: Always
+          terminationMessagePolicy: File
+          image: 'quay.io/rajivranjan/ollama-model-llama318b-amd64:v1'
+          # env:
+          #   - name: OLLAMA_ROOT
+          #     value: /ollama-data
+          #   - name: OLLAMA_HOST
+          #     value: 0.0.0.0:11434
+          #   - name: HOME
+          #     value: /ollama-data
+          # volumeMounts:
+          #   - name: ollama-data-volume
+          #     mountPath: /ollama-data
+      # volumes:
+      #   - name: ollama-data-volume
+      #     persistentVolumeClaim:
+      #       claimName: ollama-data-pvc
+      
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+      dnsPolicy: ClusterFirst
+      securityContext:
+        runAsUser: 0
+      schedulerName: default-scheduler
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
+  revisionHistoryLimit: 10
+  progressDeadlineSeconds: 600

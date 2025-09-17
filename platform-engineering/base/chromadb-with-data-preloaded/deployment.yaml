@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: chromadb-with-data-amd64
+    app.kubernetes.io/component: chromadb-with-data-amd64
+    app.kubernetes.io/instance: chromadb-with-data-amd64
+    app.kubernetes.io/name: chromadb-with-data-amd64
+    app.kubernetes.io/part-of: engine
+    app.openshift.io/runtime: openshift
+    app.openshift.io/runtime-namespace: sasya-chikitsa
+  name: chromadb-with-data-amd64
+  namespace: sasya-chikitsa
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: chromadb-with-data-amd64
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: chromadb-with-data-amd64
+        deployment: chromadb-with-data-amd64
+    spec:
+      containers:
+      - image: quay.io/rajivranjan/chromadb-with-data-amd64:v1
+        imagePullPolicy: IfNotPresent
+        name: chromadb-with-data-amd64
+        securityContext:
+          runAsUser: 0
+        ports:
+        - containerPort: 8000
+          protocol: TCP
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext:
+        runAsUser: 0
+      terminationGracePeriodSeconds: 30
