@@ -1,0 +1,11 @@
+# Build command:
+# podman build --platform linux/arm64 --build-arg BASE_TAG=arm64-latest -t mlflow-server:arm64-v1 -f Containerfile.mlflow .
+# podman build --platform linux/amd64 --build-arg BASE_TAG=amd64-latest -t mlflow-server:amd64-v1 -f Containerfile.mlflow .
+
+ARG BASE_TAG=
+
+FROM localhost/mlflow:${BASE_TAG}
+
+# CMD ["mlflow", "server", "--host", "0.0.0.0", "--port", "5001", "--backend-store-uri=./mlruns","--artifacts-destination=./mlruns/artifacts"]
+# CMD ["mlflow", "server", "--host", "0.0.0.0", "--port", "5001", "--backend-store-uri=/mlruns","--expose-prometheus=/prometheus","--artifacts-destination=/mlartifacts","--workers=4"]
+CMD ["mlflow", "server", "--host", "0.0.0.0", "--port", "5001", "--backend-store-uri=/mlruns"]

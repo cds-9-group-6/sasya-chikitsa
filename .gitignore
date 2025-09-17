@@ -499,3 +499,5 @@ query_history*
 temp_question.txt
 mlrunsapp-ux/
 mlruns
+
+mlflow-data

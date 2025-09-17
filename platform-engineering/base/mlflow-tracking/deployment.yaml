@@ -1,0 +1,126 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mlflow-server-amd64
+  namespace: sasya-chikitsa
+  labels:
+    app: mlflow-server
+    app.kubernetes.io/component: mlflow-server
+    app.kubernetes.io/instance: mlflow-server-amd64
+    app.kubernetes.io/name: mlflow-server
+    app.kubernetes.io/part-of: mlflow-platform
+    app.openshift.io/runtime: python
+    architecture: amd64
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mlflow-server
+      architecture: amd64
+  template:
+    metadata:
+      labels:
+        app: mlflow-server
+        app.kubernetes.io/component: mlflow-server
+        app.kubernetes.io/name: mlflow-server
+        deployment: mlflow-server-amd64
+        architecture: amd64
+    spec:
+      # nodeSelector:
+      #   kubernetes.io/arch: amd64
+      containers:
+        - name: mlflow-server
+          image: 'quay.io/rajivranjan/mlflow-server:amd64-v1'
+          securityContext:
+            runAsUser: 0
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 5001
+              protocol: TCP
+              name: http
+          # env:
+          #   - name: MLFLOW_HOST
+          #     valueFrom:
+          #       configMapKeyRef:
+          #         name: mlflow-config
+          #         key: MLFLOW_HOST
+          #   - name: MLFLOW_PORT
+          #     valueFrom:
+          #       configMapKeyRef:
+          #         name: mlflow-config
+          #         key: MLFLOW_PORT
+          #   - name: MLFLOW_BACKEND_STORE_URI
+          #     valueFrom:
+          #       configMapKeyRef:
+          #         name: mlflow-config
+          #         key: MLFLOW_BACKEND_STORE_URI
+          #   - name: MLFLOW_DEFAULT_ARTIFACT_ROOT
+          #     valueFrom:
+          #       configMapKeyRef:
+          #         name: mlflow-config
+          #         key: MLFLOW_DEFAULT_ARTIFACT_ROOT
+          #   - name: MLFLOW_SERVE_ARTIFACTS
+          #     valueFrom:
+          #       configMapKeyRef:
+          #         name: mlflow-config
+          #         key: MLFLOW_SERVE_ARTIFACTS
+          volumeMounts:
+            - name: mlruns
+              mountPath: /mlruns
+            # - name: mlartifacts
+            #   mountPath: /mlartifacts
+            # - name: prometheus
+            #   mountPath: /prometheus
+            
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 5001
+            initialDelaySeconds: 60
+            periodSeconds: 30
+            timeoutSeconds: 10
+            failureThreshold: 3
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 5001
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 3
+          resources:
+            requests:
+              cpu: 500m
+              memory: 1Gi
+            limits:
+              cpu: 2
+              memory: 4Gi
+          # securityContext:
+          #   runAsNonRoot: true
+          #   runAsUser: 1000
+          #   allowPrivilegeEscalation: false
+          #   readOnlyRootFilesystem: false
+      volumes:
+        - name: mlruns
+          persistentVolumeClaim:
+            claimName: mlruns
+        # - name: mlartifacts
+        #   persistentVolumeClaim:
+        #     claimName: mlartifacts
+        # - name: prometheus
+        #   persistentVolumeClaim:
+        #     claimName: prometheus
+          
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+      dnsPolicy: ClusterFirst
+      securityContext:
+        runAsUser: 0
+      schedulerName: default-scheduler
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 25%
+      maxSurge: 25%
+  revisionHistoryLimit: 10
+  progressDeadlineSeconds: 600
