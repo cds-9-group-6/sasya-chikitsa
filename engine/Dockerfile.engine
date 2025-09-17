@@ -1,0 +1,25 @@
+
+FROM python:3.12-slim
+
+WORKDIR /app
+
+COPY ./fsm_agents/requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+
+COPY ./fsm_agents ./fsm_agents
+# COPY ./api ./api
+COPY ./ml ./ml
+# COPY ./resources ./resources
+# COPY ./__init__.py ./__init__.py
+COPY ./.env ./.env
+# COPY ./.python-version ./.python-version
+# COPY ./pyproject.toml ./pyproject.toml
+# COPY ./uv.lock ./uv.lock
+# COPY ./agents ./agents
+COPY ./rag/rag_with_ollama.py ./rag/rag_with_ollama.py
+# COPY ./rag/chroma_capstone_db_new_small ./rag/chroma_capstone_db_new_small
+
+EXPOSE 8080
+
+CMD ["python", "./fsm_agent/run_fsm_server.py", "--host", "0.0.0.0", "--port", "8080"]
