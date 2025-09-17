@@ -274,6 +274,7 @@ httpx==0.28.1
     # via
     #   chromadb
     #   groq
+    #   langgraph-sdk
     #   langsmith
     #   ollama
     #   openai
@@ -373,6 +374,9 @@ langchain-core==0.3.76
     #   langchain-ollama
     #   langchain-openai
     #   langchain-text-splitters
+    #   langgraph
+    #   langgraph-checkpoint
+    #   langgraph-prebuilt
 langchain-groq==0.3.8
     # via engine (pyproject.toml)
 langchain-huggingface==0.3.1
@@ -387,6 +391,16 @@ langchain-text-splitters==0.3.9
     # via langchain
 langcodes==3.5.0
     # via spacy
+langgraph==0.6.7
+    # via engine (pyproject.toml)
+langgraph-checkpoint==2.1.1
+    # via
+    #   langgraph
+    #   langgraph-prebuilt
+langgraph-prebuilt==0.6.4
+    # via langgraph
+langgraph-sdk==0.2.8
+    # via langgraph
 langsmith==0.4.20
     # via
     #   langchain
@@ -551,7 +565,10 @@ optree==0.17.0
 orjson==3.11.3
     # via
     #   chromadb
+    #   langgraph-sdk
     #   langsmith
+ormsgpack==1.10.0
+    # via langgraph-checkpoint
 overrides==7.7.0
     # via chromadb
 packaging==25.0
@@ -681,6 +698,7 @@ pydantic==2.11.7
     #   groq
     #   langchain
     #   langchain-core
+    #   langgraph
     #   langsmith
     #   mlflow-skinny
     #   mlflow-tracing
@@ -1050,6 +1068,7 @@ xxhash==3.5.0
     # via
     #   datasets
     #   evaluate
+    #   langgraph
 yarl==1.20.1
     # via aiohttp
 zipp==3.23.0

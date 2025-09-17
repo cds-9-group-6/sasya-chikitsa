@@ -16,7 +16,7 @@ import os
 
 # Add the parent directories to path for imports
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "../../.."))
-from engine.ml.cnn_attn_classifier_improved import CNNWithAttentionClassifier
+from ml.cnn_attn_classifier_improved import CNNWithAttentionClassifier
 
 logger = logging.getLogger(__name__)
 

@@ -47,7 +47,7 @@ class PrescriptionTool(BaseTool):
         """Load the RAG system"""
         try:
             # Import the RAG system
-            from engine.rag.rag_with_ollama import OllamaRag
+            from rag.rag_with_ollama import OllamaRag
             
             # Initialize RAG system with default settings
             self.rag_system = OllamaRag(llm_name="llama3.1:8b", temperature=0.1)

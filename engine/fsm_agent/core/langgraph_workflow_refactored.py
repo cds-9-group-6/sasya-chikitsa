@@ -37,7 +37,7 @@ try:
     from ..tools.attention_overlay_tool import AttentionOverlayTool
 except ImportError:
     # Fallback to absolute imports if relative imports fail
-    from engine.fsm_agent.core.workflow_state import (
+    from fsm_agent.core.workflow_state import (
         WorkflowState, 
         add_message_to_state, 
         update_state_node, 
@@ -45,12 +45,12 @@ except ImportError:
         can_retry, 
         mark_complete
     )
-    from engine.fsm_agent.core.nodes import NodeFactory
-    from engine.fsm_agent.tools.classification_tool import ClassificationTool
-    from engine.fsm_agent.tools.prescription_tool import PrescriptionTool
-    from engine.fsm_agent.tools.vendor_tool import VendorTool
-    from engine.fsm_agent.tools.context_extractor import ContextExtractorTool
-    from engine.fsm_agent.tools.attention_overlay_tool import AttentionOverlayTool
+    from fsm_agent.core.nodes import NodeFactory
+    from fsm_agent.tools.classification_tool import ClassificationTool
+    from fsm_agent.tools.prescription_tool import PrescriptionTool
+    from fsm_agent.tools.vendor_tool import VendorTool
+    from fsm_agent.tools.context_extractor import ContextExtractorTool
+    from fsm_agent.tools.attention_overlay_tool import AttentionOverlayTool
 
 logger = logging.getLogger(__name__)
 
