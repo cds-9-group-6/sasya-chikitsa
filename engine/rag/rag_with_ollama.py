@@ -334,52 +334,49 @@ class OllamaRag:
             if metadata_filter:
                 logger.info(f"🎯 Using metadata filters: {metadata_filter}")
             
-            # Execute search with metadata filtering
+            # Execute query using RetrievalQA chain
             if metadata_filter:
-                # Use ChromaDB directly with metadata filtering
-                docs = retrieval_qa.similarity_search(
+                # For metadata filtering, we need to use the chroma_db directly first, then RetrievalQA
+                logger.info("🎯 Using metadata-filtered retrieval")
+                docs = chroma_db.similarity_search(
                     query_request, 
                     k=6,
                     filter=metadata_filter
                 )
+                
                 if not docs:
-                    logger.warning("⚠️  No documents found with metadata filters, trying without filters...")
-                    docs = chroma_db.similarity_search(query_request, k=6)
+                    logger.warning("⚠️  No documents found with metadata filters, trying RetrievalQA without filters...")
+                    # Fallback to standard RetrievalQA chain
+                    result = retrieval_qa.invoke({"query": query_request})
+                    answer = result["result"]
+                else:
+                    # Build context from filtered documents and use LLM directly
+                    context = "\n\n".join([doc.page_content for doc in docs])
+                    formatted_prompt = self.PROMPT.format(context=context, question=query_request)
+                    answer = self.llm.invoke(formatted_prompt).content
             else:
-                # Use standard search without metadata filtering
-                docs = chroma_db.similarity_search(query_request, k=6)
+                # Use RetrievalQA chain for standard queries
+                logger.info("🔍 Using RetrievalQA chain for similarity search")
+                result = retrieval_qa.invoke({"query": query_request})
+                answer = result["result"]
             
-            if not docs:
-                logger.warning("⚠️  No relevant documents found in the database")
-                return "I couldn't find relevant information in the database. Please provide more specific details about the plant disease or treatment you're looking for."
-            
-            # Build context from retrieved documents
-            context = "\n\n".join([doc.page_content for doc in docs])
-            
-            # Generate answer using LLM with context
-            formatted_prompt = self.PROMPT.format(context=context, question=query_request)
-            answer = self.llm.invoke(formatted_prompt).content
-            
-            logger.info(f"✅ Query completed successfully using collection: {collection_name} with {len(docs)} documents")
+            if metadata_filter and 'docs' in locals():
+                logger.info(f"✅ Query completed successfully using collection: {collection_name} with {len(docs)} filtered documents")
+            else:
+                logger.info(f"✅ Query completed successfully using collection: {collection_name} via RetrievalQA chain")
             
             return answer
             
         except Exception as e:
             logger.error(f"❌ Error during query execution: {e}")
-            # Try fallback to default collection without metadata filtering
-            logger.info(f"🔄 Attempting fallback to default collection without metadata filters...")
+            # Try fallback to default collection using RetrievalQA
+            logger.info(f"🔄 Attempting fallback to default collection using RetrievalQA...")
             try:
-                fallback_db = self.chroma_databases[self.default_collection]
-                docs = fallback_db.similarity_search(query_request, k=6)
-                
-                if docs:
-                    context = "\n\n".join([doc.page_content for doc in docs])
-                    formatted_prompt = self.PROMPT.format(context=context, question=query_request)
-                    answer = self.llm.invoke(formatted_prompt).content
-                    logger.info("✅ Fallback query completed successfully")
-                    return answer
-                else:
-                    logger.error("❌ No documents found even in fallback")
+                fallback_retrieval_qa = self.retrievers[self.default_collection]
+                result = fallback_retrieval_qa.invoke({"query": query_request})
+                answer = result["result"]
+                logger.info("✅ Fallback RetrievalQA query completed successfully")
+                return answer
                     
             except Exception as fallback_error:
                 logger.error(f"❌ Fallback query also failed: {fallback_error}")
@@ -390,6 +387,49 @@ class OllamaRag:
         """Get list of successfully initialized collections."""
         return list(self.chroma_databases.keys())
     
+    def query_with_sources(self, query_request: str, 
+                          plant_type: Optional[str] = None,
+                          season: Optional[str] = None,
+                          location: Optional[str] = None,
+                          disease: Optional[str] = None) -> Dict[str, any]:
+        """
+        Run a query and return both answer and source documents.
+        
+        Args:
+            query_request: The query to search for
+            plant_type: Optional explicit plant type
+            season: Optional season filter
+            location: Optional location filter
+            disease: Optional disease name filter
+            
+        Returns:
+            Dictionary containing 'result' and 'source_documents'
+        """
+        try:
+            # Determine which collection to use
+            if plant_type and plant_type in self.chroma_databases:
+                collection_name = plant_type
+                logger.debug(f"🎯 Using explicit plant type: {plant_type}")
+            else:
+                collection_name = self._detect_plant_type(query_request)
+            
+            if collection_name not in self.retrievers:
+                logger.warning(f"⚠️  Collection {collection_name} not available, falling back to {self.default_collection}")
+                collection_name = self.default_collection
+            
+            retrieval_qa = self.retrievers[collection_name]
+            logger.debug(f"🔍 Querying collection: {collection_name} with source documents")
+            
+            # Use RetrievalQA chain which returns source documents
+            result = retrieval_qa.invoke({"query": query_request})
+            
+            logger.info(f"✅ Query with sources completed successfully using collection: {collection_name}")
+            return result
+            
+        except Exception as e:
+            logger.error(f"❌ Error during query with sources: {e}")
+            raise RuntimeError(f"RAG query with sources failed: {e}")
+
     def get_collection_info(self) -> Dict[str, Dict]:
         """Get information about all initialized collections."""
         info = {}
