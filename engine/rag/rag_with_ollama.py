@@ -12,6 +12,8 @@ import os
 import logging
 from typing import Dict, List, Optional
 
+from RAG.Embeddings_creation import retrieval
+
 # Configure logging
 logging.basicConfig(
     level=logging.DEBUG, format="%(asctime)s - %(name)s - %(levelname)s - %(message)s"
@@ -324,6 +326,8 @@ class OllamaRag:
                 collection_name = self.default_collection
             
             chroma_db = self.chroma_databases[collection_name]
+            retrieval_qa = self.retrievers[collection_name]
+
             logger.debug(f"🔍 Querying collection: {collection_name}")
             
             # Build metadata filter
@@ -334,14 +338,14 @@ class OllamaRag:
             # Execute search with metadata filtering
             if metadata_filter:
                 # Use ChromaDB directly with metadata filtering
-                docs = chroma_db.similarity_search(
+                docs = retrieval_qa.similarity_search(
                     query_request, 
                     k=6,
                     filter=metadata_filter
                 )
-                # if not docs:
-                #     logger.warning("⚠️  No documents found with metadata filters, trying without filters...")
-                #     docs = chroma_db.similarity_search(query_request, k=6)
+                if not docs:
+                    logger.warning("⚠️  No documents found with metadata filters, trying without filters...")
+                    docs = chroma_db.similarity_search(query_request, k=6)
             else:
                 # Use standard search without metadata filtering
                 docs = chroma_db.similarity_search(query_request, k=6)
