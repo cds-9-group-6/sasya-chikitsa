@@ -1,0 +1,11 @@
+pandas
+langchain_chroma
+langchain
+langchain-community
+langchain_huggingface
+sentence-transformers
+# transformers
+# torch
+uvicorn
+chromadb
+fastapi

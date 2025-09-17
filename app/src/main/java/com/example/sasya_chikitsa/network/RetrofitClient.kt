@@ -52,4 +52,26 @@ object RetrofitClient {
     fun refreshInstance() {
         cachedInstance = null
     }
+    
+    /**
+     * Get ApiService with custom URL for testing connections
+     */
+    fun getApiService(customUrl: String): ApiService {
+        val loggingInterceptor = HttpLoggingInterceptor().apply {
+            level = HttpLoggingInterceptor.Level.BASIC // Less verbose for testing
+        }
+        val okHttpClient = OkHttpClient.Builder()
+            .addInterceptor(loggingInterceptor)
+            .connectTimeout(10, TimeUnit.SECONDS) // Shorter timeout for testing
+            .readTimeout(10, TimeUnit.SECONDS)
+            .writeTimeout(10, TimeUnit.SECONDS)
+            .build()
+
+        val retrofit = Retrofit.Builder()
+            .baseUrl(customUrl)
+            .client(okHttpClient)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+        return retrofit.create(ApiService::class.java)
+    }
 }

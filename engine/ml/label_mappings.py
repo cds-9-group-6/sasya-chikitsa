@@ -1,7 +1,7 @@
 LABEL_MAPPINGS = {
     'Apple_scab': 'scab',
     'Bacterial_spot': 'Bacterial_spot',
-    'Black_rot': 'Collar_rot',
+    'Black_rot': 'Fruit borer',
     'Cedar_apple_rust': 'Rust',
     'Cercospora_leaf_spot Gray_leaf_spot': 'Alternaria_leaf_blotch',
     'Common_rust': 'Rust',

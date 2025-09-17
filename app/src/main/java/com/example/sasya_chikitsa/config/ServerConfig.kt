@@ -15,10 +15,10 @@ object ServerConfig {
     private const val PREF_NAME = "sasya_chikitsa_config"
     private const val SERVER_URL_KEY = "server_url"
     
-    // Default URLs for common scenarios (updated for Planning Agent on port 8001)
-    const val DEFAULT_EMULATOR_URL = "http://10.0.2.2:8001/"
-    const val DEFAULT_LOCALHOST_URL = "http://localhost:8001/"
-    const val DEFAULT_LOCAL_IP_URL = "http://192.168.1.100:8001/"
+    // Default URLs for common scenarios (FSM Agent on port 8080)
+    const val DEFAULT_EMULATOR_URL = "http://10.0.2.2:8080/"
+    const val DEFAULT_LOCALHOST_URL = "http://localhost:8080/"
+    const val DEFAULT_LOCAL_IP_URL = "http://192.168.1.100:8080/"
     const val DEFAULT_STAGING_URL = "https://your-staging-server.com/api/"
     const val DEFAULT_PRODUCTION_URL = "http://engine-sasya-chikitsa.apps.cluster-6twrd.6twrd.sandbox1818.opentlc.com/"
     

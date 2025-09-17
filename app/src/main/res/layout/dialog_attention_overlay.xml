@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#F5F5F5"
+    android:padding="16dp">
+
+    <!-- Header -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginBottom="16dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="🎯 AI Diagnostic Visualization"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="#2D3748" />
+
+        <ImageButton
+            android:id="@+id/btnClose"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:background="?android:attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/ic_close"
+            android:contentDescription="Close"
+            android:scaleType="centerInside" />
+
+    </LinearLayout>
+
+    <!-- Disease Info -->
+    <TextView
+        android:id="@+id/tvDiseaseInfo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Detected: Apple Scab (95.2% confidence)"
+        android:textSize="16sp"
+        android:textColor="#4A5568"
+        android:gravity="center"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/modern_card_background"
+        android:padding="12dp" />
+
+    <!-- Full Screen Attention Overlay with Zoom Support -->
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@drawable/modern_card_background">
+
+        <ScrollView
+            android:id="@+id/zoomScrollView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="none"
+            android:fillViewport="true">
+
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scrollbars="none"
+                android:fillViewport="true">
+
+                <ImageView
+                    android:id="@+id/imgAttentionOverlay"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:adjustViewBounds="true"
+                    android:scaleType="matrix"
+                    android:background="@drawable/modern_card_background"
+                    android:contentDescription="Full-size zoomable AI attention overlay showing diagnostic focus areas" />
+
+            </HorizontalScrollView>
+
+        </ScrollView>
+
+        <!-- Zoom Instructions Overlay -->
+        <TextView
+            android:id="@+id/zoomInstructions"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center_horizontal"
+            android:layout_marginBottom="16dp"
+            android:background="#80000000"
+            android:text="🔍 Pinch to zoom • Drag to pan"
+            android:textColor="#FFFFFF"
+            android:textSize="12sp"
+            android:padding="8dp"
+            android:visibility="gone" />
+
+    </FrameLayout>
+
+    <!-- Instructions -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="💡 This shows where the AI focused when analyzing your plant. Blue/yellow areas indicate the model's attention during disease detection."
+        android:textSize="14sp"
+        android:textColor="#666666"
+        android:gravity="center"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/modern_card_background"
+        android:padding="12dp" />
+
+</LinearLayout>

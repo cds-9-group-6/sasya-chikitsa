@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="8dp"
+    android:gravity="start">
+
+    <!-- Sasya Arogya Icon for Assistant Messages -->
+    <ImageView
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="8dp"
+        android:src="@drawable/ic_local_florist"
+        android:background="@drawable/circle_background"
+        android:backgroundTint="#66BB6A"
+        android:padding="6dp"
+        android:scaleType="centerInside"
+        android:contentDescription="Sasya Arogya" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:layout_marginStart="4dp"
+        android:layout_marginEnd="60dp">
+
+        <!-- Assistant Message Bubble -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="2dp"
+            android:layout_marginBottom="4dp">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="12dp"
+                android:background="#F5F5F5">
+
+                <!-- Sasya Arogya Header -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="🌱 Sasya Arogya"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:textColor="#66BB6A"
+                    android:layout_marginBottom="4dp" />
+
+                <!-- Professional State Indicator -->
+                <TextView
+                    android:id="@+id/stateIndicator"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="PROCESSING"
+                    android:textSize="10sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/banner_primary_text"
+                    android:background="@drawable/state_indicator_background"
+                    android:paddingStart="8dp"
+                    android:paddingEnd="8dp"
+                    android:paddingTop="4dp"
+                    android:paddingBottom="4dp"
+                    android:layout_marginBottom="8dp"
+                    android:letterSpacing="0.1"
+                    android:visibility="gone" />
+
+                <!-- Message Text -->
+                <TextView
+                    android:id="@+id/messageText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Assistant message"
+                    android:textSize="16sp"
+                    android:textColor="#2D3748"
+                    android:lineSpacingExtra="2dp"
+                    android:maxWidth="320dp" />
+
+                <!-- Attention Overlay Container -->
+                <LinearLayout
+                    android:id="@+id/attentionOverlayContainer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginTop="12dp"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="🎯 AI Diagnostic Visualization"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        android:textColor="#2D3748"
+                        android:layout_marginBottom="8dp" />
+
+                    <TextView
+                        android:id="@+id/overlayDescription"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="AI attention heatmap with blue/yellow highlights • Tap to zoom &amp; inspect"
+                        android:textSize="12sp"
+                        android:textColor="#666666"
+                        android:layout_marginBottom="8dp" />
+
+                    <!-- Attention Overlay Image -->
+                    <ImageView
+                        android:id="@+id/attentionOverlayImage"
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:background="@drawable/modern_card_background"
+                        android:scaleType="centerCrop"
+                        android:layout_marginBottom="8dp"
+                        android:contentDescription="AI attention overlay showing diagnostic focus areas" />
+
+                </LinearLayout>
+
+                <!-- Feedback Buttons -->
+                <LinearLayout
+                    android:id="@+id/feedbackContainer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="8dp"
+                    android:gravity="start">
+
+                    <ImageButton
+                        android:id="@+id/thumbsUpButton"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:background="?android:attr/selectableItemBackgroundBorderless"
+                        android:src="@drawable/ic_thumb_up"
+                        android:contentDescription="Thumbs up"
+                        android:scaleType="centerInside"
+                        android:padding="6dp"
+                        android:layout_marginEnd="8dp" />
+
+                    <ImageButton
+                        android:id="@+id/thumbsDownButton"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:background="?android:attr/selectableItemBackgroundBorderless"
+                        android:src="@drawable/ic_thumb_down"
+                        android:contentDescription="Thumbs down"
+                        android:scaleType="centerInside"
+                        android:padding="6dp" />
+
+                </LinearLayout>
+
+                <!-- Follow-up Container (Inside the message card for WhatsApp style) -->
+                <LinearLayout
+                    android:id="@+id/followUpContainer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginTop="12dp"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="📝 What would you like to know next?"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        android:textColor="#2D3748"
+                        android:layout_marginBottom="8dp" />
+
+                    <!-- Follow-up Chips -->
+                    <com.google.android.material.chip.ChipGroup
+                        android:id="@+id/followUpChipGroup"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:chipSpacing="8dp"
+                        app:chipSpacingHorizontal="8dp"
+                        app:chipSpacingVertical="4dp" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- Timestamp -->
+        <TextView
+            android:id="@+id/messageTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="12:34"
+            android:textSize="12sp"
+            android:textColor="#999999"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="2dp" />
+
+    </LinearLayout>
+
+</LinearLayout>

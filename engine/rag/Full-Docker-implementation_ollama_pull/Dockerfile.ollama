@@ -1,0 +1,25 @@
+FROM ollama/ollama:latest
+
+# # Create a directory that the 'ollama' user has permissions to write to
+# RUN mkdir /home/ollama/.ollama
+# RUN chown ollama:ollama /home/ollama/.ollama
+
+# Set the OLLAMA_MODELS environment variable to use the new directory
+# ENV OLLAMA_MODELS=/home/ollama/.ollama
+
+WORKDIR /app
+
+COPY ./entrypoint.sh /app/entrypoint.sh
+
+EXPOSE 11434
+# EXPOSE 5000
+
+ENTRYPOINT ["/app/entrypoint.sh"]
+
+# ollama serve &
+
+# RUN ollama pull llama3.1:8b
+
+
+
+# COPY ./local_models /root/.ollama/models

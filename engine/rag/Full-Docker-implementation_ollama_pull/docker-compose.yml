@@ -1,0 +1,89 @@
+version: "3.9"
+services:
+  chroma-small:
+    image: chromadb_small:latest
+    container_name: chroma-small
+    ports:
+      - "8000:8000"
+  ollama-app:
+    build:
+      context: .
+      dockerfile: Dockerfile.ollama
+    image: ollama_image
+    container_name: ollama_containers_new
+    restart: unless-stopped
+  fastapi-app:
+    build:
+      context: .
+      dockerfile: Dockerfile.test_chromadb
+    image: fastapi-app:latest
+    container_name: fastapi-app
+    ports:
+      - "5000:5000"
+    environment:
+      - CHROMA_HOST=chroma-small
+      - CHROMA_PORT=8000
+      - OLLAMA_HOST=ollama-app
+      - OLLAMA_PORT=11434
+    depends_on:
+      - chroma-small
+      - ollama-app
+    restart: unless-stopped
+
+# volumes:
+#   ollama_models:
+
+
+
+# # version: "3.8"
+# # services:
+# #   application:
+# #     build:
+# #       context: .
+# #       dockerfile: ./Dockerfile
+# #     image: application
+# #     container_name: application
+# #     volumes:
+# #       - ./:/app/
+# #     networks:
+# #       - net
+
+# #   chroma:
+# #     image: ghcr.io/chroma-core/chroma:latest
+# #     volumes:
+# #       - index_data:/chroma/.chroma/index
+# #     ports:
+# #       - 8000:8000
+# #     networks:
+# #       - net
+
+# # volumes:
+# #   index_data:
+# #     driver: local
+# #   backups:
+# #     driver: local
+
+# # networks:
+# #   net:
+# #     driver: bridge
+
+# # # version: "3.9"
+
+# # # services:
+# # #   ollama:
+# # #     build: ./ollama
+# # #     container_name: ollama_service
+# # #     ports:
+# # #       - "11434:11434"
+# # #     volumes:
+# # #       - ./ollama/local_models:/root/.ollama/models
+
+# # #   fastapi:
+# # #     build: ./fastapi
+# # #     container_name: fastapi_service
+# # #     ports:
+# # #       - "5050:5050"
+# # #     environment:
+# # #       - OLLAMA_HOST=http://ollama:11434
+# # #     depends_on:
+# # #       - ollama

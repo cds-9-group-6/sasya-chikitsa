@@ -1,0 +1,7 @@
+BlockName,Category,Year,Month,Day,Crop,DistrictName,QueryType,Season,Sector,StateName,QueryText,KccAns,latitude,longitude
+ORATTANADU,"Plantation Crops",2016,12,24,Coconut,THANJAVUR,"Plant Protection",RABI,HORTICULTURE,TAMILNADU,"Coconut  Scale insects","recommended for the Spray of Malathion at the rate of 2 ml in 1 litre of water",10.659,79.2014
+ANAMALAI,"Plantation Crops",2019,6,25,Coconut,COIMBATORE,"Plant Protection",nan,HORTICULTURE,TAMILNADU,"asking about scale insects in coconut",nan,11.0018,76.9628
+ERODE,"Plantation Crops",2019,2,18,Coconut,ERODE,"Plant Protection",nan,HORTICULTURE,TAMILNADU,"asking about scale insects in coconut","recommended spray Fish Oil Rosin Soap FORS 25mllit of water",11.4905,77.3505
+WANDOOR,"Plantation Crops",2025,1,28,Coconut,MALAPPURAM,"Plant Protection",,HORTICULTURE,KERALA,"Asked about management of scale insects in  coconut","Suggested to spray dimethoate 2 ml per liter of water",11.1068,76.11
+WANDOOR,"Plantation Crops",2025,1,29,Coconut,MALAPPURAM,"Plant Protection",,HORTICULTURE,KERALA,"Asked about management of scale insects in coconut ","Suggested to spray dimethoate 2 ml per liter of water",11.1068,76.11
+MUNAGAPAKA,"Plantation Crops",2025,3,13,Coconut,VISAKHAPATNAM,"Plant Protection",,HORTICULTURE,"ANDHRA PRADESH","FARMER ASKED QUERY ON SCALE INSECTS MANAGEMENT IN COCONUT","RECOMMENDED TO SPRAY DIMETHOATE 30 EC FMC ROGER 400 ML 200 LITRES OF WATER ACRE 2 MLLT  400   200        ",17.6936,83.2921

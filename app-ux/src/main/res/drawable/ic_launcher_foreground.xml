@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <path
+        android:fillColor="@color/sasya_green_primary"
+        android:pathData="M54,22C38,22 26,34 26,54c0,16 8,24 16,32c4,4 8,4 16,0c8,-8 16,-16 16,-32C74,34 74,22 54,22z" />
+    <path
+        android:fillColor="@color/sasya_green_light"
+        android:pathData="M54,30c-12,0 -20,12 -20,24c0,12 6,18 12,24c3,3 6,3 12,0c6,-6 12,-12 12,-24C70,42 70,30 54,30z" />
+    <path
+        android:fillColor="@color/sasya_green_dark"
+        android:pathData="M54,38l12,16l-12,12l-12,-12z" />
+</vector>
+
+
+

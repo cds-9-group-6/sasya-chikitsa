@@ -1,0 +1,10 @@
+pandas
+langchain_chroma
+langchain_groq
+langchain
+langchain-community
+langchain_huggingface
+HuggingFaceEmbeddings
+transformers
+torch
+dotenv

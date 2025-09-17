@@ -28,18 +28,21 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = "11"
+        jvmTarget = "17"
     }
     buildFeatures {
         compose = true
+        viewBinding = true
     }
+    buildToolsVersion = "34.0.0"
 }
 
 dependencies {
+    // FSM Module dependency
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
@@ -60,11 +63,23 @@ dependencies {
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
     // For JSON processing
-    implementation("com.squareup.retrofit2:retrofit:2.9.0") // Or the latest version
-    implementation("com.squareup.retrofit2:converter-gson:2.9.0") // Or converter-moshi
+    implementation("com.squareup.retrofit2:retrofit:2.11.0") // Latest stable version
+    implementation("com.squareup.retrofit2:converter-gson:2.11.0") // Latest stable version
     // For handling streaming responses, especially Server-Sent Events (SSE)
-    // You might need a library that specifically handles SSE or handle it manually.
-    // OkHttp (which Retrofit uses under the hood) can handle raw responses.
-    implementation("com.squareup.okhttp3:okhttp:4.10.0") // Or the latest version
-    implementation("com.squareup.okhttp3:logging-interceptor:4.10.0") // For debugging
+    implementation("com.squareup.okhttp3:okhttp:4.12.0") // Latest stable version
+    implementation("com.squareup.okhttp3:logging-interceptor:4.12.0") // For debugging
+
+    // Additional UI Components for FSM integration
+    implementation("androidx.appcompat:appcompat:1.6.1")
+    implementation("androidx.constraintlayout:constraintlayout:2.1.4")
+    implementation("androidx.recyclerview:recyclerview:1.3.1")
+
+    // JSON processing
+    implementation("com.google.code.gson:gson:2.10.1")
+
+    // Image handling
+    implementation("com.github.bumptech.glide:glide:4.15.1")
+
+    // Coroutines for FSM streaming
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.1")
 }

@@ -49,4 +49,32 @@
     <color name="user_header_bg">#4CAF50</color>        <!-- Green header background -->
     <color name="assistant_header_bg">#2196F3</color>   <!-- Blue header background -->
     <color name="header_text_white">#FFFFFF</color>     <!-- White text for headers -->
+    
+    <!-- Follow-up Chip Colors (Light Green as requested) -->
+    <color name="followup_chip_background">#A5D6A7</color>      <!-- Light green background -->
+    <color name="followup_chip_text">#1B5E20</color>           <!-- Dark green text -->
+    <color name="followup_chip_stroke">#66BB6A</color>         <!-- Medium green border -->
+    <color name="followup_chip_clicked">#81C784</color>        <!-- Darker green when clicked -->
+    
+    <!-- Professional Plant Care State Indicator Colors -->
+    <color name="state_ready">#4CAF50</color>           <!-- Vibrant green for ready state -->
+    <color name="state_processing">#689F38</color>      <!-- Olive green for processing -->
+    <color name="state_complete">#2E7D32</color>        <!-- Deep forest green for complete -->
+    <color name="state_default">#81C784</color>         <!-- Light sage green for default -->
+    
+    <!-- Professional Server Status Colors (Plant Care Theme) -->
+    <color name="server_local">#FFA726</color>          <!-- Warm amber for local development -->
+    <color name="server_production">#4CAF50</color>     <!-- Vibrant green for production -->
+    <color name="server_staging">#66BB6A</color>        <!-- Light green for staging -->
+    <color name="server_custom">#795548</color>         <!-- Earth brown for custom -->
+    
+    <!-- Enhanced Banner Text Colors -->
+    <color name="banner_primary_text">#FFFFFF</color>   <!-- Pure white for main title -->
+    <color name="banner_secondary_text">#E8F5E8</color><!-- Light green tint for subtitle -->
+    <color name="banner_accent_text">#81C784</color>    <!-- Accent green for status -->
+    
+    <!-- Feedback Button Colors -->
+    <color name="thumbs_default">#CCCCCC</color>        <!-- Default gray for inactive buttons -->
+    <color name="thumbs_up_selected">#4CAF50</color>    <!-- Green for thumbs up selected -->
+    <color name="thumbs_down_selected">#F44336</color>  <!-- Red for thumbs down selected -->
 </resources>

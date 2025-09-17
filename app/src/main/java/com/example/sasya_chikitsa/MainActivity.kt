@@ -1,63 +1,57 @@
 package com.example.sasya_chikitsa
 
 import android.annotation.SuppressLint
-import android.app.Activity
 import android.content.Context
-import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.ImageDecoder
+import android.graphics.Typeface
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
-import android.util.Base64
-import android.util.Log
 import android.text.SpannableString
+import android.text.SpannableStringBuilder
 import android.text.Spanned
 import android.text.method.LinkMovementMethod
 import android.text.style.ClickableSpan
 import android.text.style.ForegroundColorSpan
-import android.text.style.UnderlineSpan
 import android.text.style.StyleSpan
-import android.graphics.Typeface
+import android.text.style.UnderlineSpan
+import android.util.Base64
+import android.util.Log
 import android.view.View
-import android.view.ViewTreeObserver
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.ScrollView
+import android.widget.Spinner
 import android.widget.TextView
 import android.widget.Toast
-import android.widget.Spinner
-import androidx.appcompat.app.AlertDialog
 import androidx.activity.ComponentActivity
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AlertDialog
 import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
-
-import com.example.sasya_chikitsa.network.request.ChatRequestData // Import data class
-import com.example.sasya_chikitsa.network.RetrofitClient // Import Retrofit client
 import com.example.sasya_chikitsa.config.ServerConfig
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
-import java.io.ByteArrayOutputStream
-import java.io.IOException
-import java.io.BufferedReader
-import java.io.InputStreamReader
-import java.util.UUID
-import com.example.sasya_chikitsa.network.fetchChatStream
-import com.example.sasya_chikitsa.ui.theme.Sasya_ChikitsaTheme
-import org.json.JSONObject
-import org.json.JSONArray
-import org.json.JSONException
-import android.text.SpannableStringBuilder
-import android.widget.ArrayAdapter
+import com.example.sasya_chikitsa.network.RetrofitClient
+import com.example.sasya_chikitsa.network.request.ChatRequestData
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import org.json.JSONArray
+import org.json.JSONException
+import org.json.JSONObject
+import java.io.BufferedReader
+import java.io.ByteArrayOutputStream
+import java.io.IOException
+import java.io.InputStreamReader
+import java.util.UUID
 
 class MainActivity : ComponentActivity() {
     private lateinit var imagePreview: ImageView
@@ -67,12 +61,13 @@ class MainActivity : ComponentActivity() {
     private lateinit var removeImageBtn: ImageButton
     private lateinit var uploadSection: CardView
     private lateinit var imageFileName: TextView
-    private lateinit var serverStatus: TextView
     private lateinit var settingsBtn: ImageButton
+    private lateinit var fsmModeBtn: ImageButton // Stub initialization in onCreate
 
-    private lateinit var responseTextView: TextView // TextView to show stream output
-    private lateinit var conversationScrollView: ScrollView // ScrollView for conversation
-    private lateinit var conversationContainer: LinearLayout // Container for individual messages
+    // Note: Chat interface replaced with RecyclerView in MainActivityFSM.kt  
+    private lateinit var responseTextView: TextView // Stub initialization in onCreate
+    private lateinit var conversationScrollView: ScrollView // Stub initialization in onCreate
+    private lateinit var conversationContainer: LinearLayout // Stub initialization in onCreate
 
     private var selectedImageUri: Uri? = null
     private var conversationHistory =
@@ -223,14 +218,26 @@ class MainActivity : ComponentActivity() {
         removeImageBtn = findViewById(R.id.removeImageBtn)
         uploadSection = findViewById(R.id.uploadSection)
         imageFileName = findViewById(R.id.imageFileName)
-        serverStatus = findViewById(R.id.serverStatus)
+        // Profile button replaces status indicator
+        val profileBtn = findViewById<ImageButton>(R.id.profileBtn)
         settingsBtn = findViewById(R.id.settingsBtn)
-        responseTextView = findViewById(R.id.responseTextView)
-        conversationScrollView = findViewById(R.id.conversationScrollView)
-            conversationContainer = findViewById(R.id.conversationContainer)
         
-        // Update server status display
-        updateServerStatusDisplay()
+        // Set up profile button click listener
+        profileBtn.setOnClickListener {
+            showAgriculturalProfileDialog()
+        }
+        
+        // Note: Create stub views for legacy MainActivity compatibility
+        // Since MainActivityFSM.kt is now the primary activity, create minimal stubs
+        fsmModeBtn = settingsBtn // Use settingsBtn as placeholder for fsmModeBtn
+        
+        // Create stub views for legacy chat interface (MainActivityFSM uses RecyclerView)
+        responseTextView = TextView(this).apply { text = "Legacy MainActivity - Use MainActivityFSM for full functionality" }
+        conversationScrollView = ScrollView(this) 
+        conversationContainer = LinearLayout(this)
+        
+        // Update profile button state
+        updateProfileButtonState()
         
         // Initialize conversation history if empty
         if (conversationHistory.length == 0) {
@@ -244,9 +251,14 @@ class MainActivity : ComponentActivity() {
             addAssistantMessage(exampleMessage)
         }
 
+        // FSM Mode Button - Launch intelligent assistant
+        fsmModeBtn.setOnClickListener {
+            launchFSMMode()
+        }
+
         // Settings Button
         settingsBtn.setOnClickListener {
-                showSettingsDialog()
+            showSettingsDialog()
         }
 
         // Upload Button
@@ -427,24 +439,21 @@ class MainActivity : ComponentActivity() {
 
     // Helper method to create a user message view with optional image (aligned right, WhatsApp-style)
     private fun createUserMessageView(message: ConversationMessage): View {
-        // Calculate width for WhatsApp-like chat bubble (75% max width, but can be smaller for short messages)
+        // Calculate width for proper zigzag chat layout (50% max width for better layout balance)
         val displayMetrics = resources.displayMetrics
         val screenWidth = displayMetrics.widthPixels
-        val maxCardWidth = (screenWidth * 0.75).toInt()
+        val maxCardWidth = (screenWidth * 0.5).toInt() // Reduced to 50% for zigzag layout
         val minCardWidth = (screenWidth * 0.3).toInt()
         val rightMargin = 16
-        val leftMargin = (screenWidth * 0.2).toInt() // More space on left to push right
+        val leftMargin = (screenWidth * 0.4).toInt() // More space on left to push right and balance layout
 
         val messageCard = androidx.cardview.widget.CardView(this).apply {
             layoutParams = LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.WRAP_CONTENT, // Let it size based on content
+                maxCardWidth, // Set explicit max width instead of WRAP_CONTENT
                 LinearLayout.LayoutParams.WRAP_CONTENT
             ).apply {
                 setMargins(leftMargin, 12, rightMargin, 12) // More spacing between messages
                 gravity = android.view.Gravity.END // Align to right
-
-                // Set max width constraint
-                width = LinearLayout.LayoutParams.WRAP_CONTENT
             }
             radius = 16f // Rounded corners
             cardElevation = 8f // Strong shadow for clear separation
@@ -460,16 +469,9 @@ class MainActivity : ComponentActivity() {
             orientation = LinearLayout.VERTICAL
             setPadding(0, 0, 0, 16) // No side padding for header, bottom padding for content
             layoutParams = LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.WRAP_CONTENT,
+                LinearLayout.LayoutParams.MATCH_PARENT, // Use full card width for proper text wrapping
                 LinearLayout.LayoutParams.WRAP_CONTENT
-            ).apply {
-                // Set width constraints based on content type
-                if (message.imageUri != null) {
-                    // Messages with images get more consistent width
-                    width = maxCardWidth - 32 // Account for padding
-                }
-                // Text-only messages use WRAP_CONTENT naturally
-            }
+            )
         }
 
         // Add header with icon and "Human" label with colored background
@@ -494,37 +496,16 @@ class MainActivity : ComponentActivity() {
         headerLayout.addView(headerText)
         messageLayout.addView(headerLayout)
 
-        // Add message text if not empty
-        if (message.text.isNotEmpty()) {
-            val textView = TextView(this).apply {
-                text = message.text // Clean text without emoji (header has it)
-                textSize = 16f // Standard message text size
-                setTextColor(ContextCompat.getColor(this@MainActivity, R.color.user_text))
-                setLineSpacing(4f, 1.1f) // WhatsApp-like line spacing
-                typeface = android.graphics.Typeface.DEFAULT
-                setPadding(16, 8, 16, 8) // Padding for text content
-
-                // Make text wrap nicely
-                maxWidth = maxCardWidth - 64 // Account for padding and margins
-            }
-            messageLayout.addView(textView)
-        }
-
-        // Add image if present (WhatsApp-style image sizing)
+        // Add image if present (WhatsApp-style image sizing) - Show image first
         if (message.imageUri != null) {
             val imageView = ImageView(this).apply {
                 val imageSize =
-                    minOf(maxCardWidth - 32, 280) // Max 280dp like WhatsApp, account for padding
+                    minOf(maxCardWidth - 32, 240) // Reduced max size for narrower cards, account for padding
                 layoutParams = LinearLayout.LayoutParams(
                     imageSize,
                     imageSize
                 ).apply {
-                    setMargins(
-                        16,
-                        if (message.text.isNotEmpty()) 8 else 8,
-                        16,
-                        0
-                    ) // Margin to match text padding
+                    setMargins(16, 8, 16, if (message.text.isNotEmpty()) 8 else 8) // Bottom margin only if text follows
                 }
                 scaleType = ImageView.ScaleType.CENTER_CROP
                 setImageURI(message.imageUri)
@@ -537,22 +518,46 @@ class MainActivity : ComponentActivity() {
             messageLayout.addView(imageView)
         }
 
+        // Add message text if not empty - Show text below image
+        if (message.text.isNotEmpty()) {
+            val textView = TextView(this).apply {
+                text = message.text // Clean text without emoji (header has it)
+                textSize = 16f // Standard message text size
+                setTextColor(ContextCompat.getColor(this@MainActivity, R.color.user_text))
+                setLineSpacing(4f, 1.1f) // WhatsApp-like line spacing
+                typeface = android.graphics.Typeface.DEFAULT
+                setPadding(16, if (message.imageUri != null) 8 else 8, 16, 8) // Top padding reduced if image above
+
+                // Enable proper text wrapping
+                layoutParams = LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT, // Use full available width
+                    LinearLayout.LayoutParams.WRAP_CONTENT
+                )
+                
+                // Additional text wrapping settings
+                setSingleLine(false) // Allow multi-line
+                maxLines = Int.MAX_VALUE // No line limit
+                ellipsize = null // No ellipsize to prevent truncation
+            }
+            messageLayout.addView(textView)
+        }
+
         messageCard.addView(messageLayout)
         return messageCard
     }
 
     // Helper method to create an assistant message view (aligned left, WhatsApp-style)
     private fun createAssistantMessageView(message: ConversationMessage): View {
-        // Calculate width for WhatsApp-like chat bubble (85% max width for longer AI responses)
+        // Calculate width for proper zigzag chat layout (60% max width to balance with user messages)
         val displayMetrics = resources.displayMetrics
         val screenWidth = displayMetrics.widthPixels
-        val maxCardWidth = (screenWidth * 0.85).toInt()
+        val maxCardWidth = (screenWidth * 0.6).toInt() // Reduced for zigzag balance
         val leftMargin = 16
-        val rightMargin = (screenWidth * 0.1).toInt() // Less space on right to push left
+        val rightMargin = (screenWidth * 0.3).toInt() // More space on right to maintain zigzag layout
 
         val messageCard = androidx.cardview.widget.CardView(this).apply {
             layoutParams = LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.WRAP_CONTENT,
+                maxCardWidth, // Set explicit max width for proper wrapping
                 LinearLayout.LayoutParams.WRAP_CONTENT
             ).apply {
                 setMargins(leftMargin, 12, rightMargin, 12) // More spacing between messages
@@ -572,7 +577,7 @@ class MainActivity : ComponentActivity() {
             orientation = LinearLayout.VERTICAL
             setPadding(0, 0, 0, 16) // No side padding for header, bottom padding for content
             layoutParams = LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.WRAP_CONTENT,
+                LinearLayout.LayoutParams.MATCH_PARENT, // Use full card width
                 LinearLayout.LayoutParams.WRAP_CONTENT
             )
         }
@@ -630,12 +635,67 @@ class MainActivity : ComponentActivity() {
                     movementMethod = LinkMovementMethod.getInstance()
                     setPadding(16, 8, 16, 8) // Padding for text content
 
-                    // Constrain max width for better readability
-                    maxWidth = maxCardWidth - 64
+                    // Enable proper text wrapping
+                    layoutParams = LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.MATCH_PARENT, // Use full available width
+                        LinearLayout.LayoutParams.WRAP_CONTENT
+                    )
+                    
+                    // Additional text wrapping settings
+                    setSingleLine(false) // Allow multi-line
+                    maxLines = Int.MAX_VALUE // No line limit
+                    ellipsize = null // No ellipsize to prevent truncation
                 }
                 messageLayout.addView(textView)
             }
         }
+
+        // Add feedback buttons for all assistant messages
+        val feedbackContainer = LinearLayout(this).apply {
+            orientation = LinearLayout.HORIZONTAL
+            setPadding(16, 8, 16, 16)
+            gravity = android.view.Gravity.START
+        }
+        
+        val thumbsUpButton = android.widget.ImageButton(this).apply {
+            layoutParams = LinearLayout.LayoutParams(96, 96).apply { 
+                setMargins(0, 0, 24, 0) 
+            }
+            setImageDrawable(ContextCompat.getDrawable(this@MainActivity, R.drawable.ic_thumb_up))
+            background = ContextCompat.getDrawable(this@MainActivity, android.R.drawable.ic_input_add)
+            scaleType = android.widget.ImageView.ScaleType.CENTER_INSIDE
+            setPadding(18, 18, 18, 18)
+            contentDescription = "Thumbs up"
+            
+            setOnClickListener {
+                // Visual feedback - highlight the clicked button
+                setColorFilter(ContextCompat.getColor(this@MainActivity, R.color.thumbs_up_selected))
+                
+                // Handle thumbs up feedback
+                handleThumbsUpFeedback(message)
+            }
+        }
+        
+        val thumbsDownButton = android.widget.ImageButton(this).apply {
+            layoutParams = LinearLayout.LayoutParams(96, 96)
+            setImageDrawable(ContextCompat.getDrawable(this@MainActivity, R.drawable.ic_thumb_down))
+            background = ContextCompat.getDrawable(this@MainActivity, android.R.drawable.ic_delete)
+            scaleType = android.widget.ImageView.ScaleType.CENTER_INSIDE
+            setPadding(18, 18, 18, 18)
+            contentDescription = "Thumbs down"
+            
+            setOnClickListener {
+                // Visual feedback - highlight the clicked button  
+                setColorFilter(ContextCompat.getColor(this@MainActivity, R.color.thumbs_down_selected))
+                
+                // Handle thumbs down feedback
+                handleThumbsDownFeedback(message)
+            }
+        }
+        
+        feedbackContainer.addView(thumbsUpButton)
+        feedbackContainer.addView(thumbsDownButton)
+        messageLayout.addView(feedbackContainer)
 
         messageCard.addView(messageLayout)
         return messageCard
@@ -1383,28 +1443,21 @@ class MainActivity : ComponentActivity() {
     }
 
     private fun createThinkingIndicatorView(): View {
-        val cardView = androidx.cardview.widget.CardView(this).apply {
+        return TextView(this).apply {
+            text = "🤖 Sasya Chikitsa AI Agent Thinking"
+            textSize = 14f
+            setTextColor(getColor(R.color.assistant_text))
+            setPadding(16, 8, 16, 8)
             layoutParams = LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.WRAP_CONTENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT
             ).apply {
-                setMargins(16, 8, 64, 8) // Left align like assistant messages
+                setMargins(16, 4, 16, 4) // Simple margins
             }
-            radius = 20f
-            cardElevation = 4f
-            setCardBackgroundColor(getColor(R.color.assistant_message_bg))
-        }
-
-        val textView = TextView(this).apply {
-            text = "🤖 Sasya Chikitsa AI Agent Thinking"
-            textSize = 16f
-            setTextColor(getColor(R.color.assistant_text))
-            setPadding(24, 16, 24, 16)
+            alpha = 0.7f // Slightly transparent to make it more subtle
+            setTypeface(typeface, android.graphics.Typeface.ITALIC) // Make text italic
             id = View.generateViewId() // For animation updates
         }
-
-        cardView.addView(textView)
-        return cardView
     }
 
     private fun removeThinkingIndicatorFromContainer() {
@@ -1446,7 +1499,7 @@ class MainActivity : ComponentActivity() {
 
                     // Update the thinking indicator view text with dots
                     thinkingIndicatorView?.let { view ->
-                        val textView = (view as? androidx.cardview.widget.CardView)?.getChildAt(0) as? TextView
+                        val textView = view as? TextView
                         textView?.text = "🤖 Sasya Chikitsa AI Agent Thinking$dots"
                     }
                     
@@ -2289,6 +2342,9 @@ class MainActivity : ComponentActivity() {
 
         editor.apply()
         Log.d(TAG, "Saved agricultural profile: $profile")
+        
+        // Update profile button to reflect completed setup
+        updateProfileButtonState()
     }
 
     /**
@@ -2299,28 +2355,12 @@ class MainActivity : ComponentActivity() {
 
         val dialogView = layoutInflater.inflate(R.layout.dialog_agricultural_profile, null)
 
-        // Get dialog elements
-        val cropSpinner = dialogView.findViewById<Spinner>(R.id.cropSpinner)
-        val locationSpinner = dialogView.findViewById<Spinner>(R.id.locationSpinner)
-        val seasonSpinner = dialogView.findViewById<Spinner>(R.id.seasonSpinner)
-        val growthStageSpinner = dialogView.findViewById<Spinner>(R.id.growthStageSpinner)
-        val experienceSpinner = dialogView.findViewById<Spinner>(R.id.experienceSpinner)
+        // Get dialog elements (simplified to only state and farm size)
+        val stateSpinner = dialogView.findViewById<Spinner>(R.id.stateSpinner)
         val farmSizeSpinner = dialogView.findViewById<Spinner>(R.id.farmSizeSpinner)
 
         // Set up spinners with current values
-        setupProfileSpinner(cropSpinner, getCropOptions(), currentProfile["crop_type"])
-        setupProfileSpinner(locationSpinner, getLocationOptions(), currentProfile["location"])
-        setupProfileSpinner(seasonSpinner, getSeasonOptions(), currentProfile["season"])
-        setupProfileSpinner(
-            growthStageSpinner,
-            getGrowthStageOptions(),
-            currentProfile["growth_stage"]
-        )
-        setupProfileSpinner(
-            experienceSpinner,
-            getExperienceOptions(),
-            currentProfile["farming_experience"]
-        )
+        setupProfileSpinner(stateSpinner, getStateOptions(), currentProfile["state"])
         setupProfileSpinner(farmSizeSpinner, getFarmSizeOptions(), currentProfile["farm_size"])
 
         AlertDialog.Builder(this)
@@ -2329,17 +2369,13 @@ class MainActivity : ComponentActivity() {
             .setView(dialogView)
             .setPositiveButton("Save") { _, _ ->
                 val newProfile = mapOf(
-                    "crop_type" to cropSpinner.selectedItem.toString(),
-                    "location" to locationSpinner.selectedItem.toString(),
-                    "season" to seasonSpinner.selectedItem.toString(),
-                    "growth_stage" to growthStageSpinner.selectedItem.toString(),
-                    "farming_experience" to experienceSpinner.selectedItem.toString(),
+                    "state" to stateSpinner.selectedItem.toString(),
                     "farm_size" to farmSizeSpinner.selectedItem.toString()
                 )
                 saveAgriculturalProfile(newProfile)
                 Toast.makeText(
                     this,
-                    "Profile saved! Your advice will now be personalized.",
+                    "Profile saved! Your recommendations will be tailored to ${stateSpinner.selectedItem}.",
                     Toast.LENGTH_LONG
                 ).show()
             }
@@ -2382,7 +2418,7 @@ class MainActivity : ComponentActivity() {
         "Okra"
     )
 
-    private fun getLocationOptions() = listOf(
+    private fun getStateOptions() = listOf(
         "Tamil Nadu",
         "Karnataka",
         "Kerala",
@@ -2432,56 +2468,16 @@ class MainActivity : ComponentActivity() {
         }
     }
     
-    private fun updateServerStatusDisplay() {
-        val currentUrl = ServerConfig.getServerUrl(this)
-        val defaultUrls = ServerConfig.getDefaultUrls()
-        
-        // Find friendly name for current URL
-        val friendlyName = defaultUrls.find { it.second == currentUrl }?.first ?: "Custom"
-        val shortUrl = when {
-            currentUrl.contains("10.0.2.2") -> "Emulator"
-            currentUrl.contains("localhost") -> "Localhost"
-            currentUrl.contains("192.168") -> "Local Network"
-            currentUrl.contains("staging") -> "Staging"
-            currentUrl.contains("production") || currentUrl.contains("prod") -> "Production"
-            else -> currentUrl.replace("http://", "").replace("https://", "").take(20)
-        }
-        
-        serverStatus.text = "📡 Server: $shortUrl"
-        Log.d(TAG, "Server status updated: $friendlyName - $currentUrl")
-    }
-
-    private fun showSettingsDialog() {
+    private fun launchFSMMode() {
         try {
-            val builder = AlertDialog.Builder(this)
-            builder.setTitle("⚙️ Settings")
-
-            val options = arrayOf(
-                "🌱 Agricultural Profile",
-                "🌐 Configure Server URL", 
-                "🗑️ Clear Conversation History",
-                "❌ Cancel"
-            )
-
-            // Use setSingleChoiceItems instead of setItems to avoid resource issues
-            builder.setSingleChoiceItems(options, -1) { dialog, which ->
-                dialog.dismiss() // Dismiss first to avoid conflicts
-                when (which) {
-                    0 -> showAgriculturalProfileDialog()
-                    1 -> showServerUrlDialog()
-                    2 -> showClearConversationsDialog()
-                    3 -> { } // Cancel - already dismissed
-                }
-            }
-
-            val dialog = builder.create()
-            dialog.show()
+            // Use the FSMLauncher to launch the intelligent assistant
+//            FSMLauncher.launchFSMDiagnosis(this)
         } catch (e: Exception) {
-            Log.e(TAG, "Error showing settings dialog: ${e.message}", e)
-            // Fallback to simple menu
-            showSimpleSettingsMenu()
+            Log.e(TAG, "Failed to launch FSM mode", e)
+            Toast.makeText(this, "Failed to launch FSM Assistant: ${e.message}", Toast.LENGTH_LONG).show()
         }
     }
+
 
     private fun showSimpleSettingsMenu() {
         // Simple fallback menu without AlertDialog
@@ -2580,7 +2576,7 @@ class MainActivity : ComponentActivity() {
             if (newUrl.isNotEmpty() && ServerConfig.isValidUrl(newUrl)) {
                 ServerConfig.setServerUrl(this, newUrl)
                 RetrofitClient.refreshInstance() // Force recreate with new URL
-                updateServerStatusDisplay() // Update the status display
+                // Profile button state remains unchanged for server updates
                 Toast.makeText(this, "Server URL updated to: $newUrl", Toast.LENGTH_LONG).show()
                 Log.d(TAG, "Server URL updated to: $newUrl")
             } else {
@@ -2595,5 +2591,264 @@ class MainActivity : ComponentActivity() {
         
         val dialog = builder.create()
         dialog.show()
+    }
+    
+    // Feedback handling methods
+    private fun handleThumbsUpFeedback(message: ConversationMessage) {
+        Log.d(TAG, "👍 Thumbs up feedback for message: ${message.text.take(50)}...")
+        
+        // Record feedback using FeedbackManager
+        val feedback = com.example.sasya_chikitsa.models.MessageFeedback(
+            messageText = message.text,
+            feedbackType = com.example.sasya_chikitsa.models.FeedbackType.THUMBS_UP,
+            sessionId = getCurrentSessionId(),
+            userContext = "User gave positive feedback"
+        )
+        com.example.sasya_chikitsa.models.FeedbackManager.recordFeedback(feedback)
+        
+        runOnUiThread {
+            android.widget.Toast.makeText(this, "👍 Thanks for your feedback!", android.widget.Toast.LENGTH_SHORT).show()
+        }
+    }
+    
+    private fun handleThumbsDownFeedback(message: ConversationMessage) {
+        Log.d(TAG, "👎 Thumbs down feedback for message: ${message.text.take(50)}...")
+        
+        // Record feedback using FeedbackManager
+        val feedback = com.example.sasya_chikitsa.models.MessageFeedback(
+            messageText = message.text,
+            feedbackType = com.example.sasya_chikitsa.models.FeedbackType.THUMBS_DOWN,
+            sessionId = getCurrentSessionId(),
+            userContext = "User gave negative feedback - needs improvement"
+        )
+        com.example.sasya_chikitsa.models.FeedbackManager.recordFeedback(feedback)
+        
+        runOnUiThread {
+            android.widget.Toast.makeText(this, "👎 Thanks for your feedback! We'll improve.", android.widget.Toast.LENGTH_SHORT).show()
+        }
+    }
+    
+    // Helper method to get current session ID
+    private fun getCurrentSessionId(): String? {
+        // Return the current session ID if available
+        return sessionId
+    }
+    
+    /**
+     * Show server configuration dialog
+     */
+    private fun showSettingsDialog() {
+        val dialogView = layoutInflater.inflate(R.layout.dialog_server_url, null)
+        val urlSpinner = dialogView.findViewById<Spinner>(R.id.urlSpinner)
+        val customUrlInput = dialogView.findViewById<EditText>(R.id.customUrlInput)
+
+        // Server options
+        val serverOptions = listOf(
+            "Local Development (localhost)",
+            "Production Server",
+            "Staging Server", 
+            "Custom URL"
+        )
+
+        // Setup spinner
+        val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, serverOptions)
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        urlSpinner.adapter = adapter
+
+        // Get current server configuration
+        val currentUrl = ServerConfig.getServerUrl(this)
+        val currentIndex = when {
+            currentUrl.contains("localhost") || currentUrl.contains("127.0.0.1") -> 0
+            currentUrl.contains("production") -> 1
+            currentUrl.contains("staging") -> 2
+            else -> 3
+        }
+        urlSpinner.setSelection(currentIndex)
+
+        // Show/hide custom URL input based on selection
+        urlSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                customUrlInput.visibility = if (position == 3) View.VISIBLE else View.GONE
+                if (position == 3) {
+                    customUrlInput.setText(currentUrl)
+                }
+            }
+            override fun onNothingSelected(parent: AdapterView<*>?) {}
+        }
+
+        AlertDialog.Builder(this)
+            .setTitle("⚙️ Server Settings")
+            .setView(dialogView)
+            .setPositiveButton("Save") { _, _ ->
+                val selectedPosition = urlSpinner.selectedItemPosition
+                val newUrl = when (selectedPosition) {
+                    0 -> "http://localhost:8080/"
+                    1 -> "https://production-server.com/"
+                    2 -> "https://staging-server.com/"
+                    3 -> {
+                        var customUrl = customUrlInput.text.toString().trim()
+                        if (customUrl.isNotEmpty() && !customUrl.endsWith("/")) {
+                            customUrl += "/"
+                        }
+                        customUrl
+                    }
+                    else -> "http://localhost:8080/"
+                }
+
+                if (newUrl.isNotEmpty()) {
+                    ServerConfig.setServerUrl(this, newUrl)
+                    // Profile button state remains unchanged for server updates
+                    Toast.makeText(this, "Server configuration updated to: $newUrl", Toast.LENGTH_LONG).show()
+                } else {
+                    Toast.makeText(this, "Please enter a valid URL", Toast.LENGTH_SHORT).show()
+                }
+            }
+            .setNeutralButton("Profile") { _, _ ->
+                showAgriculturalProfileDialog()
+            }
+            .setNegativeButton("Cancel", null)
+            .show()
+    }
+    
+    /**
+     * Update profile button based on user's agricultural profile setup status
+     */
+    private fun updateProfileButtonState() {
+        val profileBtn = findViewById<ImageButton>(R.id.profileBtn)
+        val prefs = getSharedPreferences("agricultural_profile", Context.MODE_PRIVATE)
+        val hasProfile = prefs.getBoolean("profile_setup_completed", false)
+        
+        if (hasProfile) {
+            // User has profile - show normal green tint
+            profileBtn.setColorFilter(ContextCompat.getColor(this, R.color.forest_green))
+            profileBtn.contentDescription = "View Agricultural Profile"
+        } else {
+            // User needs to set up profile - show attention-grabbing color
+            profileBtn.setColorFilter(ContextCompat.getColor(this, R.color.warm_amber))
+            profileBtn.contentDescription = "Set Up Agricultural Profile"
+        }
+    }
+    
+    /**
+     * Show dedicated server configuration dialog
+     */
+    private fun showServerSettings() {
+        try {
+            val dialogView = layoutInflater.inflate(R.layout.dialog_server_url, null)
+            val urlSpinner = dialogView.findViewById<Spinner>(R.id.urlSpinner)
+            val customUrlInput = dialogView.findViewById<EditText>(R.id.customUrlInput)
+
+            // Get available server options from ServerConfig
+            val defaultUrls = ServerConfig.getDefaultUrls()
+            val serverOptions = defaultUrls.map { it.first }
+
+            // Setup spinner
+            val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, serverOptions)
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            urlSpinner.adapter = adapter
+
+            // Get current server configuration and set selection
+            val currentUrl = ServerConfig.getServerUrl(this)
+            val currentIndex = defaultUrls.indexOfFirst { it.second == currentUrl }
+                .takeIf { it >= 0 } ?: (defaultUrls.size - 1) // Default to "Custom URL" if not found
+
+            urlSpinner.setSelection(currentIndex)
+
+            // Show/hide custom URL input based on selection
+            urlSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+                override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                    val isCustom = position == defaultUrls.size - 1 // Last option is "Custom URL"
+                    customUrlInput.visibility = if (isCustom) View.VISIBLE else View.GONE
+                    
+                    if (isCustom) {
+                        customUrlInput.setText(currentUrl)
+                        customUrlInput.requestFocus()
+                    }
+                }
+                override fun onNothingSelected(parent: AdapterView<*>?) {}
+            }
+
+            // Trigger initial selection to show/hide custom input
+            urlSpinner.onItemSelectedListener?.onItemSelected(urlSpinner, null, currentIndex, 0)
+
+            AlertDialog.Builder(this)
+                .setTitle("🌐 Server Configuration")
+                .setMessage("Select your server endpoint for the Sasya Chikitsa AI assistant:")
+                .setView(dialogView)
+                .setPositiveButton("Connect") { _, _ ->
+                    val selectedPosition = urlSpinner.selectedItemPosition
+                    val newUrl = if (selectedPosition == defaultUrls.size - 1) {
+                        // Custom URL selected
+                        var customUrl = customUrlInput.text.toString().trim()
+                        if (customUrl.isNotEmpty() && !customUrl.endsWith("/")) {
+                            customUrl += "/"
+                        }
+                        customUrl
+                    } else {
+                        // Preset URL selected
+                        defaultUrls[selectedPosition].second
+                    }
+
+                    if (newUrl.isNotEmpty() && ServerConfig.isValidUrl(newUrl)) {
+                        ServerConfig.setServerUrl(this, newUrl)
+                        // Profile button state remains unchanged for server updates
+                        
+                        val serverName = if (selectedPosition == defaultUrls.size - 1) "Custom Server" else defaultUrls[selectedPosition].first
+                        Toast.makeText(this, "✅ Connected to $serverName\n$newUrl", Toast.LENGTH_LONG).show()
+                        
+                        Log.d(TAG, "Server URL updated to: $newUrl")
+                    } else {
+                        Toast.makeText(this, "❌ Please enter a valid URL (e.g., http://192.168.1.100:8080/)", Toast.LENGTH_LONG).show()
+                    }
+                }
+                .setNeutralButton("Test Connection") { _, _ ->
+                    val selectedPosition = urlSpinner.selectedItemPosition
+                    val testUrl = if (selectedPosition == defaultUrls.size - 1) {
+                        customUrlInput.text.toString().trim()
+                    } else {
+                        defaultUrls[selectedPosition].second
+                    }
+                    testServerConnection(testUrl)
+                }
+                .setNegativeButton("Cancel", null)
+                .show()
+                
+        } catch (e: Exception) {
+            Log.e(TAG, "Error showing server settings dialog: ${e.message}", e)
+            Toast.makeText(this, "Failed to show server settings: ${e.message}", Toast.LENGTH_SHORT).show()
+        }
+    }
+    
+    /**
+     * Test server connection
+     */
+    private fun testServerConnection(url: String) {
+        if (url.isEmpty() || !ServerConfig.isValidUrl(url)) {
+            Toast.makeText(this, "❌ Invalid URL format", Toast.LENGTH_SHORT).show()
+            return
+        }
+        
+        Toast.makeText(this, "🔄 Testing connection to $url...", Toast.LENGTH_SHORT).show()
+        
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                // Create a test request to check server connectivity
+                val testUrl = if (!url.endsWith("/")) "$url/" else url
+                val response = RetrofitClient.getApiService(testUrl).testConnection()
+                
+                withContext(Dispatchers.Main) {
+                    if (response.isSuccessful) {
+                        Toast.makeText(this@MainActivity, "✅ Server connection successful!", Toast.LENGTH_LONG).show()
+                    } else {
+                        Toast.makeText(this@MainActivity, "⚠️ Server responded but may not be fully ready (${response.code()})", Toast.LENGTH_LONG).show()
+                    }
+                }
+            } catch (e: Exception) {
+                withContext(Dispatchers.Main) {
+                    Toast.makeText(this@MainActivity, "❌ Connection failed: ${e.message}", Toast.LENGTH_LONG).show()
+                    Log.e(TAG, "Server connection test failed for $url", e)
+                }
+            }
+        }
     }
 }

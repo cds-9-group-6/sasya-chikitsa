@@ -1,0 +1,51 @@
+# Dynamic Planning Agent Requirements
+# LangGraph FSM Agent for Plant Disease Diagnosis
+
+# Core LangChain and LangGraph
+langgraph>=0.2.0
+langchain>=0.3.0
+langchain-core>=0.3.0
+langchain-ollama>=0.2.0
+langchain-chroma>=0.1.0
+langchain-huggingface>=0.1.0
+
+# FastAPI and Server
+fastapi>=0.104.0
+uvicorn>=0.24.0
+pydantic>=2.0.0
+python-multipart>=0.0.6
+
+# Data Processing
+numpy>=1.24.0
+pandas>=2.0.0
+Pillow>=10.0.0
+opencv-python>=4.8.0
+
+# Machine Learning
+tensorflow>=2.13.0
+scikit-learn>=1.3.0
+matplotlib>=3.7.0
+
+# Database and Storage
+chromadb>=0.4.0
+sentence-transformers>=2.2.0
+
+# Utilities
+python-dotenv>=1.0.0
+asyncio-mqtt>=0.13.0
+aiofiles>=23.0.0
+python-jose>=3.3.0
+bcrypt>=4.0.0
+
+# Development and Testing
+pytest>=7.4.0
+pytest-asyncio>=0.21.0
+black>=23.9.0
+isort>=5.12.0
+mypy>=1.6.0
+
+# Logging and Monitoring
+structlog>=23.2.0
+prometheus-client>=0.18.0
+
+

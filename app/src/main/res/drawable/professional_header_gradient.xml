@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Premium plant care professional gradient -->
+    <gradient
+        android:type="linear"
+        android:angle="135"
+        android:startColor="#1B5E20"
+        android:centerColor="#2E7D32"
+        android:endColor="#4CAF50"
+        android:centerX="0.2"
+        android:centerY="0.8" />
+    <corners android:radius="20dp" />
+    <!-- Subtle stroke for premium feel -->
+    <stroke
+        android:width="0.5dp"
+        android:color="#81C784" />
+</shape>

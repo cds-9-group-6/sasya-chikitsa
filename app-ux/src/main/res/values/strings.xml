@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Sasya Chikitsya UX</string>
+    
+    <!-- Main Screen -->
+    <string name="main_title">What\'s troubling your crops today?</string>
+    <string name="main_subtitle">Get instant AI-powered diagnosis and treatment recommendations for your plants</string>
+    <string name="input_hint">Ask anything about your crops…</string>
+    
+    <!-- Action Buttons -->
+    <string name="upload_photo">Upload Photo</string>
+    <string name="voice_input">Voice Input</string>
+    
+    <!-- Try Asking Section -->
+    <string name="try_asking">Try asking</string>
+    <string name="sample_question_1">What\'s wrong with my tomato leaves?</string>
+    <string name="sample_question_2">Best pesticide for early blight</string>
+    <string name="sample_question_3">How to improve soil health</string>
+    <string name="sample_question_4">Organic pest control methods</string>
+    
+    <!-- Content Descriptions -->
+    <string name="app_logo">Sasya Chikitsya logo</string>
+    <string name="voice_button">Voice input button</string>
+    <string name="send_button">Send message button</string>
+    <string name="upload_button">Upload photo button</string>
+    <string name="camera_icon">Camera</string>
+    <string name="microphone_icon">Microphone</string>
+</resources>

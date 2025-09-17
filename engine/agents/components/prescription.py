@@ -31,14 +31,14 @@ class PrescriptionComponent(BaseComponent):
     def __init__(self):
         super().__init__()
         # Import enhanced RAG system
-        from rag.rag_with_ollama import ollama_rag
+        from rag.rag_with_ollama import OllamaRag
         # Initialize enhanced RAG system with pre-loaded collections for multiple plant types
         logger.info("🔧 Initializing Enhanced Multi-Plant RAG System for prescription component...")
-        self.rag_system = ollama_rag(
+        self.rag_system = OllamaRag(
             llm_name="llama3.1:8b",
             temperature=0.1,
-            # embedding_model="intfloat/multilingual-e5-large-instruct", 
-            embedding_model=os.getenv("HUB_MODEL_ID","sentence-transformers/multi-qa-MiniLM-L6-cos-v1"),
+            embedding_model="intfloat/multilingual-e5-large-instruct",
+            # embedding_model=os.getenv("HUB_MODEL_ID","sentence-transformers/multi-qa-MiniLM-L6-cos-v1"),
             # Initialize common plant collections
             collections_to_init=['Tomato', 'Potato', 'Rice', 'Wheat', 'Corn', 'Cotton']
         )
@@ -146,6 +146,8 @@ class PrescriptionComponent(BaseComponent):
         
         # Add specific treatment request
         rag_query += ". Include chemical treatments, organic options, prevention methods, dosage, and timing."
+        rag_query += "Summarize the treatment in simple terms and no more than 30 words for a farmer to understand."
+        rag_query += "Send only this summary of the treatment as a response and not the entire detail."
         
         logger.debug(f"📝 RAG query: {rag_query}")
         
