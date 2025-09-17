@@ -786,7 +786,7 @@ class MainActivityFSM : ComponentActivity(), FSMStreamHandler.StreamCallback {
         CoroutineScope(Dispatchers.IO).launch {
             try {
                 val prefs = getSharedPreferences("app_setup", Context.MODE_PRIVATE)
-                val imagesCopied = prefs.getBoolean("test_images_copied_v2", false)
+                val imagesCopied = prefs.getBoolean("test_images_copied_v3", false)
                 
                 if (!imagesCopied) {
                     Log.d(TAG, "📸 Copying test images to device gallery...")
@@ -798,23 +798,26 @@ class MainActivityFSM : ComponentActivity(), FSMStreamHandler.StreamCallback {
                         R.raw.eggplant_leaf_spot to "Eggplant Leaf Spot Disease - Sample.jpg",
                         R.raw.eggplant_mosaic_virus to "Eggplant Mosaic Virus - Sample.jpg",
                         
-                        // New comprehensive test images for attention overlay testing
+                        // Comprehensive test images for attention overlay testing - Apple varieties
                         R.raw.apple_alternaria_early_blight_multi_leaves_1 to "Apple Alternaria Early Blight - Multi Leaves 1.jpg",
                         R.raw.apple_alternaria_early_blight_multi_leaves_2 to "Apple Alternaria Early Blight - Multi Leaves 2.jpg",
                         R.raw.apple_healthy_multi_leaves_1 to "Apple Healthy - Multi Leaves Sample.jpg",
-                        R.raw.apple_healthy to "Apple Healthy - Single Leaf Sample.jpg",
                         R.raw.apple_tomato_mosaic_virus_1 to "Apple Tomato Mosaic Virus - Sample 1.jpg",
                         R.raw.apple_tomato_mosaic_virus_multi_leaves to "Apple Tomato Mosaic Virus - Multi Leaves.jpg",
                         R.raw.apple_leaf_root_rot to "Apple Leaf Root Rot Disease.jpg",
-                        R.raw.healthy_leaf_image_test to "Healthy Leaf Test Image.jpg",
-                        R.raw.leaf_with_spotting to "Leaf with Spotting Disease.jpg",
+                        
+                        // Potato varieties
                         R.raw.potato_fungi_2_leaves to "Potato Fungal Disease - 2 Leaves.jpg",
                         R.raw.potato_healthy_multi_1 to "Potato Healthy - Multi Sample 1.jpg",
                         R.raw.potato_healthy_multi_2 to "Potato Healthy - Multi Sample 2.jpg", 
                         R.raw.potato_healthy_multi_leaves_1 to "Potato Healthy - Multi Leaves Sample.jpg",
-                        R.raw.tomato_dry to "Tomato Dry Condition Sample.jpg",
+                        
+                        // Tomato varieties
                         R.raw.tomato_mosaic_virus to "Tomato Mosaic Virus Disease.jpg",
-                        R.raw.tomato_fruit_borer to "Tomato Fruit Borer Damage.jpg"
+                        R.raw.tomato_fruit_borer to "Tomato Fruit Borer Damage.jpg",
+                        R.raw.tomato_spider_mites_multiple_leaves to "Tomato Spider Mites - Multiple Leaves.jpg",
+                        R.raw.tomato_target_spot_multiple_leaves to "Tomato Target Spot - Multiple Leaves.jpg",
+                        R.raw.tomato_tomato_yellow_leaf_curl_virus to "Tomato Yellow Leaf Curl Virus.jpg"
                     )
                     
                     var copiedCount = 0
@@ -825,7 +828,7 @@ class MainActivityFSM : ComponentActivity(), FSMStreamHandler.StreamCallback {
                     }
                     
                     // Mark as completed
-                    prefs.edit().putBoolean("test_images_copied_v2", true).apply()
+                    prefs.edit().putBoolean("test_images_copied_v3", true).apply()
                     
                     withContext(Dispatchers.Main) {
                         if (copiedCount > 0) {
