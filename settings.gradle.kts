@@ -16,4 +16,3 @@ dependencyResolutionManagement {
 
 rootProject.name = "sasya-chikitsa"
 include(":app")
-include(":app-ux")
