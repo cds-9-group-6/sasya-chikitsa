@@ -786,7 +786,7 @@ class MainActivityFSM : ComponentActivity(), FSMStreamHandler.StreamCallback {
         CoroutineScope(Dispatchers.IO).launch {
             try {
                 val prefs = getSharedPreferences("app_setup", Context.MODE_PRIVATE)
-                val imagesCopied = prefs.getBoolean("test_images_copied_v2", false)
+                val imagesCopied = prefs.getBoolean("test_images_copied_v3", false)
                 
                 if (!imagesCopied) {
                     Log.d(TAG, "📸 Copying test images to device gallery...")
@@ -814,7 +814,10 @@ class MainActivityFSM : ComponentActivity(), FSMStreamHandler.StreamCallback {
                         R.raw.potato_healthy_multi_leaves_1 to "Potato Healthy - Multi Leaves Sample.jpg",
                         R.raw.tomato_dry to "Tomato Dry Condition Sample.jpg",
                         R.raw.tomato_mosaic_virus to "Tomato Mosaic Virus Disease.jpg",
-                        R.raw.tomato_fruit_borer to "Tomato Fruit Borer Damage.jpg"
+                        R.raw.tomato_fruit_borer to "Tomato Fruit Borer Damage.jpg",
+                        R.raw.tomato_spider_mites_multiple_leaves to "Tomato Spider Mites - Multiple Leaves.jpg",
+                        R.raw.tomato_target_spot_multiple_leaves to "Tomato Target Spot - Multiple Leaves.jpg",
+                        R.raw.tomato_yellow_leaf_curl_virus to "Tomato Yellow Leaf Curl Virus Disease.jpg"
                     )
                     
                     var copiedCount = 0
@@ -825,13 +828,13 @@ class MainActivityFSM : ComponentActivity(), FSMStreamHandler.StreamCallback {
                     }
                     
                     // Mark as completed
-                    prefs.edit().putBoolean("test_images_copied_v2", true).apply()
+                    prefs.edit().putBoolean("test_images_copied_v3", true).apply()
                     
                     withContext(Dispatchers.Main) {
                         if (copiedCount > 0) {
                             Toast.makeText(
                                 this@MainActivityFSM,
-                                "✅ $copiedCount sample plant images added to your gallery for testing!",
+                                "✅ $copiedCount comprehensive plant disease test images added to your gallery!",
                                 Toast.LENGTH_LONG
                             ).show()
                             Log.d(TAG, "📸 Successfully copied $copiedCount test images to gallery")
