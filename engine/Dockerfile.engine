@@ -8,27 +8,46 @@
 
 ARG BASE_TAG=
 
-FROM localhost/python:${BASE_TAG}
-# FROM python:3.12-slim
+# FROM localhost/python:${BASE_TAG}
+FROM python:3.12-slim
+
+# Install system dependencies needed for OpenCV and other libraries
+RUN apt-get update && apt-get install -y \
+    libgl1-mesa-dri \
+    libgl1-mesa-dev \
+    libglib2.0-0 \
+    libsm6 \
+    libxext6 \
+    libxrender-dev \
+    libgomp1 \
+    libgstreamer1.0-0 \
+    && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
 
-COPY ./requirements.txt .
+COPY ./engine/requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 
-COPY ./fsm_agent ./fsm_agent
-# COPY ./api ./api
-COPY ./ml ./ml
-# COPY ./resources ./resources
-# COPY ./__init__.py ./__init__.py
-COPY ./.env ./.env
-# COPY ./.python-version ./.python-version
-# COPY ./pyproject.toml ./pyproject.toml
-# COPY ./uv.lock ./uv.lock
-# COPY ./agents ./agents
-COPY ./rag/rag_with_ollama.py ./rag/rag_with_ollama.py
-# COPY ./rag/chroma_capstone_db_new_small ./rag/chroma_capstone_db_new_small
+# Create engine directory to match import structure
+RUN mkdir -p engine
+
+# Copy files to maintain proper module structure
+COPY ./engine/fsm_agent ./engine/fsm_agent
+
+COPY ./engine/ml ./engine/ml
+
+# Create empty __init__.py for engine module
+RUN touch ./engine/__init__.py
+COPY ./engine/.env ./engine/.env
+
+RUN mkdir -p rag
+COPY ./engine/rag/rag_with_ollama.py ./rag/rag_with_ollama.py
+
+# Also copy files to root for direct access
+COPY ./engine/fsm_agent ./fsm_agent
+COPY ./engine/ml ./ml
+COPY ./engine/.env ./.env
 
 EXPOSE 8080
 
