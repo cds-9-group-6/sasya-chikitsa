@@ -21,6 +21,7 @@ dependencies = [
     "langchain-ollama>=0.3.7",
     "langchain-openai>=0.3.32",
     "langchain-ray>=0.0.12",
+    "langgraph>=0.6.7",
     "mlflow>=3.3.2",
     "numpy>=2.3.2",
     "opencv-python-headless>=4.11.0.86",
