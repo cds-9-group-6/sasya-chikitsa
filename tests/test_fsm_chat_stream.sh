@@ -17,8 +17,26 @@ NC='\033[0m' # No Color
 # Configuration
 FSM_SERVER_URL="${FSM_SERVER_URL:-http://localhost:8080}"
 CHAT_STREAM_ENDPOINT="$FSM_SERVER_URL/sasya-chikitsa/chat-stream"
+
+# Check if chat stream endpoint is accessible
+echo -e "${YELLOW}🔍 Checking chat stream endpoint connectivity...${NC}"
+if ! curl -s --connect-timeout 5 -X OPTIONS "$CHAT_STREAM_ENDPOINT" > /dev/null 2>&1; then
+    echo -e "${RED}❌ Cannot connect to chat stream endpoint at $CHAT_STREAM_ENDPOINT${NC}"
+    echo -e "${RED}   Please verify the endpoint is available${NC}"
+    exit 1
+fi
+echo -e "${GREEN}✅ Chat stream endpoint is accessible${NC}"
+
 SESSION_ID="test-session-$(date +%s)"
 IMAGES_DIR="${IMAGES_DIR:-$(pwd)/engine/resources/images_for_test}"
+
+# Check if images directory exists
+if [[ ! -d "$IMAGES_DIR" ]]; then
+    echo -e "${RED}❌ Images directory not found: $IMAGES_DIR${NC}"
+    echo -e "${RED}   Please ensure the images directory exists or set IMAGES_DIR environment variable${NC}"
+    exit 1
+fi
+echo -e "${GREEN}✅ Images directory found: $IMAGES_DIR${NC}"
 TEMP_DIR="/tmp/fsm_test_$$"
 
 # Create temp directory
