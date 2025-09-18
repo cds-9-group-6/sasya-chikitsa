@@ -25,7 +25,7 @@ spec:
     spec:
       containers:
         - name: engine
-          image: 'quay.io/rajivranjan/engine:v4'
+          image: 'quay.io/rajivranjan/engine:amd64-v5'
           securityContext:
             runAsUser: 0
           ports:

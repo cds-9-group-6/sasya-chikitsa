@@ -7,26 +7,12 @@
     android:padding="8dp"
     android:gravity="start">
 
-    <!-- Sasya Arogya Icon for Assistant Messages -->
-    <ImageView
-        android:layout_width="36dp"
-        android:layout_height="36dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginTop="8dp"
-        android:src="@drawable/ic_local_florist"
-        android:background="@drawable/circle_background"
-        android:backgroundTint="#66BB6A"
-        android:padding="6dp"
-        android:scaleType="centerInside"
-        android:contentDescription="Sasya Arogya" />
-
     <LinearLayout
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
         android:orientation="vertical"
-        android:layout_marginStart="4dp"
-        android:layout_marginEnd="60dp">
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="48dp">
 
         <!-- Assistant Message Bubble -->
         <androidx.cardview.widget.CardView
@@ -45,14 +31,29 @@
                 android:background="#F5F5F5">
 
                 <!-- Sasya Arogya Header -->
-                <TextView
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="🌱 Sasya Arogya"
-                    android:textSize="12sp"
-                    android:textStyle="bold"
-                    android:textColor="#66BB6A"
-                    android:layout_marginBottom="4dp" />
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginBottom="4dp">
+
+                    <ImageView
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
+                        android:src="@drawable/ic_local_florist"
+                        android:layout_marginEnd="4dp"
+                        android:scaleType="centerInside" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Sasya Arogya"
+                        android:textSize="12sp"
+                        android:textStyle="bold"
+                        android:textColor="#66BB6A" />
+
+                </LinearLayout>
 
                 <!-- Professional State Indicator -->
                 <TextView
@@ -81,7 +82,7 @@
                     android:textSize="16sp"
                     android:textColor="#2D3748"
                     android:lineSpacingExtra="2dp"
-                    android:maxWidth="320dp" />
+                    android:maxWidth="380dp" />
 
                 <!-- Attention Overlay Container -->
                 <LinearLayout
@@ -114,7 +115,7 @@
                     <ImageView
                         android:id="@+id/attentionOverlayImage"
                         android:layout_width="match_parent"
-                        android:layout_height="200dp"
+                        android:layout_height="220dp"
                         android:background="@drawable/modern_card_background"
                         android:scaleType="centerCrop"
                         android:layout_marginBottom="8dp"

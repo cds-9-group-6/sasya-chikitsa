@@ -1,0 +1,57 @@
+# Downloads
+# podman pull --arch=amd64  python:3.12-slim && podman tag docker.io/library/python:3.12-slim  localhost/python:amd64-3.12-slim
+# podman pull --arch=arm64  python:3.12-slim && podman tag docker.io/library/python:3.12-slim  localhost/python:arm64-3.12-slim
+
+# Build command:
+# podman build --platform linux/arm64 --build-arg BASE_TAG=arm64-3.12-slim -t engine:arm64-v5 -f ./engine/Dockerfile.engine .
+# podman build --platform linux/amd64 --build-arg BASE_TAG=amd64-3.12-slim -t engine:amd64-v5 -f ./engine/Dockerfile.engine .
+
+# Run the image
+# podman run -it --rm -p 8080:8080 -e OLLAMA_HOST=http://192.168.0.100:11434 localhost/engine:arm64-v5
+
+ARG BASE_TAG=
+
+FROM localhost/python:${BASE_TAG}
+# FROM python:3.12-slim
+
+# Install system dependencies needed for OpenCV and other libraries
+RUN apt-get update && apt-get install -y \
+    libgl1-mesa-dri \
+    libgl1-mesa-dev \
+    libglib2.0-0 \
+    libsm6 \
+    libxext6 \
+    libxrender-dev \
+    libgomp1 \
+    libgstreamer1.0-0 \
+    && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /app
+
+COPY ./engine/requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+
+# Create engine directory to match import structure
+RUN mkdir -p engine
+
+# Copy files to maintain proper module structure
+COPY ./engine/fsm_agent ./engine/fsm_agent
+
+COPY ./engine/ml ./engine/ml
+
+# Create empty __init__.py for engine module
+RUN touch ./engine/__init__.py
+COPY ./engine/.env ./engine/.env
+
+RUN mkdir -p rag
+COPY ./engine/rag/rag_with_ollama.py ./rag/rag_with_ollama.py
+
+# Also copy files to root for direct access
+COPY ./engine/fsm_agent ./fsm_agent
+COPY ./engine/ml ./ml
+COPY ./engine/.env ./.env
+
+EXPOSE 8080
+
+CMD ["python", "./fsm_agent/run_fsm_server.py", "--host", "0.0.0.0", "--port", "8080"]

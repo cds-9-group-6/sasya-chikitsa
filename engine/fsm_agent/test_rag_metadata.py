@@ -9,7 +9,9 @@ import os
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "../.."))
 
 import logging
-from engine.rag.rag_with_ollama import OllamaRag
+# from engine.rag.rag_with_ollama import OllamaRag
+# we do not need engine part of the package here
+from rag.rag_with_ollama import OllamaRag
 
 # Configure logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
