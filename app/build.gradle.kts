@@ -28,8 +28,6 @@ android {
             buildConfigField("String", "SERVER_URL_NON_GPU", "\"http://engine-sasya-chikitsa.apps.cluster-6twrd.6twrd.sandbox1818.opentlc.com/\"")
             buildConfigField("String", "DEFAULT_SERVER_TYPE", "\"GPU\"")
             buildConfigField("String", "APP_VARIANT", "\"GPU\"")
-            
-            resValue("string", "app_name", "Sasya Chikitsa (GPU)")
         }
         
         create("nongpu") {
