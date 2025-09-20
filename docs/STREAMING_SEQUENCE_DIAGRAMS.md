@@ -1023,4 +1023,158 @@ graph TB
     REC --> CIR
 ```
 
+---
+
+## 🏗️ Python Class-Level Streaming Sequence Diagram
+
+### Complete Multi-Agent Streaming Architecture with Actual Python Classes
+
+```mermaid
+sequenceDiagram
+    participant Client as 📱 Client<br/>(Android/Web)
+    participant FastAPI as 🚀 MultiAgentServer<br/>(FastAPI)
+    participant APIModels as 📋 ChatRequest<br/>StreamingChunkAPI
+    participant Orchestrator as ⚡ A2AMultiAgentOrchestrator
+    participant OrchAgent as 🎭 OrchestrationAgent<br/>(AgentBase)
+    participant IntentAnalyzer as 🧠 LLMIntentAnalyzer
+    participant A2AProtocol as 🔄 A2AMessage<br/>A2AProtocol
+    participant DiagAgent as 🔍 MultimodalDiagnosticsAgent<br/>(AgentBase)
+    participant CNNClassifier as 🖼️ CNNWithAttentionClassifier
+    participant PresAgent as 💊 PrescriptionAgent<br/>(AgentBase)
+    participant CropAgent as 🌾 CropCareAgent<br/>(AgentBase)
+    participant LLMUtils as 🤖 ChatOllama<br/>LLMResponseGenerator
+    participant StreamHandler as 📡 StreamingCallbackHandler
+    
+    %% Initial Request Flow
+    Client->>+FastAPI: POST /sasya-arogya/chat/stream
+    Note over Client,FastAPI: ChatRequest with user_query + multimodal_inputs
+    
+    FastAPI->>+APIModels: Validate ChatRequest
+    APIModels-->>-FastAPI: Validated request data
+    
+    FastAPI->>+Orchestrator: process_streaming_request(OrchestrationRequest)
+    
+    %% Intent Analysis Phase
+    Orchestrator->>+OrchAgent: analyze_and_coordinate(request)
+    OrchAgent->>+IntentAnalyzer: analyze_user_intent(query, inputs)
+    IntentAnalyzer->>+LLMUtils: Generate intent analysis
+    LLMUtils-->>-IntentAnalyzer: IntentAnalysis response
+    IntentAnalyzer-->>-OrchAgent: Intent classification + routing plan
+    
+    %% Stream First Update
+    OrchAgent->>+StreamHandler: Stream progress update
+    StreamHandler-->>-FastAPI: StreamingChunkAPI(chunk_type="progress")
+    FastAPI-->>Client: SSE: Intent analysis complete
+    
+    %% A2A Protocol Communication Setup
+    OrchAgent->>+A2AProtocol: create_message(DIAGNOSTICS_REQUEST)
+    A2AProtocol-->>-OrchAgent: A2AMessage with routing info
+    
+    %% Diagnostics Agent Processing
+    Orchestrator->>+DiagAgent: process_multimodal_request(DiagnosticsRequest)
+    DiagAgent->>+CNNClassifier: classify_plant_disease(image_data)
+    CNNClassifier-->>-DiagAgent: Classification results + attention maps
+    
+    %% Stream Partial Results
+    DiagAgent->>+StreamHandler: Stream partial results
+    StreamHandler-->>-FastAPI: StreamingChunkAPI(chunk_type="partial_result")
+    FastAPI-->>Client: SSE: Diagnosis in progress...
+    
+    DiagAgent->>+LLMUtils: generate_diagnosis_explanation(results)
+    LLMUtils-->>-DiagAgent: Formatted diagnosis
+    DiagAgent-->>-Orchestrator: DiagnosticsResponse
+    
+    %% A2A Handoff to Prescription Agent
+    Orchestrator->>+A2AProtocol: forward_to_agent(PRESCRIPTION)
+    A2AProtocol->>+PresAgent: process_prescription_request(PrescriptionRequest)
+    
+    PresAgent->>+LLMUtils: query_rag_knowledge_base(disease_info)
+    LLMUtils-->>-PresAgent: Treatment recommendations
+    
+    %% Stream Treatment Results  
+    PresAgent->>+StreamHandler: Stream treatment plan
+    StreamHandler-->>-FastAPI: StreamingChunkAPI(chunk_type="partial_result")
+    FastAPI-->>Client: SSE: Treatment plan ready...
+    
+    PresAgent-->>-A2AProtocol: PrescriptionResponse
+    A2AProtocol-->>-Orchestrator: Aggregated response
+    
+    %% Parallel Crop Care Processing (if needed)
+    par Crop Care Processing
+        Orchestrator->>+CropAgent: process_crop_care_request(CropCareRequest)
+        CropAgent->>+LLMUtils: generate_care_recommendations(context)
+        LLMUtils-->>-CropAgent: Care guidelines
+        CropAgent->>+StreamHandler: Stream care advice
+        StreamHandler-->>-FastAPI: StreamingChunkAPI(chunk_type="partial_result")
+        FastAPI-->>Client: SSE: Crop care advice...
+        CropAgent-->>-Orchestrator: CropCareResponse
+    end
+    
+    %% Final Response Synthesis
+    Orchestrator->>+OrchAgent: synthesize_final_response(all_results)
+    OrchAgent->>+LLMUtils: generate_cohesive_response(combined_data)
+    LLMUtils-->>-OrchAgent: Final synthesized response
+    
+    %% Stream Final Results
+    OrchAgent->>+StreamHandler: Stream final response
+    StreamHandler-->>-FastAPI: StreamingChunkAPI(chunk_type="final_result", is_final=true)
+    FastAPI-->>Client: SSE: Complete response with all recommendations
+    
+    OrchAgent-->>-Orchestrator: OrchestrationResponse
+    Orchestrator-->>-FastAPI: Final response data
+    
+    %% Connection Cleanup
+    FastAPI-->>Client: SSE: [DONE] - End of stream
+    FastAPI->>-Client: HTTP 200 - Stream complete
+```
+
+### Key Python Classes and Their Roles
+
+#### **Server Layer**
+- **`MultiAgentServer`**: FastAPI application handling HTTP endpoints
+- **`ChatRequest`**: Pydantic model for incoming chat requests  
+- **`StreamingChunkAPI`**: API model for Server-Sent Events
+
+#### **Orchestration Layer**
+- **`A2AMultiAgentOrchestrator`**: Main orchestrator using A2A protocol
+- **`OrchestrationAgent(AgentBase)`**: Agent responsible for coordination
+- **`LLMIntentAnalyzer`**: LLM-based intent classification
+- **`OrchestrationRequest/Response`**: Data models for orchestration
+
+#### **A2A Protocol Layer**
+- **`A2AMessage`**: Standard message format for inter-agent communication
+- **`A2AProtocol`**: Protocol handler for message routing and delivery
+- **`A2AMessageType`**: Enum for message types (REQUEST, RESPONSE, ACK, etc.)
+
+#### **Specialized Agent Layer**
+- **`MultimodalDiagnosticsAgent(AgentBase)`**: Handles disease diagnosis
+- **`PrescriptionAgent(AgentBase)`**: Generates treatment recommendations
+- **`CropCareAgent(AgentBase)`**: Provides agricultural guidance
+- **`VendorManagementAgent(AgentBase)`**: Manages product procurement
+
+#### **Core Infrastructure**
+- **`AgentBase`**: Abstract base class for all agents
+- **`StreamingCallbackHandler`**: Manages streaming responses
+- **`CNNWithAttentionClassifier`**: Deep learning model for image classification
+- **`ChatOllama`**: LLM interface for text generation
+
+#### **Data Models**
+- **`DiagnosticsRequest/Response`**: Models for diagnosis operations
+- **`PrescriptionRequest/Response`**: Models for treatment plans
+- **`MultimodalInput`**: Handles images, videos, audio, text
+- **`StreamingChunk`**: Internal streaming data structure
+
+### Class Interaction Patterns
+
+1. **Request Validation**: `ChatRequest` → `MultiAgentServer` → `A2AMultiAgentOrchestrator`
+2. **Intent Analysis**: `OrchestrationAgent` → `LLMIntentAnalyzer` → `ChatOllama`
+3. **A2A Communication**: `A2AProtocol` → `A2AMessage` → Target `AgentBase`
+4. **Streaming Updates**: `AgentBase` → `StreamingCallbackHandler` → `StreamingChunkAPI`
+5. **Model Inference**: `MultimodalDiagnosticsAgent` → `CNNWithAttentionClassifier`
+6. **Response Synthesis**: All agents → `OrchestrationAgent` → `LLMResponseGenerator`
+
+This architecture ensures type safety, proper separation of concerns, and scalable streaming capabilities across the multi-agent system.
+
+---
+
 This comprehensive streaming architecture documentation provides detailed insights into how the Sasya Chikitsa multi-agent system delivers real-time, responsive agricultural AI services through optimized streaming patterns, robust error handling, and efficient resource utilization.
