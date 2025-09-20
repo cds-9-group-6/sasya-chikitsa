@@ -78,6 +78,12 @@ class MainActivityFSM : ComponentActivity(), FSMStreamHandler.StreamCallback {
     private lateinit var imageFileName: TextView
     private lateinit var removeImageBtn: ImageButton
     
+    // New inline image preview components
+    private lateinit var inlineImageContainer: LinearLayout
+    private lateinit var inlineImagePreview: ImageView
+    private lateinit var inlineImageLabel: TextView
+    private lateinit var inlineRemoveBtn: ImageButton
+    
     // FSM Components
     private lateinit var chatAdapter: ChatAdapter
     private lateinit var streamHandler: FSMStreamHandler
@@ -164,6 +170,12 @@ class MainActivityFSM : ComponentActivity(), FSMStreamHandler.StreamCallback {
         imageFileName = findViewById(R.id.imageFileName)
         removeImageBtn = findViewById(R.id.removeImageBtn)
         
+        // Initialize new inline image preview components
+        inlineImageContainer = findViewById(R.id.inlineImageContainer)
+        inlineImagePreview = findViewById(R.id.inlineImagePreview)
+        inlineImageLabel = findViewById(R.id.inlineImageLabel)
+        inlineRemoveBtn = findViewById(R.id.inlineRemoveBtn)
+        
         // Initialize profile button state
         updateProfileButtonState()
     }
@@ -172,6 +184,7 @@ class MainActivityFSM : ComponentActivity(), FSMStreamHandler.StreamCallback {
         uploadBtn.setOnClickListener { openImagePicker() }
         sendBtn.setOnClickListener { sendMessage() }
         removeImageBtn.setOnClickListener { clearSelectedImage() }
+        inlineRemoveBtn.setOnClickListener { clearSelectedImage() }
         profileBtn.setOnClickListener { showAgriculturalProfileDialog() }
         settingsBtn.setOnClickListener { showServerSettings() }
         
@@ -228,10 +241,13 @@ class MainActivityFSM : ComponentActivity(), FSMStreamHandler.StreamCallback {
             val resizedBitmap = resizeBitmap(bitmap, 1024)
             selectedImageBase64 = bitmapToBase64(resizedBitmap)
             
-            // Show image preview
-            imagePreview.setImageBitmap(resizedBitmap)
-            imageFileName.text = "📷 Image selected"
-            uploadSection.visibility = View.VISIBLE
+            // Show inline image preview
+            inlineImagePreview.setImageBitmap(resizedBitmap)
+            inlineImageLabel.text = "📷 Image"
+            inlineImageContainer.visibility = View.VISIBLE
+            
+            // Hide old upload section
+            uploadSection.visibility = View.GONE
             
             Log.d(TAG, "Image selected and processed")
             
@@ -244,7 +260,12 @@ class MainActivityFSM : ComponentActivity(), FSMStreamHandler.StreamCallback {
     private fun clearSelectedImage() {
         selectedImageUri = null
         selectedImageBase64 = null
+        inlineImageContainer.visibility = View.GONE
         uploadSection.visibility = View.GONE
+        
+        // Clear the image from preview
+        inlineImagePreview.setImageDrawable(null)
+        
         Log.d(TAG, "Image cleared")
     }
     

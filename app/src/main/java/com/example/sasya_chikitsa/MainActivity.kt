@@ -61,6 +61,13 @@ class MainActivity : ComponentActivity() {
     private lateinit var removeImageBtn: ImageButton
     private lateinit var uploadSection: CardView
     private lateinit var imageFileName: TextView
+    
+    // New inline image preview components
+    private lateinit var inlineImageContainer: LinearLayout
+    private lateinit var inlineImagePreview: ImageView
+    private lateinit var inlineImageLabel: TextView
+    private lateinit var inlineRemoveBtn: ImageButton
+    private lateinit var serverStatus: TextView
     private lateinit var settingsBtn: ImageButton
     private lateinit var fsmModeBtn: ImageButton // Stub initialization in onCreate
 
@@ -218,15 +225,15 @@ class MainActivity : ComponentActivity() {
         removeImageBtn = findViewById(R.id.removeImageBtn)
         uploadSection = findViewById(R.id.uploadSection)
         imageFileName = findViewById(R.id.imageFileName)
-        // Profile button replaces status indicator
-        val profileBtn = findViewById<ImageButton>(R.id.profileBtn)
+        
+        // Initialize new inline image preview components
+        inlineImageContainer = findViewById(R.id.inlineImageContainer)
+        inlineImagePreview = findViewById(R.id.inlineImagePreview)
+        inlineImageLabel = findViewById(R.id.inlineImageLabel)
+        inlineRemoveBtn = findViewById(R.id.inlineRemoveBtn)
+        // Note: Using stateIndicator instead of serverStatus in new layout
+        serverStatus = findViewById(R.id.stateIndicator) 
         settingsBtn = findViewById(R.id.settingsBtn)
-        
-        // Set up profile button click listener
-        profileBtn.setOnClickListener {
-            showAgriculturalProfileDialog()
-        }
-        
         // Note: Create stub views for legacy MainActivity compatibility
         // Since MainActivityFSM.kt is now the primary activity, create minimal stubs
         fsmModeBtn = settingsBtn // Use settingsBtn as placeholder for fsmModeBtn
@@ -236,8 +243,8 @@ class MainActivity : ComponentActivity() {
         conversationScrollView = ScrollView(this) 
         conversationContainer = LinearLayout(this)
         
-        // Update profile button state
-        updateProfileButtonState()
+        // Update server status display
+        updateServerStatusDisplay()
         
         // Initialize conversation history if empty
         if (conversationHistory.length == 0) {
@@ -268,6 +275,11 @@ class MainActivity : ComponentActivity() {
 
         // Remove Image Button
         removeImageBtn.setOnClickListener {
+            clearSelectedImage()
+        }
+        
+        // Inline remove image button
+        inlineRemoveBtn.setOnClickListener {
             clearSelectedImage()
         }
 
@@ -340,23 +352,34 @@ class MainActivity : ComponentActivity() {
     // Helper method to show selected image
     private fun showSelectedImage(imageUri: Uri) {
         selectedImageUri = imageUri
-            imagePreview.setImageURI(imageUri)
-        imageFileName.text = "📷 Image attached"
-        uploadSection.visibility = android.view.View.VISIBLE
         
-        Log.d(TAG, "Image selected and upload section shown")
+        // Show inline image preview
+        inlineImagePreview.setImageURI(imageUri)
+        inlineImageLabel.text = "📷 Image"
+        inlineImageContainer.visibility = android.view.View.VISIBLE
+        
+        // Hide old upload section
+        uploadSection.visibility = android.view.View.GONE
+        
+        Log.d(TAG, "Image selected and inline preview shown")
     }
 
     // Helper method to clear selected image
     private fun clearSelectedImage(showToast: Boolean = true) {
         selectedImageUri = null
+        
+        // Clear both old and new image previews
         imagePreview.setImageURI(null)
+        inlineImagePreview.setImageDrawable(null)
+        
+        // Hide both sections
         uploadSection.visibility = android.view.View.GONE
+        inlineImageContainer.visibility = android.view.View.GONE
         
         if (showToast) {
             Toast.makeText(this, "Image removed", Toast.LENGTH_SHORT).show()
         }
-        Log.d(TAG, "Image cleared and upload section hidden")
+        Log.d(TAG, "Image cleared and inline preview hidden")
     }
 
     // Helper method to add user message to conversation
@@ -521,7 +544,7 @@ class MainActivity : ComponentActivity() {
         // Add message text if not empty - Show text below image
         if (message.text.isNotEmpty()) {
             val textView = TextView(this).apply {
-                text = message.text // Clean text without emoji (header has it)
+                text = com.example.sasya_chikitsa.utils.TextFormattingUtil.formatWhatsAppStyle(message.text) // Format bold text
                 textSize = 16f // Standard message text size
                 setTextColor(ContextCompat.getColor(this@MainActivity, R.color.user_text))
                 setLineSpacing(4f, 1.1f) // WhatsApp-like line spacing
@@ -628,7 +651,7 @@ class MainActivity : ComponentActivity() {
                 val textView = TextView(this).apply {
                     // Clean text without emoji prefix (header has it)
                     val displayText = message.text.removePrefix("🤖 ").trim()
-                    text = displayText
+                    text = com.example.sasya_chikitsa.utils.TextFormattingUtil.formatWhatsAppStyle(displayText)
                     textSize = 16f // Consistent with user messages
                     setTextColor(ContextCompat.getColor(this@MainActivity, R.color.assistant_text))
                     setLineSpacing(4f, 1.1f) // WhatsApp-like line spacing
@@ -1390,7 +1413,7 @@ class MainActivity : ComponentActivity() {
 
             // Only update legacy TextView if NOT currently streaming to avoid wiping streaming content
             if (!isCurrentlyStreaming) {
-            responseTextView.text = conversationHistory
+            responseTextView.text = com.example.sasya_chikitsa.utils.TextFormattingUtil.formatWhatsAppStyle(conversationHistory.toString())
             responseTextView.movementMethod = LinkMovementMethod.getInstance()
                 Log.d(TAG, "Updated legacy TextView (not streaming)")
             } else {
@@ -2342,9 +2365,6 @@ class MainActivity : ComponentActivity() {
 
         editor.apply()
         Log.d(TAG, "Saved agricultural profile: $profile")
-        
-        // Update profile button to reflect completed setup
-        updateProfileButtonState()
     }
 
     /**
@@ -2576,7 +2596,7 @@ class MainActivity : ComponentActivity() {
             if (newUrl.isNotEmpty() && ServerConfig.isValidUrl(newUrl)) {
                 ServerConfig.setServerUrl(this, newUrl)
                 RetrofitClient.refreshInstance() // Force recreate with new URL
-                // Profile button state remains unchanged for server updates
+                updateServerStatusDisplay() // Update the status display
                 Toast.makeText(this, "Server URL updated to: $newUrl", Toast.LENGTH_LONG).show()
                 Log.d(TAG, "Server URL updated to: $newUrl")
             } else {
@@ -2697,7 +2717,7 @@ class MainActivity : ComponentActivity() {
 
                 if (newUrl.isNotEmpty()) {
                     ServerConfig.setServerUrl(this, newUrl)
-                    // Profile button state remains unchanged for server updates
+                    updateServerStatusDisplay()
                     Toast.makeText(this, "Server configuration updated to: $newUrl", Toast.LENGTH_LONG).show()
                 } else {
                     Toast.makeText(this, "Please enter a valid URL", Toast.LENGTH_SHORT).show()
@@ -2711,21 +2731,34 @@ class MainActivity : ComponentActivity() {
     }
     
     /**
-     * Update profile button based on user's agricultural profile setup status
+     * Update the server status indicator in the header
      */
-    private fun updateProfileButtonState() {
-        val profileBtn = findViewById<ImageButton>(R.id.profileBtn)
-        val prefs = getSharedPreferences("agricultural_profile", Context.MODE_PRIVATE)
-        val hasProfile = prefs.getBoolean("profile_setup_completed", false)
+    private fun updateServerStatusDisplay() {
+        val stateIndicator = findViewById<TextView>(R.id.stateIndicator)
+        val currentUrl = ServerConfig.getServerUrl(this)
         
-        if (hasProfile) {
-            // User has profile - show normal green tint
-            profileBtn.setColorFilter(ContextCompat.getColor(this, R.color.forest_green))
-            profileBtn.contentDescription = "View Agricultural Profile"
-        } else {
-            // User needs to set up profile - show attention-grabbing color
-            profileBtn.setColorFilter(ContextCompat.getColor(this, R.color.warm_amber))
-            profileBtn.contentDescription = "Set Up Agricultural Profile"
+        // Update status indicator based on server configuration
+        when {
+            currentUrl.contains("localhost") || currentUrl.contains("127.0.0.1") -> {
+                stateIndicator.text = "●"
+                stateIndicator.setTextColor(ContextCompat.getColor(this, android.R.color.holo_orange_dark))
+                stateIndicator.contentDescription = "Local Development Server"
+            }
+            currentUrl.contains("production") -> {
+                stateIndicator.text = "●"
+                stateIndicator.setTextColor(ContextCompat.getColor(this, android.R.color.holo_green_light))
+                stateIndicator.contentDescription = "Production Server"
+            }
+            currentUrl.contains("staging") -> {
+                stateIndicator.text = "●"
+                stateIndicator.setTextColor(ContextCompat.getColor(this, android.R.color.holo_blue_light))
+                stateIndicator.contentDescription = "Staging Server"
+            }
+            else -> {
+                stateIndicator.text = "●"
+                stateIndicator.setTextColor(ContextCompat.getColor(this, android.R.color.holo_red_light))
+                stateIndicator.contentDescription = "Custom Server"
+            }
         }
     }
     
@@ -2791,7 +2824,7 @@ class MainActivity : ComponentActivity() {
 
                     if (newUrl.isNotEmpty() && ServerConfig.isValidUrl(newUrl)) {
                         ServerConfig.setServerUrl(this, newUrl)
-                        // Profile button state remains unchanged for server updates
+                        updateServerStatusDisplay()
                         
                         val serverName = if (selectedPosition == defaultUrls.size - 1) "Custom Server" else defaultUrls[selectedPosition].first
                         Toast.makeText(this, "✅ Connected to $serverName\n$newUrl", Toast.LENGTH_LONG).show()
