@@ -1,8 +1,42 @@
-# Notes
+# Sasya Chikitsa Engine
 
 ![Sasya Chikitsa Data Flow Diagram](./images/sasya-chikitsa-data-flow.png)
 
 *Data flow architecture showing how the plant disease detection system processes images and provides AI-powered analysis*
+
+## 🔄 Android App Integration
+
+### **Multi-Session Management**
+The Android app now supports **multiple conversation sessions** that integrate seamlessly with the FSM agent:
+
+- **Session-Aware API**: Each request includes `session_id` for proper context tracking
+- **Auto-Session Creation**: New sessions created automatically for different plant analyses  
+- **State Persistence**: FSM state maintained across session switches
+- **Conversation History**: Complete conversation history preserved per session
+
+### **Enhanced User Experience**
+- **Real-time Streaming**: Supports streaming responses with session context
+- **WhatsApp-style Formatting**: Handles **bold** text formatting in responses
+- **Image Analysis**: Multi-plant analysis with proper session isolation
+- **Smart Routing**: Auto-detects when new sessions should be created
+
+## 🤖 FSM Agent Features
+
+### **Session-Aware Processing**
+```python
+# FSM Agent now handles session-specific context
+{
+    "message": "Analyze this plant image",
+    "session_id": "session-uuid-123",
+    "image_b64": "base64-encoded-image",
+    "text": "Additional context"
+}
+```
+
+### **State Management Integration**
+- **Per-Session States**: Each session maintains independent FSM state
+- **Context Preservation**: Conversation context preserved across interactions
+- **Multi-Plant Support**: Simultaneous analysis of different plants in separate sessions
 
 ## Commands to run the python file
 
