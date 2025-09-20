@@ -1,0 +1,103 @@
+// Gradle script for building release APK variants for different server clusters
+// This script provides convenient tasks for building GPU and Non-GPU variants
+
+task buildGpuRelease(dependsOn: 'assembleGpuRelease') {
+    group 'build'
+    description 'Build release APK for GPU cluster (http://engine-sasya-chikitsa.apps.cluster-mqklc.mqklc.sandbox601.opentlc.com/)'
+    
+    doLast {
+        def apkPath = "${project.buildDir}/outputs/apk/gpu/release"
+        def apkFile = fileTree(apkPath).include('*.apk').singleFile
+        
+        if (apkFile.exists()) {
+            println "✅ GPU Release APK built successfully:"
+            println "   📱 File: ${apkFile.name}"
+            println "   📂 Path: ${apkFile.absolutePath}"
+            println "   🌐 Server: GPU Cluster (mqklc.sandbox601)"
+            println "   📏 Size: ${(apkFile.length() / 1024 / 1024).round(2)} MB"
+        } else {
+            println "❌ GPU Release APK not found at: ${apkPath}"
+        }
+    }
+}
+
+task buildNonGpuRelease(dependsOn: 'assembleNongpuRelease') {
+    group 'build'
+    description 'Build release APK for Non-GPU cluster (http://engine-sasya-chikitsa.apps.cluster-6twrd.6twrd.sandbox1818.opentlc.com/)'
+    
+    doLast {
+        def apkPath = "${project.buildDir}/outputs/apk/nongpu/release"
+        def apkFile = fileTree(apkPath).include('*.apk').singleFile
+        
+        if (apkFile.exists()) {
+            println "✅ Non-GPU Release APK built successfully:"
+            println "   📱 File: ${apkFile.name}"
+            println "   📂 Path: ${apkFile.absolutePath}"
+            println "   🌐 Server: Non-GPU Cluster (6twrd.sandbox1818)"
+            println "   📏 Size: ${(apkFile.length() / 1024 / 1024).round(2)} MB"
+        } else {
+            println "❌ Non-GPU Release APK not found at: ${apkPath}"
+        }
+    }
+}
+
+task buildAllReleaseVariants {
+    group 'build'
+    description 'Build both GPU and Non-GPU release APKs'
+    dependsOn buildGpuRelease, buildNonGpuRelease
+    
+    doLast {
+        println "\n🚀 Both release variants built successfully!"
+        println "📦 GPU APK: Configured for GPU cluster processing"
+        println "📦 Non-GPU APK: Configured for standard cluster processing"
+        println "\n📋 Next steps:"
+        println "   1. Test both APKs on target devices"
+        println "   2. Verify server connectivity for each variant"
+        println "   3. Deploy to respective environments"
+        println "\n🔗 Server URLs:"
+        println "   GPU:     http://engine-sasya-chikitsa.apps.cluster-mqklc.mqklc.sandbox601.opentlc.com/"
+        println "   Non-GPU: http://engine-sasya-chikitsa.apps.cluster-6twrd.6twrd.sandbox1818.opentlc.com/"
+    }
+}
+
+// Task to copy APKs to releases directory for easier distribution
+task copyReleasesToDistribution {
+    group 'distribution'
+    description 'Copy release APKs to releases/ directory with descriptive names'
+    dependsOn buildAllReleaseVariants
+    
+    doLast {
+        def releasesDir = new File(project.rootDir, "releases")
+        if (!releasesDir.exists()) {
+            releasesDir.mkdirs()
+        }
+        
+        // Copy GPU APK
+        def gpuApkPath = "${project.buildDir}/outputs/apk/gpu/release"
+        def gpuApkFile = fileTree(gpuApkPath).include('*.apk').singleFile
+        if (gpuApkFile.exists()) {
+            def gpuDestName = "sasya-chikitsa-gpu-cluster-v${android.defaultConfig.versionName}.apk"
+            copy {
+                from gpuApkFile
+                into releasesDir
+                rename { gpuDestName }
+            }
+            println "✅ GPU APK copied to: releases/${gpuDestName}"
+        }
+        
+        // Copy Non-GPU APK
+        def nonGpuApkPath = "${project.buildDir}/outputs/apk/nongpu/release"
+        def nonGpuApkFile = fileTree(nonGpuApkPath).include('*.apk').singleFile
+        if (nonGpuApkFile.exists()) {
+            def nonGpuDestName = "sasya-chikitsa-nongpu-cluster-v${android.defaultConfig.versionName}.apk"
+            copy {
+                from nonGpuApkFile
+                into releasesDir
+                rename { nonGpuDestName }
+            }
+            println "✅ Non-GPU APK copied to: releases/${nonGpuDestName}"
+        }
+        
+        println "\n📁 All release APKs are now available in the releases/ directory"
+    }
+}
