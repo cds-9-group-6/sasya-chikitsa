@@ -23,7 +23,7 @@ def create_test_llm_config() -> Dict[str, Any]:
     """Create a test LLM configuration"""
     return {
         "model": "llama2",  # Replace with actual model
-        "base_url": "http://localhost:11434",  # Replace with actual Ollama URL
+        "base_url": os.getenv("OLLAMA_HOST", "http://localhost:11434"),  # Configurable Ollama URL
         "temperature": 0.1
     }
 

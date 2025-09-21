@@ -59,7 +59,8 @@ class ClassifyingNode(BaseNode):
                 "image_b64": state["user_image"],
                 "plant_type": state.get("plant_type"),
                 "location": state.get("location"),
-                "season": state.get("season")
+                "season": state.get("season"),
+                "session_id": state.get("session_id", "unknown")  # ADD SESSION ID FOR MLFLOW
             }
             
             add_message_to_state(
@@ -68,7 +69,7 @@ class ClassifyingNode(BaseNode):
                 "🔬 Analyzing the plant leaf image for disease detection..."
             )
             
-            result = await classification_tool.arun(classification_input)
+            result = await classification_tool._arun(mlflow_manager=self.mlflow_manager, **classification_input)
             
             # Determine next action based on user intent FIRST (regardless of classification result)
             user_intent = state.get("user_intent", {})

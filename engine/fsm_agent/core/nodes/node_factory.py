@@ -24,16 +24,18 @@ logger = logging.getLogger(__name__)
 class NodeFactory:
     """Factory class for creating and managing workflow nodes"""
     
-    def __init__(self, tools: Dict[str, Any], llm: Any):
+    def __init__(self, tools: Dict[str, Any], llm: Any, mlflow_manager=None):
         """
         Initialize the node factory
         
         Args:
             tools: Dictionary of available tools
             llm: The language model instance
+            mlflow_manager: Optional MLflow manager instance for metrics tracking
         """
         self.tools = tools
         self.llm = llm
+        self.mlflow_manager = mlflow_manager
         self.nodes = {}
         self._create_nodes()
     
@@ -54,7 +56,7 @@ class NodeFactory:
         
         for node_name, node_class in node_classes.items():
             try:
-                self.nodes[node_name] = node_class(self.tools, self.llm)
+                self.nodes[node_name] = node_class(self.tools, self.llm, self.mlflow_manager)
                 logger.debug(f"Created node: {node_name}")
             except Exception as e:
                 logger.error(f"Failed to create node {node_name}: {str(e)}")

@@ -4,13 +4,13 @@ FastAPI Server for Dynamic Planning Agent using LangGraph
 This module provides a FastAPI server interface for the FSM-based planning agent.
 """
 
-import asyncio
 import json
 import logging
-from typing import Dict, Any, Optional
-from datetime import datetime
 import os
 from contextlib import asynccontextmanager
+from datetime import datetime
+from typing import Dict, Any, Optional
+
 
 # Custom JSON encoder to handle datetime objects
 class CustomJSONEncoder(json.JSONEncoder):
@@ -20,13 +20,13 @@ class CustomJSONEncoder(json.JSONEncoder):
         return super().default(obj)
 
 from fastapi import FastAPI, HTTPException, BackgroundTasks
-from fastapi.responses import StreamingResponse, JSONResponse
+from fastapi.responses import StreamingResponse
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
 import uvicorn
 from dotenv import load_dotenv
 
-from fsm_agent.core.fsm_agent import DynamicPlanningAgent
+from engine.fsm_agent.core.fsm_agent import DynamicPlanningAgent
 
 # Load environment variables
 load_dotenv()
@@ -42,7 +42,13 @@ async def lifespan(app: FastAPI):
     """Manage application lifespan"""
     global agent
     
-    # Initialize agent on startup
+    # Set TensorFlow threading environment variables to prevent mutex issues
+    os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'  # Reduce TensorFlow logging
+    os.environ['OMP_NUM_THREADS'] = '1'       # Limit OpenMP threads
+    os.environ['TF_NUM_INTEROP_THREADS'] = '1'
+    os.environ['TF_NUM_INTRAOP_THREADS'] = '1'
+
+    # Initialize agent on startup (MLflow is now initialized within the workflow)
     llm_config = {
         "model": os.getenv("OLLAMA_MODEL", "llama3.1:8b"),
         "base_url": os.getenv("OLLAMA_HOST", "http://localhost:11434"),
@@ -50,6 +56,7 @@ async def lifespan(app: FastAPI):
     }
     
     try:
+        logger.info("Initializing Dynamic Planning Agent with threading fixes...")
         agent = DynamicPlanningAgent(llm_config)
         logger.info("Dynamic Planning Agent initialized successfully")
     except Exception as e:
@@ -61,6 +68,14 @@ async def lifespan(app: FastAPI):
     # Cleanup on shutdown
     if agent:
         logger.info("Shutting down Dynamic Planning Agent")
+        
+        # End MLflow persistent run on shutdown
+        try:
+            if hasattr(agent.workflow, 'mlflow_manager') and agent.workflow.mlflow_manager:
+                agent.workflow.mlflow_manager.end_persistent_run()
+                logger.info("MLflow persistent run ended")
+        except Exception as e:
+            logger.warning(f"Error ending MLflow run on shutdown: {e}")
 
 
 # Create FastAPI app with lifespan manager

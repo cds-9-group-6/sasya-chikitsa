@@ -17,13 +17,15 @@ logger = logging.getLogger(__name__)
 class SessionManager:
     """Manages session state persistence for the FSM Agent workflow"""
     
-    def __init__(self, storage_dir: str = "/tmp/fsm_sessions"):
+    def __init__(self, storage_dir: str = None):
         """
         Initialize session manager
         
         Args:
-            storage_dir: Directory to store session files
+            storage_dir: Directory to store session files (defaults to env var or /tmp/fsm_sessions)
         """
+        if storage_dir is None:
+            storage_dir = os.getenv("SESSION_STORAGE_DIR", "/tmp/fsm_sessions")
         self.storage_dir = storage_dir
         os.makedirs(storage_dir, exist_ok=True)
         logger.info(f"SessionManager initialized with storage: {storage_dir}")

@@ -21,6 +21,8 @@ from pydantic import BaseModel, Field
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "../../.."))
 from ml.cnn_attn_classifier_improved import CNNWithAttentionClassifier
 
+# MLflow components will be passed by nodes - no need to import or initialize here
+
 logger = logging.getLogger(__name__)
 
 
@@ -31,6 +33,7 @@ class ClassificationInput(BaseModel):
     location: Optional[str] = Field(default=None, description="Location for context (optional)")
     season: Optional[str] = Field(default=None, description="Season for context (optional)")
     growth_stage: Optional[str] = Field(default=None, description="Growth stage (optional)")
+    session_id: Optional[str] = Field(default="unknown", description="Session ID for MLflow tracking")
 
 
 class ClassificationTool(BaseTool):
@@ -100,11 +103,12 @@ Important:
                 "stream": False
             }
             
-            ollama_url = "http://localhost:11434"
+            ollama_url = os.getenv("OLLAMA_HOST", "http://localhost:11434")
+            llava_timeout = int(os.getenv("LLAVA_TIMEOUT", "120"))
             response = requests.post(
                 f"{ollama_url}/api/generate",
                 json=payload,
-                timeout=120
+                timeout=llava_timeout
             )
             
             if response.status_code == 200:
@@ -340,36 +344,65 @@ Important:
         
         return formatted_result
     
-    async def _arun(self, **kwargs) -> Dict[str, Any]:
+    async def _arun(self, mlflow_manager=None, **kwargs) -> Dict[str, Any]:
         """Async implementation"""
-        return await asyncio.to_thread(self._run, **kwargs)
+        return await asyncio.to_thread(self._run, mlflow_manager=mlflow_manager, **kwargs)
     
-    def _run(self, **kwargs) -> Dict[str, Any]:
+    def _run(self, mlflow_manager=None, **kwargs) -> Dict[str, Any]:
         """
-        Run dual evaluation with both CNN and LLaVA using clean separated logic
+        Run dual evaluation with both CNN and LLaVA using clean separated logic with MLflow tracking
+        
+        Args:
+            mlflow_manager: MLflow manager instance (passed by node)
+            **kwargs: Tool input parameters
         
         Returns:
             Dictionary containing classification results or error
         """
+        session_id = kwargs.get("session_id", "unknown")
+        
         try:
+            # Verify MLflow manager is available (but don't start/end runs)
+            if mlflow_manager and not mlflow_manager.is_available():
+                logger.warning("MLflow manager not available for metrics logging")
+                mlflow_manager = None
+            
             # Validate input
             if not kwargs.get("image_b64"):
-                return {"error": "No image provided"}
+                error_msg = "No image provided"
+                if mlflow_manager:
+                    mlflow_manager.log_error(session_id, "validation_error", error_msg)
+                return {"error": error_msg}
             
             if not self.classifier:
-                return {"error": "CNN classifier not available"}
+                error_msg = "CNN classifier not available"
+                if mlflow_manager:
+                    mlflow_manager.log_error(session_id, "cnn_unavailable", error_msg)
+                return {"error": error_msg}
             
             # Prepare plant context
             plant_context = {
-                "plant_type": kwargs.get("plant_type"),
-                "location": kwargs.get("location"),
-                "season": kwargs.get("season"),
-                "growth_stage": kwargs.get("growth_stage")
-            }
+                            "plant_type": kwargs.get("plant_type"),
+                            "location": kwargs.get("location"),
+                            "season": kwargs.get("season"),
+                            "growth_stage": kwargs.get("growth_stage")
+                        }
+            
+            # Log plant context to MLflow
+            if mlflow_manager:
+                try:
+                    import mlflow
+                    for key, value in plant_context.items():
+                        if value:
+                            mlflow.log_param(f"plant_{key}", value)
+                except Exception as e:
+                    logger.warning(f"Failed to log plant context: {e}")
             
             # Run CNN evaluation
             cnn_result = self._run_cnn_evaluation(kwargs["image_b64"], plant_context)
             if cnn_result.get("error"):
+                if mlflow_manager:
+                    mlflow_manager.log_error(session_id, "cnn_error", cnn_result["error"])
                 return cnn_result  # Return CNN error directly
             
             # Run LLaVA evaluation (always for comparison)
@@ -381,6 +414,44 @@ Important:
             # Format final result
             final_result = self._format_final_result(decision_data, cnn_result, llava_result, plant_context)
             
+            # Log comprehensive metrics to MLflow
+            if mlflow_manager:
+                try:
+                    # Log classification metrics (includes entropy calculation)
+                    mlflow_manager.log_classification_metrics(
+                        session_id=session_id,
+                        cnn_result=cnn_result,
+                        llava_result=llava_result,
+                        final_result=final_result,
+                        similarity_score=decision_data.get("similarity")
+                    )
+                    
+                    # Calculate and log additional metrics
+                    try:
+                        from engine.core.classification_metrics import ClassificationMetrics
+                        import mlflow
+                        additional_metrics = ClassificationMetrics.calculate_decision_metrics(
+                            cnn_result, llava_result, final_result, decision_data.get("similarity")
+                        )
+                        
+
+                        for metric_name, metric_value in additional_metrics.items():
+                            if isinstance(metric_value, (int, float)):
+                                mlflow.log_metric(f"custom_{metric_name}", metric_value)
+                            elif isinstance(metric_value, str):
+                                mlflow.log_param(f"custom_{metric_name}", metric_value)
+                        
+                        # Log metric summary
+                        summary = ClassificationMetrics.get_metric_summary(additional_metrics)
+                        mlflow.log_param("metrics_summary", summary)
+                        logger.info(f"MLflow metrics summary: {summary}")
+                        
+                    except ImportError:
+                        logger.warning("ClassificationMetrics not available for additional metrics")
+                
+                except Exception as e:
+                    logger.warning(f"Failed to log metrics to MLflow: {e}")
+            
             # Log completion
             logger.info(f"Classification completed: {decision_data['final_disease_name']} ({decision_data['final_confidence']:.2f}) from {decision_data['result_source']}")
             
@@ -389,6 +460,14 @@ Important:
         except Exception as e:
             error_msg = f"Classification error: {str(e)}"
             logger.error(error_msg, exc_info=True)
+            
+            # Log error to MLflow if available
+            if mlflow_manager:
+                try:
+                    mlflow_manager.log_error(session_id, "classification_error", error_msg)
+                except:
+                    pass
+            
             return {"error": error_msg}
 
 
