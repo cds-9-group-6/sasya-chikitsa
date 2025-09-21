@@ -69,7 +69,22 @@ class DynamicPlanningWorkflow:
         # Initialize LLM
         self.llm = ChatOllama(**llm_config)
         
-        # Initialize tools
+        # Initialize MLflow manager once for the entire workflow
+        self.mlflow_manager = None
+        try:
+            from engine.core.mlflow_manager import initialize_mlflow, get_mlflow_manager
+            mlflow_initialized = initialize_mlflow()
+            if mlflow_initialized:
+                self.mlflow_manager = get_mlflow_manager()
+                logger.info("✅ MLflow tracking initialized in workflow")
+            else:
+                logger.warning("⚠️ MLflow tracking initialization failed - metrics will not be logged")
+        except ImportError:
+            logger.warning("MLflow components not available - metrics will not be logged")
+        except Exception as e:
+            logger.warning(f"MLflow initialization error: {e}")
+        
+        # Initialize tools with MLflow manager
         self.tools = {
             "classification": ClassificationTool(),
             "prescription": PrescriptionTool(),
@@ -78,8 +93,8 @@ class DynamicPlanningWorkflow:
             "attention_overlay": AttentionOverlayTool(),
         }
         
-        # Initialize node factory with tools and LLM
-        self.node_factory = NodeFactory(self.tools, self.llm)
+        # Initialize node factory with tools, LLM, and MLflow manager
+        self.node_factory = NodeFactory(self.tools, self.llm, self.mlflow_manager)
         
         # Initialize session manager for state persistence
         self.session_manager = SessionManager()
@@ -88,7 +103,7 @@ class DynamicPlanningWorkflow:
         self.workflow = self._build_workflow()
         self.app = self.workflow.compile()
         
-        logger.info("Dynamic Planning Workflow initialized with modular node architecture and session persistence")
+        logger.info("Dynamic Planning Workflow initialized with modular node architecture, session persistence, and MLflow tracking")
     
     def _build_workflow(self) -> StateGraph:
         """

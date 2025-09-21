@@ -34,7 +34,7 @@ def test_server_startup():
         try:
             # Set environment variables
             env = os.environ.copy()
-            env['OLLAMA_HOST'] = 'http://127.0.0.1:11434'
+            env['OLLAMA_HOST'] = os.getenv('OLLAMA_HOST', 'http://127.0.0.1:11434')  # Use existing or default
             env['OLLAMA_MODEL'] = 'llama3.1:8b'
             
             # Run command and capture output

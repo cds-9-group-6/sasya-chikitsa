@@ -113,15 +113,16 @@ class FollowupNode(BaseNode):
                 
                 # Prepare classification input
                 classification_input = {
-                    "image": state["user_image"],
+                    "image_b64": state["user_image"],  # FIX: Use correct field name
                     "plant_type": state.get("plant_type"),
                     "location": state.get("location"),
                     "season": state.get("season"),
-                    "growth_stage": state.get("growth_stage")
+                    "growth_stage": state.get("growth_stage"),
+                    "session_id": state.get("session_id", "unknown")  # ADD SESSION ID FOR MLFLOW
                 }
                 
                 # Run classification
-                classification_result = await classification_tool.arun(classification_input)
+                classification_result = await classification_tool._arun(mlflow_manager=self.mlflow_manager, **classification_input)
                 
                 if classification_result and not classification_result.get("error"):
                     # Store classification results
