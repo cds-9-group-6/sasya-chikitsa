@@ -103,7 +103,10 @@ class MLflowManager:
                 # Start persistent run for the agent
                 self._start_persistent_run()
                 
-                logger.info("MLflow manager initialized successfully with persistent run")
+                # Enable automatic LangChain tracing to the persistent run
+                self._enable_langchain_autolog()
+                
+                logger.info("MLflow manager initialized successfully with persistent run and LangChain autolog")
                 return True
                 
             except Exception as e:
@@ -144,6 +147,21 @@ class MLflowManager:
         except Exception as e:
             logger.error(f"Failed to start persistent MLflow run: {e}")
             return None
+    
+    def _enable_langchain_autolog(self):
+        """
+        Enable MLflow LangChain autologging to capture traces automatically
+        """
+        try:
+            # Enable LangChain autologging to capture all LangChain operations
+            # Use simplest call for maximum compatibility
+            mlflow.langchain.autolog()
+            
+            logger.info("✅ MLflow LangChain autolog enabled - will capture workflow traces")
+            
+        except Exception as e:
+            logger.warning(f"Failed to enable LangChain autolog: {e}")
+            logger.info("Continuing without automatic trace logging")
     
     def ensure_active_run(self) -> bool:
         """
@@ -339,6 +357,13 @@ class MLflowManager:
         End the persistent MLflow run (called when agent shuts down)
         """
         try:
+            # Disable LangChain autolog
+            try:
+                mlflow.langchain.autolog(disable=True)
+                logger.info("Disabled MLflow LangChain autolog")
+            except Exception as e:
+                logger.warning(f"Failed to disable LangChain autolog: {e}")
+            
             if mlflow.active_run():
                 import datetime
                 mlflow.set_tag("agent_end_time", datetime.datetime.now().isoformat())
