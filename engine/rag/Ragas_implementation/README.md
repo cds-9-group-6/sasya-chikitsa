@@ -34,6 +34,8 @@ AspectCritic is an evaluation metric that can be used to evaluate responses base
 Context Precision is a metric that evaluates the retriever’s ability to rank relevant chunks higher than irrelevant ones for a given query in the retrieved context. Specifically, it assesses the degree to which relevant chunks in the retrieved context are placed at the top of the ranking. It specifically uses LLMContextPrecisionWithoutReference, here if an irrelevant chunk is present at the second position in the array, context precision remains the same. Here user_input(question) ,response, retrieved_contexts and evaluator llm are the input parameters.
 
 
+### Code
+
 - All metrics use asyncio (async/await) for execution.
 
 - RAG_Evaluation class implements the metrics.
@@ -41,11 +43,11 @@ Context Precision is a metric that evaluates the retriever’s ability to rank r
 - log_single_turn_sample logs results to MLflow.
 
 
-The mlflow_test code uses RAG_Evaluation class where all the 4 metrics are defined and uses the log_single_turn_sample function to log the experiments into the mlflow server. 
+The mlflow_test code: uses RAG_Evaluation class where all the 4 metrics are defined and uses the log_single_turn_sample function to log the experiments into the mlflow server. 
 
-The rag_with_ollama_mod code integrates the RAG_Evaluation class with the Retriever.
+The rag_with_ollama_mod code: integrates the RAG_Evaluation class with the Retriever.
 
-The rag_with_ollama_augmented code is a modification on the Retriver logic which integrates with the RAG_Evaluation class.
+The rag_with_ollama_augmented code: is a modification on the Retriver logic which integrates with the RAG_Evaluation class.
 
 
 To start the MLflow server run - mlflow ui
