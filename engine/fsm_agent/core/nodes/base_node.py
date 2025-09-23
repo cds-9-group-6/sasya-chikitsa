@@ -17,16 +17,18 @@ logger = logging.getLogger(__name__)
 class BaseNode(ABC):
     """Base class for all workflow nodes"""
     
-    def __init__(self, tools: Dict[str, Any], llm: Any):
+    def __init__(self, tools: Dict[str, Any], llm: Any, mlflow_manager=None):
         """
         Initialize the node
         
         Args:
             tools: Dictionary of available tools
             llm: The language model instance
+            mlflow_manager: Optional MLflow manager instance for metrics tracking
         """
         self.tools = tools
         self.llm = llm
+        self.mlflow_manager = mlflow_manager
         self.logger = logger
     
     @abstractmethod

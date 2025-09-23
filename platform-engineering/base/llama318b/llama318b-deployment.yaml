@@ -15,14 +15,21 @@ spec:
       labels:
         app: llama318b
     spec:
+      tolerations:
+        - key: odh-notebook
+          operator: Equal
+          value: 'true'
+          effect: NoSchedule
       containers:
         - resources:
             limits:
               cpu: '10'
               memory: 10Gi
+              nvidia.com/gpu: '1'
             requests:
               cpu: '5'
               memory: 8Gi
+              nvidia.com/gpu: '1'
           readinessProbe:
             httpGet:
               path: /api/tags
