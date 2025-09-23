@@ -8,3 +8,5 @@ HuggingFaceEmbeddings
 transformers
 torch
 dotenv
+langchain-openai
+ragas
