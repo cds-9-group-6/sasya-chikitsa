@@ -34,7 +34,7 @@ AspectCritic is an evaluation metric that can be used to evaluate responses base
 Context Precision is a metric that evaluates the retriever’s ability to rank relevant chunks higher than irrelevant ones for a given query in the retrieved context. Specifically, it assesses the degree to which relevant chunks in the retrieved context are placed at the top of the ranking. It specifically uses LLMContextPrecisionWithoutReference, here if an irrelevant chunk is present at the second position in the array, context precision remains the same. Here user_input(question) ,response, retrieved_contexts and evaluator llm are the input parameters.
 
 
-### Code
+## Code
 
 - All metrics use asyncio (async/await) for execution.
 
