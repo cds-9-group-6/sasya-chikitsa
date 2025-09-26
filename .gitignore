@@ -512,3 +512,5 @@ temp_icons/
 # Android specific
 app/src/androidTest/build/
 app/src/test/build/
+
+postgresql-data
