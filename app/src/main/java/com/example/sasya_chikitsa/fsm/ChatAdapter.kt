@@ -118,7 +118,7 @@ class ChatAdapter(
         private val messageImage: ImageView = itemView.findViewById(R.id.messageImage)
         
         fun bind(message: ChatMessage) {
-            messageText.text = message.text
+            messageText.text = com.example.sasya_chikitsa.utils.TextFormattingUtil.formatWhatsAppStyle(message.text)
             messageTime.text = timeFormatter.format(Date(message.timestamp))
             
             // Show image if present
@@ -155,7 +155,7 @@ class ChatAdapter(
         private val overlayDescription: TextView = itemView.findViewById(R.id.overlayDescription)
         
         fun bind(message: ChatMessage) {
-            messageText.text = message.text
+            messageText.text = com.example.sasya_chikitsa.utils.TextFormattingUtil.formatWhatsAppStyle(message.text)
             messageTime.text = timeFormatter.format(Date(message.timestamp))
             
             // Show state indicator if present

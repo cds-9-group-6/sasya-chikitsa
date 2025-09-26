@@ -59,7 +59,8 @@ class ClassifyingNode(BaseNode):
                 "image_b64": state["user_image"],
                 "plant_type": state.get("plant_type"),
                 "location": state.get("location"),
-                "season": state.get("season")
+                "season": state.get("season"),
+                "session_id": state.get("session_id", "unknown")  # ADD SESSION ID FOR MLFLOW
             }
             
             add_message_to_state(
@@ -68,7 +69,7 @@ class ClassifyingNode(BaseNode):
                 "🔬 Analyzing the plant leaf image for disease detection..."
             )
             
-            result = await classification_tool.arun(classification_input)
+            result = await classification_tool._arun(mlflow_manager=self.mlflow_manager, **classification_input)
             
             # Determine next action based on user intent FIRST (regardless of classification result)
             user_intent = state.get("user_intent", {})
@@ -108,10 +109,28 @@ class ClassifyingNode(BaseNode):
         # Confidence in farmer terms
         confidence_emoji, confidence_text = self._get_farmer_confidence(confidence_pct)
         
-        # Severity in farmer terms
-        farmer_severity = self._get_farmer_severity(severity)
+        # Check if plant is healthy - different response format
+        is_healthy = disease_name.lower() in ["healthy", "healthy_plant"] or farmer_disease_name.lower() in ["healthy", "healthy plant"]
         
-        response = f"""🌿 **PLANT DISEASE ANALYSIS**
+        if is_healthy:
+            # Healthy plant response - no severity or treatment needed
+            response = f"""🌿 **PLANT HEALTH ANALYSIS**
+
+🔍 **GREAT NEWS!**
+Your plant appears to be: **{farmer_disease_name}**
+
+{confidence_emoji} **HOW SURE ARE WE?**
+{confidence_text} ({confidence_pct:.0f}% match)
+
+🎉 **WHAT THIS MEANS**
+Your plant looks healthy! No signs of disease detected. Keep up the good care routine you're already following.
+
+💚 **KEEP IT HEALTHY:** Continue regular watering, proper sunlight, and good soil drainage."""
+        else:
+            # Diseased plant response - include severity and treatment
+            farmer_severity = self._get_farmer_severity(severity)
+            
+            response = f"""🌿 **PLANT DISEASE ANALYSIS**
 
 🔍 **WHAT WE FOUND**
 Your plant has: **{farmer_disease_name}**
@@ -137,8 +156,8 @@ Your plant has: **{farmer_disease_name}**
         
         add_message_to_state(state, "assistant", response)
         
-        # Set next action based on user intent
-        self._determine_next_action_after_classification(state, user_intent)
+        # Set next action based on user intent and plant health
+        self._determine_next_action_after_classification(state, user_intent, is_healthy)
     
     def _process_failed_classification(self, state: WorkflowState, result: Dict[str, Any]) -> None:
         """Process failed classification results"""
@@ -169,9 +188,24 @@ Your plant has: **{farmer_disease_name}**
             set_error(state, f"Classification error: {str(exception)}")
             state["next_action"] = "error"
     
-    def _determine_next_action_after_classification(self, state: WorkflowState, user_intent: Dict[str, Any]) -> None:
-        """Determine next action based on user intent after successful classification"""
-        if user_intent.get("wants_prescription", False):
+    def _determine_next_action_after_classification(self, state: WorkflowState, user_intent: Dict[str, Any], is_healthy: bool = False) -> None:
+        """Determine next action based on user intent and plant health after successful classification"""
+        
+        if is_healthy:
+            # For healthy plants, skip prescriptions and go directly to follow-up
+            state["next_action"] = "followup"
+            state["is_complete"] = False
+            logger.info("Setting next_action to 'followup' (plant is healthy, no treatment needed)")
+            
+            completion_msg = "🌱 **Your plant is in great shape!** Keep monitoring it and feel free to ask if you have any general plant care questions!"
+            
+            # Add general answer if this was a hybrid request
+            if state.get("general_answer"):
+                completion_msg += f"\n\n🌾 **General Agricultural Advice:** {state['general_answer']}"
+            
+            add_message_to_state(state, "assistant", completion_msg)
+            
+        elif user_intent.get("wants_prescription", False):
             state["next_action"] = "prescribe"
             logger.info("Setting next_action to 'prescribe' based on user intent")
         elif user_intent.get("wants_vendors", False):
@@ -206,7 +240,9 @@ Your plant has: **{farmer_disease_name}**
             "bacterial_spot": "Bacterial Spots",
             "viral_mosaic": "Leaf Pattern Disease",
             "fusarium_wilt": "Plant Wilting Disease",
-            "root_rot": "Root Damage Disease"
+            "root_rot": "Root Damage Disease",
+            "healthy": "Healthy Plant",
+            "healthy_plant": "Healthy Plant"
         }
         
         # Remove underscores and make title case if not in map

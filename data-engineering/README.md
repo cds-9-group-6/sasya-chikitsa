@@ -13,5 +13,5 @@ It prepares a **clean, deduplicated, and high-quality dataset** suitable for **R
   - Remove duplicates (exact & semantic)
   - Filter rows with only numeric answers
   - Ensure minimum word count for queries/answers
-- 🔎 Apply **TF-IDF + cosine similarity** filtering to remove >65% similar Q&A pairs.
+-    Apply **Huggingface Embeddings + cosine similarity** filtering to remove >90% similar Q&A pairs.
 - 💾 Save final dataset to `filtered_data.csv`.

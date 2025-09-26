@@ -44,7 +44,8 @@ def check_environment():
     # Check if Ollama is accessible
     try:
         import requests
-        response = requests.get(f"{ollama_host}/api/tags", timeout=5)
+        health_timeout = int(os.getenv("HEALTH_CHECK_TIMEOUT", "5"))
+        response = requests.get(f"{ollama_host}/api/tags", timeout=health_timeout)
         if response.status_code == 200:
             models = response.json().get("models", [])
             model_names = [model.get("name", "") for model in models]

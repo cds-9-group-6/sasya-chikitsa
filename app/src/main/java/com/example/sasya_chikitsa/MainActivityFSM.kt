@@ -36,6 +36,9 @@ import com.example.sasya_chikitsa.fsm.FSMRetrofitClient
 import com.example.sasya_chikitsa.fsm.FSMSessionState
 import com.example.sasya_chikitsa.fsm.FSMStateUpdate
 import com.example.sasya_chikitsa.fsm.FSMStreamHandler
+import com.example.sasya_chikitsa.fsm.SessionManager
+import com.example.sasya_chikitsa.fsm.SessionSpinnerAdapter
+import com.example.sasya_chikitsa.fsm.SessionMetadata
 import com.example.sasya_chikitsa.models.FeedbackManager
 import com.example.sasya_chikitsa.models.FeedbackType
 import com.example.sasya_chikitsa.models.MessageFeedback
@@ -48,6 +51,9 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.io.ByteArrayOutputStream
 import java.io.InputStream
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 import java.util.UUID
 
 /**
@@ -77,6 +83,18 @@ class MainActivityFSM : ComponentActivity(), FSMStreamHandler.StreamCallback {
     private lateinit var imagePreview: ImageView
     private lateinit var imageFileName: TextView
     private lateinit var removeImageBtn: ImageButton
+    
+    // Session Management Components
+    private lateinit var sessionSelector: Spinner
+    private lateinit var newSessionBtn: ImageButton
+    private lateinit var sessionSpinnerAdapter: SessionSpinnerAdapter
+    private lateinit var sessionManager: SessionManager
+    
+    // New inline image preview components
+    private lateinit var inlineImageContainer: LinearLayout
+    private lateinit var inlineImagePreview: ImageView
+    private lateinit var inlineImageLabel: TextView
+    private lateinit var inlineRemoveBtn: ImageButton
     
     // FSM Components
     private lateinit var chatAdapter: ChatAdapter
@@ -113,8 +131,8 @@ class MainActivityFSM : ComponentActivity(), FSMStreamHandler.StreamCallback {
         setupClickListeners()
         setupRecyclerView()
         
-        // Add welcome message
-        addWelcomeMessage()
+        // Initialize session management
+        setupSessionManagement()
         
         // Copy test images to gallery on first launch
         copyTestImagesToGallery()
@@ -150,6 +168,10 @@ class MainActivityFSM : ComponentActivity(), FSMStreamHandler.StreamCallback {
         profileBtn = findViewById(R.id.profileBtn)
         settingsBtn = findViewById(R.id.settingsBtn)
         
+        // Session Management components
+        sessionSelector = findViewById(R.id.sessionSelector)
+        newSessionBtn = findViewById(R.id.newSessionBtn)
+        
         // Chat components
         chatRecyclerView = findViewById(R.id.chatRecyclerView)
         followUpContainer = findViewById(R.id.followUpContainer)
@@ -164,6 +186,12 @@ class MainActivityFSM : ComponentActivity(), FSMStreamHandler.StreamCallback {
         imageFileName = findViewById(R.id.imageFileName)
         removeImageBtn = findViewById(R.id.removeImageBtn)
         
+        // Initialize new inline image preview components
+        inlineImageContainer = findViewById(R.id.inlineImageContainer)
+        inlineImagePreview = findViewById(R.id.inlineImagePreview)
+        inlineImageLabel = findViewById(R.id.inlineImageLabel)
+        inlineRemoveBtn = findViewById(R.id.inlineRemoveBtn)
+        
         // Initialize profile button state
         updateProfileButtonState()
     }
@@ -172,6 +200,8 @@ class MainActivityFSM : ComponentActivity(), FSMStreamHandler.StreamCallback {
         uploadBtn.setOnClickListener { openImagePicker() }
         sendBtn.setOnClickListener { sendMessage() }
         removeImageBtn.setOnClickListener { clearSelectedImage() }
+        inlineRemoveBtn.setOnClickListener { clearSelectedImage() }
+        newSessionBtn.setOnClickListener { createNewSession() }
         profileBtn.setOnClickListener { showAgriculturalProfileDialog() }
         settingsBtn.setOnClickListener { showServerSettings() }
         
@@ -191,6 +221,161 @@ class MainActivityFSM : ComponentActivity(), FSMStreamHandler.StreamCallback {
         chatRecyclerView.adapter = chatAdapter
     }
     
+    // Session Management Methods
+    private fun setupSessionManagement() {
+        // Initialize session manager
+        sessionManager = SessionManager.getInstance(this)
+        
+        // Set up session spinner adapter
+        val sessions = sessionManager.getAllSessions().ifEmpty { 
+            // Create first session if none exist
+            listOf(SessionMetadata(
+                sessionId = UUID.randomUUID().toString(),
+                title = "🌱 Default Session", 
+                lastUpdated = System.currentTimeMillis(),
+                messageCount = 0,
+                hasImages = false,
+                hasDiagnosis = false
+            ))
+        }
+        
+        sessionSpinnerAdapter = SessionSpinnerAdapter(this, sessions)
+        sessionSelector.adapter = sessionSpinnerAdapter
+        
+        // Set up session selection listener
+        sessionSelector.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                val selectedSession = sessionSpinnerAdapter.getItem(position)
+                switchToSession(selectedSession.sessionId)
+            }
+            
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+                // Do nothing
+            }
+        }
+        
+        // Load current session (this will add welcome message if needed)
+        loadCurrentSession()
+        
+        Log.d(TAG, "Session management initialized with ${sessions.size} sessions")
+    }
+    
+    private fun createNewSession() {
+        try {
+            val newSession = sessionManager.createNewSession()
+            
+            // Update spinner
+            refreshSessionSpinner()
+            
+            // Switch to new session
+            switchToSession(newSession.sessionId)
+            
+            // Update spinner selection to new session
+            val position = sessionSpinnerAdapter.findPositionById(newSession.sessionId)
+            if (position >= 0) {
+                sessionSelector.setSelection(position, false)
+            }
+            
+            Toast.makeText(this, "✨ New session created!", Toast.LENGTH_SHORT).show()
+            Log.d(TAG, "Created new session: ${newSession.sessionId}")
+            
+        } catch (e: Exception) {
+            Log.e(TAG, "Error creating new session", e)
+            showError("Failed to create new session: ${e.message}")
+        }
+    }
+    
+    private fun switchToSession(sessionId: String) {
+        try {
+            // Prevent switching to the same session (avoid duplication)
+            if (currentSessionState.sessionId == sessionId) {
+                Log.d(TAG, "Already on session: $sessionId, skipping switch")
+                return
+            }
+            
+            val session = sessionManager.switchToSession(sessionId)
+            if (session != null) {
+                // Clear current UI completely
+                chatAdapter.clear()
+                
+                // Update current session state
+                currentSessionState = FSMSessionState(
+                    sessionId = session.sessionId,
+                    currentNode = session.fsmState?.currentNode ?: "initial",
+                    previousNode = session.fsmState?.previousNode,
+                    isComplete = session.fsmState?.isComplete ?: false,
+                    messages = session.messages.toMutableList() // Copy messages
+                )
+                
+                // Reload all messages from session storage
+                session.messages.forEach { message ->
+                    chatAdapter.addMessage(message)
+                }
+                
+                scrollToBottom()
+                
+                // Update adapter to highlight current session
+                sessionSpinnerAdapter.setCurrentSessionId(sessionId)
+                
+                Log.d(TAG, "Successfully switched to session: $sessionId with ${session.messages.size} messages")
+            } else {
+                Log.e(TAG, "Failed to retrieve session: $sessionId")
+            }
+        } catch (e: Exception) {
+            Log.e(TAG, "Error switching session: $sessionId", e)
+            showError("Failed to switch session: ${e.message}")
+        }
+    }
+    
+    private fun loadCurrentSession() {
+        try {
+            val currentSession = sessionManager.getCurrentSession()
+            
+            // CRITICAL FIX: Always switch to current session first to sync UI state
+            switchToSession(currentSession.sessionId)
+            
+            // Then check if we need to add welcome message AFTER switching
+            if (currentSession.messages.isEmpty()) {
+                Log.d(TAG, "Empty session detected, adding welcome message")
+                addWelcomeMessage()
+            }
+            
+            // Update spinner selection and set current session in adapter
+            val position = sessionSpinnerAdapter.findPositionById(currentSession.sessionId)
+            if (position >= 0) {
+                sessionSelector.setSelection(position, false)
+            }
+            sessionSpinnerAdapter.setCurrentSessionId(currentSession.sessionId)
+            
+            Log.d(TAG, "Loaded current session: ${currentSession.sessionId} with ${currentSession.messages.size} messages")
+            
+        } catch (e: Exception) {
+            Log.e(TAG, "Error loading current session", e)
+        }
+    }
+    
+    private fun refreshSessionSpinner() {
+        try {
+            val sessions = sessionManager.getAllSessions()
+            val currentId = currentSessionState.sessionId
+            sessionSpinnerAdapter.updateSessionsWithCurrent(sessions, currentId)
+            Log.d(TAG, "Session spinner refreshed with ${sessions.size} sessions, current: $currentId")
+        } catch (e: Exception) {
+            Log.e(TAG, "Error refreshing session spinner", e)
+        }
+    }
+    
+    private fun saveCurrentSessionState() {
+        try {
+            currentSessionState.sessionId?.let { sessionId ->
+                sessionManager.updateSessionFSMState(sessionId, currentSessionState)
+                Log.d(TAG, "Current session state saved")
+            }
+        } catch (e: Exception) {
+            Log.e(TAG, "Error saving session state", e)
+        }
+    }
+    
     private fun addWelcomeMessage() {
         val welcomeMessage = ChatMessage(
             text = "🌿 Welcome to Sasya Arogya! I'm your intelligent plant health assistant.\n\nI can help you:\n• Diagnose plant diseases from images\n• Recommend treatments and medicines\n• Connect you with local vendors\n• Provide seasonal care advice\n\nHow can I help you today?",
@@ -200,6 +385,12 @@ class MainActivityFSM : ComponentActivity(), FSMStreamHandler.StreamCallback {
         
         chatAdapter.addMessage(welcomeMessage)
         currentSessionState.messages.add(welcomeMessage)
+        
+        // Save to session manager
+        currentSessionState.sessionId?.let { sessionId ->
+            sessionManager.addMessageToSession(sessionId, welcomeMessage)
+        }
+        
         scrollToBottom()
     }
     
@@ -214,6 +405,26 @@ class MainActivityFSM : ComponentActivity(), FSMStreamHandler.StreamCallback {
     
     private fun handleSelectedImage(uri: Uri) {
         try {
+            // Check if we need to auto-create new session for new image analysis
+            if (sessionManager.shouldCreateNewSessionForImage()) {
+                Log.d(TAG, "Auto-creating new session for new image analysis")
+                
+                val autoSession = sessionManager.createAutoSessionForNewImage()
+                refreshSessionSpinner()
+                
+                // Switch to new session
+                switchToSession(autoSession.sessionId)
+                
+                // Update spinner selection to new session
+                val position = sessionSpinnerAdapter.findPositionById(autoSession.sessionId)
+                if (position >= 0) {
+                    sessionSelector.setSelection(position, false)
+                }
+                
+                // Show user feedback about new session
+                Toast.makeText(this, "🔄 New session created for fresh analysis!", Toast.LENGTH_SHORT).show()
+            }
+            
             selectedImageUri = uri
             
             // Convert to bitmap and base64
@@ -228,10 +439,13 @@ class MainActivityFSM : ComponentActivity(), FSMStreamHandler.StreamCallback {
             val resizedBitmap = resizeBitmap(bitmap, 1024)
             selectedImageBase64 = bitmapToBase64(resizedBitmap)
             
-            // Show image preview
-            imagePreview.setImageBitmap(resizedBitmap)
-            imageFileName.text = "📷 Image selected"
-            uploadSection.visibility = View.VISIBLE
+            // Show inline image preview
+            inlineImagePreview.setImageBitmap(resizedBitmap)
+            inlineImageLabel.text = "📷 Image"
+            inlineImageContainer.visibility = View.VISIBLE
+            
+            // Hide old upload section
+            uploadSection.visibility = View.GONE
             
             Log.d(TAG, "Image selected and processed")
             
@@ -244,7 +458,12 @@ class MainActivityFSM : ComponentActivity(), FSMStreamHandler.StreamCallback {
     private fun clearSelectedImage() {
         selectedImageUri = null
         selectedImageBase64 = null
+        inlineImageContainer.visibility = View.GONE
         uploadSection.visibility = View.GONE
+        
+        // Clear the image from preview
+        inlineImagePreview.setImageDrawable(null)
+        
         Log.d(TAG, "Image cleared")
     }
     
@@ -264,6 +483,11 @@ class MainActivityFSM : ComponentActivity(), FSMStreamHandler.StreamCallback {
         // Add user message to chat
         chatAdapter.addMessage(userMessage)
         currentSessionState.messages.add(userMessage)
+        
+        // Save to session manager
+        currentSessionState.sessionId?.let { sessionId ->
+            sessionManager.addMessageToSession(sessionId, userMessage)
+        }
         scrollToBottom()
         
         // Clear input
@@ -390,6 +614,11 @@ class MainActivityFSM : ComponentActivity(), FSMStreamHandler.StreamCallback {
         
         chatAdapter.addMessage(followUpMessage)
         currentSessionState.messages.add(followUpMessage)
+        
+        // Save to session manager
+        currentSessionState.sessionId?.let { sessionId ->
+            sessionManager.addMessageToSession(sessionId, followUpMessage)
+        }
         scrollToBottom()
         
         // Send to FSM agent
@@ -442,8 +671,13 @@ class MainActivityFSM : ComponentActivity(), FSMStreamHandler.StreamCallback {
                 
                 // Update the existing message card with accumulated content
                 chatAdapter.updateLastMessage(updatedText)
-                currentSessionState.messages[currentSessionState.messages.size - 1] = 
-                    currentMessage.copy(text = updatedText)
+                val updatedMessage = currentMessage.copy(text = updatedText)
+                currentSessionState.messages[currentSessionState.messages.size - 1] = updatedMessage
+                
+                // CRITICAL FIX: Update the last message in session manager (don't add duplicate)
+                currentSessionState.sessionId?.let { sessionId ->
+                    sessionManager.updateLastMessageInSession(sessionId, updatedMessage)
+                }
             } else {
                 // Start new assistant response card
                 val assistantMessage = ChatMessage(
@@ -453,6 +687,11 @@ class MainActivityFSM : ComponentActivity(), FSMStreamHandler.StreamCallback {
                 )
                 chatAdapter.addMessage(assistantMessage)
                 currentSessionState.messages.add(assistantMessage)
+                
+                // Save to session manager
+                currentSessionState.sessionId?.let { sessionId ->
+                    sessionManager.addMessageToSession(sessionId, assistantMessage)
+                }
             }
             scrollToBottom()
         }
@@ -509,7 +748,12 @@ class MainActivityFSM : ComponentActivity(), FSMStreamHandler.StreamCallback {
         Log.d(TAG, "Stream completed")
         runOnUiThread {
             stopThinkingIndicator()
-            // Status updates no longer needed - profile button manages its own state
+            
+            // Save session state after stream completion
+            saveCurrentSessionState()
+            
+            // Refresh session spinner to update any metadata changes
+            refreshSessionSpinner()
         }
     }
     

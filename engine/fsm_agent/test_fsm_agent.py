@@ -33,7 +33,7 @@ async def test_basic_conversation():
     # Initialize agent
     llm_config = {
         "model": "llama3.1:8b",
-        "base_url": "http://localhost:11434", 
+        "base_url": os.getenv("OLLAMA_HOST", "http://localhost:11434"), 
         "temperature": 0.1,
     }
     
@@ -100,7 +100,7 @@ async def test_streaming():
     
     llm_config = {
         "model": "llama3.1:8b", 
-        "base_url": "http://localhost:11434",
+        "base_url": os.getenv("OLLAMA_HOST", "http://localhost:11434"),
         "temperature": 0.1,
     }
     
@@ -259,7 +259,9 @@ async def main():
     # Check if Ollama is available
     try:
         import requests
-        response = requests.get("http://localhost:11434/api/tags", timeout=5)
+        ollama_host = os.getenv("OLLAMA_HOST", "http://localhost:11434")
+        health_timeout = int(os.getenv("HEALTH_CHECK_TIMEOUT", "5"))
+        response = requests.get(f"{ollama_host}/api/tags", timeout=health_timeout)
         if response.status_code == 200:
             print("✅ Ollama server is accessible")
         else:

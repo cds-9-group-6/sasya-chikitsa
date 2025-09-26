@@ -12,8 +12,8 @@ for classification, prescription, vendor integration, and more.
 __version__ = "1.0.0"
 __author__ = "Sasya Chikitsa Team"
 
-from fsm_agent.core.fsm_agent import DynamicPlanningAgent
-from fsm_agent.server.fsm_server import FSMServer
+from engine.fsm_agent.core.fsm_agent import DynamicPlanningAgent
+from engine.fsm_agent.server.fsm_server import FSMServer
 
 __all__ = [
     "DynamicPlanningAgent",
