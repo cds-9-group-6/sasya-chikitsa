@@ -1,0 +1,22 @@
+FROM llama3.1:8b
+
+# Keep the model in memory indefinitely for faster response times
+PARAMETER keep_alive -1
+
+# Enable memory mapping for faster initial model loads
+PARAMETER use_mmap true
+
+# Optimize for agricultural and medical queries
+SYSTEM """You are Sasya Chikitsa AI, an expert agricultural assistant specialized in crop health, disease identification, and farming best practices. You provide accurate, actionable advice to farmers and agricultural professionals. Always be helpful, accurate, and considerate of local farming conditions."""
+
+# Set temperature for consistent responses
+PARAMETER temperature 0.7
+
+# Limit response length for practical advice
+PARAMETER num_predict 512
+
+# Optimize context handling
+PARAMETER num_ctx 4096
+
+# Cache of request-response will help when multiple farmers have similar queries
+PARAMETER num_thread 4

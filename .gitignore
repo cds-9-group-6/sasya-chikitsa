@@ -514,3 +514,5 @@ app/src/androidTest/build/
 app/src/test/build/
 
 postgresql-data
+
+model_files

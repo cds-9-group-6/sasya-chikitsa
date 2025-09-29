@@ -158,6 +158,41 @@ data class ConversationSession(
 - **Modular Architecture**: Clean separation of concerns for maintainability
 - **Extensible Design**: Easy to add new session management features
 
+## 🤖 Ollama Multi-Model Docker Builds
+
+**NEW**: Complete Docker build system for agricultural AI models with platform-specific containers.
+
+### 🎯 What It Builds
+- **6 different image combinations**: ARM64/AMD64 × llama-3.1/llava/both models
+- **Platform-optimized**: Apple Silicon (ARM64) and Intel/AMD (AMD64) specific builds
+- **Agricultural AI specialized**: Custom prompts for farming and crop disease identification
+- **Production-ready**: Health checks, proper startup sequences, and registry support
+
+### ⚡ Quick Start
+```bash
+# Setup (one-time)
+./engine/setup-ollama-build.sh
+
+# Build for your platform
+./engine/build-ollama-models.sh --version v1.0 --platform arm64 --models llama31
+
+# Run the container
+podman run -it --rm -p 11434:11434 ollama-llama31-only:arm64-v1.0
+```
+
+### 📚 Documentation
+- **[🚀 Quick Reference](./engine/OLLAMA_QUICK_REFERENCE.md)** - Essential commands and workflows
+- **[📖 Complete Guide](./engine/README_OLLAMA_BUILDS.md)** - Comprehensive documentation
+- **[🔄 Build Flow](./engine/OLLAMA_BUILD_FLOW.md)** - Architecture and visual guides
+- **[📋 Documentation Index](./engine/OLLAMA_INDEX.md)** - Navigation and overview
+
+### 🛠️ Features
+- ✅ **Auto-detects Docker/Podman** for seamless operation
+- ✅ **Interactive registry control** (asks before pushing)
+- ✅ **Platform-specific optimization** (ARM64 vs AMD64)
+- ✅ **Comprehensive error handling** and troubleshooting
+- ✅ **Team collaboration support** (shared registry workflows)
+
 ## How to check logs
 
 ```bash

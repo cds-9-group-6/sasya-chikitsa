@@ -1,0 +1,130 @@
+# Multi-model Ollama Docker Image
+# Supports: llama-3.1:8b, llava-llama3:8b, or both
+# Usage: docker build --build-arg MODELS="llama-3.1:8b,llava-llama3:8b" -t ollama-models .
+
+ARG PLATFORM=amd64
+FROM --platform=linux/${PLATFORM} ollama/ollama:latest
+
+# Build arguments for model configuration
+ARG MODELS="llama-3.1:8b"
+ARG MODEL_NAME="custom-llama"
+ARG VERSION="latest"
+
+# Create necessary directories
+RUN mkdir -p /models /scripts
+
+# Copy model configuration files
+COPY Modelfile.* /models/
+
+# Create startup script that handles multiple models
+RUN cat > /scripts/start-ollama.sh << 'EOF'
+#!/bin/bash
+set -e
+
+# Start Ollama server in background
+echo "🚀 Starting Ollama server..."
+ollama serve &
+OLLAMA_PID=$!
+
+# Wait for server to be ready
+echo "⏳ Waiting for Ollama server to be ready..."
+for i in {1..30}; do
+    if curl -f http://localhost:11434/api/version >/dev/null 2>&1; then
+        echo "✅ Ollama server is ready!"
+        break
+    fi
+    if [ $i -eq 30 ]; then
+        echo "❌ Ollama server failed to start within 30 seconds"
+        exit 1
+    fi
+    sleep 1
+done
+
+# Parse and pull models
+IFS=',' read -ra MODEL_ARRAY <<< "${MODELS}"
+for model in "${MODEL_ARRAY[@]}"; do
+    model=$(echo "$model" | xargs)  # trim whitespace
+    echo "📥 Pulling model: $model"
+    
+    # Pull the base model
+    if ! ollama pull "$model"; then
+        echo "❌ Failed to pull model: $model"
+        exit 1
+    fi
+    
+    echo "✅ Successfully pulled: $model"
+done
+
+# Create custom models with optimized settings
+model_count=0
+for model in "${MODEL_ARRAY[@]}"; do
+    model=$(echo "$model" | xargs)
+    model_count=$((model_count + 1))
+    
+    # Determine the modelfile to use
+    if [[ "$model" == "llama-3.1:8b" ]] || [[ "$model" == "llama3.1:8b" ]]; then
+        modelfile="/models/Modelfile.llama3.1"
+        custom_name="${MODEL_NAME}-llama3.1"
+    elif [[ "$model" == "llava-llama3:8b" ]] || [[ "$model" == "llava:8b" ]]; then
+        modelfile="/models/Modelfile.llava"
+        custom_name="${MODEL_NAME}-llava"
+    else
+        echo "⚠️ Unknown model: $model, skipping custom model creation"
+        continue
+    fi
+    
+    if [ -f "$modelfile" ]; then
+        echo "🔧 Creating custom model: $custom_name from $modelfile"
+        if ollama create "$custom_name" -f "$modelfile"; then
+            echo "✅ Created custom model: $custom_name"
+        else
+            echo "⚠️ Failed to create custom model: $custom_name"
+        fi
+    else
+        echo "⚠️ Modelfile not found: $modelfile"
+    fi
+done
+
+echo "🎉 Model setup completed!"
+echo "📊 Available models:"
+ollama list
+
+echo "🔄 Keeping Ollama server running..."
+# Keep the container running
+wait $OLLAMA_PID
+EOF
+
+# Make the script executable
+RUN chmod +x /scripts/start-ollama.sh
+
+# Copy health check script
+RUN cat > /scripts/health-check.sh << 'EOF'
+#!/bin/bash
+curl -f http://localhost:11434/api/version >/dev/null 2>&1
+EOF
+
+RUN chmod +x /scripts/health-check.sh
+
+# Set environment variables
+ENV MODELS=${MODELS}
+ENV MODEL_NAME=${MODEL_NAME}
+ENV OLLAMA_HOST=0.0.0.0
+ENV OLLAMA_PORT=11434
+
+# Add labels for better image management
+LABEL org.opencontainers.image.title="Ollama Multi-Model Server"
+LABEL org.opencontainers.image.description="Ollama server with pre-configured models: ${MODELS}"
+LABEL org.opencontainers.image.version="${VERSION}"
+LABEL org.opencontainers.image.platform="${PLATFORM}"
+LABEL sasya.models="${MODELS}"
+LABEL sasya.platform="${PLATFORM}"
+
+# Health check
+HEALTHCHECK --interval=30s --timeout=10s --start-period=60s --retries=3 \
+    CMD ["/scripts/health-check.sh"]
+
+# Expose Ollama API port
+EXPOSE 11434
+
+# Use the startup script as entrypoint
+ENTRYPOINT ["/scripts/start-ollama.sh"]

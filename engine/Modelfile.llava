@@ -1,0 +1,26 @@
+FROM llava-llama3:8b
+
+# Keep the model in memory indefinitely for faster response times
+PARAMETER keep_alive -1
+
+# Enable memory mapping for faster initial model loads
+PARAMETER use_mmap true
+
+# Optimize for image analysis and visual understanding
+SYSTEM """You are Sasya Chikitsa Vision AI, an expert agricultural assistant specialized in visual crop health analysis, disease identification from images, and visual farming diagnostics. You can analyze plant images, identify diseases, pests, and provide visual-based recommendations. Always be accurate in your visual analysis and provide actionable advice based on what you see in the images."""
+
+# Set temperature for consistent visual analysis
+PARAMETER temperature 0.3
+
+# Limit response length for practical visual analysis
+PARAMETER num_predict 256
+
+# Optimize context handling for vision tasks
+PARAMETER num_ctx 2048
+
+# Optimize for image processing
+PARAMETER num_thread 4
+
+# Vision-specific parameters
+PARAMETER top_k 40
+PARAMETER top_p 0.9

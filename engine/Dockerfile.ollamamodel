@@ -1,47 +1,35 @@
-# # Base: Use Ollama official base (Debian/Ubuntu + Ollama runtime)
-# FROM ollama/ollama:latest
-
-# # Copy your application into container
-# # WORKDIR /app
-# # COPY . /app
-
-# # Ensure Ollama model is preloaded (can also mount via PVC if >10GB models)
-# RUN ollama serve & sleep 5 && ollama pull llama3.1:8b
-
-# # Expose Ollama API port
-# EXPOSE 11434
-
-# # Start Ollama server and your app together (example: python app.py)
-# # CMD ["sh", "-c", "ollama serve & sleep 5 && python /app/app.py"]
-# CMD ["ollama ","serve", "&"," sleep", "5"]
-
-# Use the official Ollama base image
-# FROM ollama/ollama:latest
-
-# This RUN command is the key. It starts the server in the background,
-# waits a moment for it to be ready, pulls the desired model,
-# and then the server process exits, leaving the model in the image layer.
-# RUN /bin/sh -c 'ollama serve & sleep 5 && ollama pull llama3.1:8b'
-
-# The default entrypoint of the base image is to run "ollama serve",
-# so we don't need to specify CMD or ENTRYPOINT again.
+# Cross-platform Ollama Multi-Model container for OpenShift deployment
+# Uses pre-downloaded model files to avoid emulation issues
+# Contains: llama3.1:8b (text) + llava-llama3:8b (vision)
 
 FROM ollama/ollama:latest
 
-# Copy the pre-downloaded models from the build context
-# into the expected directory inside the container.
-COPY ./Modelfile /Modelfile
-COPY ./local_models /root/.ollama/models
+# Install curl for health checks
+RUN apt-get update && apt-get install -y curl && rm -rf /var/lib/apt/lists/*
 
-# Use a startup script to pull the base model and create the custom one
+# Copy pre-downloaded model files from build context
+# These should be downloaded locally using: ./engine/download-models.sh
+COPY engine/model_files /root/.ollama/models
+
+# Create production-ready startup script
 RUN echo '#!/bin/sh' > /entrypoint.sh && \
-    echo 'ollama serve &' >> /entrypoint.sh && \
-    echo 'PID=$!' >> /entrypoint.sh && \
-    echo 'sleep 5' >> /entrypoint.sh && \
-    # echo 'ollama pull llama3.1:8b' >> /entrypoint.sh && \
-    echo 'ollama create my-llama3.1-kept-alive -f /Modelfile' >> /entrypoint.sh && \
-    echo 'echo "Custom model created. Ollama is ready."' >> /entrypoint.sh && \
-    echo 'wait $PID' >> /entrypoint.sh && \
+    echo 'echo "🚀 Starting Ollama with pre-loaded models..."' >> /entrypoint.sh && \
+    echo 'echo "📝 Text AI: llama3.1:8b"' >> /entrypoint.sh && \
+    echo 'echo "👁️  Vision AI: llava-llama3:8b"' >> /entrypoint.sh && \
+    echo 'echo "🏢 Ready for OpenShift deployment"' >> /entrypoint.sh && \
+    echo 'echo "📁 Model files:"' >> /entrypoint.sh && \
+    echo 'ls -la /root/.ollama/models/' >> /entrypoint.sh && \
+    echo 'echo "🎯 Available models:"' >> /entrypoint.sh && \
+    echo 'ollama list || echo "Models will be available after server starts"' >> /entrypoint.sh && \
+    echo 'exec ollama serve' >> /entrypoint.sh && \
     chmod +x /entrypoint.sh
 
+# Add health check for OpenShift
+HEALTHCHECK --interval=30s --timeout=10s --start-period=60s --retries=3 \
+    CMD curl -f http://localhost:11434/api/version || exit 1
+
+# Expose Ollama API port
+EXPOSE 11434
+
+# Use exec form for better signal handling in OpenShift
 ENTRYPOINT ["/entrypoint.sh"]
